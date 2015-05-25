@@ -16,7 +16,7 @@
 		4C1E2B1F1B0C75D0009B6B6B /* CGTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1E2B1E1B0C75D0009B6B6B /* CGTestTests.m */; };
 		4C1E2B2D1B0C7718009B6B6B /* CGView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1E2B2C1B0C7718009B6B6B /* CGView.m */; };
 		4C65A3861B0DD69C00B36032 /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C65A3851B0DD69C00B36032 /* CustomIOS7AlertView.m */; };
-		4C65A3881B0DDA8E00B36032 /* Test.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C65A3871B0DDA8E00B36032 /* Test.strings */; };
+		4CF39DFC1B12D7A7006C5641 /* Test.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CF39DFE1B12D7A7006C5641 /* Test.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +47,10 @@
 		4C1E2B2E1B0C7729009B6B6B /* CGView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CGView.h; sourceTree = "<group>"; };
 		4C65A3841B0DD69C00B36032 /* CustomIOS7AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIOS7AlertView.h; sourceTree = "<group>"; };
 		4C65A3851B0DD69C00B36032 /* CustomIOS7AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomIOS7AlertView.m; sourceTree = "<group>"; };
-		4C65A3871B0DDA8E00B36032 /* Test.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Test.strings; sourceTree = "<group>"; };
+		4CAEC6691B12CAB600E6681D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		4CAEC66A1B12CAB600E6681D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		4CF39DFD1B12D7A7006C5641 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Test.strings; sourceTree = "<group>"; };
+		4CF39DFF1B12D7E9006C5641 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Test.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +96,7 @@
 				4C1E2B071B0C75CF009B6B6B /* AppDelegate.m */,
 				4C1E2B091B0C75CF009B6B6B /* ViewController.h */,
 				4C1E2B0A1B0C75CF009B6B6B /* ViewController.m */,
-				4C65A3871B0DDA8E00B36032 /* Test.strings */,
+				4CF39DFE1B12D7A7006C5641 /* Test.strings */,
 				4C1E2B2C1B0C7718009B6B6B /* CGView.m */,
 				4C1E2B2E1B0C7729009B6B6B /* CGView.h */,
 				4C1E2B0C1B0C75CF009B6B6B /* Main.storyboard */,
@@ -203,6 +206,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = 4C1E2AF61B0C75CF009B6B6B;
 			productRefGroup = 4C1E2B001B0C75CF009B6B6B /* Products */;
@@ -220,7 +224,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C65A3881B0DDA8E00B36032 /* Test.strings in Resources */,
+				4CF39DFC1B12D7A7006C5641 /* Test.strings in Resources */,
 				4C1E2B0E1B0C75CF009B6B6B /* Main.storyboard in Resources */,
 				4C1E2B131B0C75CF009B6B6B /* LaunchScreen.xib in Resources */,
 				4C1E2B101B0C75CF009B6B6B /* Images.xcassets in Resources */,
@@ -272,6 +276,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				4C1E2B0D1B0C75CF009B6B6B /* Base */,
+				4CAEC6691B12CAB600E6681D /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -280,8 +285,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				4C1E2B121B0C75CF009B6B6B /* Base */,
+				4CAEC66A1B12CAB600E6681D /* zh-Hant */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		4CF39DFE1B12D7A7006C5641 /* Test.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4CF39DFD1B12D7A7006C5641 /* Base */,
+				4CF39DFF1B12D7E9006C5641 /* zh-Hant */,
+			);
+			name = Test.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

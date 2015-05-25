@@ -70,7 +70,7 @@
     label.textAlignment = NSTextAlignmentLeft;
     [label setNumberOfLines:0];
     label.lineBreakMode =NSLineBreakByWordWrapping;
-    label.text = NSLocalizedStringFromTable(@"請由右往左開始編輯一到五根K棒", @"FigureSearch", nil);
+    label.text = NSLocalizedStringFromTable(@"Testt", @"Test", nil);
     [hintAlertView setTitleLabel:label];
     [hintAlertView setContainerView:view];
     [hintAlertView setButtonTitles:@[NSLocalizedStringFromTable(@"確定", @"FigureSearch", nil)]];

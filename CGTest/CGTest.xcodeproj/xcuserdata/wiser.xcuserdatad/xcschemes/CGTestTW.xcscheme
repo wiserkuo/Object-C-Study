@@ -20,20 +20,6 @@
                ReferencedContainer = "container:CGTest.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4C1E2B171B0C75D0009B6B6B"
-               BuildableName = "CGTestTests.xctest"
-               BlueprintName = "CGTestTests"
-               ReferencedContainer = "container:CGTest.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -42,16 +28,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4C1E2B171B0C75D0009B6B6B"
-               BuildableName = "CGTestTests.xctest"
-               BlueprintName = "CGTestTests"
-               ReferencedContainer = "container:CGTest.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
@@ -72,7 +48,7 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES"
-      language = "en">
+      language = "zh-Hant">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
