@@ -10,7 +10,7 @@
 #import "CGView.h"
 #import "CustomIOS7AlertView.h"
 @interface ViewController ()<CustomIOS7AlertViewDelegate>{
-
+    
     CGView *mainView;
     CustomIOS7AlertView *hintAlertView;
 }
@@ -39,6 +39,18 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self showHint];
+    /*UIAlertView * alert = [[UIAlertView alloc]initWithTitle:nil message:NSLocalizedStringFromTable(@"請由右往左開始編輯一到五根K棒", @"FigureSearch", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedStringFromTable(@"確定", @"FigureSearch", nil), nil];
+     [alert show];*/
+    // label.lineBreakMode =NSLineBreakByWordWrapping;
+    //[_checkLabel setFont:[UIFont systemFontOfSize:12]];
+    //[label setFont:[UIFont fontWithName:@"System" size:8]];
+    //2015-05-22 10:25:21.116 uscharttrade[5862:60b] -[FSAppDelegate application:didFinishLaunchingWithOptions:] [Line 47] /Users/wiser/Library/Developer/CoreSimulator/Devices/44B2D465-3A9B-4599-A32C-EEE5A783CA84/data/Applications/241377AD-3366-42F2-9106-33D40842ECC8/Library/Caches
+    
+    // UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapCheckBox)];
+    // [_checkView addGestureRecognizer:tapGestureRecognizer];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *string = [userDefaults stringForKey:@"Hello world"];
+    NSLog(@"========string from userdefault:%@=========\n",string);
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -63,14 +75,14 @@
     [hintAlertView setContainerView:view];
     [hintAlertView setButtonTitles:@[NSLocalizedStringFromTable(@"確定", @"FigureSearch", nil)]];
     hintAlertView.delegate = self;
-   /*
+    /*
      self.checkView = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.size.height, 300, 44)];
      
      _checkView.backgroundColor = [UIColor whiteColor];
      
      _checkView.userInteractionEnabled = YES;
      
-    // [_checkView addGestureRecognizer:tapGestureRecognizer];
+     // [_checkView addGestureRecognizer:tapGestureRecognizer];
      
      [view addSubview:_checkView];
      
@@ -95,7 +107,7 @@
      _checkBtn.frame = CGRectMake(245, 0, 30, 37);
      
      [_checkView addSubview:_checkBtn];
-*/
+     */
     
     
     //[view addSubview:_actionTableView];
@@ -108,11 +120,11 @@
 -(void)tapCheckBox
 {
     /*if(_checkBtn.selected){
-        _checkBtn.selected = NO;
-    }else{
-        _checkBtn.selected = YES;
-        
-    }*/
+     _checkBtn.selected = NO;
+     }else{
+     _checkBtn.selected = YES;
+     
+     }*/
     
 }
 @end
