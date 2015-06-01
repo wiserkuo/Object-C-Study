@@ -1,0 +1,44 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import "FSFonestock.h"
+    #import "FSUIButton.h"
+    #import "FSUIViewController.h"
+    #import "CorePlot-CocoaTouch.h"
+    #import "StockConstant.h"
+    #import "UITableView+iOS7Separator.h"
+    #import "FSUITableViewCell.h"
+    #import "CustomIOS7AlertView.h"
+// old
+    #import "FSHUD.h"
+    #import "UIView+HUD.h"
+    #import "CodingUtil.h"
+    #import "FSDataModelProc.h"
+    #import "NSNumber+Extensions.h"
+    #import "NSDate+Extensions.h"
+    #import "UINavigationItem+iOS7Spacing.h"
+    #import "UIViewController+Notification.h"
+    #import "UIViewController+ActionSheet.h"
+    #import "FSNotificationCenter.h"
+    #import "UIViewController+CustomNavigationBar.h"
+#define FS_REQUEST_TIMEOUT 30
+
+#ifdef DEBUG
+#   define NSLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#else
+#   define NSLog(...)
+#endif
+
+#endif

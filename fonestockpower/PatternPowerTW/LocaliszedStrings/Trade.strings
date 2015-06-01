@@ -1,0 +1,39 @@
+/* 
+  Trade.strings
+  FonestockPower
+
+  Created by Derek on 2014/8/26.
+  Copyright (c) 2014年 Fonestock. All rights reserved.
+*/
+
+"Buy" = "買進";
+"Sell" = "賣出";
+"Short" = "放空";
+"Cover" = "回補";
+
+"Trade" = "股票交易";
+"Save" = "儲存";
+"Date" = "日期";
+"Symbol" = "名稱";
+"Action" = "交易";
+"Shares" = "張數";
+"Price" = "價格";
+"Amount Payable" = "交易金額";
+"Done" = "確認";
+"Cancel" = "取消";
+"Invalid volume!" = "數量/價格未輸入";
+"Error" = "錯誤";
+"Out of stock!" = "庫存不夠";
+"OK" = "確認";
+"Please Choose" = "請選擇";
+"Please Enter Content!" = "金額未輸入";
+"Shares Owned" = "庫存張數";
+"Cash" = "現金餘額";
+
+"多方選股形勢" = "多方";
+"空方選股形勢" = "空方";
+
+"Bought %@ shares of %@ at $%@ per share for %@." = "已購買 %@ 股 %@ %@ 元, 共 %@";
+"Sold %@ shares of %@ at $%@ per share for %@." = "已賣出 %@ 股 %@ %@, 共 %@";
+"已賣出 %@ 複數張,\n%@ %@ 元,\n共 %@ 元." = "已賣出 %@ 張,\n%@ %@ 元,\n共 %@ 元.";
+"已購買 %@ 複數張,\n%@ %@ 元,\n共 %@ 元." = "已購買 %@ 張,\n%@ %@ 元,\n共 %@ 元.";

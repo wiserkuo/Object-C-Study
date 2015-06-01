@@ -1,0 +1,18 @@
+/* 
+  Position.strings
+  FonestockPower
+
+  Created by Michael.Hsieh on 2015/4/25.
+  Copyright (c) 2015年 Fonestock. All rights reserved.
+*/
+
+"張數" = "手数";
+"總成本" = "总成本";
+"價值" = "价值";
+"獲利" = "获利";
+"曝險金額" = "曝险金额";
+"歷" = "历";
+"記" = "记";
+"報" = "报";
+"買進均價" = "买进均价";
+"放空均價" = "放空均价";

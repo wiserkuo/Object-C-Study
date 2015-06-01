@@ -1,0 +1,21 @@
+/* 
+  Macroeconomic.strings
+  FonestockPower
+
+  Created by Kenny on 2014/9/23.
+  Copyright (c) 2014年 Fonestock. All rights reserved.
+*/
+"圖表種類" = "Chart Type";
+"折線圖" = "Line Chart";
+"長條圖" = "Bar Chart";
+"日期" = "Date";
+"數值" = "Value";
+"增減" = "Change";
+"增減%" = "Change%";
+"與前期比較" = "QOQ";
+"與去年同期比較" = "YOY";
+"取消" = "Cancel";
+"折線圖-折線圖" = "Line-Line";
+"折線圖-長條圖" = "Line-Bar";
+"長條圖-折線圖" = "Bar-Line";
+"請選擇" = "Select";

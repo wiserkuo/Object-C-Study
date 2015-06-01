@@ -1,0 +1,165 @@
+/*
+ watchlists.strings
+ WirtsLeg
+ 
+ Created by Kenny on 2014/2/11.
+ Copyright (c) 2014年 fonestock. All rights reserved.
+ */
+
+/* allLabel */
+"All" = "全部";
+
+/* adkLabel */
+"Ask" = "卖价";
+
+/* bidLabel */
+"Bid" = "买价";
+
+/* chgLabel */
+"Change" = "涨跌";
+
+/* p_chgLabel */
+"Change%" = "Range";
+
+/* priceLabel */
+"Last Price" = "成交";
+"LastBtn" = "成交价";
+
+/* symLabel */
+"Symbol" = "名称";
+
+"Vol" = "Total Vol";
+
+"Volume" = "单量";
+
+"accumulatedVolume" = "总量";
+
+"High" = "最高";
+
+"Low" = "最低";
+
+"Last" = "成交";
+
+"完成" = "完成";
+
+"volumeRatio" = "量比";
+
+"stockAmplitude" = "振幅";
+
+/* chgGroupNameBtn */
+"edit name" = "修改名称";
+
+/*please input a name*/
+"please input a name" = "请输入群组名称";
+
+"change watch group name" = "更改自选群组名称";
+
+"Group name already exist" = "已有相同群组名称存在, 请重新更改群组名称.";
+
+"Please define a different name" = "请输入一个与原本不相同的群组名称";
+
+"Add group successfully" = "成功加入群组";
+
+"Chnage group name successfully" = "成功修改群组名称";
+
+"AddWatchlist" = "新增群组";
+
+"EditWatchlist" = "修改群組";
+
+"Header Order" = "表头排序";
+
+"changeSymbol" = "          表 头 排 序                             >";
+
+
+"Day" = "日";
+
+"Week" = "周";
+
+"Month" = "月";
+
+"Add To Watchlist" = "加入到自选股";
+
+"Choice watch groups" = "选择自选群组";
+
+"Add To Watchlists Success" = "成功加至";
+
+"Add To Watchlists Fail" = "加至自选群组失败";
+
+"Back" = "返回";
+
+"top of page" = "已达表格页首";
+
+"bottom of page" = "已达表格页尾";
+
+"多空" = "多空";
+
+"分類最愛已達上限20組" = "分类最爱已达上限20组";
+
+"您的加值自選商品已超過限制值" = "您的加值自选已超过限制值";
+
+"目前加值自選" = "目前加值自选";
+
+"自選限制數" = "自选限制数";
+
+"非加值自選" = "非加值自选";
+
+"加值切換" = "加值切换";
+
+"新增自選群組" = "新增自选群组";
+
+"新增分類最愛" = "新增分类最爱";
+
+"重點瀏覽" = "重点浏览";
+
+"此分類已加入分類最愛群組" = "此分类已加入分类最爱群组";
+
+"分類最愛加入成功" = "分类最爱加入成功";
+
+"加值自選" = "加值自选";
+
+"一般自選" = "一般自选";
+
+"編輯狀態無法切換自選群組" = "编辑状态无法切换自选群组";
+
+"請選擇您的自選股" = "请选择您的自选股";
+
+"自選分析" = "我的自选";
+
+"VolT" = "总量";
+"Vols" = "单量";
+"Vol%" = "量比";
+"Rise" = "涨幅";
+"Fall" = "跌幅";
+"Up" = "涨跌";
+"Down" = "跌涨";
+"Amp" = "振幅";
+"Last Price" = "成交价";
+"Your seqence" = "Your seqence";
+"None" = "None";
+
+"群組" = "群组";
+"取消" = "取消";
+"排序" = "排序方式";
+"確定" = "确认";
+
+"Add Symbols" = "新增自选";
+"Symbol" = "名称";
+"Add to Action" = "加入警示列表";
+"Move" = "移动";
+"None" = "未加入";
+"Both" = "多空操作";
+"Long" = "多方操作";
+"Short" = "空方操作";
+"Do Not Sort" = "依所选栏位排序";
+
+"Today's Volume" = "总量";
+"Volume Per 20 Sec" = "单量";
+"VolT/VolY" = "量比";
+"Up Price $" = "涨价";
+"Down Price $" = "跌价";
+"Rise %" = "涨幅";
+"Fall %" = "跌幅";
+"Amplitude" = "振幅";
+"Last Price2" = "成交";
+"Strategy" = "加入交易计划";
+

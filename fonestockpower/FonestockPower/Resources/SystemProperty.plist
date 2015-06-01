@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AuthenticationServer</key>
+	<string>https://usauth.fonestock.com:2178/auth/token</string>
+	<key>AuthType</key>
+	<string>fonestock</string>
+	<key>Account</key>
+	<string>uschartlead@points.fonestock.com</string>
+	<key>AppId</key>
+	<string>uschartlead</string>
+	<key>MainPageAdvertiseURL</key>
+	<string>http://www.fonestock.com/goodleads/advertise</string>
+</dict>
+</plist>

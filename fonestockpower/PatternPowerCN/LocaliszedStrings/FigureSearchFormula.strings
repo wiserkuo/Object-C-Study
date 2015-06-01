@@ -1,0 +1,57 @@
+/* 
+  FigureSearchFormula.strings
+  FonestockPower
+
+  Created by Michael.Hsieh on 2015/4/20.
+  Copyright (c) 2015年 Fonestock. All rights reserved.
+ */
+//日線公式
+"PARAM_Day" = "0.03";
+"PARAM_Day2" = "0.02";
+"LONGHORNPARAM_Day" = "0.05";
+"LONGHORNPARAM_Day_2" = "0.05";
+"LONGPARAM_Day" = "0.07";
+"LONGPARAM_Day_2" = "0.07";
+"TWOPARAM_Day" = "1.001";
+"TIME_Day" = "20";
+"TIME_Day2" = "20";
+"MULT_Day" = "0.001";
+"SPMULT_Day" = "1.03";
+"SPMULT_Day_2" = "1.03";
+"SPEC1_Day" = "20";
+"SPEC2_Day" = "5";
+"TRENDPARAM_Day" = "5";
+"MONTRENDPARAM_Day" = "5";
+"TRENDSPEC1_Day" = "20";
+
+//週線公式
+"PARAM_Week" = "0.05";
+"LONGHORNPARAM_Week" = "0.1";
+"LONGPARAM_Week" = "0.1";
+"LONGPARAM_Week_2" = "0.1";
+"TWOPARAM_Week" = "1.005";
+"TIME_Week" = "13";
+"MULT_Week" = "0.005";
+"SPMULT_Week" = "1.05";
+"SPMULT_Week_2" = "1.05";
+"SPEC1_Week" = "13";
+"SPEC2_Week" = "5";
+"TRENDPARAM_Week" = "5";
+"MONTRENDPARAM_Week" = "5";
+"TRENDSPEC1_Week" = "13";
+
+//月線公式
+"PARAM_Month" = "0.07";
+"LONGHORNPARAM_Month" = "0.15";
+"LONGPARAM_Month" = "0.15";
+"LONGPARAM_Month_2" = "0.15";
+"TWOPARAM_Month" = "1.01";
+"TIME_Month" = "6";
+"MULT_Month" = "0.01";
+"SPMULT_Month" = "1.07";
+"SPMULT_Month_2" = "1.07";
+"SPEC1_Month" = "12";
+"SPEC2_Month" = "6";
+"TRENDPARAM_Month" = "3";
+"MONTRENDPARAM_Month" = "3";
+"TRENDSPEC1_Month" = "12";

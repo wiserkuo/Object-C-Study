@@ -1,0 +1,31 @@
+/* 
+  Trade.strings
+  FonestockPower
+
+  Created by Derek on 2014/8/27.
+  Copyright (c) 2014年 Fonestock. All rights reserved.
+*/
+
+"多方選股形勢" = "Long";
+"空方選股形勢" = "Short";
+"金額" = "Estimated Total";
+"建議買進張數小於" = "Best to buy less than";
+"建議放空張數小於" = "Best to sell short less than";
+"(建議曝險金額控制在資產淨值2%內)" = "(Best to keep risk exposure within 2% of total asset)";
+"交易金額" = "Estimated Total";
+"取消" = "Cancel";
+"請輸入數量" = "Please enter the number of";
+"請輸入價格" = "Please enter the price";
+"確認" = "OK";
+"張數" = "Quantity";
+"選擇日期不正確" = "Invalid date";
+"數量未輸入" = "Please enter content!";
+"價格未輸入" = "Please enter content!";
+"現金餘額不足, 請先投入資金" = "Not enough cash.\nPlease put in some money first";
+"已賣出 %@ 複數張,\n%@ %@ 元,\n共 %@ 元." = "Sold %@ shares of\n%@ at $%@ per share\nfor $%@.";
+"已賣出 %@ 張,\n%@ %@ 元,\n共 %@ 元." = "Sold %@ share of\n%@ at $%@ per share\nfor $%@.";
+"已購買 %@ 複數張,\n%@ %@ 元,\n共 %@ 元." = "Bought %@ shares of\n%@ at $%@ per share\nfor $%@.";
+"已購買 %@ 張,\n%@ %@ 元,\n共 %@ 元." = "Bought %@ share of\n%@ at $%@ per share\nfor $%@.";
+"已實現損益" = "Total Gain";
+"勝率" = "Win Rate";
+"%@%%(交易%d檔)" = "%@%%(%d time)";

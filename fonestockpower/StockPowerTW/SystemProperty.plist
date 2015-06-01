@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AuthenticationServerURL</key>
+	<string>https://kqauth.fonestock.com:2178/auth2/token</string>
+	<key>AuthType</key>
+	<string>fonestock</string>
+	<key>AppId</key>
+	<string>twgoodlead</string>
+	<key>PaymentPageURL</key>
+	<string>http://www.fonestock.com/twleads/payment</string>
+	<key>PurchaseVerifyURL</key>
+	<string>https://www.fonestock.com/app_purchase/apple/purchase_verify</string>
+	<key>SignupPageURL</key>
+	<string>http://www.fonestock.com/twleads/signup.php</string>
+	<key>UpdatePushNotificationTokenURL</key>
+	<string>http://fidatest.fonestock.com:2172/push_notify/token_data</string>
+	<key>mainDBName</key>
+	<string>PatternPowerDB.sqlite</string>
+	<key>FBShareNotificationURL</key>
+	<string>https://www.fonestock.com.tw/fs_service/apiSocial/share</string>
+	<key>AppStoreURL</key>
+	<string>https://itunes.apple.com/us/app/patternpower/id842419597</string>
+	<key>ForgotPasswordURL</key>
+	<string>https://www.fonestock.com.tw/fs_register/request</string>
+</dict>
+</plist>

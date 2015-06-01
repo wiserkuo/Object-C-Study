@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AuthenticationServerURL</key>
+	<string>https://twauth.fonestock.com:2188/auth2/token</string>
+	<key>AuthType</key>
+	<string>fonestock</string>
+	<key>AppId</key>
+	<string>twcharttrade</string>
+	<key>PaymentPageURL</key>
+	<string>http://172.31.5.104/fs_register/subscription.php</string>
+	<key>PurchaseVerifyURL</key>
+	<string>https://www.fonestock.com.tw/fs_service/apiSubscription/apple</string>
+	<key>SignupPageURL</key>
+	<string>https://www.fonestock.com.tw/fs_register/signup.php</string>
+	<key>UpdatePushNotificationTokenURL</key>
+	<string>https://uspush.fonestock.com:2189/pushtokenup/us/</string>
+	<key>mainDBName</key>
+	<string>PatternPowerDB.sqlite</string>
+	<key>FBShareNotificationURL</key>
+	<string>https://www.fonestock.com.tw/fs_service/apiSocial/share</string>
+	<key>AppStoreURL</key>
+	<string>itms-apps://itunes.apple.com/us/app/xing-tai-cao-pan-shou/id961071068?l=zh&amp;ls=1&amp;mt=8</string>
+	<key>ForgotPasswordURL</key>
+	<string>https://www.fonestock.com.tw/fs_register/request</string>
+	<key>OpenProjectURL</key>
+	<string>https://www.fonestock.com.tw/fs_service/apiSignup/initial</string>
+</dict>
+</plist>

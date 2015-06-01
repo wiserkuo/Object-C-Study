@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <scenes>
+        <!--Story Board Left View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController storyboardIdentifier="FSStoryBoardLeftViewController" id="vXZ-lx-hvc" customClass="FSStoryBoardLeftViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="q2h-ae-Ctm"/>
+                        <viewControllerLayoutGuide type="bottom" id="cKU-Pb-rV2"/>
+                    </layoutGuides>
+                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="8mu-L8-Ala">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="紅球" translatesAutoresizingMaskIntoConstraints="NO" id="Cej-NF-c9y">
+                                <rect key="frame" x="0.0" y="450" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="38" y="113" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <imageView tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="紅球" translatesAutoresizingMaskIntoConstraints="NO" id="BXz-fZ-NrX">
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="196" y="3" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="黃球" translatesAutoresizingMaskIntoConstraints="NO" id="E3a-Jv-9HH">
+                                <rect key="frame" x="0.0" y="450" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="134" y="113" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="紅球" translatesAutoresizingMaskIntoConstraints="NO" id="d69-t2-Jjg">
+                                <rect key="frame" x="0.0" y="450" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="230" y="113" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="綠球+" translatesAutoresizingMaskIntoConstraints="NO" id="Rkp-bL-MIV">
+                                <rect key="frame" x="0.0" y="450" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="82" y="244" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="粉紅球" translatesAutoresizingMaskIntoConstraints="NO" id="HrW-e8-3mb">
+                                <rect key="frame" x="0.0" y="450" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="196" y="244" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="綠球" translatesAutoresizingMaskIntoConstraints="NO" id="tK8-4P-3o9">
+                                <rect key="frame" x="0.0" y="450" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="82" y="379" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="綠球" translatesAutoresizingMaskIntoConstraints="NO" id="Grt-Ex-PsP">
+                                <rect key="frame" x="0.0" y="450" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="196" y="379" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="紅球" translatesAutoresizingMaskIntoConstraints="NO" id="8F8-6O-Ui5">
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="82" y="3" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="推薦股票" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIr-Hx-qxM">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="18"/>
+                                    <rect key="frame" x="82" y="80" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="標竿型態" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gee-g8-kO9">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="18"/>
+                                    <rect key="frame" x="192" y="80" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的型態" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFO-iQ-9RH">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="34" y="192" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的自選" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MXc-JK-F4l">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="130" y="192" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="型態追蹤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iyy-oy-as4">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="230" y="192" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交易警示" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xn-Df-ivl">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="82" y="323" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="部位風險" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PKL-fS-xd4">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="78" y="461" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="績效日記" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wn9-Q0-nAV">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="192" y="461" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右斜箭" translatesAutoresizingMaskIntoConstraints="NO" id="k9c-GO-Mrq">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="147" y="211" width="25" height="25"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="左斜箭" translatesAutoresizingMaskIntoConstraints="NO" id="SUp-tR-SuO">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="131" y="100" width="20" height="20"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="左箭" translatesAutoresizingMaskIntoConstraints="NO" id="tXZ-ey-iM8">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="119" y="150" width="12" height="6"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭" translatesAutoresizingMaskIntoConstraints="NO" id="QdW-EH-RQy">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="217" y="150" width="12" height="6"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右斜箭" translatesAutoresizingMaskIntoConstraints="NO" id="uU0-3j-fvD">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="200" y="102" width="20" height="20"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="雙箭" translatesAutoresizingMaskIntoConstraints="NO" id="qOM-fr-rWk">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="167" y="281" width="25" height="15"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="下箭" translatesAutoresizingMaskIntoConstraints="NO" id="cl6-80-RVy">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="118" y="351" width="8" height="20"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="左斜箭" translatesAutoresizingMaskIntoConstraints="NO" id="Boh-yx-C2o">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="163" y="345" width="45" height="45"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="白色線條" translatesAutoresizingMaskIntoConstraints="NO" id="hnj-Oa-0ux">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="217" width="320" height="2"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="白色線條" translatesAutoresizingMaskIntoConstraints="NO" id="iCC-iL-Jn9">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="-1" y="361" width="320" height="2"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="小綠棒" translatesAutoresizingMaskIntoConstraints="NO" id="Zr1-i4-F1h">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="-1" y="226" width="33" height="126"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="小綠棒" translatesAutoresizingMaskIntoConstraints="NO" id="UfY-4L-rns">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="371" width="34" height="127"/>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7Z-Yv-bpM">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <string key="text">加
+入
+想
+買
+的
+股
+票</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="42" y="217" width="17" height="124"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oV6-kN-CAq">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <string key="text">找
+買
+賣
+點</string>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="6" y="225" width="22" height="107"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1xy-Zr-npZ">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <string key="text">獲
+利
+分
+析</string>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="6" y="370" width="22" height="107"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g60-Ws-d0Z">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <string key="text">加
+入
+想
+看
+的
+股
+票</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="42" y="1" width="17" height="120"/>
+                                </variation>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="小綠棒" translatesAutoresizingMaskIntoConstraints="NO" id="hq2-xh-kuv">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="-10" width="36" height="216"/>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ep-bX-nxH">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <string key="text">找
+
+股
+
+票</string>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="6" y="18" width="22" height="151"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="時機健診" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4i4-dx-7xH">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="192" y="323" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="我的型態" translatesAutoresizingMaskIntoConstraints="NO" id="zCS-Rd-t8P">
+                                <rect key="frame" x="0.0" y="450" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="345" y="112" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <imageView tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="標竿型態" translatesAutoresizingMaskIntoConstraints="NO" id="HRu-Vl-0U1">
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="503" y="2" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="我的自選" translatesAutoresizingMaskIntoConstraints="NO" id="FvW-wa-0G2">
+                                <rect key="frame" x="0.0" y="450" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="441" y="112" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="新的型態追蹤" translatesAutoresizingMaskIntoConstraints="NO" id="eX9-7y-Esb">
+                                <rect key="frame" x="0.0" y="450" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="537" y="112" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="交易警示" translatesAutoresizingMaskIntoConstraints="NO" id="UQM-vV-xTS">
+                                <rect key="frame" x="0.0" y="450" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="389" y="243" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="時機健診" translatesAutoresizingMaskIntoConstraints="NO" id="17g-Rr-2mI">
+                                <rect key="frame" x="0.0" y="450" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="503" y="243" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="部位風險" translatesAutoresizingMaskIntoConstraints="NO" id="0hX-eg-B8q">
+                                <rect key="frame" x="0.0" y="450" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="389" y="378" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="績效日記" translatesAutoresizingMaskIntoConstraints="NO" id="g3r-Fl-oW5">
+                                <rect key="frame" x="0.0" y="450" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="503" y="378" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="推薦股票" translatesAutoresizingMaskIntoConstraints="NO" id="WeS-JR-Ng3">
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="389" y="2" width="80" height="80"/>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="推薦股票" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8L5-OU-I4K">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="18"/>
+                                    <rect key="frame" x="389" y="79" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="標竿型態" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBD-ho-iFb">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="18"/>
+                                    <rect key="frame" x="499" y="79" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的型態" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWN-VQ-xvw">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="341" y="191" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的自選" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JL5-Kl-iLD">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="437" y="191" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="型態追蹤" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFm-CA-mMQ">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="537" y="191" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交易警示" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7aE-5A-zhl">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="389" y="322" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="部位風險" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87M-KW-nyM">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="385" y="460" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="績效日記" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="THf-JK-XFD">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="499" y="464" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右斜箭" translatesAutoresizingMaskIntoConstraints="NO" id="vWo-Ld-Is9">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="454" y="210" width="25" height="25"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="左斜箭" translatesAutoresizingMaskIntoConstraints="NO" id="9Zh-Zs-NFG">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="438" y="99" width="20" height="20"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="左箭" translatesAutoresizingMaskIntoConstraints="NO" id="UX3-9f-oBh">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="426" y="149" width="12" height="6"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右箭" translatesAutoresizingMaskIntoConstraints="NO" id="sDO-em-Grp">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="524" y="149" width="12" height="6"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="右斜箭" translatesAutoresizingMaskIntoConstraints="NO" id="hVj-Ax-17u">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="507" y="101" width="20" height="20"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="雙箭" translatesAutoresizingMaskIntoConstraints="NO" id="RNZ-1G-ndb">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="474" y="280" width="25" height="15"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="下箭" translatesAutoresizingMaskIntoConstraints="NO" id="tK8-fU-jX3">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="422" y="350" width="8" height="20"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="左斜箭" translatesAutoresizingMaskIntoConstraints="NO" id="u0Y-0f-H8u">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="470" y="344" width="45" height="45"/>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="時機健診" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCL-HC-sVB">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="499" y="322" width="89" height="23"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dml-7e-rYi">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <string key="text">哪些股票
+達到
+轉折型態</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="88" y="3" width="68" height="80"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ASd-qw-mdA">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <string key="text">搭配基本面
+選股</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="195" y="9" width="83" height="69"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vaz-Xr-K5V">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <string key="text">個人自訂
+專屬型態</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="36" y="117" width="83" height="69"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="da9-xJ-aT5">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <string key="text">買賣標的
+研究分析</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="132" y="119" width="83" height="69"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9I-FG-LUo">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <string key="text">條件設定
+即時警示
+進行交易</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="81" y="255" width="83" height="69"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbj-bS-cOr">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <string key="text">手中個股
+是否出現
+買賣訊號</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="195" y="255" width="83" height="69"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qto-gt-gdR">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <string key="text">部位績效
+風險控管</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="79" y="383" width="83" height="69"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZi-em-nwU">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <string key="text">交易紀錄
+檢討改進</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="195" y="384" width="83" height="69"/>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PSk-bE-wDa">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <string key="text">追蹤型態
+有效性</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="229" y="117" width="83" height="69"/>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Cej-NF-c9y"/>
+                                <exclude reference="BXz-fZ-NrX"/>
+                                <exclude reference="E3a-Jv-9HH"/>
+                                <exclude reference="d69-t2-Jjg"/>
+                                <exclude reference="Rkp-bL-MIV"/>
+                                <exclude reference="HrW-e8-3mb"/>
+                                <exclude reference="tK8-4P-3o9"/>
+                                <exclude reference="Grt-Ex-PsP"/>
+                                <exclude reference="8F8-6O-Ui5"/>
+                                <exclude reference="gIr-Hx-qxM"/>
+                                <exclude reference="gee-g8-kO9"/>
+                                <exclude reference="ZFO-iQ-9RH"/>
+                                <exclude reference="MXc-JK-F4l"/>
+                                <exclude reference="Iyy-oy-as4"/>
+                                <exclude reference="4xn-Df-ivl"/>
+                                <exclude reference="PKL-fS-xd4"/>
+                                <exclude reference="wn9-Q0-nAV"/>
+                                <exclude reference="k9c-GO-Mrq"/>
+                                <exclude reference="SUp-tR-SuO"/>
+                                <exclude reference="tXZ-ey-iM8"/>
+                                <exclude reference="QdW-EH-RQy"/>
+                                <exclude reference="uU0-3j-fvD"/>
+                                <exclude reference="qOM-fr-rWk"/>
+                                <exclude reference="cl6-80-RVy"/>
+                                <exclude reference="Boh-yx-C2o"/>
+                                <exclude reference="hnj-Oa-0ux"/>
+                                <exclude reference="iCC-iL-Jn9"/>
+                                <exclude reference="Zr1-i4-F1h"/>
+                                <exclude reference="UfY-4L-rns"/>
+                                <exclude reference="x7Z-Yv-bpM"/>
+                                <exclude reference="oV6-kN-CAq"/>
+                                <exclude reference="1xy-Zr-npZ"/>
+                                <exclude reference="g60-Ws-d0Z"/>
+                                <exclude reference="hq2-xh-kuv"/>
+                                <exclude reference="9Ep-bX-nxH"/>
+                                <exclude reference="4i4-dx-7xH"/>
+                                <exclude reference="zCS-Rd-t8P"/>
+                                <exclude reference="HRu-Vl-0U1"/>
+                                <exclude reference="FvW-wa-0G2"/>
+                                <exclude reference="eX9-7y-Esb"/>
+                                <exclude reference="UQM-vV-xTS"/>
+                                <exclude reference="17g-Rr-2mI"/>
+                                <exclude reference="0hX-eg-B8q"/>
+                                <exclude reference="g3r-Fl-oW5"/>
+                                <exclude reference="WeS-JR-Ng3"/>
+                                <exclude reference="8L5-OU-I4K"/>
+                                <exclude reference="DBD-ho-iFb"/>
+                                <exclude reference="rWN-VQ-xvw"/>
+                                <exclude reference="JL5-Kl-iLD"/>
+                                <exclude reference="QFm-CA-mMQ"/>
+                                <exclude reference="7aE-5A-zhl"/>
+                                <exclude reference="87M-KW-nyM"/>
+                                <exclude reference="THf-JK-XFD"/>
+                                <exclude reference="vWo-Ld-Is9"/>
+                                <exclude reference="9Zh-Zs-NFG"/>
+                                <exclude reference="UX3-9f-oBh"/>
+                                <exclude reference="sDO-em-Grp"/>
+                                <exclude reference="hVj-Ax-17u"/>
+                                <exclude reference="RNZ-1G-ndb"/>
+                                <exclude reference="tK8-fU-jX3"/>
+                                <exclude reference="u0Y-0f-H8u"/>
+                                <exclude reference="nCL-HC-sVB"/>
+                                <exclude reference="dml-7e-rYi"/>
+                                <exclude reference="ASd-qw-mdA"/>
+                                <exclude reference="Vaz-Xr-K5V"/>
+                                <exclude reference="da9-xJ-aT5"/>
+                                <exclude reference="d9I-FG-LUo"/>
+                                <exclude reference="zbj-bS-cOr"/>
+                                <exclude reference="Qto-gt-gdR"/>
+                                <exclude reference="vZi-em-nwU"/>
+                                <exclude reference="PSk-bE-wDa"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact" ambiguous="YES">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                            <mask key="subviews">
+                                <include reference="Cej-NF-c9y"/>
+                                <include reference="BXz-fZ-NrX"/>
+                                <include reference="E3a-Jv-9HH"/>
+                                <include reference="d69-t2-Jjg"/>
+                                <include reference="Rkp-bL-MIV"/>
+                                <include reference="HrW-e8-3mb"/>
+                                <include reference="tK8-4P-3o9"/>
+                                <include reference="Grt-Ex-PsP"/>
+                                <include reference="8F8-6O-Ui5"/>
+                                <include reference="gIr-Hx-qxM"/>
+                                <include reference="gee-g8-kO9"/>
+                                <include reference="ZFO-iQ-9RH"/>
+                                <include reference="MXc-JK-F4l"/>
+                                <include reference="Iyy-oy-as4"/>
+                                <include reference="4xn-Df-ivl"/>
+                                <include reference="PKL-fS-xd4"/>
+                                <include reference="wn9-Q0-nAV"/>
+                                <include reference="k9c-GO-Mrq"/>
+                                <include reference="SUp-tR-SuO"/>
+                                <include reference="tXZ-ey-iM8"/>
+                                <include reference="QdW-EH-RQy"/>
+                                <include reference="uU0-3j-fvD"/>
+                                <include reference="qOM-fr-rWk"/>
+                                <include reference="cl6-80-RVy"/>
+                                <include reference="Boh-yx-C2o"/>
+                                <include reference="hnj-Oa-0ux"/>
+                                <include reference="iCC-iL-Jn9"/>
+                                <include reference="Zr1-i4-F1h"/>
+                                <include reference="UfY-4L-rns"/>
+                                <include reference="x7Z-Yv-bpM"/>
+                                <include reference="oV6-kN-CAq"/>
+                                <include reference="1xy-Zr-npZ"/>
+                                <include reference="g60-Ws-d0Z"/>
+                                <include reference="hq2-xh-kuv"/>
+                                <include reference="9Ep-bX-nxH"/>
+                                <include reference="4i4-dx-7xH"/>
+                                <include reference="zCS-Rd-t8P"/>
+                                <include reference="HRu-Vl-0U1"/>
+                                <include reference="FvW-wa-0G2"/>
+                                <include reference="eX9-7y-Esb"/>
+                                <include reference="UQM-vV-xTS"/>
+                                <include reference="17g-Rr-2mI"/>
+                                <include reference="0hX-eg-B8q"/>
+                                <include reference="g3r-Fl-oW5"/>
+                                <include reference="WeS-JR-Ng3"/>
+                                <include reference="8L5-OU-I4K"/>
+                                <include reference="DBD-ho-iFb"/>
+                                <include reference="rWN-VQ-xvw"/>
+                                <include reference="JL5-Kl-iLD"/>
+                                <include reference="QFm-CA-mMQ"/>
+                                <include reference="7aE-5A-zhl"/>
+                                <include reference="87M-KW-nyM"/>
+                                <include reference="THf-JK-XFD"/>
+                                <include reference="vWo-Ld-Is9"/>
+                                <include reference="9Zh-Zs-NFG"/>
+                                <include reference="UX3-9f-oBh"/>
+                                <include reference="sDO-em-Grp"/>
+                                <include reference="hVj-Ax-17u"/>
+                                <include reference="RNZ-1G-ndb"/>
+                                <include reference="tK8-fU-jX3"/>
+                                <include reference="u0Y-0f-H8u"/>
+                                <include reference="nCL-HC-sVB"/>
+                                <include reference="dml-7e-rYi"/>
+                                <include reference="ASd-qw-mdA"/>
+                                <include reference="Vaz-Xr-K5V"/>
+                                <include reference="da9-xJ-aT5"/>
+                                <include reference="d9I-FG-LUo"/>
+                                <include reference="zbj-bS-cOr"/>
+                                <include reference="Qto-gt-gdR"/>
+                                <include reference="vZi-em-nwU"/>
+                                <include reference="PSk-bE-wDa"/>
+                            </mask>
+                        </variation>
+                    </scrollView>
+                    <navigationItem key="navigationItem" id="lyw-4R-b3K"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="img1" destination="8F8-6O-Ui5" id="d9e-xz-Kmh"/>
+                        <outlet property="img11" destination="WeS-JR-Ng3" id="And-oR-jMO"/>
+                        <outlet property="img12" destination="HRu-Vl-0U1" id="ODz-E9-w2z"/>
+                        <outlet property="img13" destination="zCS-Rd-t8P" id="ET7-JG-lgq"/>
+                        <outlet property="img14" destination="FvW-wa-0G2" id="8Kl-XB-xb1"/>
+                        <outlet property="img15" destination="eX9-7y-Esb" id="ueV-e5-WkQ"/>
+                        <outlet property="img16" destination="UQM-vV-xTS" id="VQn-oO-gQJ"/>
+                        <outlet property="img17" destination="17g-Rr-2mI" id="OPA-YQ-awQ"/>
+                        <outlet property="img18" destination="0hX-eg-B8q" id="n57-1R-SqO"/>
+                        <outlet property="img19" destination="g3r-Fl-oW5" id="7Yt-5d-Zcm"/>
+                        <outlet property="img2" destination="BXz-fZ-NrX" id="nAb-1y-j9t"/>
+                        <outlet property="img3" destination="Cej-NF-c9y" id="InR-mh-FhP"/>
+                        <outlet property="img4" destination="E3a-Jv-9HH" id="M7O-Ef-ybr"/>
+                        <outlet property="img5" destination="d69-t2-Jjg" id="s7s-Pj-2SH"/>
+                        <outlet property="img6" destination="Rkp-bL-MIV" id="4hI-KZ-vim"/>
+                        <outlet property="img7" destination="HrW-e8-3mb" id="Xf8-2Y-Srt"/>
+                        <outlet property="img8" destination="tK8-4P-3o9" id="Y3M-4K-4BQ"/>
+                        <outlet property="img9" destination="Grt-Ex-PsP" id="0Ki-5h-Je5"/>
+                        <outlet property="sclView" destination="8mu-L8-Ala" id="2yT-Rj-ldR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="817.5" y="252"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="9Io-3u-6qU">
+            <objects>
+                <viewController id="d6H-W3-QSN" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bXh-F3-D2u"/>
+                        <viewControllerLayoutGuide type="bottom" id="ytr-7l-n5w"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sWW-8a-il6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vB4-88-2cZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="997.5" y="863"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="下箭" width="42" height="59"/>
+        <image name="交易警示" width="190" height="190"/>
+        <image name="右斜箭" width="54" height="52"/>
+        <image name="右箭" width="28" height="33"/>
+        <image name="小綠棒" width="36" height="72"/>
+        <image name="左斜箭" width="57" height="53"/>
+        <image name="左箭" width="201" height="83"/>
+        <image name="我的型態" width="185" height="185"/>
+        <image name="我的自選" width="190" height="190"/>
+        <image name="推薦股票" width="190" height="190"/>
+        <image name="新的型態追蹤" width="190" height="190"/>
+        <image name="時機健診" width="190" height="190"/>
+        <image name="標竿型態" width="190" height="190"/>
+        <image name="白色線條" width="720" height="3"/>
+        <image name="粉紅球" width="190" height="190"/>
+        <image name="紅球" width="190" height="190"/>
+        <image name="綠球" width="190" height="190"/>
+        <image name="綠球+" width="190" height="190"/>
+        <image name="績效日記" width="190" height="190"/>
+        <image name="部位風險" width="190" height="190"/>
+        <image name="雙箭" width="63" height="39"/>
+        <image name="黃球" width="190" height="190"/>
+    </resources>
+</document>

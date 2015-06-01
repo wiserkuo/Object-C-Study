@@ -1,0 +1,330 @@
+/* 
+  Equity.strings
+  WirtsLeg
+
+  Created by Neil on 13/11/25.
+  Copyright (c) 2   013年 fonestock. All rights reserved.
+*/
+
+
+"資料下載中" = "Download data please wait...";
+
+//////////////////////基本/////////////////////////
+"基本" = "Basic";
+
+
+//財報
+"財報" = "Finance";
+"選擇顯示類型" = "Type";
+"選擇日期" = "Date";
+"單位：百萬" = "Numbers in millions. Currency in USD";
+"兩檔比較" = "Compare:";
+"財報最後日期" = "Date";
+"財報最後日期(累計)" = "Date(Accu)";
+"財報最後日期(單季)" = "Date(Quarterly)";
+"單季" = "Quarterly";
+"累計" = "Accumulate";
+"取消" = "Cancel";
+
+"換股" = "Change Stock";
+"財報日期(單季)" = "Period Ending";
+
+//資產負債表
+"資產負債表" = "Balance Sheet";
+//"Cash And Cash Equivalents" = "Cash & Equivalents";
+//"Short Term Investments" = "Short Term Investments";
+//"Net Receivables" = "Net Receivables";
+//"Inventory" = "Inventory";
+//"Total Current Assets" = "Total Current Assets";
+//"Long Term Investments" = "Long Term Investments";
+//"Property Plant and Equipment" = "Property Plant and Equipment";
+//"Total Assets" = "Total Assets";
+//"Short Term Debt" = "Current Debt";
+//"Accounts Payable" = "Accounts Payable";
+//"Current Liabilities" = "Total Current Liabilities";
+//"Long Term Debt" = "Deferred LT Liability Charges";
+//"Total Current Liabilities" = "Total Liabilities";
+//"Stockholder Equity" = "Common Stock";
+//"Retained Earnings & Reserve" = "Retained Earnings";
+//"Total Stockholder Equity" = "Total Stockholder Equity";
+//
+////損益表
+"損益表" = "Income Statement";
+"損益表(合併)" = "Income Statement";
+//"Total Revenue" = "Total Revenue";
+//"Cost of Revenue" = "Cost of Revenue";
+//"Gross Profit" = "Gross Profit";
+//"Research Development" = "Research Development";
+//"Selling General and Administrative" = "Selling General and Administrative";
+//"Depreciation/Amortization" = "Depreciation/Amortization";
+//"Indirect Expenses" = "Indirect Expenses";
+//"Total Operating Expenses" = "Total Operating Expenses";
+//"Operating Income" = "Operating Income";
+//"Non-Operating Gains" = "Non-Operating Gains";
+//"Cash from Operating Activities" = "Cash from Operating Activities";
+//"Interest Income" = "Interest Income";
+//"Interest Expense" = "Interest Expense";
+//"Investment Gains/Losses" = "Net Investment Gains";
+//"Exchange Gains/Losses" = "Exchange Gains/Losses";
+//"Income Before Tax" = "Income Before Tax";
+//"Income Tax Expense" = "Income Tax Expense";
+//"Net Income" = "Net Income";
+//"Diluted Shares" = "Diluted Shares";
+//"YTD EPS" = "Diluted EPS";
+//"Last Price of Quarter Ending" = "Last Price of Quarter Ending";
+//"P/E Ratio of Quarter Ending" = "P/E Ratio of Quarter Ending";
+//
+////現金流量
+"現金流量" = "Cash Flow";
+"現金流量(合併)" = "Cash Flow";
+//"Net Income" = "Net Income";
+////"Depreciation Expense & Various Amortization" = "Depreciation Expense & Various Amortization";
+////"Investment Gains/Losses" = "Investment Gains/Losses";
+////"S-T Investments Disposal Gains/Loses" = "S-T Investments Disposal Gains/Loses";
+////"F-A Investments Disposal Gains/Loses" = "F-A Investments Disposal Gains/Loses";
+////"L-T Investments Disposal Gains/Loses" = "L-T Investments Disposal Gains/Loses";
+////"Changes In Accounts Receivables" = "Changes In Accounts Receivables";
+////"Changes In Inventories" = "Changes In Inventories";
+////"Changes in Accounts Payable" = "Changes in Accounts Payable";
+//"Changes in Working Capital" = "Changes in Working Capital";
+//"Adjustment to Net Income" = "Adjustment to Net Income";
+//"Other Cash Flows from Operating Activities" = "Other Cash Flows from Operating Activities";
+//"Cash flows from Operating Activities" = "Total Cash Flow From Operating Activities";
+////"Slaes of S-T Investments" = "Slaes of S-T Investments";
+////"Slaes of L-T Investments" = "Slaes of L-T Investments";
+////"L-T Investments" = "L-T Investments";
+////"Sales of Fixed Assets" = "Sales of Fixed Assets";
+////"Total Fixed Assets" = "Total Fixed Assets";
+//"Capital Expenditures" = "Capital Expenditures";
+//"Investment Purchase" = "Investment Purchase";
+//"Investment Disposal" = "Investment Disposal";
+//"Business Acqstns/Disposals" = "Business Acqstns/Disposals";
+//"Other Cash Flows from Investing Activities" = "Other Cash Flows from Investing Activities";
+//"Cash Flow From Investing Activities" = "Total Cash Flows from Investing Activities";
+//"Proceeds from New Issues" = "Proceeds from New Issues";
+//"Dividend Paid" = "Dividend Paid";
+//"Changes in Borrowing" = "Changes in Borrowing";
+//"Changes in Short Term Debt" = "Changes in Short Term Debt";
+//"Changes in Long Term Debt" = "Changes in Long Term Debt";
+//"Change in Equity (Cumu)" = "Change in Equity";
+//"Other Cash Flows from Financing Activities" = "Other Cash Flow from Financing Activities";
+//"Cash Flow from Financing Activities" = "Total Cash Flows from Financing Activities";
+//"Effect Of Exchange Rate Changes" = "Effect Of Exchange Rate Changes";
+//"Changes in Cash Flow" = "Change In Cash and Cash Equivalents";
+//"Cash & Cash Equivalents at Beginning" = "Net Cash - Beginning Balance";
+//"Cash & Cash Equivalents at End" = "Net Cash - Ending Balance";
+//"Interest Paid" = "Interest Paid";
+//"Income Tax Paid" = "Income Tax Paid";
+//"Free Cash Flow" = "Free Cash Flow";
+//
+//
+////財務比例
+"五力分析" = "Financial Ratio";
+"五力分析(合併)" = "Financial Ratio";
+//"Price to EPS" = "Price to EPS";
+//"Price to Sales" = "Price to Sales";
+//"Avg. Dividend Yield" = "Avg. Dividend Yield";
+//"Dividend Payout Ratio(TTM)" = "Dividend Payout Ratio(TTM)";
+//"Gross Margin" = "Gross Margin";
+//"Operating Margin" = "Operating Margin";
+//"Pre-Tax Margin" = "Pre-Tax Margin";
+//"Net Profit Margin" = "Net Profit Margin";
+//"Sales Growth Rate" = "Sales Growth Rate";
+//"Net Profit Growth Rate" = "Net Profit Growth Rate";
+//"Net Asset Value Per Share" = "Net Asset Value Per Share";
+//"Receivable Days" = "Receivable Days";
+//"Sales - 5 Yr. Growth Rate" = "Sales-5 Yr. Growth Rate";
+//"EPS - 5 Yr. Growth Rate" = "EPS-5 Yr. Growth Rate";
+//"Capital Spending - 5 Yr. Growth Rate" = "Capital Spending-5 Yr. Growth Rate";
+//"Current Ratio (MRQ)" = "Current Ratio (MRQ)";
+//"Quick Ratio (MRQ)" = "Quick Ratio (MRQ)";
+//"Total Debt to Equity (MRQ)" = "Total Debt to Equity (MRQ)";
+//"Total Debt to Assest" = "Total Debt to Assest";
+//"Interest Coverage" = "Interest Coverage";
+//"Return on Assets (TTM)" = "Return on Assets (TTM)";
+//"Return on Assets - 5 Yr. Avg." = "Return on Assets-5 Yr. Avg.";
+//"Return on Investment (TTM)" = "Return on Investment(TTM)";
+//"Return on Investment - 5 Yr. Avg." = "Return on Investment-5 Yr. Avg.";
+//"Return on Equity (TTM)" = "Return on Equity (TTM)";
+//"Return on Equity - 5 Yr. Avg." = "Return on Equity-5 Yr. Avg.";
+//"Revenue/Employee" = "Revenue/Employee(TTM)";
+//"Net Income/Employee" = "Net Income/Employee(TTM)";
+//"Receivable Turnover (TTM)" = "Receivable Turnover (TTM)";
+//"Inventory Turnover (TTM)" = "Inventory Turnover (TTM)";
+//"Asset Turnover (TTM)" = "Asset Turnover (TTM)";
+
+
+//公司
+"公司" = "Profile";
+"集團名稱" = "Group Name";
+"董事長" = "Chairman";
+"總經理" = "General Manager";
+"成立日期" = "Found Date";
+"掛牌日期" = "List date";
+"公司電話" = "Phone";
+"公司傳真" = "Fax";
+"公司地址" = "Address";
+"公司網站" = "Web site";
+"員工人數" = "Employees";
+"當期股本" = "Capital";
+"發行股數" = "Shares Outstanding";
+"流通在外股數" = "The Number of Shares Outstanding";
+"總市值" = "Market Cap";
+"累計EPS" = "EPS ttm";
+"預估EPS" = "EPS fwd";
+"本益比" = "P/E";
+"公司簡介" = "Company Profile";
+
+
+"法人認同度(持股比率)" = "Institutional Investor Stockholding Ratio";
+"外資" = "Foreign Investment";
+"投信" = "Investment Trust";
+"自營商" = "Dealer";
+"董監事" = "The Board";
+"董監持股" = "Stockholding of the Board";
+"持股比率" = "Stockholding Rate";
+"變動率" = "Changing Rate";
+"董監質押" = "Equity Pledge of the Board";
+"質押張數" = "Equity Pledge Volume";
+"質押比率" = "Equity Pledge Rate";
+
+
+"大股東" = "Major Stockholders";
+"持股比例" = "Stockholding Rate";
+"主要產品" = "Main Product";
+"營收比例" = "Revenue Ratio";
+
+
+"資料更新日期：" = "Last Update: ";
+"持有：" = "Stockholding:";
+
+
+"董事/總經理" = "Chairman/General Manager";
+"申讓張數" = "Stockholding Transfer Volume";
+"申讓價格" = "Stockholding Transfer Price";
+"交易方式" = "Trading Method";
+"申讓日期" = "Stockholding Transfer Date";
+"申讓前持張" = "Volume Before Stockholding Transfer";
+"申讓後持張" = "Vol After Stockholding Transfer";
+
+
+//營收
+"營收" = "Rev";
+"年/月" = "Quarter";
+"合併營收" = "Consolidated Revenue";
+"去年同期" = "Same Quarter Last Year";
+"成長率" = "Growth \nRate";
+"累計合併營收" = "Cumulative Consolidated Revenue";
+"去年同期累計" = "Cumulative Same Quarter Last Year";
+"累計成長率" = "Cumulative Growth Rate";
+"月增率" = "Monthly Groth Rate";
+"當月營收" = "This Q";
+"去年同期營收" = "Last Q \n(YoY)";
+"累計營收" = "This YR";
+"去年同期累計" = "Last YR \n(YoY)";
+"累計成長率" = "Growth \nRate";
+
+"兆" = "Trillion";
+"十億" = "Billion";
+"百萬" = "Million";
+"千" = "Thousand";
+"元" = "Dollar";
+
+"計算兆" = "%.2f Trillion";
+"計算十億" = "%.2f Billion";
+"計算百萬" = "%.2f Million";
+"計算千" = "%.2f Thousand";
+"計算元" = "%.2f Dollar";
+
+//EPS
+"季/年" = "Q/Y";
+"依年度" = "By Year";
+"依季度" = "By Quarter";
+
+//////////////////////即時/////////////////////////
+
+"即時" = "Quote";
+
+//走勢  EquityDrawViewController
+"走勢" = "Chart";
+"買進" = "Bid";
+"賣出" = "Ask";
+"開盤" = "Open";
+"收盤" = "Close";
+"最高" = "High";
+"最低" = "Low";
+"漲跌" = "Up/Down";
+"漲幅" = "Range";
+"總量" = "Vol";
+"今日總量" = "Today's Volume (VolT)";
+"單量" = "Vol";
+"內盤" = "Inside Market";
+"外盤" = "Outside Market";
+"昨收" = "";
+"昨量" = "Yesterday's Volume (VolY)";
+"比值" = "Ratio";
+"均價線" = "AVG";
+"量比" = "Vol Ratio";
+"52週最高" = "52WkH";
+"52週最低" = "52WkL";
+"昨量比" = "";
+"3月均量" = "3 Months Average Volume";
+"EPS" = "EPS";
+"本益比" = "P/E";
+"股利" = "Div";
+"時間" = "Time";
+"買" = "Bid";
+"賣" = "Ask";
+"成" = "Last";
+"差" = "Chg";
+"量" = "Vol";
+"Vol%" = "VolT/VolY";
+"Last" = "Last";
+"全部" = "All";
+
+
+//明細
+"明細" = "Detail";
+"明細漲跌" = "Rise & Fall";
+"時間" = "Time";
+"Chg" = "Chg$";
+"成交" = "Last$";
+"Chg$" = "Chg$";
+//"Chg%" = "Chg%";
+
+//分價表
+"分價表" = "Dist";
+"比例" = "Ratio";
+"分價內盤" = "Sell";
+"分價外盤" = "Buy";
+"成價" = "Price";
+"成量" = "Vol";
+
+
+//支壓圖
+"支壓圖" = "S&R";
+"單日" = "Single";
+"今日" = "Today";
+"前1日" = "T-1";
+"前2日" = "T-2";
+"前3日" = "T-3";
+"前4日" = "T-4";
+"前5日" = "T-5";
+
+"累積" = "Acc";
+"5日" = "5days";
+"10日" = "10days";
+"15日" = "15days";
+
+
+
+//////////////////////技術/////////////////////////
+"技術" = "Tech";
+"日線" = "Day";
+"週線" = "Week";
+"月線" = "Month";
+"分線" = "Minute";
+"參數" = "Parameter";
+"欄位" = "Column";
+
+"名詞解釋" = "Parameter";

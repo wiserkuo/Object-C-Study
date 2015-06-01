@@ -1,0 +1,320 @@
+/* AR/BR indicator */
+"ARBR" = "AR/BR";
+
+/* The ask price label of InfoPanel */
+"Ask" = "卖出";
+
+/* Bias indicator */
+"Bias" = "乖离率";
+
+/* The bid price label of InfoPanel */
+"Bid" = "买进";
+
+/* The price change labelMomentum of InfoPanel */
+"Chg" = "涨跌";
+
+/* The price change percentage label of InfoPanel */
+"Chg%" = "涨幅";
+
+/* The compare button of the realtime chart */
+"Compare" = "走势对照";
+
+/* The title of the comparison setting */
+"CompareChart" = "走势对照";
+
+/* The right navigation button of the realtime chart */
+"Detail" = "技术分析";
+
+/* ADX/DMI indicator */
+"DMI" = "DMI";
+
+/* TLB indicator*/
+"TLB" = "新三价线";
+
+/* The high price label of InfoPanel */
+"High" = "最高";
+
+/* The title of the picker list for selecting indicators */
+"UpperIndicatorSheetTitle" = "选择 K 线指标";
+
+"BottonIndicatorSheetTitle" = "选择技术指标【图一】";
+
+/* The back navigation button of the realtime chart */
+"Intraday" = "当日走势";
+
+/* KD indicator */
+"KD" = "KD";
+
+"KDJ" = "KD";
+
+"VR" = "VR";
+
+/* The last price label of InfoPanel */
+"Last" = "成交";
+
+/* The low price label of InfoPanel */
+"Low" = "最低";
+
+/* MACD indicator */
+"MACD" = "MACD";
+
+/* Momentum indicator */
+"Momentum" = "动量";
+
+/* OBV indicator */
+"OBV" = "能量潮";
+
+/* The open price label of InfoPanel */
+"Open" = "开盘";
+
+/* Oscillator indicator */
+"Oscillator" = "震荡量";
+
+/* PSY indicator */
+"PSY" = "心理线";
+
+/* RSI indicator */
+"RSI" = "RSI";
+
+/* The select button of the comparison setting */
+"Select" = "选股";
+
+/* The tick list button of the realtime chart */
+"TickList" = "即时报价";
+
+/* The today volume label of InfoPanel */
+"Vol" = "总量";
+
+/* Volume indicator */
+"VolumeTitle" = "单量";
+
+"Close" = "Close";
+
+/* Williams indicator */
+"Williams" = "威廉指标";
+
+/* Tower indicator */
+"Tower" = "宝塔线";
+
+/* The daily K-line navigation button */
+"Daily" = "日线";
+
+/* The weekly K-line navigation button */
+"Weekly" = "周线";
+
+/* The monthly K-line navigation button */
+"Monthly" = "月线";
+
+/* The 5-minutely K-line navigation button */
+"5Minutely" = "5分钟线";
+
+"Row" = "栏位";
+"分線" = "分线";
+"Minutely" = "分线";
+
+/* The daily button for selecting K-line period */
+"DailyChart" = "日线";
+
+/* The weekly button for selecting K-line period */
+"WeeklyChart" = "周线";
+
+/* The monthly button for selecting K-line period */
+"MonthlyChart" = "月线";
+
+/* The 5-minutely button for selecting K-line period */
+"5MinutelyChart" = "5分钟线";
+
+"15Minutely" = "15分钟线";
+"30Minutely" = "30分钟线";
+"60Minutely" = "60分钟线";
+
+"15MinutelyChart" = "十五分钟线";
+"30MinutelyChart" = "三十分钟线";
+"60MinutelyChart" = "六十分钟线";
+
+
+
+"Menu" = "功能表";
+
+"Please choice indicator parameters" = "请选择技术指标参数";
+
+"Setting Indicator Parameter" = "参数";
+"設定指標參數" = "设定指标参数";
+
+"period" = "周期";
+
+"Main Chart" = "主图形态";
+
+"Tech Indicator" = "主图指标";
+
+"Bollinger Bands" = "布林线指标";
+
+"Moving Average" = "移动平均线";
+
+"SAR" = "SAR";
+
+"DBL stk" = "双股对比";
+
+"Candle" = "K线";
+
+"OHLC" = "美国线";
+
+"技術指標" = "Indicators";
+//橫式 開高低收量
+"OpenLandScape" = "开";
+
+"HighLandScape" = "高";
+
+"LowLandScape" = "低";
+
+"CloseLandScape" = "收";
+
+"VolumeLandScape" = "量";
+
+"BidLandScape" = "买";
+
+"AskLandScape" = "卖";
+
+"PriceLandScape" = "成";
+
+"ChgLandScape" = "差";
+"ChgPerLandScape" = "";
+
+//以下是權證 跟 snapshot format 2~5的東西
+
+"現貨" = "现货";
+
+"履約" = "履约";
+
+"權利" = "权利";
+
+"到期日" = "到期日";
+
+"行使比例" = "行使比例";
+
+"標的物" = "标的物";
+
+"52週最高" = "52周最高";
+
+"52週最低" = "52周最低";
+
+"3月均量" = "3月均量";
+
+"一年紅利" = "股利";
+
+"發行股數" = "发行股数";
+
+"Call" = "认购";
+
+"Put" = "认售";
+
+"SingleString0" = "---";
+
+"SingleString1" = "今天";
+
+"SingleString2" = "前一天";
+
+"SingleString3" = "前二天";
+
+"SingleString4" = "前三天";
+
+"SingleString5" = "前四天";
+
+"SingleString6" = "前五天";
+
+"PeriodString0" = "---";
+
+"PeriodString1" = "5日";
+
+"PeriodString2" = "10日";
+
+"PeriodString3" = "15日";
+
+"PeriodString4" = "30日";
+
+"單日" = "单日";
+
+"累計期間" = "累计期间";
+
+"BidSellInfoBidString" = "挂买";
+
+"BidSellInfoSellString" = "挂卖";
+
+"TimeString" = "时间";
+
+"BidString" = "买价";
+
+"AskString" = "卖价";
+
+"TradeString" = "成交";
+
+"ChgString" = "涨跌";
+
+"VolString" = "单量";
+
+"Best5BidString" = "买";
+
+"Best5AskString" = "卖";
+
+"Price" = "价";
+
+"Volume" = "VOL";
+
+"doubleStockVolume" = "VolT";
+
+"In" = "內";	//內盤
+
+"Out" = "外";	//外盤
+
+"內" = "内";
+
+"外" = "外";
+
+"成交金額" = "成交金额";
+
+"均價ForInfo" = "         均价";
+
+"昨收" = "昨收";
+
+"InformationMine" = "资讯地雷";
+
+"QuoteExistInWatchlist" = "群组已存在此商品";
+
+"Bid Vol" = "委买";
+
+"Ask Vol" = "委卖";
+
+"Downloading" = "";
+
+"DelayClose" = "(延後收盤)";
+
+"Cancel" = "取消";
+"取消" = "Cancel";
+
+"買進日超出日期範圍" = "买进日超出日期范围";
+"賣出日超出日期範圍" = "卖出日超出日期范围";
+"超出日期範圍同時成立" = "超出日期范围同时成立";
+
+"Notes" = "交易笔记";
+"Gain" = "报酬率";
+"Gain:" = "报酬率:";
+
+"確認" = "确认";
+"訊號" = "信号";
+"買" = "买进";
+"賣" = "卖出";
+"張" = "手";
+
+"選擇型態" = "选择形态";
+"系統型態(多)" = "系统形态(多)";
+"系統型態(空)" = "系统形态(空)";
+"自訂型態(多)" = "自订形态(多)";
+"自訂型態(空)" = "自订形态(空)";
+
+"擦掉單線" = "清除单线";
+"擦全部線" = "清除全部";
+"儲存線" = "画线储存";
+
+"今日開盤價" = "今日开盘价";
+
+"請輸入此筆交易買賣的原因" = "请输入此笔交易买卖的原因";

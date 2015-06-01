@@ -1,0 +1,56 @@
+/* 
+  InternationalInfo.strings
+  CombineConnectingHTTPAndParseXML_v4_SKCustomTableView
+
+  Created by CooperLin on 2014/10/9.
+  Copyright (c) 2014年 CooperLin. All rights reserved.
+*/
+//title
+"internationalInfo"="國際資訊";
+
+//buttons
+"forex"="外匯";
+"usd"="美元";
+"eur"="歐元";
+"yen"="日元";
+"ntd"="台幣";
+"yuan"="人民幣";
+"hk"="港幣";
+"aud"="澳幣";
+"cad"="加拿大幣";
+"gbp"="英鎊";
+"chf"="瑞士法朗";
+"sid"="新加坡幣";
+
+"material"="原物料";
+"metal"="貴金屬";
+"agriculture"="農產品";
+
+"industry"="產業連結";
+"semi"="半導體";
+"tele"="電信服務";
+"info"="資訊產品";
+"opto"="光電產品";
+"netw"="軟體網路";
+"bio"="生物科技";
+"energy"="能源化學";
+"raw"="基礎原料";
+"vehicle"="汽車機械";
+"trans"="運輸服務";
+"finan"="金融業";
+"life"="生活零售";
+"food"="食品零售";
+
+//header
+"name"="名稱";
+"close"="收盤價";
+"d1"="一日";
+"w1"="一週";
+"m1"="一個月";
+"m3"="三個月";
+"m6"="六個月";
+"exchange"="交易所";
+"highFor52w"="52週最高";
+"lowFor52w"="52週最低";
+"highest"="今年最高";
+"lowest"="今年最低";

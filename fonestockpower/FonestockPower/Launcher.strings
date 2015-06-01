@@ -1,0 +1,39 @@
+/* 
+  Launcher.strings
+  FonestockPower
+
+  Created by CooperLin on 2015/1/8.
+  Copyright (c) 2015年 Fonestock. All rights reserved.
+*/
+
+//LoginViewController
+"圖是力"="DivergenceTips";
+"本產品提供14天試用期"="";
+"email帳號"="email";
+"密碼"="Password";
+"加入會員"="Create New\nAccount";
+"登入"="Sign In";
+"忘記密碼"="Forget password";
+////"客服電話new"="客服電話: (02)5589-4589#1";  -> 台股的長這樣
+"客服電話new"="contact us:help@fonestock.com";
+
+//LauncherConfigureViewController
+//"Setup"="Setup";
+//"Payment"="Payment";
+//"Location"="Location";
+//"DataBackup"="Data Backup";
+
+//main Part
+//"Divert to Bear"="Divert to Bear";
+//"Divert to Bull"="Divert to Bull";
+//above are moved to divergenceTips.strings
+
+//"登入成功"="aaaa";
+//"登入中"="登入中，請稍候…";
+//"讀取中"="bbbbb";
+
+
+
+
+
+
