@@ -20,7 +20,9 @@ typedef NS_ENUM(NSUInteger, FSFinanceCategory) {
     FSFinanceCategory2,           // 1: 單季
 };
 
-@interface FSFinanceModel : NSObject
+@interface FSFinanceModel : NSObject{
+    NSObject * notifyObj;
+}
 
 @property FSFinanceType type;
 @property FSFinanceCategory category;
@@ -44,7 +46,7 @@ typedef NS_ENUM(NSUInteger, FSFinanceCategory) {
 @property (weak) NSMutableArray *cashFlow2Array;
 @property (weak) NSMutableArray *financialRatio1Array;
 @property (weak) NSMutableArray *financialRatio2Array;
-
+- (void)setTargetNotify:(id)obj;
 - (void)searchAllSheetWithSecurityNumber:(UInt32)securityNumber dataType:(char)dataType searchStartDate:(NSDate *)searchDate;
 
 @end

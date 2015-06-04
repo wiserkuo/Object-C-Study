@@ -14,8 +14,10 @@
     if (self = [super init]) {
         
         _lock = [[NSRecursiveLock alloc] init];
-        
-        _model = [[FSFinanceReportCN alloc] init];
+ //depend on version , should switch model
+        //notifyObj = nil;
+        FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
+        _model = dataModel.financeReportCN;
         
         _pageList1 = _model.pageList1;
         _pageList2 = _model.pageList2;
@@ -43,9 +45,14 @@
                     nil];
         
     }
+    
+    [_model addObserver:self forKeyPath:@"stockDict" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil ];
     return self;
 }
 
+-(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    printf("jfkdfgjaoghaghdaghdfsg\n");
+}
 - (void)removeAllData {
     [_lock lock];
     
@@ -60,25 +67,17 @@
     
     [_lock unlock];
 }
-
+- (void)setTargetNotify:(id)obj
+{
+    notifyObj = obj;
+    [_model setTargetNotify:notifyObj];
+}
 - (void)searchAllSheetWithSecurityNumber:(UInt32)securityNumber dataType:(char)dataType searchStartDate:(NSDate *)searchDate {
-    
+
     [_model searchAllSheetWithSecurityNumber:securityNumber dataType:dataType searchStartDate:searchDate];
 }
 
 @end
-
-@implementation FSCashFlowCN : NSObject
-- (instancetype)initWithBlankData {
-    if (self = [super init]) {
-        _op_cash_flow = [[FSBValueFormat alloc] init];
-        _invest_cash_flow = [[FSBValueFormat alloc] init];
-        _fm_cash_flow = [[FSBValueFormat alloc] init];
-    }
-    return self;
-}
-@end
-
 @implementation FSBalanceSheetCN : NSObject
 - (instancetype)initWithBlankData {
     if (self = [super init]) {
@@ -102,6 +101,19 @@
     return self;
 }
 @end
+
+@implementation FSCashFlowCN : NSObject
+- (instancetype)initWithBlankData {
+    if (self = [super init]) {
+        _op_cash_flow = [[FSBValueFormat alloc] init];
+        _invest_cash_flow = [[FSBValueFormat alloc] init];
+        _fm_cash_flow = [[FSBValueFormat alloc] init];
+    }
+    return self;
+}
+@end
+
+
 
 @implementation FSIncomeStatementCN: NSObject
 - (instancetype)initWithBlankData {

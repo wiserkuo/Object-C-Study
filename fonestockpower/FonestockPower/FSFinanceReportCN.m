@@ -13,7 +13,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        
+        //notifyObj = nil;
         FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
         FSDatabaseAgent *dbAgent = dataModel.mainDB;
         [dbAgent inTransaction:^(FMDatabase *db, BOOL *rollback) {
@@ -109,9 +109,17 @@
         _financialRatio2Array = [[NSMutableArray alloc] init];
         
     }
+    _bsKeyArray = [[NSMutableArray alloc] init];
+    _isKeyArray = [[NSMutableArray alloc] init];
+    _cfKeyArray = [[NSMutableArray alloc] init];
+    _frKeyArray = [[NSMutableArray alloc] init];
+    [self setKey];
     return self;
 }
-
+- (void)setTargetNotify:(id)obj
+{
+    notifyObj = obj;
+}
 - (void)searchAllSheetWithSecurityNumber:(UInt32)securityNumber dataType:(char)dataType searchStartDate:(NSDate *)searchDate {
     
     if (securityNumber != 0) {
@@ -147,12 +155,14 @@
     FSInstantInfoWatchedPortfolio *watchPortfolio = [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio];
     if (watchPortfolio.portfolioItem->commodityNo == data.commodityNum) {
         identCodeSymbol = [watchPortfolio.portfolioItem getIdentCodeSymbol];
+        _reporType = @"BalanceSheet1";
     }else if (watchPortfolio.comparedPortfolioItem->commodityNo == data.commodityNum){
         identCodeSymbol = [watchPortfolio.comparedPortfolioItem getIdentCodeSymbol];
+        _reporType = @"BalanceSheet2";
     }else{
         return;
     }
-    
+
     [dbAgent inTransaction:^(FMDatabase *db, BOOL *rollback) {
         for (FSBalanceSheetCN *balance in data.balanceSheetArray) {
             
@@ -274,7 +284,313 @@
     
     
     [self searchFinanceDataDateWithReportType:@"BalanceSheet" identCodeSymbol:identCodeSymbol];
+
 }
+
+
+
+
+//- (NSMutableDictionary *)searchFinanceDataDateWithReportType:(NSString *)reportType identCodeSymbol:(NSString *)ids {
+//    NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] init];
+//    FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
+//    FSDatabaseAgent *dbAgent = dataModel.mainDB;
+//    
+//    [ dbAgent  inDatabase: ^ ( FMDatabase  * db )   {
+//        FMResultSet *message = [db executeQuery:@"SELECT FieldName, Amount FROM FinanceReport WHERE DataDate >= ? AND DataDate <= ? AND Symbol = ? AND ReportType = ?", [NSNumber numberWithUnsignedInt:startDay], [NSNumber numberWithUnsignedInt:endDay], ids, reportType];
+//        while ([message next]) {
+//            NSString *fieldName = [message stringForColumn:@"FieldName"];
+//            NSString * amount = [message stringForColumn:@"Amount"];
+//            [dataDict setObject:amount forKey:fieldName];
+//        }
+//    }];
+//    return dataDict;
+//}
+
+
+//損益表
+-(void)IncomeStatementCallBack:(FSIncomeStatementCNIn *)data
+{
+    FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
+    FSDatabaseAgent *dbAgent = dataModel.mainDB;
+    NSString *identCodeSymbol;
+    
+    FSInstantInfoWatchedPortfolio *watchPortfolio = [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio];
+    if (watchPortfolio.portfolioItem->commodityNo == data.commodityNum) {
+        identCodeSymbol = [watchPortfolio.portfolioItem getIdentCodeSymbol];
+        _reporType = @"IncomeStatement1";
+    }else if (watchPortfolio.comparedPortfolioItem->commodityNo == data.commodityNum){
+        identCodeSymbol = [watchPortfolio.comparedPortfolioItem getIdentCodeSymbol];
+        _reporType = @"IncomeStatement2";
+    }else{
+        return;
+    }
+    
+    
+    
+    [dbAgent inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        for (FSIncomeStatementCN *incomeStatement in data.incomeStatementArray) {
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:incomeStatement.data_date.date16],
+             identCodeSymbol,
+             @"net_sales",
+             [NSString stringWithFormat:@"%f",incomeStatement.net_sales.calcValue]
+             , @"IncomeStatement"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:incomeStatement.data_date.date16],
+             identCodeSymbol,
+             @"costs_of_goods_sold",
+             [NSString stringWithFormat:@"%f",incomeStatement.costs_of_goods_sold.calcValue]
+             , @"IncomeStatement"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:incomeStatement.data_date.date16],
+             identCodeSymbol,
+             @"gross_profit",
+             [NSString stringWithFormat:@"%f",incomeStatement.gross_profit.calcValue]
+             , @"IncomeStatement"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:incomeStatement.data_date.date16],
+             identCodeSymbol,
+             @"total_expanse",
+             [NSString stringWithFormat:@"%f",incomeStatement.total_expanse.calcValue]
+             , @"IncomeStatement"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:incomeStatement.data_date.date16],
+             identCodeSymbol,
+             @"net_op_income",
+             [NSString stringWithFormat:@"%f",incomeStatement.net_op_income.calcValue]
+             , @"IncomeStatement"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:incomeStatement.data_date.date16],
+             identCodeSymbol,
+             @"total_non_operating_income",
+             [NSString stringWithFormat:@"%f",incomeStatement.total_non_operating_income.calcValue]
+             , @"IncomeStatement"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:incomeStatement.data_date.date16],
+             identCodeSymbol,
+             @"total_non_business_expense",
+             [NSString stringWithFormat:@"%f",incomeStatement.total_non_business_expense.calcValue]
+             , @"IncomeStatement"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:incomeStatement.data_date.date16],
+             identCodeSymbol,
+             @"n_income_bt",
+             [NSString stringWithFormat:@"%f",incomeStatement.n_income_bt.calcValue]
+             , @"IncomeStatement"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:incomeStatement.data_date.date16],
+             identCodeSymbol,
+             @"tax_expanse",
+             [NSString stringWithFormat:@"%f",incomeStatement.tax_expanse.calcValue]
+             , @"IncomeStatement"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:incomeStatement.data_date.date16],
+             identCodeSymbol,
+             @"net_profit",
+             [NSString stringWithFormat:@"%f",incomeStatement.net_profit.calcValue]
+             , @"IncomeStatement"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:incomeStatement.data_date.date16],
+             identCodeSymbol,
+             @"eps",
+             [NSString stringWithFormat:@"%f",incomeStatement.eps.calcValue]
+             , @"IncomeStatement"];
+            
+        }
+    }];
+    
+    
+    [self searchFinanceDataDateWithReportType:@"IncomeStatement" identCodeSymbol:identCodeSymbol];
+    
+    
+//    if(notifyObj){
+//        if (watchPortfolio.portfolioItem->commodityNo == data->commodityNum) {
+//            [notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:@"Income1" waitUntilDone:NO];
+//        }else if (watchPortfolio.comparedPortfolioItem->commodityNo == data->commodityNum){
+//            [notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:@"Income2" waitUntilDone:NO];
+//        }
+//        
+//    }
+}
+
+//現金流量表
+- (void)CashFlowCallBack:(FSCashFlowCNIn *)data
+{
+    FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
+    FSDatabaseAgent *dbAgent = dataModel.mainDB;
+    
+    NSString *identCodeSymbol;
+    FSInstantInfoWatchedPortfolio *watchPortfolio = [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio];
+    if (watchPortfolio.portfolioItem->commodityNo == data.commodityNum) {
+        identCodeSymbol = [watchPortfolio.portfolioItem getIdentCodeSymbol];
+        _reporType = @"CashFlow1";
+    } else if (watchPortfolio.comparedPortfolioItem->commodityNo == data.commodityNum){
+        identCodeSymbol = [watchPortfolio.comparedPortfolioItem getIdentCodeSymbol];
+        _reporType = @"CashFlow2";
+    } else {
+        return;
+    }
+    
+    [dbAgent inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        for (FSCashFlowCN *cashFlow in data.cashFlowArray) {
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:cashFlow.data_date.date16],
+             identCodeSymbol,
+             @"op_cash_flow",
+             [NSString stringWithFormat:@"%f",cashFlow.op_cash_flow.calcValue]
+             , @"CashFlow"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:cashFlow.data_date.date16],
+             identCodeSymbol,
+             @"invest_cash_flow",
+             [NSString stringWithFormat:@"%f",cashFlow.invest_cash_flow.calcValue]
+             , @"CashFlow"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:cashFlow.data_date.date16],
+             identCodeSymbol,
+             @"fm_cash_flow",
+             [NSString stringWithFormat:@"%f",cashFlow.fm_cash_flow.calcValue]
+             , @"CashFlow"];
+            
+        }
+    }];
+    
+    
+    [self searchFinanceDataDateWithReportType:@"CashFlow" identCodeSymbol:identCodeSymbol];
+    
+    
+//    if(notifyObj){
+//        if (watchPortfolio.portfolioItem->commodityNo == data->commodityNum) {
+//            [notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:@"CashFlow1" waitUntilDone:NO];
+//        }else if (watchPortfolio.comparedPortfolioItem->commodityNo == data->commodityNum){
+//            [notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:@"CashFlow2" waitUntilDone:NO];
+//        }
+//        
+//    }
+}
+
+
+
+
+//財務比率
+-(void)FinancialRatioCallBack:(FSFinancialRatioCNIn *)data {
+    FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
+    FSDatabaseAgent *dbAgent = dataModel.mainDB;
+    NSString *identCodeSymbol;
+    
+    FSInstantInfoWatchedPortfolio *watchPortfolio = [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio];
+    if (watchPortfolio.portfolioItem->commodityNo == data.commodityNum) {
+        identCodeSymbol = [watchPortfolio.portfolioItem getIdentCodeSymbol];
+        _reporType = @"FinancialRatio1";
+    }else if (watchPortfolio.comparedPortfolioItem->commodityNo == data.commodityNum){
+        identCodeSymbol = [watchPortfolio.comparedPortfolioItem getIdentCodeSymbol];
+        _reporType = @"FinancialRatio2";
+    }else{
+        return;
+    }
+    
+    
+    [dbAgent inTransaction:^(FMDatabase *db, BOOL *rollback) {
+        for (FSFinancialRatioCN *financialRatioCN in data.financialRatioArray) {
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
+             identCodeSymbol,
+             @"g_profit_ratio",
+             [NSString stringWithFormat:@"%f",financialRatioCN.g_profit_ratio.calcValue]
+             , @"FinancialRatio"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
+             identCodeSymbol,
+             @"op_profit_ratio",
+             [NSString stringWithFormat:@"%f",financialRatioCN.op_profit_ratio.calcValue]
+             , @"FinancialRatio"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
+             identCodeSymbol,
+             @"net_income_ratio",
+             [NSString stringWithFormat:@"%f",financialRatioCN.net_income_ratio.calcValue]
+             , @"FinancialRatio"];
+            
+            
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
+             identCodeSymbol,
+             @"net_value",
+             [NSString stringWithFormat:@"%f",financialRatioCN.net_value.calcValue]
+             , @"FinancialRatio"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
+             identCodeSymbol,
+             @"sale_growth_ratio",
+             [NSString stringWithFormat:@"%f",financialRatioCN.sale_growth_ratio.calcValue]
+             , @"FinancialRatio"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
+             identCodeSymbol,
+             @"current_ratio",
+             [NSString stringWithFormat:@"%f",financialRatioCN.current_ratio.calcValue]
+             , @"FinancialRatio"];
+
+            
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
+             identCodeSymbol,
+             @"quick_ratio",
+             [NSString stringWithFormat:@"%f",financialRatioCN.quick_ratio.calcValue]
+             , @"FinancialRatio"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
+             identCodeSymbol,
+             @"debt2asset",
+             [NSString stringWithFormat:@"%f",financialRatioCN.debt2asset.calcValue]
+             , @"FinancialRatio"];
+            
+            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
+             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
+             identCodeSymbol,
+             @"debt2equity",
+             [NSString stringWithFormat:@"%f",financialRatioCN.debt2equity.calcValue]
+             , @"FinancialRatio"];
+
+            
+        }
+    }];
+    
+    [self searchFinanceDataDateWithReportType:@"FinancialRatio" identCodeSymbol:identCodeSymbol];
+    
+//    if(notifyObj){
+//        if (watchPortfolio.portfolioItem->commodityNo == data->commodityNum) {
+//            [notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:@"FinancialRatio1" waitUntilDone:NO];
+//        }else if (watchPortfolio.comparedPortfolioItem->commodityNo == data->commodityNum){
+//            [notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:@"FinancialRatio2" waitUntilDone:NO];
+//        }
+//        
+//    }
+}
+
+
 
 
 - (void)searchFinanceDataDateWithReportType:(NSString *)reportType identCodeSymbol:(NSString *)ids {
@@ -381,7 +697,7 @@
                 
                 NSString *fieldName = [message stringForColumn:@"FieldName"];
                 double value = [[message stringForColumn:@"Amount"] doubleValue];
-
+                
                 if ([@"net_sales" isEqualToString:fieldName]) {
                     incomeStatement.net_sales.calcValue = value;
                 }
@@ -498,306 +814,36 @@
             
             
         }
-        
         [_stockDict setObject:dateDict forKey:ids];
-        
     }];
+    if(notifyObj)
+        [notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:_reporType waitUntilDone:NO];
+    //[notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:@"BalanceSheet1" waitUntilDone:NO];
 }
+-(void)setKey{
 
-//- (NSMutableDictionary *)searchFinanceDataDateWithReportType:(NSString *)reportType identCodeSymbol:(NSString *)ids {
-//    NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] init];
-//    FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
-//    FSDatabaseAgent *dbAgent = dataModel.mainDB;
-//    
-//    [ dbAgent  inDatabase: ^ ( FMDatabase  * db )   {
-//        FMResultSet *message = [db executeQuery:@"SELECT FieldName, Amount FROM FinanceReport WHERE DataDate >= ? AND DataDate <= ? AND Symbol = ? AND ReportType = ?", [NSNumber numberWithUnsignedInt:startDay], [NSNumber numberWithUnsignedInt:endDay], ids, reportType];
-//        while ([message next]) {
-//            NSString *fieldName = [message stringForColumn:@"FieldName"];
-//            NSString * amount = [message stringForColumn:@"Amount"];
-//            [dataDict setObject:amount forKey:fieldName];
-//        }
-//    }];
-//    return dataDict;
-//}
+    [_bsKeyArray addObject:@"current_asset"];
+    [_bsKeyArray addObject:@"l_term_invest"];
+    [_bsKeyArray addObject:@"fixed_asset"];
+    [_bsKeyArray addObject:@"current_asset"];
+    [_bsKeyArray addObject:@"l_term_invest"];
+    [_bsKeyArray addObject:@"fixed_asset"];
+    [_bsKeyArray addObject:@"other_asset"];
+    [_bsKeyArray addObject:@"total_asset"];
+    [_bsKeyArray addObject:@"current_debt"];
+    [_bsKeyArray addObject:@"l_term_loan"];
+    [_bsKeyArray addObject:@"other_liabilities_n_reserves"];
+    [_bsKeyArray addObject:@"total_debt"];
+    [_bsKeyArray addObject:@"equity"];
+    [_bsKeyArray addObject:@"preferred_stock_equity"];
+    [_bsKeyArray addObject:@"retained_earning"];
+    [_bsKeyArray addObject:@"undivided_profits"];
+    [_bsKeyArray addObject:@"minority_interest"];
+    [_bsKeyArray addObject:@"total_equity"];
+    [_bsKeyArray addObject:@"liabilities_n_total_equity"];
 
 
-//損益表
--(void)IncomeStatementCallBack:(FSIncomeStatementCNIn *)data
-{
-    FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
-    FSDatabaseAgent *dbAgent = dataModel.mainDB;
-    NSString *identCodeSymbol;
-    
-    FSInstantInfoWatchedPortfolio *watchPortfolio = [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio];
-    if (watchPortfolio.portfolioItem->commodityNo == data.commodityNum) {
-        identCodeSymbol = [watchPortfolio.portfolioItem getIdentCodeSymbol];
-    }else if (watchPortfolio.comparedPortfolioItem->commodityNo == data.commodityNum){
-        identCodeSymbol = [watchPortfolio.comparedPortfolioItem getIdentCodeSymbol];
-    }else{
-        return;
-    }
-    
-    
-    
-    [dbAgent inTransaction:^(FMDatabase *db, BOOL *rollback) {
-        for (FSIncomeStatementCN *incomeStatement in data.incomeStatementArray) {
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:incomeStatement.data_date.date16],
-             identCodeSymbol,
-             @"net_sales",
-             [NSString stringWithFormat:@"%f",incomeStatement.net_sales.calcValue]
-             , @"IncomeStatement"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:incomeStatement.data_date.date16],
-             identCodeSymbol,
-             @"costs_of_goods_sold",
-             [NSString stringWithFormat:@"%f",incomeStatement.costs_of_goods_sold.calcValue]
-             , @"IncomeStatement"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:incomeStatement.data_date.date16],
-             identCodeSymbol,
-             @"gross_profit",
-             [NSString stringWithFormat:@"%f",incomeStatement.gross_profit.calcValue]
-             , @"IncomeStatement"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:incomeStatement.data_date.date16],
-             identCodeSymbol,
-             @"total_expanse",
-             [NSString stringWithFormat:@"%f",incomeStatement.total_expanse.calcValue]
-             , @"IncomeStatement"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:incomeStatement.data_date.date16],
-             identCodeSymbol,
-             @"net_op_income",
-             [NSString stringWithFormat:@"%f",incomeStatement.net_op_income.calcValue]
-             , @"IncomeStatement"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:incomeStatement.data_date.date16],
-             identCodeSymbol,
-             @"total_non_operating_income",
-             [NSString stringWithFormat:@"%f",incomeStatement.total_non_operating_income.calcValue]
-             , @"IncomeStatement"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:incomeStatement.data_date.date16],
-             identCodeSymbol,
-             @"total_non_business_expense",
-             [NSString stringWithFormat:@"%f",incomeStatement.total_non_business_expense.calcValue]
-             , @"IncomeStatement"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:incomeStatement.data_date.date16],
-             identCodeSymbol,
-             @"n_income_bt",
-             [NSString stringWithFormat:@"%f",incomeStatement.n_income_bt.calcValue]
-             , @"IncomeStatement"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:incomeStatement.data_date.date16],
-             identCodeSymbol,
-             @"tax_expanse",
-             [NSString stringWithFormat:@"%f",incomeStatement.tax_expanse.calcValue]
-             , @"IncomeStatement"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:incomeStatement.data_date.date16],
-             identCodeSymbol,
-             @"net_profit",
-             [NSString stringWithFormat:@"%f",incomeStatement.net_profit.calcValue]
-             , @"IncomeStatement"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:incomeStatement.data_date.date16],
-             identCodeSymbol,
-             @"eps",
-             [NSString stringWithFormat:@"%f",incomeStatement.eps.calcValue]
-             , @"IncomeStatement"];
-            
-        }
-    }];
-    
-    
-    [self searchFinanceDataDateWithReportType:@"IncomeStatement" identCodeSymbol:identCodeSymbol];
-    
-    
-//    if(notifyObj){
-//        if (watchPortfolio.portfolioItem->commodityNo == data->commodityNum) {
-//            [notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:@"Income1" waitUntilDone:NO];
-//        }else if (watchPortfolio.comparedPortfolioItem->commodityNo == data->commodityNum){
-//            [notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:@"Income2" waitUntilDone:NO];
-//        }
-//        
-//    }
 }
-
-//現金流量表
-- (void)CashFlowCallBack:(FSCashFlowCNIn *)data
-{
-    FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
-    FSDatabaseAgent *dbAgent = dataModel.mainDB;
-    
-    NSString *identCodeSymbol;
-    FSInstantInfoWatchedPortfolio *watchPortfolio = [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio];
-    if (watchPortfolio.portfolioItem->commodityNo == data.commodityNum) {
-        identCodeSymbol = [watchPortfolio.portfolioItem getIdentCodeSymbol];
-    } else if (watchPortfolio.comparedPortfolioItem->commodityNo == data.commodityNum){
-        identCodeSymbol = [watchPortfolio.comparedPortfolioItem getIdentCodeSymbol];
-    } else {
-        return;
-    }
-    
-    [dbAgent inTransaction:^(FMDatabase *db, BOOL *rollback) {
-        for (FSCashFlowCN *cashFlow in data.cashFlowArray) {
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:cashFlow.data_date.date16],
-             identCodeSymbol,
-             @"op_cash_flow",
-             [NSString stringWithFormat:@"%f",cashFlow.op_cash_flow.calcValue]
-             , @"CashFlow"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:cashFlow.data_date.date16],
-             identCodeSymbol,
-             @"invest_cash_flow",
-             [NSString stringWithFormat:@"%f",cashFlow.invest_cash_flow.calcValue]
-             , @"CashFlow"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:cashFlow.data_date.date16],
-             identCodeSymbol,
-             @"fm_cash_flow",
-             [NSString stringWithFormat:@"%f",cashFlow.fm_cash_flow.calcValue]
-             , @"CashFlow"];
-            
-        }
-    }];
-    
-    
-    [self searchFinanceDataDateWithReportType:@"CashFlow" identCodeSymbol:identCodeSymbol];
-    
-    
-//    if(notifyObj){
-//        if (watchPortfolio.portfolioItem->commodityNo == data->commodityNum) {
-//            [notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:@"CashFlow1" waitUntilDone:NO];
-//        }else if (watchPortfolio.comparedPortfolioItem->commodityNo == data->commodityNum){
-//            [notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:@"CashFlow2" waitUntilDone:NO];
-//        }
-//        
-//    }
-}
-
-
-
-
-//財務比率
--(void)FinancialRatioCallBack:(FSFinancialRatioCNIn *)data {
-    FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
-    FSDatabaseAgent *dbAgent = dataModel.mainDB;
-    NSString *identCodeSymbol;
-    
-    FSInstantInfoWatchedPortfolio *watchPortfolio = [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio];
-    if (watchPortfolio.portfolioItem->commodityNo == data.commodityNum) {
-        identCodeSymbol = [watchPortfolio.portfolioItem getIdentCodeSymbol];
-    }else if (watchPortfolio.comparedPortfolioItem->commodityNo == data.commodityNum){
-        identCodeSymbol = [watchPortfolio.comparedPortfolioItem getIdentCodeSymbol];
-    }else{
-        return;
-    }
-    
-    
-    [dbAgent inTransaction:^(FMDatabase *db, BOOL *rollback) {
-        for (FSFinancialRatioCN *financialRatioCN in data.financialRatioArray) {
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
-             identCodeSymbol,
-             @"g_profit_ratio",
-             [NSString stringWithFormat:@"%f",financialRatioCN.g_profit_ratio.calcValue]
-             , @"FinancialRatio"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
-             identCodeSymbol,
-             @"op_profit_ratio",
-             [NSString stringWithFormat:@"%f",financialRatioCN.op_profit_ratio.calcValue]
-             , @"FinancialRatio"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
-             identCodeSymbol,
-             @"net_income_ratio",
-             [NSString stringWithFormat:@"%f",financialRatioCN.net_income_ratio.calcValue]
-             , @"FinancialRatio"];
-            
-            
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
-             identCodeSymbol,
-             @"net_value",
-             [NSString stringWithFormat:@"%f",financialRatioCN.net_value.calcValue]
-             , @"FinancialRatio"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
-             identCodeSymbol,
-             @"sale_growth_ratio",
-             [NSString stringWithFormat:@"%f",financialRatioCN.sale_growth_ratio.calcValue]
-             , @"FinancialRatio"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
-             identCodeSymbol,
-             @"current_ratio",
-             [NSString stringWithFormat:@"%f",financialRatioCN.current_ratio.calcValue]
-             , @"FinancialRatio"];
-
-            
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
-             identCodeSymbol,
-             @"quick_ratio",
-             [NSString stringWithFormat:@"%f",financialRatioCN.quick_ratio.calcValue]
-             , @"FinancialRatio"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
-             identCodeSymbol,
-             @"debt2asset",
-             [NSString stringWithFormat:@"%f",financialRatioCN.debt2asset.calcValue]
-             , @"FinancialRatio"];
-            
-            [db executeUpdate:@"REPLACE INTO NewFinanceReport(DataDate, Symbol, FieldName, Amount, ReportType) VALUES(?,?,?,?,?)",
-             [NSNumber numberWithInt:financialRatioCN.data_date.date16],
-             identCodeSymbol,
-             @"debt2equity",
-             [NSString stringWithFormat:@"%f",financialRatioCN.debt2equity.calcValue]
-             , @"FinancialRatio"];
-
-            
-        }
-    }];
-    
-    [self searchFinanceDataDateWithReportType:@"FinancialRatio" identCodeSymbol:identCodeSymbol];
-    
-//    if(notifyObj){
-//        if (watchPortfolio.portfolioItem->commodityNo == data->commodityNum) {
-//            [notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:@"FinancialRatio1" waitUntilDone:NO];
-//        }else if (watchPortfolio.comparedPortfolioItem->commodityNo == data->commodityNum){
-//            [notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:@"FinancialRatio2" waitUntilDone:NO];
-//        }
-//        
-//    }
-}
-
 @end
 
 

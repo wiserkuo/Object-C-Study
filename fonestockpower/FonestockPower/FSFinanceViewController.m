@@ -57,7 +57,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-
+        _a=0;
         fonestock = [FSFonestock sharedInstance];
         twoStockMode = fonestock.twoStockMode;
         
@@ -477,7 +477,11 @@
     [view4 addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[tableTitle4][changeDate4_1(100)][changeDate4_2(100)]|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:viewDict]];
     
 }
-
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+   // [self discardData];
+    [financeModel setTargetNotify:nil];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -531,25 +535,39 @@
     [changeCategory3 setTitle:[financeModel.categoryList objectAtIndex:financeModel.category] forState:UIControlStateNormal];
     [changeCategory4 setTitle:[financeModel.categoryList objectAtIndex:financeModel.category] forState:UIControlStateNormal];
     
+    //[self addObserver:self forKeyPath:@"a" options:NSKeyValueObservingOptionNew context:nil];
+    
     [self searchData];
 }
 
-
 - (void)searchData {
-    FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
-    
-    [dataModel.financeModel searchAllSheetWithSecurityNumber:watchedPortfolio.portfolioItem->commodityNo dataType:'Q' searchStartDate:[[NSDate date] yearOffset:-3]];
+
+    [financeModel setTargetNotify:self];
+    [financeModel searchAllSheetWithSecurityNumber:watchedPortfolio.portfolioItem->commodityNo dataType:'Q' searchStartDate:[[NSDate date] yearOffset:-3]];
 
     if (twoStockMode) {
-        [dataModel.financeModel searchAllSheetWithSecurityNumber:watchedPortfolio.comparedPortfolioItem->commodityNo dataType:'Q' searchStartDate:[[NSDate date] yearOffset:-3]];
+        [financeModel searchAllSheetWithSecurityNumber:watchedPortfolio.comparedPortfolioItem->commodityNo dataType:'Q' searchStartDate:[[NSDate date] yearOffset:-3]];
     }
+   
     
 }
-
+-(void)notifyData:(id)title{
+    NSLog(@"===========%@\n",title);
+    if([title isEqualToString:@"BalanceSheet1"]){
+       // financeModel.model.stockDict;
+        printf("===========FSFinanceViewController %s\n",__func__);
+    }
+    
+    // dataModel.financeModel.model.stockDict
+}
+//-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+//
+//    printf("rejoqgjreg;legjor;eajo");
+//}
 - (void)twoStockBtnClick:(FSUIButton *)btn {
-    
+    //printf("dksaglsiagydulabhvfbfdabffjhidabh%d\n",_a);
     twoStockMode = !btn.selected;
-    
+    //_a++;
     [self buttonStateChange];
 }
 
@@ -617,7 +635,7 @@
     if (!cell) {
         cell = [[FSFinanceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Finance"];
     }
-    
+
     if (tableView == tableView1) {
         cell.tableTitleLabel.text = [financeModel.pageList1 objectAtIndex:indexPath.row];
         cell.stock1Label.text = @"1";
