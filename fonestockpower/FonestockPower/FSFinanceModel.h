@@ -48,7 +48,7 @@ typedef NS_ENUM(NSUInteger, FSFinanceCategory) {
 @property (weak) NSMutableArray *financialRatio2Array;
 - (void)setTargetNotify:(id)obj;
 - (void)searchAllSheetWithSecurityNumber:(UInt32)securityNumber dataType:(char)dataType searchStartDate:(NSDate *)searchDate;
-
+- (FSBValueFormat*)getData:(NSString*)stockType date:(NSString*)date ids:(NSString*)ids indexPath:(NSIndexPath *)indexPath;
 @end
 
 

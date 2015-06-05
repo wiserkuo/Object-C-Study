@@ -99,16 +99,10 @@
         
         _stockDict = [[NSMutableDictionary alloc] init];
         
-        _balance1Array = [[NSMutableArray alloc] init];
-        _balance2Array = [[NSMutableArray alloc] init];
-        _income1Array = [[NSMutableArray alloc] init];
-        _income2Array = [[NSMutableArray alloc] init];
-        _cashFlow1Array = [[NSMutableArray alloc] init];
-        _cashFlow2Array = [[NSMutableArray alloc] init];
-        _financialRatio1Array = [[NSMutableArray alloc] init];
-        _financialRatio2Array = [[NSMutableArray alloc] init];
+
         
     }
+    
     _bsKeyArray = [[NSMutableArray alloc] init];
     _isKeyArray = [[NSMutableArray alloc] init];
     _cfKeyArray = [[NSMutableArray alloc] init];
@@ -143,6 +137,103 @@
     }
     
 }
+- (FSBValueFormat*)getData:(NSString*)stockType date:(NSString*)date ids:(NSString*)ids indexPath:(NSIndexPath *)indexPath{
+    FSInstantInfoWatchedPortfolio *watchPortfolio = [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio];
+    FSBValueFormat *value;
+    NSString* identCodeSymbol;
+    if([stockType isEqualToString:@"stock1"]) identCodeSymbol=[watchPortfolio.portfolioItem getIdentCodeSymbol];
+    else if([stockType isEqualToString:@"stock2"]) identCodeSymbol=[watchPortfolio.comparedPortfolioItem getIdentCodeSymbol];
+    if([ids isEqualToString:@"BalanceSheet"]){
+        FSBalanceSheetCN *balanceSheet= [[[_stockDict objectForKey:identCodeSymbol] objectForKey:date] objectForKey:ids];
+        switch(indexPath.row){
+            case 0:
+                value=balanceSheet.current_asset;
+                break;
+            case 1: value=balanceSheet.l_term_invest;
+                break;
+            case 2: value=balanceSheet.fixed_asset;
+                break;
+            case 3: value=balanceSheet.other_asset;
+                break;
+            case 4: value=balanceSheet.total_asset;
+                break;
+            case 5: value=balanceSheet.current_debt;
+                break;
+            case 6: value=balanceSheet.l_term_loan;
+                break;
+            case 7: value=balanceSheet.other_liabilities_n_reserves;
+                break;
+            case 8: value=balanceSheet.total_debt;
+                break;
+            case 9: value=balanceSheet.equity;
+                break;
+            case 10: value=balanceSheet.preferred_stock_equity;
+                break;
+            case 11: value=balanceSheet.retained_earning;
+                break;
+            case 12: value=balanceSheet.undivided_profits;
+                break;
+            case 13: value=balanceSheet.minority_interest;
+                break;
+            case 14: value=balanceSheet.total_equity;
+                break;
+            case 15: value=balanceSheet.liabilities_n_total_equity;
+                break;
+        }
+    }
+    return value;
+}
+
+////BalanceSheetCN
+//[_bsKeyArray addObject:@"current_asset"];
+//[_bsKeyArray addObject:@"l_term_invest"];
+//[_bsKeyArray addObject:@"fixed_asset"];
+//[_bsKeyArray addObject:@"other_asset"];
+//[_bsKeyArray addObject:@"total_asset"];
+//[_bsKeyArray addObject:@"current_debt"];
+//[_bsKeyArray addObject:@"l_term_loan"];
+//[_bsKeyArray addObject:@"other_liabilities_n_reserves"];
+//[_bsKeyArray addObject:@"total_debt"];
+//[_bsKeyArray addObject:@"equity"];
+//[_bsKeyArray addObject:@"preferred_stock_equity"];
+//[_bsKeyArray addObject:@"retained_earning"];
+//[_bsKeyArray addObject:@"undivided_profits"];
+//[_bsKeyArray addObject:@"minority_interest"];
+//[_bsKeyArray addObject:@"total_equity"];
+//[_bsKeyArray addObject:@"liabilities_n_total_equity"];
+//
+////IncomeStetementCN
+//[_isKeyArray addObject:@"net_sales"];
+//[_isKeyArray addObject:@"costs_of_goods_sold"];
+//[_isKeyArray addObject:@"gross_profit"];
+//[_isKeyArray addObject:@"total_expanse"];
+//[_isKeyArray addObject:@"net_op_income"];
+//[_isKeyArray addObject:@"total_non_operating_income"];
+//[_isKeyArray addObject:@"total_non_business_expense"];
+//[_isKeyArray addObject:@"n_income_bt"];
+//[_isKeyArray addObject:@"tax_expanse"];
+//[_isKeyArray addObject:@"net_profit"];
+//[_isKeyArray addObject:@"eps"];
+//
+////CashFlowCN
+//[_cfKeyArray addObject: @"op_cash_flow"];
+//[_cfKeyArray addObject: @"invest_cash_flow"];
+//[_cfKeyArray addObject: @"fm_cash_flow"];
+//
+////FinancialRatioCN
+//[_frKeyArray addObject:@"g_profit_ratio"];
+//[_frKeyArray addObject:@"op_profit_ratio"];
+//[_frKeyArray addObject:@"net_income_ratio"];
+//[_frKeyArray addObject:@"net_value"];
+//[_frKeyArray addObject:@"sale_growth_ratio"];
+//[_frKeyArray addObject:@"current_ratio"];
+//[_frKeyArray addObject:@"quick_ratio"];
+//[_frKeyArray addObject:@"debt2asset"];
+//[_frKeyArray addObject:@"debt2equity"];
+//
+
+
+
 
 
 //資產負債表
@@ -681,7 +772,7 @@
                 
                 
                 [mutiData setObject:balanceSheet forKey:reportType];
-                
+
             }
             
             
@@ -807,12 +898,7 @@
                 [mutiData setObject:financialRatio forKey:reportType];
                 
             }
-            
-            
-            
             [dateDict setObject:mutiData forKey:dataDateString];
-            
-            
         }
         [_stockDict setObject:dateDict forKey:ids];
     }];
@@ -820,8 +906,11 @@
         [notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:_reporType waitUntilDone:NO];
     //[notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:@"BalanceSheet1" waitUntilDone:NO];
 }
--(void)setKey{
 
+
+-(void)setKey{
+    
+//BalanceSheetCN
     [_bsKeyArray addObject:@"current_asset"];
     [_bsKeyArray addObject:@"l_term_invest"];
     [_bsKeyArray addObject:@"fixed_asset"];
@@ -841,8 +930,39 @@
     [_bsKeyArray addObject:@"minority_interest"];
     [_bsKeyArray addObject:@"total_equity"];
     [_bsKeyArray addObject:@"liabilities_n_total_equity"];
+    
+//IncomeStetementCN
+    [_isKeyArray addObject:@"net_sales"];
+    [_isKeyArray addObject:@"costs_of_goods_sold"];
+    [_isKeyArray addObject:@"gross_profit"];
+    [_isKeyArray addObject:@"total_expanse"];
+    [_isKeyArray addObject:@"net_op_income"];
+    [_isKeyArray addObject:@"total_non_operating_income"];
+    [_isKeyArray addObject:@"total_non_business_expense"];
+    [_isKeyArray addObject:@"n_income_bt"];
+    [_isKeyArray addObject:@"tax_expanse"];
+    [_isKeyArray addObject:@"net_profit"];
+    [_isKeyArray addObject:@"eps"];
 
-
+//CashFlowCN
+    [_cfKeyArray addObject: @"op_cash_flow"];
+    [_cfKeyArray addObject: @"invest_cash_flow"];
+    [_cfKeyArray addObject: @"fm_cash_flow"];
+        
+//FinancialRatioCN
+    [_frKeyArray addObject:@"g_profit_ratio"];
+    [_frKeyArray addObject:@"op_profit_ratio"];
+    [_frKeyArray addObject:@"net_income_ratio"];
+    [_frKeyArray addObject:@"net_value"];
+    [_frKeyArray addObject:@"sale_growth_ratio"];
+    [_frKeyArray addObject:@"current_ratio"];
+    [_frKeyArray addObject:@"quick_ratio"];
+    [_frKeyArray addObject:@"debt2asset"];
+    [_frKeyArray addObject:@"debt2equity"];
+        
+        
+        
+    
 }
 @end
 

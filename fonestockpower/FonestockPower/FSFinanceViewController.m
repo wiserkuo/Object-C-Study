@@ -513,6 +513,7 @@
     } else {
         portfolioName1 = portfolioItem1->fullName;
         portfolioName2 = portfolioItem2->fullName;
+        NSLog(@"PortfolioName1 = %@ portfolioName2=%@\n",portfolioName1,portfolioName2);
     }
     
     [changeStockButton1_1 setTitle:portfolioName1 forState:UIControlStateNormal];
@@ -553,11 +554,11 @@
 }
 -(void)notifyData:(id)title{
     NSLog(@"===========%@\n",title);
-    if([title isEqualToString:@"BalanceSheet1"]){
+    if([title isEqualToString:@"BalanceSheet1"]||[title isEqualToString:@"BalanceSheet2"]){
        // financeModel.model.stockDict;
-        printf("===========FSFinanceViewController %s\n",__func__);
+        [tableView1 reloadData];
+        
     }
-    
     // dataModel.financeModel.model.stockDict
 }
 //-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
@@ -635,20 +636,43 @@
     if (!cell) {
         cell = [[FSFinanceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Finance"];
     }
+    
+    
+    //stockDict = [[financeModel.model.stockDict objectForKey: [watchedPortfolio.portfolioItem getIdentCodeSymbol]] objectForKey:@"2015/03"] ;
 
+    FSBValueFormat *value;
+    
+    //BalanceSheet
     if (tableView == tableView1) {
+        
+        
         cell.tableTitleLabel.text = [financeModel.pageList1 objectAtIndex:indexPath.row];
-        cell.stock1Label.text = @"1";
-        cell.stock2Label.text = @"2";
-    } else if (tableView == tableView2) {
+        value = [financeModel.model  getData:@"stock1" date:@"2015/03" ids:@"BalanceSheet" indexPath:indexPath];
+       // [NSString stringWithFormat:@"%.0f",[[group1DataDic objectForKey:rowName] floatValue]/1000000];
+        if(value ==nil)
+            cell.stock1Label.text =@"-";
+        else
+            cell.stock1Label.text=[NSString stringWithFormat:@"%.0f",value.calcValue/100000];
+        value = [financeModel.model  getData:@"stock2" date:@"2015/03" ids:@"BalanceSheet" indexPath:indexPath];
+        if(value ==nil)
+            cell.stock2Label.text =@"-";
+        else
+            cell.stock2Label.text=[NSString stringWithFormat:@"%.0f",value.calcValue/100000];
+    }
+    //IncomeStatement
+    else if (tableView == tableView2) {
         cell.tableTitleLabel.text = [financeModel.pageList2 objectAtIndex:indexPath.row];
         cell.stock1Label.text = @"3";
         cell.stock2Label.text = @"4";
-    } else if (tableView == tableView3) {
+    }
+    //CashFlow
+    else if (tableView == tableView3) {
         cell.tableTitleLabel.text = [financeModel.pageList3 objectAtIndex:indexPath.row];
         cell.stock1Label.text = @"5";
         cell.stock2Label.text = @"6";
-    } else if (tableView == tableView4) {
+    }
+    //FinancialRatio
+    else if (tableView == tableView4) {
         cell.tableTitleLabel.text = [financeModel.pageList4 objectAtIndex:indexPath.row];
         cell.stock1Label.text = @"7";
         cell.stock2Label.text = @"8";

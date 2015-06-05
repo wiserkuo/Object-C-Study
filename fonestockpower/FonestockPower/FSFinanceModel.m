@@ -24,14 +24,6 @@
         _pageList3 = _model.pageList3;
         _pageList4 = _model.pageList4;
         
-        _balance1Array = _model.balance1Array;
-        _balance2Array = _model.balance2Array;
-        _income1Array = _model.income1Array;
-        _income2Array = _model.income2Array;
-        _cashFlow1Array = _model.cashFlow1Array;
-        _cashFlow2Array = _model.cashFlow2Array;
-        _financialRatio1Array = _model.financialRatio1Array;
-        _financialRatio2Array = _model.financialRatio2Array;
         
         _categoryList = [[NSArray alloc] initWithObjects:
                         NSLocalizedStringFromTable(@"累計", @"Finance", @"累計"),
@@ -46,13 +38,10 @@
         
     }
     
-    [_model addObserver:self forKeyPath:@"stockDict" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil ];
+   
     return self;
 }
 
--(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-    printf("jfkdfgjaoghaghdaghdfsg\n");
-}
 - (void)removeAllData {
     [_lock lock];
     
@@ -76,7 +65,9 @@
 
     [_model searchAllSheetWithSecurityNumber:securityNumber dataType:dataType searchStartDate:searchDate];
 }
-
+- (FSBValueFormat*)getData:(NSString*)stockType date:(NSString*)date ids:(NSString*)ids indexPath:(NSIndexPath *)indexPath{
+    return [_model getData:stockType date:date ids:ids indexPath:indexPath];
+}
 @end
 @implementation FSBalanceSheetCN : NSObject
 - (instancetype)initWithBlankData {

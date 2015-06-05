@@ -36,15 +36,6 @@ typedef NS_ENUM(NSUInteger, FSFinanceReportCNCommend) {
 
 @property NSMutableDictionary *stockDict;
 
-@property NSMutableArray *balance1Array;
-@property NSMutableArray *balance2Array;
-@property NSMutableArray *income1Array;
-@property NSMutableArray *income2Array;
-@property NSMutableArray *cashFlow1Array;
-@property NSMutableArray *cashFlow2Array;
-@property NSMutableArray *financialRatio1Array;
-@property NSMutableArray *financialRatio2Array;
-
 @property (nonatomic) NSArray *pageList1;
 @property (nonatomic) NSArray *pageList2;
 @property (nonatomic) NSArray *pageList3;
@@ -52,6 +43,8 @@ typedef NS_ENUM(NSUInteger, FSFinanceReportCNCommend) {
 - (void)setTargetNotify:(id)obj;
 - (void)searchAllSheetWithSecurityNumber:(UInt32)securityNumber dataType:(char)dataType searchStartDate:(NSDate *)searchDate;
 @property (nonatomic) NSString *reporType;
+- (FSBValueFormat*)getData:(NSString*)stockType date:(NSString*)date ids:(NSString*)ids indexPath:(NSIndexPath *)indexPath ;
+
 @end
 
 @interface FSFinanceReportCNOut : NSObject <EncodeProtocol> {
