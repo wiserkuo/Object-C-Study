@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>TipsLocationUpdataType</key>
+	<integer>0</integer>
+	<key>AuthenticationServerURL</key>
+	<string>https://usaauth.fonestock.com:2192/auth2/token</string>
+	<key>AuthType</key>
+	<string>fonestock</string>
+	<key>AppId</key>
+	<string>usdivergence</string>
+	<key>PaymentPageURL</key>
+	<string>https://register.fonestock.com/fs_register/payment</string>
+	<key>PurchaseVerifyURL</key>
+	<string>https://register.fonestock.com/app_purchase/apple/purchase_verify</string>
+	<key>SignupPageURL</key>
+	<string>https://register.fonestock.com/fs_register/signup.php</string>
+	<key>UpdatePushNotificationTokenURL</key>
+	<string>https://uspush.fonestock.com:2189/pushtokenup/us/</string>
+	<key>mainDBName</key>
+	<string>DivergenceTipsDB.sqlite</string>
+	<key>FBShareNotificationURL</key>
+	<string>https://register.fonestock.com/fs_service/apiSocial/share</string>
+	<key>AppStoreURL</key>
+	<string>itms-apps://itunes.apple.com/us/app/divergence-tips/id958092327?l=zh&amp;ls=1&amp;mt=8</string>
+	<key>ForgotPasswordURL</key>
+	<string>https://register.fonestock.com/fs_register/request</string>
+	<key>OpenProjectURL</key>
+	<string>https://register.fonestock.com/fs_service/apiSignup/initial</string>
+</dict>
+</plist>

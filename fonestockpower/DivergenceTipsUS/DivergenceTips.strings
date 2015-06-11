@@ -1,0 +1,43 @@
+/* 
+  File.strings
+  FonestockPower
+
+  Created by Kenny on 2015/1/29.
+  Copyright (c) 2015年 Fonestock. All rights reserved.
+*/
+"時機小秘"="Pattern Tips";
+"背離力" = "Divergence Tips";
+"K線" = "Candle";
+"單量" = "Vol";
+"開" = "Open";
+"高" = "High";
+"低" = "Low";
+"收" = "Close";
+"差" = "Chg";
+"量" = "Vol";
+"名稱"="Symbol";
+
+//LoginViewController
+"本產品提供14天試用期"="";
+"email帳號"="email";
+"密碼"="Password";
+"加入會員"="Create New\nAccount";
+"登入"="Sign In";
+"忘記密碼"="Forget password";
+//"客服電話new"="客服電話: (02)5589-4589#1";  -> 台股的長這樣
+"客服電話new"="contact us:help@fonestock.com";
+
+//main Part
+"Divert to Bear"="To Bear";
+"Divert to Bull"="To Bull";
+"讀取中"="Loading...";
+"多方選股"="Long";
+"空方選股"="Short";
+
+//AD Page
+"下次不顯示此訊息" = "Do not show this message again";
+
+// 登入狀態提示
+"登入中, 請稍候" = "Logging...";
+"資料下載中, 請稍候" = "Loading...";
+"更新時間" = "Updated";

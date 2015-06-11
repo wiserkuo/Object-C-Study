@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AuthenticationServerURL</key>
+	<string>https://usaauth.fonestock.com:2192/auth2/token</string>
+	<key>AuthType</key>
+	<string>fonestock</string>
+	<key>Account</key>
+	<string>uschartlead@points.fonestock.com</string>
+	<key>AppId</key>
+	<string>uscharttrade</string>
+	<key>MainPageAdvertiseURL</key>
+	<string>http://www.fonestock.com/goodleads/advertise</string>
+	<key>PaymentPageURL</key>
+	<string>https://www.fonestock.com.tw/fs_register/subscription.php</string>
+	<key>PurchaseVerifyURL</key>
+	<string>https://www.fonestock.com.tw/fs_service/apiSubscription/apple</string>
+	<key>SignupPageURL</key>
+	<string>https://register.fonestock.com/fs_register/signup.php</string>
+	<key>UpdatePushNotificationTokenURL</key>
+	<string>https://uspush.fonestock.com:2189/pushtokenup/us/</string>
+	<key>mainDBName</key>
+	<string>PatternPowerDB.sqlite</string>
+	<key>FBShareNotificationURL</key>
+	<string>https://register.fonestock.com/fs_service/apiSocial/share</string>
+	<key>AppStoreURL</key>
+	<string>https://itunes.apple.com/us/app/patternpower/id842419597</string>
+	<key>ForgotPasswordURL</key>
+	<string>https://www.fonestock.com.tw/fs_register/request</string>
+	<key>OpenProjectURL</key>
+	<string>https://www.fonestock.com.tw/fs_service/apiSignup/initial</string>
+</dict>
+</plist>

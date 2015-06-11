@@ -1,0 +1,307 @@
+/* 
+  FigureSearch.strings
+  WirtsLeg
+
+  Created by Connor on 13/10/18.
+  Copyright (c) 2013年 fonestock. All rights reserved.
+*/
+
+"圖示選股" = "標竿型態";
+"下一步"="下一步";
+//多
+"多方選股" = "多方";
+"多方選股形勢" = "多方";
+"長紅棒" = "長紅棒";
+"雙錘打樁" = "雙錘打樁";
+"晨星十字" = "晨星十字";
+"紅三兵" = "紅三兵";
+"雙龍環抱" = "雙龍環抱";
+"紅K吞噬" = "紅K吞噬";
+"多方孤島" = "多方孤島";
+"橫盤突破" = "橫盤突破";
+"下影探底" = "下影探底";
+"多方醞釀" = "多方醞釀";
+"空頭抵抗" = "空頭抵抗";
+"紅K脫困" = "紅K脫困";
+
+//空
+"空方選股" = "空方";
+"空方選股形勢" = "空方";
+"長黑棒" = "長黑棒";
+"雙T倒反" = "雙T倒反";
+"夜星十字" = "夜星十字";
+"黑三鴉" = "黑三鴉";
+"雙龍棄守" = "雙龍棄守";
+"黑K吞噬" = "黑K吞噬";
+"空方孤島" = "空方孤島";
+"橫盤下殺" = "橫盤下殺";
+"上影摸頭" = "上影摸頭";
+"空方暫歇" = "空方暫歇";
+"多頭抵抗" = "多頭抵抗";
+"黑K入甕" = "黑K入甕";
+
+
+
+//消費
+"我的錢包" = "我的錢包";
+"消費紀錄" = "消費記錄";
+"剩餘金幣" = "剩餘金幣";
+"日期" = "日期";
+"消費 " = "消費";
+"增加" = "增加";
+"使用" = "使用";
+"時間" = "時間";
+"功能" = "功能";
+
+//用戶自定
+"用戶自定" = "我的型態";
+"當日" = "當日K棒";
+"前一日" = "前一日K棒";
+"前二日" = "前二日K棒";
+"前三日" = "前三日K棒";
+"前四日" = "前四日K棒";
+"當週"="當週K棒";
+"前一週" = "前一週K棒";
+"前二週" = "前二週K棒";
+"前三週" = "前三週K棒";
+"前四週" = "前四週K棒";
+"當月"="當月K棒";
+"前一月" = "前一月K棒";
+"前二月" = "前二月K棒";
+"前三月" = "前三月K棒";
+"前四月" = "前四月K棒";
+"漲跌幅設定" = "漲跌幅設定";
+"漲跌幅已更新，是否要儲存？" = "漲跌幅已更新，是否要儲存？";
+"設定最大幅度" = "設定最大幅度";
+"日K" = "日 K :      ±";
+"週K" = "週 K :      ±";
+"月K" = "月 K :      ±";
+"選擇K棒" = "選擇K棒";
+"設定篩選條件" = "設定篩選條件";
+"Change Range" = "漲跌幅";
+"紅黑K" = "紅黑K";
+"上影線" = "上影線";
+"實體線" = "實體線";
+"下影線" = "下影線";
+"選取趨勢線" = "選取趨勢線";
+"跳過" = "不設定";
+"完成" = "完成";
+"確定2" = "確定";
+"設定趨勢線" = "選取趨勢線和調整區間";
+"日設定值超過上限" = "請輸入介於0.1到%.1f的數字";
+"週設定值超過上限" = "請輸入介於0.1到%.1f的數字";
+"月設定值超過上限" = "請輸入介於0.1到%.1f的數字";
+"請輸入數值" = "請輸入數值"; //bug#10725
+"超過上限" = "請輸入0.1~%.1f數字";
+"否"="否";
+"請由右往左開始編輯一根以上的K棒" = "請由右往左開始編輯一根以上的K棒";
+"Ask to save" = "圖形已設定完成，是否要儲存?";
+"請設定至少1根k棒" = "請設定至少1根k棒";
+
+"超過上限日" = "日";
+"超過上限週" = "週";
+"超過上限月" = "月";
+"超過上限日週" = "日, 週";
+"超過上限日月" = "日, 月";
+"超過上限週月" = "週, 月";
+"超過上限日週月" = "日, 週, 月";
+"not finish" = "尚未完成編輯，是否要離開?";
+"此名稱已存在,請重新輸入"="此名稱已存在,請重新輸入";
+"離開"="離開";
+"下次不顯示此信息" = "下次不顯示此信息";
+
+//search
+"日線" = "日線";
+"Day" = "日線";
+"週線" = "週線";
+"Week" = "週線";
+"月線" = "月線";
+"Month" = "月線";
+"Daily" = "日線";
+"Weekly" = "週線";
+"Monthly" = "月線";
+"追蹤" = "型態追蹤";
+"追蹤標的" = "追蹤標的 :";
+"搜尋" = "搜尋";
+"結果" = "結果";
+"顯示上次結果" = "顯示上次結果";
+"每次搜尋扣金幣1點是否要搜尋?" = "每次搜尋扣金幣1點，是否要搜尋?";
+"確定" = "確認";
+"取消" = "取消";
+"圖示選股－結果" = "圖示選股 - 結果";
+"搜尋結果標題" = "Result";
+"圖示名稱" = "圖示名稱:";
+"搜尋時間" = "搜尋時間:";
+"搜尋範圍" = "搜尋範圍:";
+"搜尋結果" = "搜尋結果: ";
+"加入追蹤" = "加入型態追蹤: ";
+"加入自選" = "加入我的自選: ";
+"您的金幣不足，是否進行加值?" = "您的金幣不足，是否進行加值?";
+"馬上加值" = "馬上加值";
+"編輯" = "編輯";
+"重新編輯圖形，將會清空追蹤資料，是否重編?" = "重新編輯型態，將會清空追蹤資料";
+"取消" = "取消";
+"儲存" = "儲存";
+"無追蹤股票" = "無追蹤股票";
+"無搜尋記錄" = "無搜尋記錄";
+"無相符個股" = "無相符個股";
+"最新搜尋記錄" = "最新搜尋記錄";
+"搜尋到%d筆資料!僅顯示%d筆." = "搜尋到%d筆資料!僅顯示%d筆";
+"搜尋到%d筆資料!" = "搜尋到%d筆資料!";
+"盤中" = "即時盤";
+"盤後" = "盤後";
+"刪除圖形"  = "是否清除這個型態?";
+"最新" = "上次結果";
+"排序方式" = "類型:";
+"筆數" = "%d / %d";
+"筆數無僅" ="%d / %d";
+"條件2" = "設定篩選條件";
+//track
+"%d檔追蹤標的" = "%d 檔追蹤標的";
+"型態追蹤" = "型態追蹤";
+"型態名稱" = "型態名稱 :";
+"追蹤筆數" = "追蹤檔數 :";
+"獲利筆數" = "上漲檔數 :";
+"平均報酬" = "平均漲跌 :";
+"累加報酬" = "漲跌總和 :";
+"最大獲利" = "最佳交易 :";
+"最大損失" = "最差交易 :";
+"選股日期" = "時間";
+"股名" = "名稱";
+"選股日股價" = "成本";
+"今日股價" = "現價";
+"報酬率" = "漲跌%";
+"期間最高價" = "最高價";
+"期間最低價" = "最低價";
+"取消單筆追蹤" = "取消單筆追蹤";
+"指標" = "指標";
+"分線" = "分線";
+"加入自選股" = "加入自選";
+"錯誤" = "錯誤";
+"追蹤股票支數已超過" = "已經達到最大追蹤數量";
+"高" = "高";
+"收" = "收";
+"開" = "開";
+"低" = "低";
+"已加入追蹤" = "已經加入追蹤";
+"已加入自選" = "已經加入自選股";
+"取消追蹤股票" = "移除追蹤";
+"取消自選" = "移除自選股";
+
+"資料下載中" = "資料下載中...";
+"搜尋中" = "查詢中, 請稍候...";
+"EOD搜尋中" = "查詢中, 請稍候...";
+"Targets搜尋中" = "查詢中, 請稍候...";
+//FlatTrend
+"設定橫盤整理參數" = "設定橫盤整理振幅";
+"日" = "日:";
+"週" = "週:";
+"月" = "月:";
+"範例" = "例如:";
+"日3%" = "3% 為日的振幅";
+"週5%" = "5% 為週的振幅";
+"月10%" = "10% 為月的振幅";
+
+//EOD
+"EOD Targets" = "每日推薦";
+"EOD Check" = "時機健診";
+
+//教學畫面
+"teachText" = "Do not show dialogue again";
+"點擊開始" = "Tap to start";
+"開啟網站" = "Open financial\nweb sites";
+"點擊交換" = "Tap to change";
+"排序" = "Sort by";
+"選擇股票" = "Tap to analyse";
+"江波圖" = "Slide for trend";
+"選擇多空" = "Select long or short";
+"選擇圖示" = "Then select a pattern";
+"選擇時間" = "Choose the time frame";
+"選擇追蹤" = "Track the performance of the selected stocks";
+"新增追蹤" = "Drag down to add to track list";
+"取消追蹤" = "Drag out to remove";
+"滑動看更多" = "Slide for more information";
+"選擇追蹤時間" = "Switch time frame";
+"編輯圖示" = "Define your own Pattern";
+"編輯圖示說明" = "To reedit, go to search and track and tap on ''edit'' after first editing.";
+"選擇趨勢線" = "Select trend";
+"趨勢線範圍" = "Tap to adjust range";
+"編輯K棒說明" = "Set up the time period (1-5 days) from right to left. Choose the days you want to set.\n\nNote：More days set, more strict the condition is, less results showed.";
+"選擇趨勢線說明" = "There are rise, rest and fall trends. Unrequired.";
+"編輯K棒" = "Define K bar";
+"選擇預設K棒" = "Select shape";
+"調整K棒" = "Tap to adjust size";
+"移動K棒" = "Tap to move to relative position";
+"調整K棒說明" = "The more extreme size and shape are, The less Likely candidate will be found.";
+"移動K棒說明" = "The bigger the rise range is, the less result showed";
+"設定K棒" = "Set K bar's range";
+"選擇搜尋條件" = "Parameter screener";
+"設定K棒說明" = "The bigger the number, the bar in same size means larger range.";
+"選擇搜尋條件說明" = "You can leave out any parameter criteria that are irrelevant to your pattern and they will not be used to construct your equation.";
+"選擇期間" = "Time frame";
+"設定參數" = "Index parameters";
+"選擇技術圖" = "Change the index";
+"輸入搜尋條件" = "Fill in name or symbol to search";
+"設定警示條件" = "Set profit or loss";
+"刪除" = "Delete";
+"長按移動" = "Long press to move";
+"換股" = "Change stock";
+"點擊看詳細資料" = "Tap for more detail";
+"兩檔比較" = "Compare";
+"刪除一根圖形" = "是否刪除K棒?";
+"點擊至技術線圖" = "Tab to enter technical analysis";
+"名稱不可空白" = "名稱不可空白!!";
+
+"Up trend" = "近%.0f(日/週/月)";
+
+"Down trend" = "近%.0f(日/週/月)";
+
+"Flat trend" = "近%.0f(日/週/月)";
+
+"FigureSearchTitle" = "設定篩選條件";
+
+"Top 300 Volume" = "Top 300 Volume";
+
+"Top 300 Volatility" = "Top 300 Volatility";
+
+"Top 300 Turnover Rate" = "Top 300 Turnover Rate";
+
+"Top 300 Market cap" = "Top 300 Market cap";
+
+"Price Range" = "Price Range";
+
+"Prev close >= 100" = "Prev close >= 100";
+
+"100 > Prev close >= 50" = "100 > Prev close >= 50";
+
+"50 > Prev close >= 10" = "50 > Prev close >= 10";
+
+"10 > Prev close >= 5" = "10 > Prev close >= 5";
+
+"Prev close < 5" = "Prev close < 5";
+
+"candidates" = "檔符合標的";
+
+"DIY Pattern Text" = "當您熟悉K線後，您可能會想要畫出自己的型態或修改條件讓型態更嚴苛或更鬆散，以找到您屬意的股票。<br/><br/>顏色 :<br/><font color='red'>紅K棒 : (收盤價 > 開盤價)</font><br/><font color='#25B920'>綠K棒 : (收盤價 < 開盤價)</font><br/><font color='blue'>藍色線 : (收盤價 ≅ 開盤價)</font><br/><br/>您至少要設定一根K棒，也可設更多K棒以偵測更複雜的變化，另外您也可以加入一段前導趨勢來做搜尋條件。例如在一段下降趨勢後有轉多的K棒型態，即很有可能是底部訊號。</br></br><font color='#B520BA'>當然如果您設定一個複雜或嚴苛的型態時，將不容易找到符合的股票。但如果有找到，它可能會是個很好的買賣時機。</font></br></br><font color='red'>設定 :</font></br><OL>點選最右邊的空白K棒，由右至左，分別代表當天、前一天...</br>進入後，在上方選擇您要的標準K棒形狀。</br>您可以調整此根K棒開高低收的位置。</br>長按K棒，將可移動到您希望的漲跌(%)位置。</br>右上方紅色按鈕，可以設定最大漲跌幅度。</br>按下一步，您可以進一步調整此根K棒的相對長度。</OL></br><font color='#B520BA'>當設定”約等於”，找到的股票會完全近似這個型態，但是也比較不容易找到符合的股票。</br>”>”　”<” 或”任意數值”則提供您彈性調整這個參數，以便找到更多含意接近的股票。</font></br></br><font color='red'>刪除 :</font></br><OL>在預覽的畫面中，長按該根K棒即可刪除。</br>按右上方的X，即可清除整個型態。</OL>";
+
+"DIY Pattern Text_6" = "DIY Pattern Tutorial\n\nYou can define your own pattern by tapping on one of the patterns.  After a pattern is defined you can use it to pick and track stocks just like those in Typical Pattern.\n\nBasics of a candle:\nOpen is defined as Opening price.\nClose is defined as closing price.\nHigh is defined as the Highest price.\nLow is defined as the Lowest price.\n\nColoring:\nGreen (Close > Open)\nRed (Close < Open)\nBlue (Close =. Open)\n\nTo form a pattern:\nA minimum pattern is one candlestick, the one to the far right.\nIt depicts the price changes of the latest session.\nYou can define up to five candles, and use a trend line to precede the candles optionally.\nSpecific candle patterns strengthen your belief on the continuation of the current trend or one that may break or reverse the trend.\nPlease note that the more complicated the pattern is, the more refined are the criteria and the less likely to find matching candidates.\nHowever, if there is a candidate, it is often a good one to buy, sell, or short.\n\nChoose a trend line:\nYou can choose an uptrend, downtrend, or flat-trend, and the duration of the trend.\n\nDesign a candle:\n1. Tap on one of the candles\n2. Choose the shape from the patterns above\n3. Press and drag the candle to the position you want\n4. Slide Open,Close, High and Low to adjust the size\n5. Define your own parameters in the tool bar\n6. To delete a candle, just press on it for a few seconds\n\nTool Bar\n● Define the range of the size of a candle\nDefault ranges:\nday +- 5%;\nweek +- 10%;\nmonth +-15%\n● Define the shape and the relative position.\nYou can leave out any parameter criteria that are irrelevant to your pattern and they will not be used to construct your equation.\nFor instance, a Big Bull ignores its relative position.\nYou can define one by their\n● Color\n● Upper shadow\n● Lower shadow\n● Body\n● Relative position to previous Close\n\nOr you can choose to leave out any parameter criteria as you see fit.
+";
+
+//in detailViewController
+"lastMove"="上一步";
+"submit"="確認";
+"upLine"="上影線";
+"mainBody"="實體線";
+"downLine"="下影線";
+"upDown"="今收 - 昨收";
+"任意顏色"="任意顏色";
+"跌的顏色"="綠色";
+"漲的顏色"="紅色";
+"任意長度"="任意長度";
+"任意值"="任意值";
+"大於"="大於";
+"小於"="小於";
+"約等於"="約等於";
+"請選擇"="請選擇";
+
+

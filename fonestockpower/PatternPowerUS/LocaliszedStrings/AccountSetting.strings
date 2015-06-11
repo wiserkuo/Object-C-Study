@@ -1,0 +1,44 @@
+/* 
+  AccountSetting.strings
+  WirtsLeg
+
+  Created by Connor on 13/10/24.
+  Copyright (c) 2013年 fonestock. All rights reserved.
+*/
+
+"設定" = "Setup";
+"線上教學" = "On-line help";
+"操作導覽" = "Show walk-through";
+"前往" = "Here";
+"開啟" ="On";
+"版本資訊" = "Version";
+"服務說明/版權宣告" = "Terms of Service";
+"服務內容" = "<font face='Arial' size=5>1. The information and content provided in the <b>Pattern Power App</b> is for informational and/or educational purposes only.&nbsp;&nbsp;The information presented or discussed is not, and should not be considered, a recommendation or an offer of, or solicitation of an offer by, Fonestock Technology Inc.&nbsp;or its affiliates to buy, sell or hold any security or other financial product or an endorsement or affirmation of any specific investment strategy.&nbsp;&nbsp;You are fully responsible for your investment decisions.&nbsp;&nbsp;Your choice to engage in a particular investment or investment strategy should be based solely on your own research and evaluation of the risks involved, your financial circumstances and your investment objectives.&nbsp;&nbsp;Fonestock Technology Inc.&nbsp;and its affiliates are not offering or providing, and will not offer or provide, any advice, opinion or recommendation of the suitability, value or profitability of any particular investment or investment strategy.</br></br>2. <b>Pattern Power App</b> does not make recommendations or offer investment advice of any kind. 　 </br></br>3. We are very committed to protecting the privacy of your personal information and will not sell, rent or license this information to anyone.&nbsp;&nbsp;We may use your personal information to notify you of useful products or services and send email communications such as newsletters, new client information, event invitations and offers.&nbsp;&nbsp;You will always have the option to unsubscribe from any promotional email communications from Fonestock Technology Inc.&nbsp;</br></br>4. Any specific securities, or types of securities, used as examples are for demonstration purposes only.&nbsp;&nbsp;None of the information provided should be considered a recommendation or solicitation to invest in, or liquidate, a particular security or type of security.</font>";
+
+"服務內容ios6" ="1. The information and content provided in thePattern Power App is for informational and/or educational purposes only.  The information presented or discussed is not, and should not be considered, a recommendation or an offer of, or solicitation of an offer by, Fonestock Technology Inc.  or its affiliates to buy, sell or hold any security or other financial product or an endorsement or affirmation of any specific investment strategy.  You are fully responsible for your investment decisions.  Your choice to engage in a particular investment or investment strategy should be based solely on your own research and evaluation of the risks involved, your financial circumstances and your investment objectives.  Fonestock Technology Inc.  and its affiliates are not offering or providing, and will not offer or provide, any advice, opinion or recommendation of the suitability, value or profitability of any particular investment or investment strategy.  \n\n2. Pattern Power App does not make recommendations or offer investment advice of any kind.  \n\n3. We are very committed to protecting the privacy of your personal information and will not sell, rent or license this information to anyone.  We may use your personal information to notify you of useful products or services and send email communications such as newsletters, new client information, event invitations and offers.  You will always have the option to unsubscribe from any promotional email communications from Fonestock Technology Inc.  \n\n4. Any specific securities, or types of securities, used as examples are for demonstration purposes only.  None of the information provided should be considered a recommendation or solicitation to invest in, or liquidate, a particular security or type of security.";
+
+"連線設定" = "Setup";
+"狀態" = "Status:";
+"帳號" = "Account:";
+"密碼" = "Password:";
+"連線狀態" = "Connection\n   Status:";
+"登出" = "Log Out";
+"登入" = "Log In";
+"服務訊息" = "Account status";
+"客服電話" = "contact:help@fonestock.com";//"For customer support, contact:help@fonestock.com";
+"未登入" = "Log Out";
+"清除盤後資料" = "Clear Off Session Data";
+"要清除盤後資料嗎" = "Do you want to delete Off Session Data?";
+"盤後資料清除完畢" = "Off Session Data has been cleared!";
+"客服電話new"="contact@fonestock.com";
+"確定" = "OK";
+"取消" = "Cancel";
+//"輸入錯誤" = "Wrong account/password.\nPlease try again.";
+"輸入錯誤"="Incorrect account/password.\nPlease try again.";
+"沒有輸入帳號密碼"="Please enter your account/password";
+"輸入錯誤的下方按鈕"="Retry";
+"登入中"="Logging in. Please wait…";
+"請輸入帳號密碼"="Please enter your account/password";
+"忘記密碼"="Forget password";
+
+

@@ -1,0 +1,24 @@
+/* 
+  SearchCriteria.strings
+  FonestockPower
+
+  Created by Kenny on 2014/11/4.
+  Copyright (c) 2014年 Fonestock. All rights reserved.
+*/
+"成交量排行" = "Top 300 Volume";
+"振幅排行" = "Top 300 Volatility";
+"週轉率排行" = "Top 300 Turnover Rate";
+"市值排行" = "Top 300 Market Cap";
+"股價區間" = "Price";
+"營收成長率" = "GR(OPerating Income)";
+"營業利益率" = "Operating Margin";
+"每股盈餘" = "EPS(This Q)";
+"每股盈餘成長率" = "GR(EPS)(This Q)";
+"營業利益成長率" = "Operating Profit Growth Rate(This Quarter)";
+"股東權益報酬率" = "ROE(This Year)";
+"本益比" = "P/E";
+"設定篩選條件" = "Add Search Criteria";
+"成交量" = "Volume";
+"成交量/20日均量" = "Volume/Avg.20 Days Volume";
+"小於" = "under";
+"大於" = "above";

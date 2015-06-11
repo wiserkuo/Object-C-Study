@@ -1,0 +1,18 @@
+/* 
+  Position.strings
+  FonestockPower
+
+  Created by Michael.Hsieh on 2015/3/16.
+  Copyright (c) 2015年 Fonestock. All rights reserved.
+*/
+
+"張數" = "Quantity";
+"總成本" = "Total$";
+"價值" = "Total$";
+"獲利" = "Gain$";
+"曝險金額" = "Risk$";
+"歷" = "H";
+"記" = "N";
+"報" = "G";
+"買進均價" = "Buy Avg.$";
+"放空均價" = "Short Avg.$";

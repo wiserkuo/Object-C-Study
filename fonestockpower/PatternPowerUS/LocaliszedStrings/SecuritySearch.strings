@@ -1,0 +1,39 @@
+/* 
+  SecuritySearch.strings
+  WirtsLeg
+
+  Created by Neil on 13/10/7.
+  Copyright (c) 2013年 fonestock. All rights reserved.
+*/
+"無相符個股" = "no stock";
+"輸入代碼或名稱" = "Enter name or symbol";
+"搜尋" = "Search";
+"搜尋中" = "Search data please wait...";
+"股名" = "Symbol";
+"群組" = "Group";
+"加入自選" = "Group";
+"獲利" = "Profit";
+"停損" = "Lost";
+"移動" = "Move";
+"返回" = "Back";
+"變更群組名稱" = "Rename";
+"請輸入新的自訂群組名稱" = "Define Groups";
+"取消" = "Cancel";
+"確定" = "Submit";
+"確認" = "OK";
+"名稱不可為空白" = "Please input group name";
+"錯誤" = "Error";
+"警示" = "Alert";
+"自選股數" = "My Stocks";
+"由下列標的物選取股票" = "Select one or more stocks";
+"橘色為已加入自選股" = "Orange highlight indicates selected.";
+"關閉" = "Close";
+"設定" = "Set Amplitude";
+"全部" = "All";
+"搜尋市場" = "U.S. Stocks";
+"自選股" = "Watchlists";
+"選取股票" = "Select one stock";
+"警告" = "Error";
+"自選股已達上限" = "The number of stocks is maximum value";
+"刪除" = "Delete";
+"此檔股票已存在確定要移到自選嗎" = "This is stock has already exist\nDo you want to move to group %@?";

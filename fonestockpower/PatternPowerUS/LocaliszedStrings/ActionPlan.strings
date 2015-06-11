@@ -1,0 +1,130 @@
+/* 
+  ActionPlan.strings
+  FonestockPower
+
+  Created by Derek on 2014/6/19.
+  Copyright (c) 2014年 Fonestock. All rights reserved.
+*/
+
+"進場日期" = "Open Date";
+"名稱" = "Symbol";
+"進場價" = "Cost";
+"現價" = "Last$";
+"數量" = "Amount";
+"停損價" = "S@L";
+"停損價表用" = "Stop profit";
+"停利價" = "S@P";
+"停利價表用" = "Stop loss";
+"停損停利" = "Profit & Loss";
+"曝顯金額" = "Exposure";
+"風險比重" = "Risk Ratio";
+"費用" = "Expense";
+"未實現損益" = "Unrealized";
+"投入資金" = "Invested Capital";
+"已實現損益" = "Realized";
+"資產淨值" = "Total Balance";
+"編輯警示型態" = "Select an alert pattern";
+"Net Worth" = "Total Balance";
+"Duration:" = "Date";
+
+"3M" = "3 Months";
+"6M" = "6 Months";
+"YTD" = "This Year";
+"1Y" = "1 Year";
+"3Y" = "3 Years";
+"金額" = "Amount";
+
+"確認" = "OK";
+"取消" = "Cancel";
+
+"匯款方式" = "Transfer";
+"匯入/匯出" = "Transfer";
+"匯入" = "Deposit";
+"匯出" = "Withdraw";
+"匯款" = "Transfer";
+"日期" = "Date";
+"累計金額" = "Total$";
+
+"區間" = "Duration";
+"累積報酬率" = "accumulate";
+"單日報酬率" = "Daily";
+"Accumulate$" = "Total Balance$";
+"Daily$" = "Daily Change$";
+
+"出場日期" = "Close Date";
+"出場價" = "Closed Price";
+"淨損益" = "Net Profit";
+"報酬率" = "ROI";
+"累積損益" = "Total Profit";
+"交易次數" = "Tradings";
+"最大獲利" = "Max Profit";
+"最佳報酬率" = "Best ROI";
+"平均損益" = "Avg Profit";
+"交易勝率" = "Win Rate";
+"最大損失" = "Max Loss";
+"最差報酬率" = "Worst ROI";
+"平均報酬率" = "Avg ROI";
+
+"取消" = "Cancel";
+"交易" = "Deal";
+"Amount Payable" = "Amount Payable";
+"多方選股形勢" = "Long";
+"空方選股形勢" = "Short";
+"目標價" = "Target";
+"成本價" = " Cost";
+"設定您想買的目標價" = "Set a target buying price";
+"設定您想放空的目標價" = "Set a target selling price";
+"設定停利價" = "Set Stop profit";
+"設定停損價" = "Set Stop Loss";
+"請輸入金額" = "Please enter the amount";
+"當 現價 ≧ 停利價, 停損價會重新計算." = "When current price ≧ stop loss, \nthe stop loss will be recalculated";
+"當 現價 ≦ 停利價, 停損價會重新計算." = "When current price ≦ stop loss, \nthe stop loss will be recalculated";
+"總買進數量需大於總賣出數量，請確認刪除動作" = "You cannot sell more shares than you have bought.";
+"建議以最高買進價做為停損停利計算依據,\n若以買進均價計算,警示點有可能設的太遠" = "Best to use the highest buying price as stop loss/profit.\nIf average buying price is used, the alerts may be too far off.";
+"建議以最低放空價做為停損停利計算依據,\n若以放空均價計算,警示點有可能設的太遠" = "Best to use the lowest short selling price as stop loss/profit.\nIf average short selling price is used, the alerts may be too far off.";
+"最高買進價" = "Highest Buying Price";
+"買進均價" = "Average Buying Price";
+"最低放空價" = "Lowest Short Selling Price";
+"放空均價" = "Average Short Selling Price";
+
+"自選設定提示" = "Changing Action will delete all data and Favorites. Do you want to change the Action?";
+"自選設定" = "Watchlists";
+"超過加入上限" = "Over the limit.";
+"Average$" = "Average$";
+"Total$" = "Total$";
+"S@L$" = "S@L$";
+"Position" = "Position";
+"Cash" = "Cash";
+"Realized Gains" = "Realized Gains";
+"Unrealized Gains" = "Unrealized Gains";
+"Risk" = "Risk";
+"Total Gain" = "Total Gain";
+"Trades" = "Trades";
+"Total Gain%" = "Total Gain%";
+"次數s" = "times";
+"次數" = "time";
+"Win Rate" = "Win Rate";
+
+//FSTradeHistoryViewController
+"股名" = "Symbol";
+"張數" = "Quantity";
+"(買)成交價" = "Buy Price$";
+"(賣)成交價" = "Sell Price$";
+"(放空)成交價" = "Short Price$";
+"(回補)成交價" = "Cover Price$";
+"金額History" = "Total$";
+"確定刪除此筆記錄?" = "Delete?";
+"警示個股數量已達設定上限" = "ActionPlan is full";
+"自選股數量已達設定上限" = "Watchlists is full";
+
+//FSTradeDiaryViewController
+"賣出均價" = "Sell Avg.$";
+"回補均價" = "Cover Avg.$";
+"獲利" = "Gain$";
+
+//FSInvestedViewController
+"日期" = "Date";
+"匯入/匯出" = "Transfer";
+"金額$" = "Amount$";
+"累計金額" = "Total$";
+"確認" = "OK";

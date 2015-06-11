@@ -1,0 +1,28 @@
+/* 
+  IndexQuotes.strings
+  IndexQuotesViewController
+
+  Created by CooperLin on 2014/10/17.
+  Copyright (c) 2014年 CooperLin. All rights reserved.
+*/
+
+//title
+"indexquotes"="指數行情";
+
+//buttons
+"tw"="台灣";
+"cn"="大陸";
+"hk"="香港";
+"us"="美國";
+"asia"="亞洲";
+"eur"="歐洲";
+
+//tableView
+"name"="名稱";
+"last"="最新";
+"change"="漲跌";
+"changeRate"="漲跌幅";
+"highest"="最高";
+"lowest"="最低";
+"singleAmount"="單量";
+"totalAmount"="總量";

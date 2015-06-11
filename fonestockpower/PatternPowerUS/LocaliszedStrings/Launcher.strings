@@ -1,0 +1,164 @@
+/* 
+  Launcher.strings
+  WirtsLeg
+
+  Created by Connor on 13/10/18.
+  Copyright (c) 2013年 fonestock. All rights reserved.
+*/
+
+
+// 主功能選單
+//update time : 14/11/03
+//"推薦標的"="EOD Targets";
+//"時機健診"="EOD Check";
+//"標竿型態"="Typical Patterns";
+//"我的型態"="My Patterns";
+//"型態追蹤"="型態追蹤";
+//"自選分析"="Watchlists";
+//"紀律交易"="Action & Alerts";
+//"部位管理"="Position";
+//"交易日記"="Diary";
+//"國際資訊"="國際資訊";
+//"指數行情"="指數行情";
+//"興櫃行情"="興櫃行情";
+//"推薦券商"="推薦券商";
+//"興櫃行事曆"="興櫃行事曆";
+//"興櫃排行"="興櫃排行";
+
+//update time : 14/12/10
+//"推薦股票"="Daily Targets";
+//"標竿型態"="Typical Patterns";
+//"我的型態"="My Patterns";
+//"我的自選"="Watchlist";
+//"型態追蹤"="Pattern Tracking";
+//"交易警示"="Action & Alerts";
+//"時機健診"="Daily Check";
+//"部位風險"="Positions";
+//"績效日記"="Diary";
+//主功能頁第一頁
+//綠棒棒內文字
+//"找股票"="Find Stocks (Add Stocks to Watch List)";
+//"找買賣點"="Find Buy/Sell Point (Add Stocks to Trade list)";
+//"獲利分析"="Gain/Loss Analysis";
+//一般文字內容
+"加入想買的股票"="";
+"加入想看的股票"="";
+//圓球內文字
+//"哪些股票達到轉折型態"="Find Stocks\nthat reach\ncertain\npatterns";
+//"搭配基本面選股"="Combine\npatterns with\nother search\ncriteria";
+//"個人自訂專屬型態"="Customize\nyour own\npatterns";
+//"買賣標的研究分析"="Analyze\ntargets";
+//"追蹤型態有效性"="Track patterns'\nvalidity";
+//"條件設定即時警示進行交易"="Set Dealing terms\nInstant alert\nTrade simulation";
+//"手中個股是否出現買賣訊號"="Buy/sell\nsignals for the\nstocks\nin control";
+//"部位績效風險控管"="Control risk\nand\nperformance";
+//"交易紀錄檢討改進"="Record and\nreview trades\nOptimize\nstrategies";
+
+//update time : 15/01/20
+"自選分析" = "Watchlists";
+"圖是力"="Pattern Trader";
+"推薦股票"="Daily Targets";
+"標竿型態"="Typical Patterns";
+"我的型態"="My Patterns";
+"我的自選"="Watchlists";
+"型態追蹤"="Pattern\nTracking";
+"交易警示"="Action Plan";
+"時機健診"="Daily Check";
+"部位風險"="Positions";
+"績效日記"="Diary";
+//主功能頁第一頁
+//綠棒棒內文字
+"找股票"="Which";
+"找買賣點"="When";
+"獲利分析"="How";
+//圓球內文字
+"哪些股票達到轉折型態"="Gain\nPatterned\nStocks";
+"搭配基本面選股"="Search\nw / More\nCriteria";
+"個人自訂專屬型態"="Draw\nYour\nPatterns";
+"買賣標的研究分析"="Study\nStocks";
+"追蹤型態有效性"="Track\nPatterns\nValidity";
+"條件設定即時警示進行交易"="Act on\nPrivate\nAlert";
+"手中個股是否出現買賣訊號"="Match\nAny\nPattern";
+"部位績效風險控管"="Control\nRisk";
+"交易紀錄檢討改進"="Review\nRecord";
+
+
+//
+//"thumb"="推薦標的";
+//"crossOk"="時機健診";
+//"targetPattern"="標竿型態";
+//"myPattern"="我的型態";
+//"stopWatch"="型態追蹤";
+//"stockResearch"="個股研究";
+//"disciplineTrade"="紀律交易";
+//"tradeJournal"="交易日記";
+//"自選報價" = "自選分析";
+//"圖示選股" = "系統型態";
+//"用戶自定" = "自設型態";
+//"EOD Targets" = "推薦標的";
+//"EOD Check" = "時機健診";
+//"Action & Alerts" = "紀律交易";
+//"Positions" = "部位管理";  //
+//"Trade History" = "歷史交易";  //Trade History
+//"Diary" = "交易日記";  //Diary
+//"圖是力" = "Stock Trading System - Pattern";
+//"自選報價" = "Watchlists";
+//"圖示選股" = "Typical Patterns";
+//"用戶自定" = "My Patterns";
+//"EOD Targets" = "EOD Targets";
+//"EOD Check" = "EOD Check";
+//"Action & Alerts" = "Action & Alerts";
+//"Positions" = "Positions";
+//"Diary" = "Diary";
+"本產品提供7天試用期" = "";
+"您尚未完成註冊流程。請確定是否離開，若離開需重新填寫資料。" = "Registration is not yet finished. Are you sure you want to leave? You will need to start over again.";
+"您尚未完成重設密碼流程。請確定是否離開，若離開需重新填寫資料。" = "Password is not reset yet. Are you sure you want to leave? You will need to start over again.";
+"使用本產品必須支付數據費用與行動網路費用" = "Internet usage costs may apply from your mobile service provider";
+"您的使用期限至(%@)已快到期，為維護您的使用權益，建議儘快續約" = "Your due date is(%@) will be expired soon. To extend your account, please renew the subscription.";
+"您的使用期限至(%@)" = "Your due date is(%@)";
+"您的服務已經到期，請前往繳費" = "Service expired. Please subscribe again.";
+"您的資料有誤，請重新輸入，忘記密碼請來電客服洽詢" = "Wrong account/password. Please try again. Contact us if you forgot your password.";
+"帳號或密碼錯誤"="Incorrect account/password. Please try again.";
+"您確定要離開嗎?" = "Are you sure you want to leave?";
+
+"關閉" = "Close";
+"立即登入" = "Sign In";
+"第一次使用" = "Create New Account";
+"忘記密碼" = "Forgot Password?";
+
+"客服電話" = "For customer support, contact: help@fonestock.com";
+"產品提示文字" = "Internet usage costs may apply from your mobile service provider";
+
+"提示收費" = "Subscription Alert";
+"如果需要使用該功能，請前往付費" = "Please subscribe to unlock.";
+"前往付費" = "Subscribe";
+"確定" = "OK";
+"登入成功" = "Logged in";
+"待機設定" = "待機設定";
+"連線設定" = "連線設定";
+"取消" = "Cancel";
+"離開" = "Leave";
+"Index" = "Index";
+"總經" = "Macroeconomics";
+"客服電話new"="contact@fonestock.com";
+"email帳號"="E-mail";
+"密碼"="Password";
+"加入會員"="Create New\nAccount";
+"登入"="Login";
+"本產品提供14天試用期"="This product offers a 14 days trial period";
+"密碼重設"="Reset Password";
+"申裝註冊"="Create New Account";
+"門市據點"="Location";
+"Setup" = "Connection Settings";
+"在其他裝置使用相同帳號會發生的事情"="Repetitive login, Please contact customer service.";
+"Server error, please try again."="Server error, please try again.";
+"系統忙線中" = "Server Busy";
+"登入失敗，請問是否重連" = "Login Error，try again ?";
+"是否重連" = "Try Again ?";
+"確認" = "OK";
+"是" = "YES";
+"否" = "NO";
+"無服務訊息" = "No Service";
+
+//FB分享
+"FB分享成功,謝謝您的分享" = "FB share success, thank you for your sharing";

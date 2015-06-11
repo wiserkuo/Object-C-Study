@@ -1,0 +1,36 @@
+/* 
+  ActionPlanPattern.strings
+  FonestockPower
+
+  Created by Derek on 2014/6/19.
+  Copyright (c) 2014年 Fonestock. All rights reserved.
+*/
+
+//多
+"長紅棒" = "TP-L1";
+"雙錘打樁" = "TP-L2";
+"晨星十字" = "TP-L3";
+"紅三兵" = "TP-L4";
+"雙龍環抱" = "TP-L5";
+"紅K吞噬" = "TP-L6";
+"多方孤島" = "TP-L7";
+"橫盤突破" = "TP-L8";
+"下影探底" = "TP-L9";
+"多方醞釀" = "TP-L10";
+"空頭抵抗" = "TP-L11";
+"紅K脫困" = "TP-L12";
+
+//空
+"長黑棒" = "TP-S1";
+"雙T倒反" = "TP-S2";
+"夜星十字" = "TP-S3";
+"黑三鴉" = "TP-S4";
+"雙龍棄守" = "TP-S5";
+"黑K吞噬" = "TP-S6";
+"空方孤島" = "TP-S7";
+"橫盤下殺" = "TP-S8";
+"上影摸頭" = "TP-S9";
+"空方暫歇" = "TP-S10";
+"多頭抵抗" = "TP-S11";
+"黑K入甕" = "TP-S12";
+
