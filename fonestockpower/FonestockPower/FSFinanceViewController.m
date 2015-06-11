@@ -46,7 +46,7 @@
     UIColor *titleColor;
     UIColor *twoStockTitleColor;
     
-    
+    NSInteger date1,date2;
     NSInteger category;
     NSInteger type;
 }
@@ -169,10 +169,12 @@
     [view1 addSubview:changeCategory1];
 
     changeDate1_1 = [self newAutoLayoutBlueGreenButton];
+    [changeDate1_1 addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     [viewDict setObject:changeDate1_1 forKey:@"changeDate1_1"];
     [view1 addSubview:changeDate1_1];
     
     changeDate1_2 = [self newAutoLayoutBlueGreenButton];
+    [changeDate1_2 addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     [viewDict setObject:changeDate1_2 forKey:@"changeDate1_2"];
     [view1 addSubview:changeDate1_2];
     
@@ -228,10 +230,12 @@
     
     
     changeDate2_1 = [self newAutoLayoutBlueGreenButton];
+    [changeDate2_1 addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     [viewDict setObject:changeDate2_1 forKey:@"changeDate2_1"];
     [view2 addSubview:changeDate2_1];
     
     changeDate2_2 = [self newAutoLayoutBlueGreenButton];
+    [changeDate2_2 addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     [viewDict setObject:changeDate2_2 forKey:@"changeDate2_2"];
     [view2 addSubview:changeDate2_2];
     
@@ -301,10 +305,12 @@
     [view3 addSubview:changeCategory3];
     
     changeDate3_1 = [self newAutoLayoutBlueGreenButton];
+    [changeDate3_1 addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     [viewDict setObject:changeDate3_1 forKey:@"changeDate3_1"];
     [view3 addSubview:changeDate3_1];
     
     changeDate3_2 = [self newAutoLayoutBlueGreenButton];
+    [changeDate3_2 addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     [viewDict setObject:changeDate3_2 forKey:@"changeDate3_2"];
     [view3 addSubview:changeDate3_2];
 
@@ -361,10 +367,12 @@
     [view4 addSubview:title4];
     
     changeDate4_1 = [self newAutoLayoutBlueGreenButton];
+    [changeDate4_1 addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     [viewDict setObject:changeDate4_1 forKey:@"changeDate4_1"];
     [view4 addSubview:changeDate4_1];
     
     changeDate4_2 = [self newAutoLayoutBlueGreenButton];
+    [changeDate4_2 addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     [viewDict setObject:changeDate4_2 forKey:@"changeDate4_2"];
     [view4 addSubview:changeDate4_2];
 
@@ -554,11 +562,14 @@
 }
 -(void)notifyData:(id)title{
     NSLog(@"===========%@\n",title);
-    if([title isEqualToString:@"BalanceSheet1"]||[title isEqualToString:@"BalanceSheet2"]){
+    if([title isEqualToString:@"BalanceSheet1"]){
        // financeModel.model.stockDict;
-        [tableView1 reloadData];
-        
+        [changeDate1_1 setTitle:[financeModel getStockDate:@"stock1" index:date1]  forState:UIControlStateNormal];
     }
+    else if([title isEqualToString:@"BalanceSheet2"]){
+        [changeDate1_1 setTitle:[financeModel getStockDate:@"stock2" index:date2]  forState:UIControlStateNormal];
+    }
+    [tableView1 reloadData];
     // dataModel.financeModel.model.stockDict
 }
 //-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
@@ -602,7 +613,20 @@
     
     [self.navigationController pushViewController:changeStockView animated:NO];
 }
-
+- (void)changeDate:(FSUIButton *)btn {
+    
+    
+    
+    if (btn == changeDate1_1 || btn == changeDate2_1 || btn == changeDate3_1 || btn == changeDate4_1) {
+        
+        printf("1111111111111\n");
+    } else if (btn == changeDate1_2 || btn == changeDate2_2 || btn == changeDate3_2 || btn == changeDate4_2){
+        
+        printf("22222222222222\n");
+    }
+    
+    
+}
 - (void)reloadAllTable {
     [tableView1 reloadData];
     [tableView2 reloadData];

@@ -103,11 +103,7 @@
         
     }
     
-    _bsKeyArray = [[NSMutableArray alloc] init];
-    _isKeyArray = [[NSMutableArray alloc] init];
-    _cfKeyArray = [[NSMutableArray alloc] init];
-    _frKeyArray = [[NSMutableArray alloc] init];
-    [self setKey];
+
     return self;
 }
 - (void)setTargetNotify:(id)obj
@@ -687,7 +683,7 @@
 - (void)searchFinanceDataDateWithReportType:(NSString *)reportType identCodeSymbol:(NSString *)ids {
     FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
     FSDatabaseAgent *dbAgent = dataModel.mainDB;
-    
+    FSInstantInfoWatchedPortfolio *watchPortfolio = [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy/MM"];
     
@@ -696,7 +692,7 @@
     if (!dateDict) {
         dateDict = [[NSMutableDictionary alloc] init];
     }
-    
+
     [dbAgent inDatabase: ^(FMDatabase *db) {
         
         FMResultSet *message = [db executeQuery:@"SELECT DataDate, Symbol, FieldName, Amount, ReportType FROM NewFinanceReport WHERE Symbol = ? AND ReportType = ? ORDER BY DataDate DESC", ids, reportType];
@@ -704,7 +700,7 @@
             
             NSDate *dataDate = [[NSNumber numberWithInt:[message intForColumn:@"DataDate"]] uint16ToDate];
             NSString *dataDateString = [dateFormatter stringFromDate:dataDate];
-            
+            NSLog(@"dataDateString=%@\n",dataDateString);
             NSMutableDictionary *mutiData = [dateDict objectForKey:dataDateString];
             if (!mutiData) {
                 mutiData = [[NSMutableDictionary alloc] init];
@@ -900,14 +896,23 @@
             }
             [dateDict setObject:mutiData forKey:dataDateString];
         }
+        NSSortDescriptor *SortDescriptor=[NSSortDescriptor sortDescriptorWithKey:Nil ascending:NO selector:@selector(compare:)];
+        if([ids isEqualToString:[watchPortfolio.portfolioItem getIdentCodeSymbol]]){
+            _date1Array=[[dateDict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:SortDescriptor]];
+        }
+        else if([ids isEqualToString:[watchPortfolio.comparedPortfolioItem getIdentCodeSymbol]]){
+            _date2Array=[[dateDict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:SortDescriptor]];
+        }
         [_stockDict setObject:dateDict forKey:ids];
     }];
+
+    
     if(notifyObj)
         [notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:_reporType waitUntilDone:NO];
     //[notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:@"BalanceSheet1" waitUntilDone:NO];
 }
 
-
+/*
 -(void)setKey{
     
 //BalanceSheetCN
@@ -963,7 +968,7 @@
         
         
     
-}
+}*/
 @end
 
 

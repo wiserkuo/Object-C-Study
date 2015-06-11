@@ -29,13 +29,11 @@ typedef NS_ENUM(NSUInteger, FSFinanceReportCNCommend) {
 @interface FSFinanceReportCN : NSObject{
     NSObject * notifyObj;
 }
-@property (strong, nonatomic) NSMutableArray * bsKeyArray; //balance sheet的字串key
-@property (strong, nonatomic) NSMutableArray * isKeyArray; //income statement的字串key
-@property (strong, nonatomic) NSMutableArray * cfKeyArray; //cash flow的字串key
-@property (strong, nonatomic) NSMutableArray * frKeyArray; //financial ratio的字串key
+
 
 @property NSMutableDictionary *stockDict;
-
+@property (nonatomic) NSArray *date1Array;
+@property (nonatomic) NSArray *date2Array;
 @property (nonatomic) NSArray *pageList1;
 @property (nonatomic) NSArray *pageList2;
 @property (nonatomic) NSArray *pageList3;

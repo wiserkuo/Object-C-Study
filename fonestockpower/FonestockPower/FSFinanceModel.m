@@ -68,6 +68,14 @@
 - (FSBValueFormat*)getData:(NSString*)stockType date:(NSString*)date ids:(NSString*)ids indexPath:(NSIndexPath *)indexPath{
     return [_model getData:stockType date:date ids:ids indexPath:indexPath];
 }
+- (NSString*)getStockDate:(NSString*)stockType index:(NSInteger)index{
+    
+    if([stockType isEqualToString:@"stock1"]){
+        return [_model.date1Array objectAtIndex:index];
+    }
+    return [_model.date2Array objectAtIndex:index];
+    
+}
 @end
 @implementation FSBalanceSheetCN : NSObject
 - (instancetype)initWithBlankData {
