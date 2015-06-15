@@ -46,7 +46,7 @@
     UIColor *titleColor;
     UIColor *twoStockTitleColor;
     
-    NSInteger date1,date2;
+    
     NSInteger category;
     NSInteger type;
 }
@@ -57,7 +57,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        _a=0;
+
         fonestock = [FSFonestock sharedInstance];
         twoStockMode = fonestock.twoStockMode;
         
@@ -169,12 +169,10 @@
     [view1 addSubview:changeCategory1];
 
     changeDate1_1 = [self newAutoLayoutBlueGreenButton];
-    [changeDate1_1 addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     [viewDict setObject:changeDate1_1 forKey:@"changeDate1_1"];
     [view1 addSubview:changeDate1_1];
     
     changeDate1_2 = [self newAutoLayoutBlueGreenButton];
-    [changeDate1_2 addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     [viewDict setObject:changeDate1_2 forKey:@"changeDate1_2"];
     [view1 addSubview:changeDate1_2];
     
@@ -230,12 +228,10 @@
     
     
     changeDate2_1 = [self newAutoLayoutBlueGreenButton];
-    [changeDate2_1 addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     [viewDict setObject:changeDate2_1 forKey:@"changeDate2_1"];
     [view2 addSubview:changeDate2_1];
     
     changeDate2_2 = [self newAutoLayoutBlueGreenButton];
-    [changeDate2_2 addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     [viewDict setObject:changeDate2_2 forKey:@"changeDate2_2"];
     [view2 addSubview:changeDate2_2];
     
@@ -305,12 +301,10 @@
     [view3 addSubview:changeCategory3];
     
     changeDate3_1 = [self newAutoLayoutBlueGreenButton];
-    [changeDate3_1 addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     [viewDict setObject:changeDate3_1 forKey:@"changeDate3_1"];
     [view3 addSubview:changeDate3_1];
     
     changeDate3_2 = [self newAutoLayoutBlueGreenButton];
-    [changeDate3_2 addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     [viewDict setObject:changeDate3_2 forKey:@"changeDate3_2"];
     [view3 addSubview:changeDate3_2];
 
@@ -367,12 +361,10 @@
     [view4 addSubview:title4];
     
     changeDate4_1 = [self newAutoLayoutBlueGreenButton];
-    [changeDate4_1 addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     [viewDict setObject:changeDate4_1 forKey:@"changeDate4_1"];
     [view4 addSubview:changeDate4_1];
     
     changeDate4_2 = [self newAutoLayoutBlueGreenButton];
-    [changeDate4_2 addTarget:self action:@selector(changeDate:) forControlEvents:UIControlEventTouchUpInside];
     [viewDict setObject:changeDate4_2 forKey:@"changeDate4_2"];
     [view4 addSubview:changeDate4_2];
 
@@ -485,11 +477,7 @@
     [view4 addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[tableTitle4][changeDate4_1(100)][changeDate4_2(100)]|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:viewDict]];
     
 }
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-   // [self discardData];
-    [financeModel setTargetNotify:nil];
-}
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -521,7 +509,6 @@
     } else {
         portfolioName1 = portfolioItem1->fullName;
         portfolioName2 = portfolioItem2->fullName;
-        NSLog(@"PortfolioName1 = %@ portfolioName2=%@\n",portfolioName1,portfolioName2);
     }
     
     [changeStockButton1_1 setTitle:portfolioName1 forState:UIControlStateNormal];
@@ -544,42 +531,25 @@
     [changeCategory3 setTitle:[financeModel.categoryList objectAtIndex:financeModel.category] forState:UIControlStateNormal];
     [changeCategory4 setTitle:[financeModel.categoryList objectAtIndex:financeModel.category] forState:UIControlStateNormal];
     
-    //[self addObserver:self forKeyPath:@"a" options:NSKeyValueObservingOptionNew context:nil];
-    
     [self searchData];
 }
 
-- (void)searchData {
 
-    [financeModel setTargetNotify:self];
-    [financeModel searchAllSheetWithSecurityNumber:watchedPortfolio.portfolioItem->commodityNo dataType:'Q' searchStartDate:[[NSDate date] yearOffset:-3]];
+- (void)searchData {
+    FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
+    
+    [dataModel.financeModel searchAllSheetWithSecurityNumber:watchedPortfolio.portfolioItem->commodityNo dataType:'Q' searchStartDate:[[NSDate date] yearOffset:-3]];
 
     if (twoStockMode) {
-        [financeModel searchAllSheetWithSecurityNumber:watchedPortfolio.comparedPortfolioItem->commodityNo dataType:'Q' searchStartDate:[[NSDate date] yearOffset:-3]];
+        [dataModel.financeModel searchAllSheetWithSecurityNumber:watchedPortfolio.comparedPortfolioItem->commodityNo dataType:'Q' searchStartDate:[[NSDate date] yearOffset:-3]];
     }
-   
     
 }
--(void)notifyData:(id)title{
-    NSLog(@"===========%@\n",title);
-    if([title isEqualToString:@"BalanceSheet1"]){
-       // financeModel.model.stockDict;
-        [changeDate1_1 setTitle:[financeModel getStockDate:@"stock1" index:date1]  forState:UIControlStateNormal];
-    }
-    else if([title isEqualToString:@"BalanceSheet2"]){
-        [changeDate1_1 setTitle:[financeModel getStockDate:@"stock2" index:date2]  forState:UIControlStateNormal];
-    }
-    [tableView1 reloadData];
-    // dataModel.financeModel.model.stockDict
-}
-//-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
-//
-//    printf("rejoqgjreg;legjor;eajo");
-//}
+
 - (void)twoStockBtnClick:(FSUIButton *)btn {
-    //printf("dksaglsiagydulabhvfbfdabffjhidabh%d\n",_a);
+    
     twoStockMode = !btn.selected;
-    //_a++;
+    
     [self buttonStateChange];
 }
 
@@ -613,20 +583,7 @@
     
     [self.navigationController pushViewController:changeStockView animated:NO];
 }
-- (void)changeDate:(FSUIButton *)btn {
-    
-    
-    
-    if (btn == changeDate1_1 || btn == changeDate2_1 || btn == changeDate3_1 || btn == changeDate4_1) {
-        
-        printf("1111111111111\n");
-    } else if (btn == changeDate1_2 || btn == changeDate2_2 || btn == changeDate3_2 || btn == changeDate4_2){
-        
-        printf("22222222222222\n");
-    }
-    
-    
-}
+
 - (void)reloadAllTable {
     [tableView1 reloadData];
     [tableView2 reloadData];
@@ -661,42 +618,19 @@
         cell = [[FSFinanceTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Finance"];
     }
     
-    
-    //stockDict = [[financeModel.model.stockDict objectForKey: [watchedPortfolio.portfolioItem getIdentCodeSymbol]] objectForKey:@"2015/03"] ;
-
-    FSBValueFormat *value;
-    
-    //BalanceSheet
     if (tableView == tableView1) {
-        
-        
         cell.tableTitleLabel.text = [financeModel.pageList1 objectAtIndex:indexPath.row];
-        value = [financeModel.model  getData:@"stock1" date:@"2015/03" ids:@"BalanceSheet" indexPath:indexPath];
-       // [NSString stringWithFormat:@"%.0f",[[group1DataDic objectForKey:rowName] floatValue]/1000000];
-        if(value ==nil)
-            cell.stock1Label.text =@"-";
-        else
-            cell.stock1Label.text=[NSString stringWithFormat:@"%.0f",value.calcValue/100000];
-        value = [financeModel.model  getData:@"stock2" date:@"2015/03" ids:@"BalanceSheet" indexPath:indexPath];
-        if(value ==nil)
-            cell.stock2Label.text =@"-";
-        else
-            cell.stock2Label.text=[NSString stringWithFormat:@"%.0f",value.calcValue/100000];
-    }
-    //IncomeStatement
-    else if (tableView == tableView2) {
+        cell.stock1Label.text = @"1";
+        cell.stock2Label.text = @"2";
+    } else if (tableView == tableView2) {
         cell.tableTitleLabel.text = [financeModel.pageList2 objectAtIndex:indexPath.row];
         cell.stock1Label.text = @"3";
         cell.stock2Label.text = @"4";
-    }
-    //CashFlow
-    else if (tableView == tableView3) {
+    } else if (tableView == tableView3) {
         cell.tableTitleLabel.text = [financeModel.pageList3 objectAtIndex:indexPath.row];
         cell.stock1Label.text = @"5";
         cell.stock2Label.text = @"6";
-    }
-    //FinancialRatio
-    else if (tableView == tableView4) {
+    } else if (tableView == tableView4) {
         cell.tableTitleLabel.text = [financeModel.pageList4 objectAtIndex:indexPath.row];
         cell.stock1Label.text = @"7";
         cell.stock2Label.text = @"8";

@@ -13,7 +13,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        //notifyObj = nil;
+        
         FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
         FSDatabaseAgent *dbAgent = dataModel.mainDB;
         [dbAgent inTransaction:^(FMDatabase *db, BOOL *rollback) {
@@ -99,17 +99,19 @@
         
         _stockDict = [[NSMutableDictionary alloc] init];
         
-
+        _balance1Array = [[NSMutableArray alloc] init];
+        _balance2Array = [[NSMutableArray alloc] init];
+        _income1Array = [[NSMutableArray alloc] init];
+        _income2Array = [[NSMutableArray alloc] init];
+        _cashFlow1Array = [[NSMutableArray alloc] init];
+        _cashFlow2Array = [[NSMutableArray alloc] init];
+        _financialRatio1Array = [[NSMutableArray alloc] init];
+        _financialRatio2Array = [[NSMutableArray alloc] init];
         
     }
-    
-
     return self;
 }
-- (void)setTargetNotify:(id)obj
-{
-    notifyObj = obj;
-}
+
 - (void)searchAllSheetWithSecurityNumber:(UInt32)securityNumber dataType:(char)dataType searchStartDate:(NSDate *)searchDate {
     
     if (securityNumber != 0) {
@@ -119,117 +121,20 @@
         packout.dataType = 'Q';
         [FSDataModelProc sendData:self WithPacket:packout];
         
-//        packout.financeReportCommend = FSFinanceReportCNCommendIncomeStatementSheet;
-//        packout.dataType = 'C';
-//        [FSDataModelProc sendData:self WithPacket:packout];
-//        
-//        packout.financeReportCommend = FSFinanceReportCNCommendCashFlowSheet;
-//        packout.dataType = 'C';
-//        [FSDataModelProc sendData:self WithPacket:packout];
-//        
-//        packout.financeReportCommend = FSFinanceReportCNCommendFinancialRatioSheet;
-//        packout.dataType = 'Q';
-//        [FSDataModelProc sendData:self WithPacket:packout];
+        packout.financeReportCommend = FSFinanceReportCNCommendIncomeStatementSheet;
+        packout.dataType = 'C';
+        [FSDataModelProc sendData:self WithPacket:packout];
+        
+        packout.financeReportCommend = FSFinanceReportCNCommendCashFlowSheet;
+        packout.dataType = 'C';
+        [FSDataModelProc sendData:self WithPacket:packout];
+        
+        packout.financeReportCommend = FSFinanceReportCNCommendFinancialRatioSheet;
+        packout.dataType = 'Q';
+        [FSDataModelProc sendData:self WithPacket:packout];
     }
     
 }
-- (FSBValueFormat*)getData:(NSString*)stockType date:(NSString*)date ids:(NSString*)ids indexPath:(NSIndexPath *)indexPath{
-    FSInstantInfoWatchedPortfolio *watchPortfolio = [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio];
-    FSBValueFormat *value;
-    NSString* identCodeSymbol;
-    if([stockType isEqualToString:@"stock1"]) identCodeSymbol=[watchPortfolio.portfolioItem getIdentCodeSymbol];
-    else if([stockType isEqualToString:@"stock2"]) identCodeSymbol=[watchPortfolio.comparedPortfolioItem getIdentCodeSymbol];
-    if([ids isEqualToString:@"BalanceSheet"]){
-        FSBalanceSheetCN *balanceSheet= [[[_stockDict objectForKey:identCodeSymbol] objectForKey:date] objectForKey:ids];
-        switch(indexPath.row){
-            case 0:
-                value=balanceSheet.current_asset;
-                break;
-            case 1: value=balanceSheet.l_term_invest;
-                break;
-            case 2: value=balanceSheet.fixed_asset;
-                break;
-            case 3: value=balanceSheet.other_asset;
-                break;
-            case 4: value=balanceSheet.total_asset;
-                break;
-            case 5: value=balanceSheet.current_debt;
-                break;
-            case 6: value=balanceSheet.l_term_loan;
-                break;
-            case 7: value=balanceSheet.other_liabilities_n_reserves;
-                break;
-            case 8: value=balanceSheet.total_debt;
-                break;
-            case 9: value=balanceSheet.equity;
-                break;
-            case 10: value=balanceSheet.preferred_stock_equity;
-                break;
-            case 11: value=balanceSheet.retained_earning;
-                break;
-            case 12: value=balanceSheet.undivided_profits;
-                break;
-            case 13: value=balanceSheet.minority_interest;
-                break;
-            case 14: value=balanceSheet.total_equity;
-                break;
-            case 15: value=balanceSheet.liabilities_n_total_equity;
-                break;
-        }
-    }
-    return value;
-}
-
-////BalanceSheetCN
-//[_bsKeyArray addObject:@"current_asset"];
-//[_bsKeyArray addObject:@"l_term_invest"];
-//[_bsKeyArray addObject:@"fixed_asset"];
-//[_bsKeyArray addObject:@"other_asset"];
-//[_bsKeyArray addObject:@"total_asset"];
-//[_bsKeyArray addObject:@"current_debt"];
-//[_bsKeyArray addObject:@"l_term_loan"];
-//[_bsKeyArray addObject:@"other_liabilities_n_reserves"];
-//[_bsKeyArray addObject:@"total_debt"];
-//[_bsKeyArray addObject:@"equity"];
-//[_bsKeyArray addObject:@"preferred_stock_equity"];
-//[_bsKeyArray addObject:@"retained_earning"];
-//[_bsKeyArray addObject:@"undivided_profits"];
-//[_bsKeyArray addObject:@"minority_interest"];
-//[_bsKeyArray addObject:@"total_equity"];
-//[_bsKeyArray addObject:@"liabilities_n_total_equity"];
-//
-////IncomeStetementCN
-//[_isKeyArray addObject:@"net_sales"];
-//[_isKeyArray addObject:@"costs_of_goods_sold"];
-//[_isKeyArray addObject:@"gross_profit"];
-//[_isKeyArray addObject:@"total_expanse"];
-//[_isKeyArray addObject:@"net_op_income"];
-//[_isKeyArray addObject:@"total_non_operating_income"];
-//[_isKeyArray addObject:@"total_non_business_expense"];
-//[_isKeyArray addObject:@"n_income_bt"];
-//[_isKeyArray addObject:@"tax_expanse"];
-//[_isKeyArray addObject:@"net_profit"];
-//[_isKeyArray addObject:@"eps"];
-//
-////CashFlowCN
-//[_cfKeyArray addObject: @"op_cash_flow"];
-//[_cfKeyArray addObject: @"invest_cash_flow"];
-//[_cfKeyArray addObject: @"fm_cash_flow"];
-//
-////FinancialRatioCN
-//[_frKeyArray addObject:@"g_profit_ratio"];
-//[_frKeyArray addObject:@"op_profit_ratio"];
-//[_frKeyArray addObject:@"net_income_ratio"];
-//[_frKeyArray addObject:@"net_value"];
-//[_frKeyArray addObject:@"sale_growth_ratio"];
-//[_frKeyArray addObject:@"current_ratio"];
-//[_frKeyArray addObject:@"quick_ratio"];
-//[_frKeyArray addObject:@"debt2asset"];
-//[_frKeyArray addObject:@"debt2equity"];
-//
-
-
-
 
 
 //資產負債表
@@ -242,14 +147,12 @@
     FSInstantInfoWatchedPortfolio *watchPortfolio = [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio];
     if (watchPortfolio.portfolioItem->commodityNo == data.commodityNum) {
         identCodeSymbol = [watchPortfolio.portfolioItem getIdentCodeSymbol];
-        _reporType = @"BalanceSheet1";
     }else if (watchPortfolio.comparedPortfolioItem->commodityNo == data.commodityNum){
         identCodeSymbol = [watchPortfolio.comparedPortfolioItem getIdentCodeSymbol];
-        _reporType = @"BalanceSheet2";
     }else{
         return;
     }
-
+    
     [dbAgent inTransaction:^(FMDatabase *db, BOOL *rollback) {
         for (FSBalanceSheetCN *balance in data.balanceSheetArray) {
             
@@ -371,11 +274,235 @@
     
     
     [self searchFinanceDataDateWithReportType:@"BalanceSheet" identCodeSymbol:identCodeSymbol];
-
 }
 
 
+- (void)searchFinanceDataDateWithReportType:(NSString *)reportType identCodeSymbol:(NSString *)ids {
+    FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
+    FSDatabaseAgent *dbAgent = dataModel.mainDB;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy/MM"];
+    
+    
+    NSMutableDictionary *dateDict = [_stockDict objectForKey:ids];
+    if (!dateDict) {
+        dateDict = [[NSMutableDictionary alloc] init];
+    }
+    
+    [dbAgent inDatabase: ^(FMDatabase *db) {
+        
+        FMResultSet *message = [db executeQuery:@"SELECT DataDate, Symbol, FieldName, Amount, ReportType FROM NewFinanceReport WHERE Symbol = ? AND ReportType = ? ORDER BY DataDate DESC", ids, reportType];
+        while ([message next]) {
+            
+            NSDate *dataDate = [[NSNumber numberWithInt:[message intForColumn:@"DataDate"]] uint16ToDate];
+            NSString *dataDateString = [dateFormatter stringFromDate:dataDate];
+            
+            NSMutableDictionary *mutiData = [dateDict objectForKey:dataDateString];
+            if (!mutiData) {
+                mutiData = [[NSMutableDictionary alloc] init];
+            }
+            
+            // 資產負債表
+            if ([@"BalanceSheet" isEqualToString:reportType]) {
+                
+                FSBalanceSheetCN *balanceSheet = [mutiData objectForKey:reportType];
+                if (!balanceSheet) {
+                    balanceSheet = [[FSBalanceSheetCN alloc] initWithBlankData];
+                }
+                
+                NSString *fieldName = [message stringForColumn:@"FieldName"];
+                double value = [[message stringForColumn:@"Amount"] doubleValue];
+                
+                if ([@"current_asset" isEqualToString:fieldName]) {
+                    balanceSheet.current_asset.calcValue = value;
+                }
+                else if ([@"l_term_invest" isEqualToString:fieldName]) {
+                    balanceSheet.l_term_invest.calcValue = value;
+                }
+                else if ([@"fixed_asset" isEqualToString:fieldName]) {
+                    balanceSheet.fixed_asset.calcValue = value;
+                }
+                else if ([@"other_asset" isEqualToString:fieldName]) {
+                    balanceSheet.other_asset.calcValue = value;
+                }
+                else if ([@"total_asset" isEqualToString:fieldName]) {
+                    balanceSheet.total_asset.calcValue = value;
+                }
+                else if ([@"current_debt" isEqualToString:fieldName]) {
+                    balanceSheet.current_debt.calcValue = value;
+                }
+                else if ([@"l_term_loan" isEqualToString:fieldName]) {
+                    balanceSheet.l_term_loan.calcValue = value;
+                }
+                else if ([@"other_liabilities_n_reserves" isEqualToString:fieldName]) {
+                    balanceSheet.other_liabilities_n_reserves.calcValue = value;
+                }
+                else if ([@"total_debt" isEqualToString:fieldName]) {
+                    balanceSheet.total_debt.calcValue = value;
+                }
+                else if ([@"equity" isEqualToString:fieldName]) {
+                    balanceSheet.equity.calcValue = value;
+                }
+                else if ([@"preferred_stock_equity" isEqualToString:fieldName]) {
+                    balanceSheet.preferred_stock_equity.calcValue = value;
+                }
+                else if ([@"retained_earning" isEqualToString:fieldName]) {
+                    balanceSheet.retained_earning.calcValue = value;
+                }
+                else if ([@"undivided_profits" isEqualToString:fieldName]) {
+                    balanceSheet.undivided_profits.calcValue = value;
+                }
+                else if ([@"minority_interest" isEqualToString:fieldName]) {
+                    balanceSheet.minority_interest.calcValue = value;
+                }
+                else if ([@"total_equity" isEqualToString:fieldName]) {
+                    balanceSheet.total_equity.calcValue = value;
+                }
+                else if ([@"liabilities_n_total_equity" isEqualToString:fieldName]) {
+                    balanceSheet.liabilities_n_total_equity.calcValue = value;
+                }
+                
+                
+                [mutiData setObject:balanceSheet forKey:reportType];
+                
+            }
+            
+            
+            
+            
+            // 損益表
+            if ([@"IncomeStatement" isEqualToString:reportType]) {
+                
+                FSIncomeStatementCN *incomeStatement = [mutiData objectForKey:reportType];
+                if (!incomeStatement) {
+                    incomeStatement = [[FSIncomeStatementCN alloc] initWithBlankData];
+                }
+                
+                NSString *fieldName = [message stringForColumn:@"FieldName"];
+                double value = [[message stringForColumn:@"Amount"] doubleValue];
 
+                if ([@"net_sales" isEqualToString:fieldName]) {
+                    incomeStatement.net_sales.calcValue = value;
+                }
+                else if ([@"costs_of_goods_sold" isEqualToString:fieldName]) {
+                    incomeStatement.costs_of_goods_sold.calcValue = value;
+                }
+                else if ([@"gross_profit" isEqualToString:fieldName]) {
+                    incomeStatement.gross_profit.calcValue = value;
+                }
+                else if ([@"total_expanse" isEqualToString:fieldName]) {
+                    incomeStatement.total_expanse.calcValue = value;
+                }
+                else if ([@"net_op_income" isEqualToString:fieldName]) {
+                    incomeStatement.net_op_income.calcValue = value;
+                }
+                else if ([@"total_non_operating_income" isEqualToString:fieldName]) {
+                    incomeStatement.total_non_operating_income.calcValue = value;
+                }
+                else if ([@"total_non_business_expense" isEqualToString:fieldName]) {
+                    incomeStatement.total_non_business_expense.calcValue = value;
+                }
+                else if ([@"n_income_bt" isEqualToString:fieldName]) {
+                    incomeStatement.n_income_bt.calcValue = value;
+                }
+                else if ([@"tax_expanse" isEqualToString:fieldName]) {
+                    incomeStatement.tax_expanse.calcValue = value;
+                }
+                else if ([@"net_profit" isEqualToString:fieldName]) {
+                    incomeStatement.net_profit.calcValue = value;
+                }
+                else if ([@"eps" isEqualToString:fieldName]) {
+                    incomeStatement.eps.calcValue = value;
+                }
+                
+                [mutiData setObject:incomeStatement forKey:reportType];
+                
+            }
+            
+            
+            
+            
+            // 現金流量表
+            if ([@"CashFlow" isEqualToString:reportType]) {
+                
+                FSCashFlowCN *incomeStatement = [mutiData objectForKey:reportType];
+                if (!incomeStatement) {
+                    incomeStatement = [[FSCashFlowCN alloc] initWithBlankData];
+                }
+                
+                NSString *fieldName = [message stringForColumn:@"FieldName"];
+                double value = [[message stringForColumn:@"Amount"] doubleValue];
+                
+                if ([@"op_cash_flow" isEqualToString:fieldName]) {
+                    incomeStatement.op_cash_flow.calcValue = value;
+                }
+                else if ([@"invest_cash_flow" isEqualToString:fieldName]) {
+                    incomeStatement.invest_cash_flow.calcValue = value;
+                }
+                else if ([@"fm_cash_flow" isEqualToString:fieldName]) {
+                    incomeStatement.fm_cash_flow.calcValue = value;
+                }
+                
+                [mutiData setObject:incomeStatement forKey:reportType];
+                
+            }
+            
+            
+            // 財務比率
+            if ([@"FinancialRatio" isEqualToString:reportType]) {
+                
+                FSFinancialRatioCN *financialRatio = [mutiData objectForKey:reportType];
+                if (!financialRatio) {
+                    financialRatio = [[FSFinancialRatioCN alloc] initWithBlankData];
+                }
+                
+                NSString *fieldName = [message stringForColumn:@"FieldName"];
+                double value = [[message stringForColumn:@"Amount"] doubleValue];
+                
+                if ([@"g_profit_ratio" isEqualToString:fieldName]) {
+                    financialRatio.g_profit_ratio.calcValue = value;
+                }
+                else if ([@"op_profit_ratio" isEqualToString:fieldName]) {
+                    financialRatio.op_profit_ratio.calcValue = value;
+                }
+                else if ([@"net_income_ratio" isEqualToString:fieldName]) {
+                    financialRatio.net_income_ratio.calcValue = value;
+                }
+                else if ([@"net_value" isEqualToString:fieldName]) {
+                    financialRatio.net_value.calcValue = value;
+                }
+                else if ([@"sale_growth_ratio" isEqualToString:fieldName]) {
+                    financialRatio.sale_growth_ratio.calcValue = value;
+                }
+                else if ([@"current_ratio" isEqualToString:fieldName]) {
+                    financialRatio.current_ratio.calcValue = value;
+                }
+                else if ([@"quick_ratio" isEqualToString:fieldName]) {
+                    financialRatio.quick_ratio.calcValue = value;
+                }
+                else if ([@"debt2asset" isEqualToString:fieldName]) {
+                    financialRatio.debt2asset.calcValue = value;
+                }
+                else if ([@"debt2equity" isEqualToString:fieldName]) {
+                    financialRatio.debt2equity.calcValue = value;
+                }
+                
+                [mutiData setObject:financialRatio forKey:reportType];
+                
+            }
+            
+            
+            
+            [dateDict setObject:mutiData forKey:dataDateString];
+            
+            
+        }
+        
+        [_stockDict setObject:dateDict forKey:ids];
+        
+    }];
+}
 
 //- (NSMutableDictionary *)searchFinanceDataDateWithReportType:(NSString *)reportType identCodeSymbol:(NSString *)ids {
 //    NSMutableDictionary *dataDict = [[NSMutableDictionary alloc] init];
@@ -404,10 +531,8 @@
     FSInstantInfoWatchedPortfolio *watchPortfolio = [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio];
     if (watchPortfolio.portfolioItem->commodityNo == data.commodityNum) {
         identCodeSymbol = [watchPortfolio.portfolioItem getIdentCodeSymbol];
-        _reporType = @"IncomeStatement1";
     }else if (watchPortfolio.comparedPortfolioItem->commodityNo == data.commodityNum){
         identCodeSymbol = [watchPortfolio.comparedPortfolioItem getIdentCodeSymbol];
-        _reporType = @"IncomeStatement2";
     }else{
         return;
     }
@@ -521,10 +646,8 @@
     FSInstantInfoWatchedPortfolio *watchPortfolio = [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio];
     if (watchPortfolio.portfolioItem->commodityNo == data.commodityNum) {
         identCodeSymbol = [watchPortfolio.portfolioItem getIdentCodeSymbol];
-        _reporType = @"CashFlow1";
     } else if (watchPortfolio.comparedPortfolioItem->commodityNo == data.commodityNum){
         identCodeSymbol = [watchPortfolio.comparedPortfolioItem getIdentCodeSymbol];
-        _reporType = @"CashFlow2";
     } else {
         return;
     }
@@ -582,10 +705,8 @@
     FSInstantInfoWatchedPortfolio *watchPortfolio = [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio];
     if (watchPortfolio.portfolioItem->commodityNo == data.commodityNum) {
         identCodeSymbol = [watchPortfolio.portfolioItem getIdentCodeSymbol];
-        _reporType = @"FinancialRatio1";
     }else if (watchPortfolio.comparedPortfolioItem->commodityNo == data.commodityNum){
         identCodeSymbol = [watchPortfolio.comparedPortfolioItem getIdentCodeSymbol];
-        _reporType = @"FinancialRatio2";
     }else{
         return;
     }
@@ -677,298 +798,6 @@
 //    }
 }
 
-
-
-
-- (void)searchFinanceDataDateWithReportType:(NSString *)reportType identCodeSymbol:(NSString *)ids {
-    FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
-    FSDatabaseAgent *dbAgent = dataModel.mainDB;
-    FSInstantInfoWatchedPortfolio *watchPortfolio = [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy/MM"];
-    
-    
-    NSMutableDictionary *dateDict = [_stockDict objectForKey:ids];
-    if (!dateDict) {
-        dateDict = [[NSMutableDictionary alloc] init];
-    }
-
-    [dbAgent inDatabase: ^(FMDatabase *db) {
-        
-        FMResultSet *message = [db executeQuery:@"SELECT DataDate, Symbol, FieldName, Amount, ReportType FROM NewFinanceReport WHERE Symbol = ? AND ReportType = ? ORDER BY DataDate DESC", ids, reportType];
-        while ([message next]) {
-            
-            NSDate *dataDate = [[NSNumber numberWithInt:[message intForColumn:@"DataDate"]] uint16ToDate];
-            NSString *dataDateString = [dateFormatter stringFromDate:dataDate];
-            NSLog(@"dataDateString=%@\n",dataDateString);
-            NSMutableDictionary *mutiData = [dateDict objectForKey:dataDateString];
-            if (!mutiData) {
-                mutiData = [[NSMutableDictionary alloc] init];
-            }
-            
-            // 資產負債表
-            if ([@"BalanceSheet" isEqualToString:reportType]) {
-                
-                FSBalanceSheetCN *balanceSheet = [mutiData objectForKey:reportType];
-                if (!balanceSheet) {
-                    balanceSheet = [[FSBalanceSheetCN alloc] initWithBlankData];
-                }
-                
-                NSString *fieldName = [message stringForColumn:@"FieldName"];
-                double value = [[message stringForColumn:@"Amount"] doubleValue];
-                
-                if ([@"current_asset" isEqualToString:fieldName]) {
-                    balanceSheet.current_asset.calcValue = value;
-                }
-                else if ([@"l_term_invest" isEqualToString:fieldName]) {
-                    balanceSheet.l_term_invest.calcValue = value;
-                }
-                else if ([@"fixed_asset" isEqualToString:fieldName]) {
-                    balanceSheet.fixed_asset.calcValue = value;
-                }
-                else if ([@"other_asset" isEqualToString:fieldName]) {
-                    balanceSheet.other_asset.calcValue = value;
-                }
-                else if ([@"total_asset" isEqualToString:fieldName]) {
-                    balanceSheet.total_asset.calcValue = value;
-                }
-                else if ([@"current_debt" isEqualToString:fieldName]) {
-                    balanceSheet.current_debt.calcValue = value;
-                }
-                else if ([@"l_term_loan" isEqualToString:fieldName]) {
-                    balanceSheet.l_term_loan.calcValue = value;
-                }
-                else if ([@"other_liabilities_n_reserves" isEqualToString:fieldName]) {
-                    balanceSheet.other_liabilities_n_reserves.calcValue = value;
-                }
-                else if ([@"total_debt" isEqualToString:fieldName]) {
-                    balanceSheet.total_debt.calcValue = value;
-                }
-                else if ([@"equity" isEqualToString:fieldName]) {
-                    balanceSheet.equity.calcValue = value;
-                }
-                else if ([@"preferred_stock_equity" isEqualToString:fieldName]) {
-                    balanceSheet.preferred_stock_equity.calcValue = value;
-                }
-                else if ([@"retained_earning" isEqualToString:fieldName]) {
-                    balanceSheet.retained_earning.calcValue = value;
-                }
-                else if ([@"undivided_profits" isEqualToString:fieldName]) {
-                    balanceSheet.undivided_profits.calcValue = value;
-                }
-                else if ([@"minority_interest" isEqualToString:fieldName]) {
-                    balanceSheet.minority_interest.calcValue = value;
-                }
-                else if ([@"total_equity" isEqualToString:fieldName]) {
-                    balanceSheet.total_equity.calcValue = value;
-                }
-                else if ([@"liabilities_n_total_equity" isEqualToString:fieldName]) {
-                    balanceSheet.liabilities_n_total_equity.calcValue = value;
-                }
-                
-                
-                [mutiData setObject:balanceSheet forKey:reportType];
-
-            }
-            
-            
-            
-            
-            // 損益表
-            if ([@"IncomeStatement" isEqualToString:reportType]) {
-                
-                FSIncomeStatementCN *incomeStatement = [mutiData objectForKey:reportType];
-                if (!incomeStatement) {
-                    incomeStatement = [[FSIncomeStatementCN alloc] initWithBlankData];
-                }
-                
-                NSString *fieldName = [message stringForColumn:@"FieldName"];
-                double value = [[message stringForColumn:@"Amount"] doubleValue];
-                
-                if ([@"net_sales" isEqualToString:fieldName]) {
-                    incomeStatement.net_sales.calcValue = value;
-                }
-                else if ([@"costs_of_goods_sold" isEqualToString:fieldName]) {
-                    incomeStatement.costs_of_goods_sold.calcValue = value;
-                }
-                else if ([@"gross_profit" isEqualToString:fieldName]) {
-                    incomeStatement.gross_profit.calcValue = value;
-                }
-                else if ([@"total_expanse" isEqualToString:fieldName]) {
-                    incomeStatement.total_expanse.calcValue = value;
-                }
-                else if ([@"net_op_income" isEqualToString:fieldName]) {
-                    incomeStatement.net_op_income.calcValue = value;
-                }
-                else if ([@"total_non_operating_income" isEqualToString:fieldName]) {
-                    incomeStatement.total_non_operating_income.calcValue = value;
-                }
-                else if ([@"total_non_business_expense" isEqualToString:fieldName]) {
-                    incomeStatement.total_non_business_expense.calcValue = value;
-                }
-                else if ([@"n_income_bt" isEqualToString:fieldName]) {
-                    incomeStatement.n_income_bt.calcValue = value;
-                }
-                else if ([@"tax_expanse" isEqualToString:fieldName]) {
-                    incomeStatement.tax_expanse.calcValue = value;
-                }
-                else if ([@"net_profit" isEqualToString:fieldName]) {
-                    incomeStatement.net_profit.calcValue = value;
-                }
-                else if ([@"eps" isEqualToString:fieldName]) {
-                    incomeStatement.eps.calcValue = value;
-                }
-                
-                [mutiData setObject:incomeStatement forKey:reportType];
-                
-            }
-            
-            
-            
-            
-            // 現金流量表
-            if ([@"CashFlow" isEqualToString:reportType]) {
-                
-                FSCashFlowCN *incomeStatement = [mutiData objectForKey:reportType];
-                if (!incomeStatement) {
-                    incomeStatement = [[FSCashFlowCN alloc] initWithBlankData];
-                }
-                
-                NSString *fieldName = [message stringForColumn:@"FieldName"];
-                double value = [[message stringForColumn:@"Amount"] doubleValue];
-                
-                if ([@"op_cash_flow" isEqualToString:fieldName]) {
-                    incomeStatement.op_cash_flow.calcValue = value;
-                }
-                else if ([@"invest_cash_flow" isEqualToString:fieldName]) {
-                    incomeStatement.invest_cash_flow.calcValue = value;
-                }
-                else if ([@"fm_cash_flow" isEqualToString:fieldName]) {
-                    incomeStatement.fm_cash_flow.calcValue = value;
-                }
-                
-                [mutiData setObject:incomeStatement forKey:reportType];
-                
-            }
-            
-            
-            // 財務比率
-            if ([@"FinancialRatio" isEqualToString:reportType]) {
-                
-                FSFinancialRatioCN *financialRatio = [mutiData objectForKey:reportType];
-                if (!financialRatio) {
-                    financialRatio = [[FSFinancialRatioCN alloc] initWithBlankData];
-                }
-                
-                NSString *fieldName = [message stringForColumn:@"FieldName"];
-                double value = [[message stringForColumn:@"Amount"] doubleValue];
-                
-                if ([@"g_profit_ratio" isEqualToString:fieldName]) {
-                    financialRatio.g_profit_ratio.calcValue = value;
-                }
-                else if ([@"op_profit_ratio" isEqualToString:fieldName]) {
-                    financialRatio.op_profit_ratio.calcValue = value;
-                }
-                else if ([@"net_income_ratio" isEqualToString:fieldName]) {
-                    financialRatio.net_income_ratio.calcValue = value;
-                }
-                else if ([@"net_value" isEqualToString:fieldName]) {
-                    financialRatio.net_value.calcValue = value;
-                }
-                else if ([@"sale_growth_ratio" isEqualToString:fieldName]) {
-                    financialRatio.sale_growth_ratio.calcValue = value;
-                }
-                else if ([@"current_ratio" isEqualToString:fieldName]) {
-                    financialRatio.current_ratio.calcValue = value;
-                }
-                else if ([@"quick_ratio" isEqualToString:fieldName]) {
-                    financialRatio.quick_ratio.calcValue = value;
-                }
-                else if ([@"debt2asset" isEqualToString:fieldName]) {
-                    financialRatio.debt2asset.calcValue = value;
-                }
-                else if ([@"debt2equity" isEqualToString:fieldName]) {
-                    financialRatio.debt2equity.calcValue = value;
-                }
-                
-                [mutiData setObject:financialRatio forKey:reportType];
-                
-            }
-            [dateDict setObject:mutiData forKey:dataDateString];
-        }
-        NSSortDescriptor *SortDescriptor=[NSSortDescriptor sortDescriptorWithKey:Nil ascending:NO selector:@selector(compare:)];
-        if([ids isEqualToString:[watchPortfolio.portfolioItem getIdentCodeSymbol]]){
-            _date1Array=[[dateDict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:SortDescriptor]];
-        }
-        else if([ids isEqualToString:[watchPortfolio.comparedPortfolioItem getIdentCodeSymbol]]){
-            _date2Array=[[dateDict allKeys] sortedArrayUsingDescriptors:[NSArray arrayWithObject:SortDescriptor]];
-        }
-        [_stockDict setObject:dateDict forKey:ids];
-    }];
-
-    
-    if(notifyObj)
-        [notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:_reporType waitUntilDone:NO];
-    //[notifyObj performSelectorOnMainThread:@selector(notifyData:) withObject:@"BalanceSheet1" waitUntilDone:NO];
-}
-
-/*
--(void)setKey{
-    
-//BalanceSheetCN
-    [_bsKeyArray addObject:@"current_asset"];
-    [_bsKeyArray addObject:@"l_term_invest"];
-    [_bsKeyArray addObject:@"fixed_asset"];
-    [_bsKeyArray addObject:@"current_asset"];
-    [_bsKeyArray addObject:@"l_term_invest"];
-    [_bsKeyArray addObject:@"fixed_asset"];
-    [_bsKeyArray addObject:@"other_asset"];
-    [_bsKeyArray addObject:@"total_asset"];
-    [_bsKeyArray addObject:@"current_debt"];
-    [_bsKeyArray addObject:@"l_term_loan"];
-    [_bsKeyArray addObject:@"other_liabilities_n_reserves"];
-    [_bsKeyArray addObject:@"total_debt"];
-    [_bsKeyArray addObject:@"equity"];
-    [_bsKeyArray addObject:@"preferred_stock_equity"];
-    [_bsKeyArray addObject:@"retained_earning"];
-    [_bsKeyArray addObject:@"undivided_profits"];
-    [_bsKeyArray addObject:@"minority_interest"];
-    [_bsKeyArray addObject:@"total_equity"];
-    [_bsKeyArray addObject:@"liabilities_n_total_equity"];
-    
-//IncomeStetementCN
-    [_isKeyArray addObject:@"net_sales"];
-    [_isKeyArray addObject:@"costs_of_goods_sold"];
-    [_isKeyArray addObject:@"gross_profit"];
-    [_isKeyArray addObject:@"total_expanse"];
-    [_isKeyArray addObject:@"net_op_income"];
-    [_isKeyArray addObject:@"total_non_operating_income"];
-    [_isKeyArray addObject:@"total_non_business_expense"];
-    [_isKeyArray addObject:@"n_income_bt"];
-    [_isKeyArray addObject:@"tax_expanse"];
-    [_isKeyArray addObject:@"net_profit"];
-    [_isKeyArray addObject:@"eps"];
-
-//CashFlowCN
-    [_cfKeyArray addObject: @"op_cash_flow"];
-    [_cfKeyArray addObject: @"invest_cash_flow"];
-    [_cfKeyArray addObject: @"fm_cash_flow"];
-        
-//FinancialRatioCN
-    [_frKeyArray addObject:@"g_profit_ratio"];
-    [_frKeyArray addObject:@"op_profit_ratio"];
-    [_frKeyArray addObject:@"net_income_ratio"];
-    [_frKeyArray addObject:@"net_value"];
-    [_frKeyArray addObject:@"sale_growth_ratio"];
-    [_frKeyArray addObject:@"current_ratio"];
-    [_frKeyArray addObject:@"quick_ratio"];
-    [_frKeyArray addObject:@"debt2asset"];
-    [_frKeyArray addObject:@"debt2equity"];
-        
-        
-        
-    
-}*/
 @end
 
 

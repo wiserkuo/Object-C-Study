@@ -14,16 +14,22 @@
     if (self = [super init]) {
         
         _lock = [[NSRecursiveLock alloc] init];
- //depend on version , should switch model
-        //notifyObj = nil;
-        FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
-        _model = dataModel.financeReportCN;
+        
+        _model = [[FSFinanceReportCN alloc] init];
         
         _pageList1 = _model.pageList1;
         _pageList2 = _model.pageList2;
         _pageList3 = _model.pageList3;
         _pageList4 = _model.pageList4;
         
+        _balance1Array = _model.balance1Array;
+        _balance2Array = _model.balance2Array;
+        _income1Array = _model.income1Array;
+        _income2Array = _model.income2Array;
+        _cashFlow1Array = _model.cashFlow1Array;
+        _cashFlow2Array = _model.cashFlow2Array;
+        _financialRatio1Array = _model.financialRatio1Array;
+        _financialRatio2Array = _model.financialRatio2Array;
         
         _categoryList = [[NSArray alloc] initWithObjects:
                         NSLocalizedStringFromTable(@"累計", @"Finance", @"累計"),
@@ -37,8 +43,6 @@
                     nil];
         
     }
-    
-   
     return self;
 }
 
@@ -56,27 +60,25 @@
     
     [_lock unlock];
 }
-- (void)setTargetNotify:(id)obj
-{
-    notifyObj = obj;
-    [_model setTargetNotify:notifyObj];
-}
-- (void)searchAllSheetWithSecurityNumber:(UInt32)securityNumber dataType:(char)dataType searchStartDate:(NSDate *)searchDate {
 
+- (void)searchAllSheetWithSecurityNumber:(UInt32)securityNumber dataType:(char)dataType searchStartDate:(NSDate *)searchDate {
+    
     [_model searchAllSheetWithSecurityNumber:securityNumber dataType:dataType searchStartDate:searchDate];
 }
-- (FSBValueFormat*)getData:(NSString*)stockType date:(NSString*)date ids:(NSString*)ids indexPath:(NSIndexPath *)indexPath{
-    return [_model getData:stockType date:date ids:ids indexPath:indexPath];
-}
-- (NSString*)getStockDate:(NSString*)stockType index:(NSInteger)index{
-    
-    if([stockType isEqualToString:@"stock1"]){
-        return [_model.date1Array objectAtIndex:index];
+
+@end
+
+@implementation FSCashFlowCN : NSObject
+- (instancetype)initWithBlankData {
+    if (self = [super init]) {
+        _op_cash_flow = [[FSBValueFormat alloc] init];
+        _invest_cash_flow = [[FSBValueFormat alloc] init];
+        _fm_cash_flow = [[FSBValueFormat alloc] init];
     }
-    return [_model.date2Array objectAtIndex:index];
-    
+    return self;
 }
 @end
+
 @implementation FSBalanceSheetCN : NSObject
 - (instancetype)initWithBlankData {
     if (self = [super init]) {
@@ -100,19 +102,6 @@
     return self;
 }
 @end
-
-@implementation FSCashFlowCN : NSObject
-- (instancetype)initWithBlankData {
-    if (self = [super init]) {
-        _op_cash_flow = [[FSBValueFormat alloc] init];
-        _invest_cash_flow = [[FSBValueFormat alloc] init];
-        _fm_cash_flow = [[FSBValueFormat alloc] init];
-    }
-    return self;
-}
-@end
-
-
 
 @implementation FSIncomeStatementCN: NSObject
 - (instancetype)initWithBlankData {

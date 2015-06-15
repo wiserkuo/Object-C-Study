@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface FSFinanceViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-@property int a;
+
 @end
 
 

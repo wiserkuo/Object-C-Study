@@ -26,22 +26,25 @@ typedef NS_ENUM(NSUInteger, FSFinanceReportCNCommend) {
 
 
 
-@interface FSFinanceReportCN : NSObject{
-    NSObject * notifyObj;
-}
-
+@interface FSFinanceReportCN : NSObject
 
 @property NSMutableDictionary *stockDict;
-@property (nonatomic) NSArray *date1Array;
-@property (nonatomic) NSArray *date2Array;
+
+@property NSMutableArray *balance1Array;
+@property NSMutableArray *balance2Array;
+@property NSMutableArray *income1Array;
+@property NSMutableArray *income2Array;
+@property NSMutableArray *cashFlow1Array;
+@property NSMutableArray *cashFlow2Array;
+@property NSMutableArray *financialRatio1Array;
+@property NSMutableArray *financialRatio2Array;
+
 @property (nonatomic) NSArray *pageList1;
 @property (nonatomic) NSArray *pageList2;
 @property (nonatomic) NSArray *pageList3;
 @property (nonatomic) NSArray *pageList4;
-- (void)setTargetNotify:(id)obj;
+
 - (void)searchAllSheetWithSecurityNumber:(UInt32)securityNumber dataType:(char)dataType searchStartDate:(NSDate *)searchDate;
-@property (nonatomic) NSString *reporType;
-- (FSBValueFormat*)getData:(NSString*)stockType date:(NSString*)date ids:(NSString*)ids indexPath:(NSIndexPath *)indexPath ;
 
 @end
 
@@ -58,7 +61,6 @@ typedef NS_ENUM(NSUInteger, FSFinanceReportCNCommend) {
 - (instancetype)initWithSecurityNumber:(UInt32)securityNumber dataType:(char)dataType queryType:(FSFinanceReportQueryType)queryType searchStartDate:(UInt16)startDate;
 
 - (instancetype)initWithSecurityNumber:(UInt32)securityNumber dataType:(char)dataType queryType:(FSFinanceReportQueryType)queryType searchStartDate:(UInt16)startDate endDate:(UInt16)endDate;
-
 
 
 @end
