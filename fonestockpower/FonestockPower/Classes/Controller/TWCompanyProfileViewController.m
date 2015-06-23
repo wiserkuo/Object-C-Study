@@ -14,35 +14,12 @@
 
 @implementation TWCompanyProfileViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    self.currentPage = 0;
-    self.pageControl.currentPage = 0;
-    self.scrollView.bounces = NO;
-    [self.pageControl setDefersCurrentPageDisplay: YES] ;
-    [self.pageControl setType: DDPageControlTypeOnFullOffEmpty] ;
-    [self.pageControl setOnColor: [UIColor redColor]];
-    [self.pageControl setOffColor: [UIColor redColor]];
-    [self.pageControl setIndicatorDiameter: 7.0f] ;
-    [self.pageControl setIndicatorSpace: 7.0f] ;
-    [self.view addSubview:self.pageControl];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    if (self.numberOfPages <= 1) {
+        self.pageControl.hidden = YES;
+    }
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView

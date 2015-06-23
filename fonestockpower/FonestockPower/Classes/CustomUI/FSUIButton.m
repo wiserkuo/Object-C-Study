@@ -77,8 +77,14 @@
                 [self setBackgroundImage:stretchableYellowButton forState:UIControlStateHighlighted];
                 [self setBackgroundImage:stretchableYellowButton forState:UIControlStateSelected];
                 [self addTarget:self action:@selector(btnHandler:) forControlEvents:UIControlEventTouchUpInside];
-                self.btnLabel = [[MarqueeLabel alloc]initWithFrame:CGRectMake(0, 0, 300, 30) duration:6.0 andFadeLength:0.0f];
-                self.btnLabel.font = [UIFont boldSystemFontOfSize:17.0];
+                if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionCN) {
+                    self.btnLabel = [[MarqueeLabel alloc]initWithFrame:CGRectMake(0, 0, 90, 30) duration:6.0 andFadeLength:0.0f];
+                    self.btnLabel.textAlignment = NSTextAlignmentCenter;
+                    self.btnLabel.font = [UIFont systemFontOfSize:18.0f];
+                }else{
+                    self.btnLabel = [[MarqueeLabel alloc]initWithFrame:CGRectMake(0, 0, 300, 30) duration:6.0 andFadeLength:0.0f];
+                    self.btnLabel.font = [UIFont boldSystemFontOfSize:17.0];
+                }
                 self.btnLabel.marqueeType = 4;
                 self.btnLabel.continuousMarqueeExtraBuffer = 30.0f;
                 [self.btnLabel setLabelize:YES];

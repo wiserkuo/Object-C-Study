@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SecuritySearchDelegate.h"
 #import "MacroeconomicDrawViewController.h"
-@interface ChangeStockSearchViewController : UIViewController<SecuritySearchDelegate>
+@interface ChangeStockSearchViewController : FSUIViewController<SecuritySearchDelegate>
 
 @property (strong, nonatomic) id <SecuritySearchDelegate> delegate;
 

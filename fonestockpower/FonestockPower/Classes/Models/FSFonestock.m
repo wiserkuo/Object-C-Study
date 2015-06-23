@@ -69,6 +69,7 @@ static FSFonestock *sharedInstance = nil;
     _appStoreURL = [sysParameters objectForKey:@"AppStoreURL"];
     _forgotPasswordURL = [sysParameters objectForKey:@"ForgotPasswordURL"];
     _openProjectURL = [sysParameters objectForKey:@"OpenProjectURL"];
+    _checkSubscriptionURL = [sysParameters objectForKey:@"CheckSubscriptionURL"];
     
     _authorityData = [[Authority alloc] init];
     _authorityData.insession = NO;

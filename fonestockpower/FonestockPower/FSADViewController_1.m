@@ -10,7 +10,6 @@
 #import "FSADResultViewController.h"
 #import "ADSystem.h"
 
-
 @interface FSADViewController_1 (){
     FSShowResultAdObj *AdObj;
     
@@ -42,6 +41,11 @@
 {
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 82)];
     
+    if ([[[UIDevice currentDevice] model] rangeOfString:@"iPad"].location != NSNotFound) {
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    
+
 #if defined(PatternPowerUS) || defined(PatternPowerTW) || defined(PatternPowerCN)
     imageView.image = [UIImage imageNamed:@"背離.jpg"];
     

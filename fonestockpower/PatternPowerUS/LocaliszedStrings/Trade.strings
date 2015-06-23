@@ -6,6 +6,11 @@
   Copyright (c) 2014年 Fonestock. All rights reserved.
 */
 
+"BUY" = "Buy";
+"SELL" = "Sell";
+"SHORT" = "Short";
+"COVER" = "Cover";
+
 "多方選股形勢" = "Long";
 "空方選股形勢" = "Short";
 "金額" = "Estimated Total";
@@ -14,7 +19,7 @@
 "(建議曝險金額控制在資產淨值2%內)" = "(Best to keep risk exposure within 2% of total asset)";
 "交易金額" = "Estimated Total";
 "取消" = "Cancel";
-"請輸入數量" = "Please enter the number of";
+"請輸入數量" = "Please enter the number of shares";
 "請輸入價格" = "Please enter the price";
 "確認" = "OK";
 "張數" = "Quantity";

@@ -14,6 +14,7 @@
 @interface FSPaymentViewController : FSWebViewController {
     NSString *_paymentURL;
     BOOL iapRequestFlag;
+    BOOL firstInFlag;
 }
 
 - (instancetype)initWithPaymentURL:(NSString *)paymentURL;

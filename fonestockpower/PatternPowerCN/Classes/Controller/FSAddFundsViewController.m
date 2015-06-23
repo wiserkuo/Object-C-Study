@@ -12,7 +12,7 @@
 #import "UIViewController+CustomNavigationBar.h"
 #import "UIView+NewComponent.h"
 #import "FSActionPlanDatabase.h"
-#import "SGInfoAlert.h"
+
 @interface FSAddFundsViewController () <UIActionSheetDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) UILabel *dataLabel;
@@ -315,6 +315,14 @@
     }
     [_amountTextField resignFirstResponder];
 
+}
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 @end

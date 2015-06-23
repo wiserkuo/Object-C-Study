@@ -88,11 +88,9 @@
 
 -(void)initView
 {
-//    [self.navigationItem setHidesBackButton:YES];
     
     layoutConstraints = [[NSMutableArray alloc] init];
     
-    [self setToastView];
     [self setArrays];
     
     updateTimeLabel = [[UILabel alloc] init];
@@ -153,14 +151,10 @@
     FSLoginResultType authResultType = [(NSNumber *)[notification object] intValue];
     //判斷接收到的通知是屬於哪一類的，是不是我們要的那一種
     if (authResultType == FSLoginResultTypeServiceServerLoginSuccess) {
-//        [dataModel.divergenceModel performSelector:@selector(reloadProtocolBuffersData) onThread:dataModel.thread withObject:nil waitUntilDone:YES];
         
         [FSHUD showGlobalProgressHUDWithTitle:NSLocalizedStringFromTable(@"資料下載中, 請稍候", @"DivergenceTips", nil) hideAfterDelay:2];
         
         [dataModel.divergenceModel performSelector:@selector(reloadProtocolBuffersData) withObject:nil afterDelay:0.5];
-    }
-    if (authResultType == 123) {
-        [self performSelectorOnMainThread:@selector(showTheLoginToast) withObject:nil waitUntilDone:YES];   
     }
 }
 
@@ -254,21 +248,6 @@
     
     
     [tView reloadData];
-}
-
--(void)setToastView
-{
-    toastView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2 - 50, self.view.frame.size.height - 150, 100, 30)];
-    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-    lbl.text = NSLocalizedStringFromTable(@"登入成功", @"Launcher", nil);
-    lbl.textColor = [UIColor whiteColor];
-    lbl.textAlignment = NSTextAlignmentCenter;
-    [toastView addSubview:lbl];
-    toastView.backgroundColor = [UIColor blackColor];
-    [toastView.layer setMasksToBounds:YES];
-    toastView.layer.cornerRadius = 10;
-    toastView.hidden = YES;
-    [self.view addSubview:toastView];
 }
 
 -(void)setArrays
@@ -401,7 +380,14 @@
         csff = [rtaObj.storeBull objectAtIndex:indexNum];
     }else{
         csff = [rtaObj.storeBear objectAtIndex:indexNum];
-    }    cell.mainLbl.text = csff.symbol->fullName;
+    }
+    
+    if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
+        cell.mainLbl.text = csff.symbol->symbol;
+    } else {
+        cell.mainLbl.text = csff.symbol->fullName;
+    }
+    
     int a = csff.lastPrice;
     int b = csff.refPrice;
     int c = (a - b) * 10000;
@@ -490,31 +476,5 @@
 //    [self wakeTheSGInfoAlert];
     
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(void)showTheLoginToast
-{
-    toastView.hidden = NO;
-    [self performSelector:@selector(closeTheLoginToast) withObject:nil afterDelay:3];
-}
-
--(void)closeTheLoginToast
-{
-    toastView.hidden = YES;
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

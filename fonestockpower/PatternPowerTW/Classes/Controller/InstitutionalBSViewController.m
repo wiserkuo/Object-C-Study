@@ -194,7 +194,7 @@
 }
 
 -(void)categoryBtnClick{
-     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"選擇資料期間" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedStringFromTable(@"選擇類型", @"Equity", nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
     int i;
     for (i = 0;i < [_categoryArray count]; i++) {
         NSString * title = [_categoryArray objectAtIndex:i];

@@ -38,15 +38,6 @@
 
 @implementation ConnectSettingViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -55,10 +46,16 @@
     self.title = NSLocalizedStringFromTable(@"連線設定", @"AccountSetting", nil);
     [self initElement];
     [self initDataModel];
-    [self processLayout];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginAuthCallBackNotification:) name:@"loginAuthStatus" object:nil];
+    
+    [self.view setNeedsUpdateConstraints];
 }
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginAuthCallBackNotification:) name:@"loginAuthStatus" object:nil];
+}
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -71,6 +68,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 -(void)initElement
 {
     versionTitleLabel = [[UILabel alloc]init];
@@ -79,7 +84,7 @@
     [self.view addSubview:versionTitleLabel];
     
     versionLabel = [[UILabel alloc] init];
-    versionLabel.text = [FSFonestock appFullVersion];
+    versionLabel.text = [NSString stringWithFormat:@"V%@", [FSFonestock appFullVersion]];
     versionLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:versionLabel];
     
@@ -163,29 +168,34 @@
         connectSwitch.on = YES;
         accountText.enabled = NO;
         passwordText.enabled = NO;
-        statusLabel.text = NSLocalizedStringFromTable(@"登入", @"AccountSetting", nil);
+        statusLabel.text = NSLocalizedStringFromTable(@"已登入", @"AccountSetting", nil);
     }
 }
 
--(void)processLayout
-{
+- (void)updateViewConstraints {
+    
+    [super updateViewConstraints];
+    
     NSDictionary *viewController = NSDictionaryOfVariableBindings(statusLabel, statusTitleLabel, accountLabel, accountText, passwordLabel, passwordText, connectSwitch, msgButton, bottomLabel, forgetBtn, versionTitleLabel, versionLabel);
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[versionTitleLabel(30)]-20-[statusTitleLabel(==versionTitleLabel)]-20-[accountLabel(==versionTitleLabel)]-20-[passwordLabel(==versionTitleLabel)]" options:0 metrics:nil views:viewController]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[versionLabel(30)]-20-[statusLabel(==versionLabel)]-20-[accountText(==versionLabel)]-20-[passwordText(==versionLabel)]-20-[connectSwitch(==versionLabel)]" options:0 metrics:nil views:viewController]];
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[msgButton][bottomLabel(30)]|" options:0 metrics:nil views:viewController]];
+    NSMutableArray *constraints = [[NSMutableArray alloc] init];
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[versionTitleLabel(100)]-5-[versionLabel(150)]" options:0 metrics:nil views:viewController]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[statusTitleLabel(100)]-5-[statusLabel(150)]" options:0 metrics:nil views:viewController]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[accountLabel(==statusTitleLabel)]-5-[accountText(150)]" options:0 metrics:nil views:viewController]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[passwordLabel(==statusTitleLabel)]-5-[passwordText(150)]" options:0 metrics:nil views:viewController]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-100-[connectSwitch]-100-|" options:0 metrics:nil views:viewController]];
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-50-[forgetBtn]-50-|" options:0 metrics:nil views:viewController]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[statusTitleLabel(30)]-20-[accountLabel(30)]-20-[passwordLabel(30)]-20-[versionTitleLabel(30)]" options:0 metrics:nil views:viewController]];
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[forgetBtn][msgButton(forgetBtn)]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewController]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[forgetBtn(35)]" options:0 metrics:nil views:viewController]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[msgButton(forgetBtn)]" options:0 metrics:nil views:viewController]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomLabel]|" options:0 metrics:nil views:viewController]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[statusLabel(30)]-20-[accountText(30)]-20-[passwordText(30)]-20-[versionLabel(30)]-20-[connectSwitch(30)]" options:0 metrics:nil views:viewController]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[msgButton][bottomLabel(30)]|" options:0 metrics:nil views:viewController]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[versionTitleLabel(100)]-5-[versionLabel(150)]" options:0 metrics:nil views:viewController]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[statusTitleLabel(100)]-5-[statusLabel(150)]" options:0 metrics:nil views:viewController]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[accountLabel(==statusTitleLabel)]-5-[accountText(150)]" options:0 metrics:nil views:viewController]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[passwordLabel(==statusTitleLabel)]-5-[passwordText(150)]" options:0 metrics:nil views:viewController]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-100-[connectSwitch]-100-|" options:0 metrics:nil views:viewController]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[forgetBtn][msgButton(forgetBtn)]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewController]];
+    
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[forgetBtn(35)]" options:0 metrics:nil views:viewController]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[msgButton(forgetBtn)]" options:0 metrics:nil views:viewController]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bottomLabel]|" options:0 metrics:nil views:viewController]];
+    
+    [self replaceCustomizeConstraints:constraints];
 }
 
 -(void)switchHandler:(id)sender
@@ -199,11 +209,12 @@
             statusLabel.text = NSLocalizedStringFromTable(@"未登入", @"AccountSetting", nil);
             [self loginHandler];
         }else{
-            statusLabel.text = NSLocalizedStringFromTable(@"登入", @"AccountSetting", nil);
+            statusLabel.text = NSLocalizedStringFromTable(@"已登入", @"AccountSetting", nil);
         }
     }else{
         //當switch 為非選取狀態時
         [model.mainSocket disconnect];
+        [model.loginService disconnect];
         [self someDelayMethod];
 //        connectSwitch.on = NO;
 //        accountText.enabled = YES;
@@ -212,18 +223,21 @@
     }
 }
 
--(void)loginHandler
-{
-    if([accountText.text isEqualToString:@""] || [passwordText.text isEqualToString:@""]){
-        if(IS_IOS8){
+- (void)loginHandler {
+    
+    if ([accountText.text isEqualToString:@""] || [passwordText.text isEqualToString:@""]) {
+        if (IS_IOS8) {
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromTable(@"請輸入帳號密碼", @"AccountSetting", nil) message:nil preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"確認", @"Launcher", nil) style:UIAlertActionStyleCancel handler:nil]];
+            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"確認", @"AccountSetting", nil) style:UIAlertActionStyleCancel handler:nil]];
             [self presentViewController:alertController animated:YES completion:nil];
-        }else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"請輸入帳號密碼", @"AccountSetting", nil) message:nil delegate:nil cancelButtonTitle:NSLocalizedStringFromTable(@"確認", @"Launcher", nil) otherButtonTitles:nil, nil];
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"請輸入帳號密碼", @"AccountSetting", nil) message:nil delegate:nil cancelButtonTitle:NSLocalizedStringFromTable(@"確認", @"AccountSetting", nil) otherButtonTitles:nil, nil];
             [alert show];
             [self someDelayMethod];
         }
+        
+        [connectSwitch setOn:NO animated:YES];
+        
         return;
     }
     FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
@@ -242,7 +256,7 @@
         statusLabel.text = NSLocalizedStringFromTable(@"未登入", @"AccountSetting", nil);
         [connectSwitch setOn:NO animated:YES];
     }else if (authResultType == FSLoginResultTypeAuthLoginSuccess) {
-        statusLabel.text = NSLocalizedStringFromTable(@"登入", @"AccountSetting", nil);
+        statusLabel.text = NSLocalizedStringFromTable(@"已登入", @"AccountSetting", nil);
         [connectSwitch setOn:YES animated:YES];
     }else if(authResultType == FSLoginResultTypeStopContinuousReLogin){
         FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
@@ -318,22 +332,17 @@
     [formatterLocal setDateFormat:@"yyyy-MM-dd"];
     [formatterLocal setTimeZone:[NSTimeZone systemTimeZone]];
     
-//    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-//    NSDateComponents *components = [gregorianCalendar components:NSDayCalendarUnit
-//                                                        fromDate:[NSDate date]
-//                                                          toDate:loginService.serviceDueDateTimeUTC
-//                                                         options:0];
-    
     NSString *dueDateAlertString;
-    if([NSLocalizedStringFromTable(@"未登入", @"AccountSetting", nil) isEqualToString:statusLabel.text]){
-        dueDateAlertString = NSLocalizedStringFromTable(@"無服務訊息", @"Launcher", nil);
-    }else{
+    if (loginService.serviceDueDateTimeUTC) {
         dueDateAlertString = [NSString stringWithFormat:NSLocalizedStringFromTable(@"您的使用期限至(%@)", @"Launcher", @"您的使用期限至(%@)"),[formatterLocal stringFromDate:loginService.serviceDueDateTimeUTC]];
+    }
+    else {
+        dueDateAlertString = NSLocalizedStringFromTable(@"無服務訊息", @"Launcher", @"無服務訊息");
     }
     
     if(IS_IOS8){
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:dueDateAlertString message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"確認", @"Launcher", nil) style:UIAlertActionStyleCancel handler:nil]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"確認", @"AccountSetting", nil) style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alertController animated:YES completion:nil];
     }else{
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil

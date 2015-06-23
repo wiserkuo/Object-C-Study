@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SecuritySearchDelegate.h"
 
-@interface AmericaEditChooseViewController : UIViewController<SecuritySearchDelegate>
+@interface AmericaEditChooseViewController : FSUIViewController<SecuritySearchDelegate>
 @property (strong, nonatomic) id <SecuritySearchDelegate> delegate;
 @property (strong)NSMutableArray * dataArray;//搜尋出來的股票 symbol name
 @property (strong)NSMutableArray * dataIdArray;//搜尋出來的股票symbol

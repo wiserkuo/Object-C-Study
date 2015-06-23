@@ -172,10 +172,11 @@
     }
     
     else if (message == 8) {
-        if (command == 2) {
+        if (command == 1) {
+            obj = [NSClassFromString(@"FSReferenceIn") alloc];
+        }else if (command == 2) {
             obj = [NSClassFromString(@"FSBAIn") alloc];
-        }
-        else if (command == 3) {
+        }else if (command == 3) {
             obj = [NSClassFromString(@"FSTickIn") alloc];
         }else if (command == 4) {
             obj = [NSClassFromString(@"FSIndexIn") alloc];

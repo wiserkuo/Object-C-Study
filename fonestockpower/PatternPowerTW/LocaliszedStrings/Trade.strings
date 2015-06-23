@@ -6,17 +6,17 @@
   Copyright (c) 2014年 Fonestock. All rights reserved.
 */
 
-"Buy" = "買進";
-"Sell" = "賣出";
-"Short" = "放空";
-"Cover" = "回補";
+"BUY" = "買進";
+"SELL" = "賣出";
+"SHORT" = "放空";
+"COVER" = "回補";
 
 "Trade" = "股票交易";
 "Save" = "儲存";
 "Date" = "日期";
 "Symbol" = "名稱";
 "Action" = "交易";
-"Shares" = "張數";
+"Shares" = "張數(1張=1000股)";
 "Price" = "價格";
 "Amount Payable" = "交易金額";
 "Done" = "確認";

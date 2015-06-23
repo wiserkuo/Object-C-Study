@@ -94,69 +94,70 @@
 #pragma mark -
 #pragma mark self-signed certificate trust
 
-- (BOOL)connection:(NSURLConnection *)connection
-canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
-	return [protectionSpace.authenticationMethod
-			isEqualToString:NSURLAuthenticationMethodServerTrust];
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
+    return YES;
 }
 
 - (void)connection:(NSURLConnection *)connection
 didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
     
-	if ([challenge.protectionSpace.authenticationMethod
-		 isEqualToString:NSURLAuthenticationMethodServerTrust])
-	{
-		// we only trust our own domain
-		if ([challenge.protectionSpace.host isEqualToString:@"points.fonestock.com"])
-		{
-			NSURLCredential *credential =
-            [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
-			[challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
-		}
-
-        if ([challenge.protectionSpace.host isEqualToString:@"usauth.fonestock.com"])
-		{
-			NSURLCredential *credential =
-            [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
-			[challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
-		}
-        
-        if ([challenge.protectionSpace.host isEqualToString:@"cnauth.fonestock.com"])
-		{
-			NSURLCredential *credential =
-            [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
-			[challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
-		}
-        
-        if ([challenge.protectionSpace.host isEqualToString:@"kqauth.fonestock.com"])
-		{
-			NSURLCredential *credential =
-            [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
-			[challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
-		}
-        
-        if ([challenge.protectionSpace.host isEqualToString:@"twauth.fonestock.com"])
-        {
-            NSURLCredential *credential =
-            [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
-            [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
-        }
-        
-        if ([challenge.protectionSpace.host isEqualToString:@"uspush.fonestock.com"])
-        {
-            NSURLCredential *credential =
-            [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
-            [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
-        }
-        else {
-            NSURLCredential *credential =
-            [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
-            [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
-        }
-        
-	}
+//	if ([challenge.protectionSpace.authenticationMethod
+//		 isEqualToString:NSURLAuthenticationMethodServerTrust])
+//	{
+//		// we only trust our own domain
+//		if ([challenge.protectionSpace.host isEqualToString:@"points.fonestock.com"])
+//		{
+//			NSURLCredential *credential =
+//            [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+//			[challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
+//		}
+//
+//        if ([challenge.protectionSpace.host isEqualToString:@"usauth.fonestock.com"])
+//		{
+//			NSURLCredential *credential =
+//            [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+//			[challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
+//		}
+//        
+//        if ([challenge.protectionSpace.host isEqualToString:@"cnauth.fonestock.com"])
+//		{
+//			NSURLCredential *credential =
+//            [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+//			[challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
+//		}
+//        
+//        if ([challenge.protectionSpace.host isEqualToString:@"kqauth.fonestock.com"])
+//		{
+//			NSURLCredential *credential =
+//            [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+//			[challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
+//		}
+//        
+//        if ([challenge.protectionSpace.host isEqualToString:@"twauth.fonestock.com"])
+//        {
+//            NSURLCredential *credential =
+//            [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+//            [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
+//        }
+//        
+//        if ([challenge.protectionSpace.host isEqualToString:@"uspush.fonestock.com"])
+//        {
+//            NSURLCredential *credential =
+//            [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+//            [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
+//        }
+//        else {
+//            NSURLCredential *credential =
+//            [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+//            [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
+//        }
+//        
+//	}
     
-	[challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+    
+    NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
+    [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
+    
 }
 
 @end

@@ -264,8 +264,12 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifierDataSour
 
 - (void) notifyDataArrive:(NSObject <TickDataSourceProtocol> *)dataSource {
     [dataLock lock];
+    
     if ([[_portfolioItem getIdentCodeSymbol] isEqualToString:[_comparedPortfolioItem getIdentCodeSymbol]]) {
         self.dataSource = dataSource;
+        
+        [_dataSource lock];
+        
         self.comparedDataSource = dataSource;
     
         if (dataSource.progress > 0.99 ) {
@@ -329,10 +333,13 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifierDataSour
             [self configureComparedYRange];
             
         }
+        
+        [_dataSource unlock];
 
     }else{
         if ([[dataSource getIdenCodeSymbol] isEqualToString:[_portfolioItem getIdentCodeSymbol]]) {
             self.dataSource = dataSource;
+            [_dataSource lock];
             
             if (dataSource.progress > 0.99 ) {
                 
@@ -379,9 +386,13 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifierDataSour
                 [self configureComparedYRange];
                 
             }
+            
+            [_dataSource unlock];
         }
         else if ([[dataSource getIdenCodeSymbol] isEqualToString:[_comparedPortfolioItem getIdentCodeSymbol]]) {
             self.comparedDataSource = dataSource;
+            
+            [_comparedDataSource lock];
             
             if(dataSource.progress > 0.99) {
                 _maxComparedVolume = 0.0f;
@@ -416,17 +427,24 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifierDataSour
                 [self configureYRange];
                 [self configureComparedYRange];
             }
+            
+            [_comparedDataSource unlock];
         }
     }
     
     
 //    [self configureXRange];
     
+    
     [dataLock unlock];
 }
 
 #pragma mark - inner and outer plat
 -(void)countPlatWithSnapshot:(EquitySnapshotDecompressed *)snapShot{
+    
+    [dataLock lock];
+    [_dataSource lock];
+    
     int vol = 0 ,oldVol = 0;
     int inner = 0 ,outer = 0;
     for (NSUInteger tickCounter=1; tickCounter <= _dataSource.tickCount; tickCounter++) {
@@ -454,6 +472,8 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifierDataSour
     snapShot.outerPlat = outer;
     
 
+    [_dataSource unlock];
+    [dataLock unlock];
 }
 
 -(void)countPlatWithBValueSnapshot:(FSSnapshot *)snapShot{
@@ -737,7 +757,11 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifierDataSour
 
 #pragma mark  - data before first tick
 
--(void)prepareDataBeforeFirstTick{
+- (void)prepareDataBeforeFirstTick {
+    
+    [dataLock lock];
+    [_dataSource lock];
+    
     [_beforeFirstTickTimeData removeAllObjects];
     [_beforeFirstTickData removeAllObjects];
     EquityTick *watchedEquity = (EquityTick*)_dataSource;
@@ -790,9 +814,18 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifierDataSour
 #endif
     
     
+    [_dataSource unlock];
+    [dataLock unlock];
+    
 }
 
--(void)prepareComparedDataBeforeFirstTick{
+- (void)prepareComparedDataBeforeFirstTick {
+    
+    [dataLock lock];
+    [_dataSource lock];
+    
+    
+    
     [_comparedBeforeFirstTickTimeData removeAllObjects];
     [_comparedBeforeFirstTickData removeAllObjects];
     EquityTick *watchedEquity = (EquityTick*)_comparedDataSource;
@@ -831,30 +864,46 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifierDataSour
     [_comparedBeforeFirstTickData addObject:[NSNumber numberWithDouble:tick.price]];
 #endif
     
+    [_dataSource unlock];
+    [dataLock unlock];
+    
 }
 
 -(void)prepareAVGDataBeforeFirstTick{
+    
+    [dataLock lock];
+    [_dataSource lock];
+    
     [_AVGBeforeFirstTickTimeData removeAllObjects];
     [_AVGBeforeFirstTickData removeAllObjects];
     EquityTick *watchedEquity = (EquityTick*)_dataSource;
     EquityTickDecompressed * tick = (EquityTickDecompressed *)[_dataSource copyTickAtSequenceNo:1];
     //first Tick time:0,price:參考價
-    if (tick == nil) return;
-    [_AVGBeforeFirstTickTimeData addObject:[NSNumber numberWithInt:0]];
-    [_AVGBeforeFirstTickData addObject:[NSNumber numberWithDouble:watchedEquity.snapshot.referencePrice]];
+    if (tick != nil) {
+        [_AVGBeforeFirstTickTimeData addObject:[NSNumber numberWithInt:0]];
+        [_AVGBeforeFirstTickData addObject:[NSNumber numberWithDouble:watchedEquity.snapshot.referencePrice]];
+        
+        //sec Tick time:first Tick Time, price:參考價
+        [_AVGBeforeFirstTickTimeData addObject:[NSNumber numberWithUnsignedInt:tick.time+1]];
+        [_AVGBeforeFirstTickData addObject:[NSNumber numberWithDouble:watchedEquity.snapshot.referencePrice]];
+        
+        [_AVGBeforeFirstTickTimeData addObject:[NSNumber numberWithUnsignedInt:tick.time+1]];
+        [_AVGBeforeFirstTickData addObject:[_averagePrices objectAtIndex:0]];
+    }
     
-    //sec Tick time:first Tick Time, price:參考價
-    [_AVGBeforeFirstTickTimeData addObject:[NSNumber numberWithUnsignedInt:tick.time+1]];
-    [_AVGBeforeFirstTickData addObject:[NSNumber numberWithDouble:watchedEquity.snapshot.referencePrice]];
     
-    [_AVGBeforeFirstTickTimeData addObject:[NSNumber numberWithUnsignedInt:tick.time+1]];
-    [_AVGBeforeFirstTickData addObject:[_averagePrices objectAtIndex:0]];
+    [_dataSource unlock];
+    [dataLock unlock];
 }
 
 #pragma mark  - AVL
 
 - (void)computeAVL
 {
+    
+    [dataLock lock];
+    [_dataSource lock];
+    
     double totalPrice = 0.0f;
     double totalVolume = 0.0f;
     double oldVol = 0.0f;
@@ -901,6 +950,11 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifierDataSour
 #endif
     
     
+    
+    [_dataSource unlock];
+    [dataLock unlock];
+    
+    
 }
 
 -(double)getRealValue:(double)value Unit:(NSInteger)unit
@@ -914,6 +968,8 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifierDataSour
 -(void)prepareTickBoxByTime{
 
     [dataLock lock];
+    [_dataSource lock];
+    
     UInt16 time = 0;
     NSInteger lastTick = -1;
     [_tickStoreInSameTime removeAllObjects];
@@ -1000,13 +1056,15 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifierDataSour
     }
     
 #endif
-    
+    [_dataSource unlock];
     [dataLock unlock];
 }
 
 -(void)prepareComparedTickBoxByTime{
     
     [dataLock lock];
+    [_dataSource lock];
+    
     UInt16 time = 0;
     NSInteger lastTick = -1;
     [_comparedTickStoreInSameTime removeAllObjects];
@@ -1091,6 +1149,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifierDataSour
         [_comparedTickStoreInSameTime addObject:lastNewTick];
     }
 #endif
+    [_dataSource unlock];
     [dataLock unlock];
     
 }
@@ -1109,6 +1168,8 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifierDataSour
 - (void)computeVolume
 {
     [dataLock lock];
+    [_dataSource lock];
+    
     double oldVol = 0;
     UInt16 time = 0;
     double sameTimeVol = 0;
@@ -1217,6 +1278,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifierDataSour
     
     self.maxMainVolume = maxVolume;
 
+    [_dataSource unlock];
     [dataLock unlock];
 }
 
@@ -1225,6 +1287,8 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifierDataSour
 - (void)computeComparedItemVolume
 {
     [dataLock lock];
+    [_dataSource lock];
+    
     double maxVolume = 0.0f;
     double oldVol = 0;
     UInt16 time = 0;
@@ -1329,6 +1393,8 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifierDataSour
     if(self.delegate && [self.delegate respondsToSelector:@selector(scaleComparedVolumeGraphToFitComparedVolume)]){
         [self.delegate scaleComparedVolumeGraphToFitComparedVolume];
     }
+    
+    [_dataSource unlock];
     [dataLock unlock];
 }
 

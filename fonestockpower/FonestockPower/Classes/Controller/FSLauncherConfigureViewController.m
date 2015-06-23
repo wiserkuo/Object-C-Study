@@ -23,24 +23,11 @@
 
 @implementation FSLauncherConfigureViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     
-    
+    // 神乎服務
     self.title = NSLocalizedStringFromTable(@"Service", @"Launcher", nil);
-    
-    UIColor *backgroundColor = [UIColor colorWithRed:102.0f/255 green:145.0f/255 blue:1.0f/255 alpha:1.0];
-    [self.view setBackgroundColor:backgroundColor];
-//    UIImage *backgroundImage = [UIImage imageNamed:@"LauncherMainBackground"];
-    
-//    UIImageView *backgroudView = [[UIImageView alloc] initWithImage:backgroundImage];
-//    backgroudView.translatesAutoresizingMaskIntoConstraints = NO;
-//    [self.view addSubview:backgroudView];
-    
-    
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[backgroudView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(backgroudView)]];
-//    
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[backgroudView]|" options:NSLayoutFormatAlignAllCenterX metrics:nil views:NSDictionaryOfVariableBindings(backgroudView)]];
+    self.view.backgroundColor = [UIColor colorWithRed:102.0f/255 green:145.0f/255 blue:1.0f/255 alpha:1.0];
     
     [self setupConfigureCollectionView];
     [self setUpImageBackButton];
@@ -50,12 +37,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)setupConfigureCollectionView {
@@ -138,12 +119,8 @@
         {
             FSLoginService *loginService = [[FSDataModelProc sharedInstance] loginService];
             FSFonestock *fonestock = [FSFonestock sharedInstance];
-            
             NSString *paymentFullURL = [NSString stringWithFormat:@"%@?acc_id=%@&app_id=%@&lang=%@&request_iap=1&forapp=1", fonestock.paymentPageURL, loginService.account, fonestock.appId, fonestock.lang];
             
-//            NSString *paymentFullURL = [NSString stringWithFormat:@"https://register.fonestock.com/fs_register/payment_iap_1pg.php?forapp=1&request_iap=1&acc_id=%@&lang=%@", loginService.account, fonestock.lang];
-            
-//            ?forapp=1&request_iap=1&lang=tw&acc_id=帳號
             FSPaymentViewController *paymentWebView = [[FSPaymentViewController alloc] initWithPaymentURL:paymentFullURL];
             
             [self.navigationController pushViewController:paymentWebView animated:NO];
@@ -163,7 +140,6 @@
         }
         case 3:
         {
-//            [self. navigationController pushViewController:[[ alloc] init] animated:NO];
             break;
         }
     }

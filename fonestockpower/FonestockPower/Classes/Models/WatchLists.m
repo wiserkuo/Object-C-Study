@@ -58,8 +58,18 @@
     FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
     FSDatabaseAgent *dbAgent = dataModel.mainDB;
     
+    
+    
     [ dbAgent  inDatabase: ^ ( FMDatabase  * db )   {
-        FMResultSet *message = [db executeQuery:@"SELECT GroupName, GroupID,isCategory FROM groupName order by GroupIndex"];
+        
+        int limit = 5;
+        if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
+            limit = 5;
+        } else {
+            limit = 10;
+        }
+        
+        FMResultSet *message = [db executeQuery:@"SELECT GroupName, GroupID,isCategory FROM groupName order by GroupIndex LIMIT ?", [NSNumber numberWithInt:limit]];
         while ([message next]) {
             WatchGroup *node = [[WatchGroup alloc] init];
             node.groupName = [message stringForColumn:@"GroupName"];

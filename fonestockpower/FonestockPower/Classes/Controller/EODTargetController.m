@@ -23,7 +23,7 @@
 #import "FSHUD.h"
 #import "SearchCriteriaModel.h"
 #import "SearchCriteriaViewController.h"
-#import "SGInfoAlert.h"
+
 #import "ExplanationViewController.h"
 #import "EODTargetIn.h"
 
@@ -134,12 +134,10 @@
 }
 
 
--(void)sendFormulaHandler
-{
-    if(firstFlag){
-        [SGInfoAlert showInfo_EOD:NSLocalizedStringFromTable(@"搜尋結果為最近一次收盤資料.", @"FigureSearch", nil) bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+-(void)sendFormulaHandler {
+    if (firstFlag) {
+        [FSHUD showMsg:NSLocalizedStringFromTable(@"搜尋結果為最近一次收盤資料", @"FigureSearch", nil)];
     }
-
     
     NSString *result = [searchViewController.formula stringByReplacingOccurrencesOfString:@"#RANGE#" withString:@"D0"];
     EODTargetOut *targetout = [[EODTargetOut alloc]initWithSerialNumber:5 PatternCount:24 Equation:result Reserved:0];

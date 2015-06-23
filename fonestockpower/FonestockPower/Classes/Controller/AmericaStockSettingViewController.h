@@ -10,7 +10,7 @@
 #import "SecuritySearchDelegate.h"
 #import "FSTeachPopDelegate.h"
 
-@interface AmericaStockSettingViewController : UIViewController<UITextFieldDelegate,SecuritySearchDelegate,UIScrollViewDelegate,FSTeachPopDelegate,UIActionSheetDelegate>
+@interface AmericaStockSettingViewController : FSUIViewController<UITextFieldDelegate,SecuritySearchDelegate,UIScrollViewDelegate,FSTeachPopDelegate,UIActionSheetDelegate>
 
 
 @end

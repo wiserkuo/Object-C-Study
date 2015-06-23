@@ -228,7 +228,7 @@
 {
     
     
-    if([[[FSFonestock sharedInstance].appId substringToIndex:2] isEqualToString:@"us"]) {
+    if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
         self.title = [NSString stringWithFormat:@"%@", [_symbolDict objectForKey:@"FullName"]];
     } else {
         self.title = [NSString stringWithFormat:@"%@ %@", [_symbolDict objectForKey:@"FullName"], [_symbolDict objectForKey:@"Symbol"]];

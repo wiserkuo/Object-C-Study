@@ -8,5 +8,5 @@
 
 #import <UIKit/UIKit.h>
 #import "CompanyProfilePage5Cell.h"
-@interface CompanyProfilePage5ViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface CompanyProfilePage5ViewController : FSUIViewController<UITableViewDataSource, UITableViewDelegate>
 @end

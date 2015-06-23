@@ -21,23 +21,6 @@
 
 @implementation FSPointsAuthCenter
 
-//- (NSString*)sha1:(NSString*)input {
-//    const char *cstr = [input cStringUsingEncoding:NSUTF8StringEncoding];
-//    NSData *data = [NSData dataWithBytes:cstr length:input.length];
-//    
-//    uint8_t digest[CC_SHA256_DIGEST_LENGTH];
-//    
-//    CC_SHA256(data.bytes, data.length, digest);
-//    
-//    NSMutableString *output = [NSMutableString stringWithCapacity:CC_SHA256_DIGEST_LENGTH * 2];
-//    
-//    for(int i = 0; i < CC_SHA256_DIGEST_LENGTH; i++)
-//        [output appendFormat:@"%02x", digest[i]];
-//    
-//    return output;
-//    
-//}
-
 - (id)initWithAuthURL:(NSURL *)url {
     if (self = [super init]) {
         authURL = url;
@@ -112,53 +95,6 @@
                                             requestString:[tag_auth_token_up XMLString]];
     authTokenConnect.delegate = self;
     [authTokenConnect commit];
-    
-//        DDXMLElement *tag_auth_token_up = [[DDXMLElement alloc] initWithName:@"auth_token_up"];
-//        
-//        DDXMLElement *tag_account = [[DDXMLElement alloc] initWithName:@"account"];
-//        [tag_account setStringValue:account];
-//        
-//        DDXMLElement *tag_account_type = [[DDXMLElement alloc] initWithName:@"account_type"];
-//        [tag_account_type setStringValue:accountType];
-//        
-//        DDXMLElement *tag_dev_id = [[DDXMLElement alloc] initWithName:@"dev_id"];
-//        [tag_dev_id setStringValue:deviceId];
-//        
-//        DDXMLElement *tag_app_id = [[DDXMLElement alloc] initWithName:@"app_id"];
-//        [tag_app_id setStringValue:appId];
-//        
-//        DDXMLElement *tag_factory = [[DDXMLElement alloc] initWithName:@"factory"];
-//        [tag_factory setStringValue:factory];
-//        
-//        DDXMLElement *tag_model = [[DDXMLElement alloc] initWithName:@"model"];
-//        [tag_model setStringValue:model];
-//        
-//        DDXMLElement *tag_os = [[DDXMLElement alloc] initWithName:@"os"];
-//        [tag_os setStringValue:os];
-//        
-//        DDXMLElement *tagVersion = [[DDXMLElement alloc] initWithName:@"version"];
-//        [tagVersion setStringValue:version];
-//        
-//        DDXMLElement *tagBuildNo = [[DDXMLElement alloc] initWithName:@"buildno"];
-//        [tagBuildNo setStringValue:buildNo];
-//        
-//        [tag_auth_token_up addChild:tag_account];
-//        [tag_auth_token_up addChild:tag_account_type];
-//        [tag_auth_token_up addChild:tag_dev_id];
-//        [tag_auth_token_up addChild:tag_app_id];
-//        [tag_auth_token_up addChild:tag_factory];
-//        [tag_auth_token_up addChild:tag_model];
-//        [tag_auth_token_up addChild:tag_os];
-//        [tag_auth_token_up addChild:tagVersion];
-//        [tag_auth_token_up addChild:tagBuildNo];
-//        
-//        FSURLConnectCenter *authTokenConnect = [[FSURLConnectCenter alloc]
-//                                                initURLRequestWithURL:authURL
-//                                                requestString:[tag_auth_token_up XMLString]];
-//        authTokenConnect.delegate = self;
-//        [authTokenConnect commit];
-//#endif
-    
 }
 
 
@@ -249,98 +185,7 @@
             [self.delegate fsAuthDidFailWithData:self];
         }
     }
-/*
-#elif PatternPowerCN
-    DDXMLDocument *xmlDoc = [[DDXMLDocument alloc] initWithData:callBackData options:0 error:nil];
-    
-    // 取得 connect status
-    NSArray *status = [xmlDoc nodesForXPath:@"/auth_token_down/status" error:nil];
-    for (DDXMLElement *element in status) {
-        _connectStatusCode = [[element elementForName:@"code"] stringValue];
-        _connectStatusMessage = [[element elementForName:@"message"] stringValue];
-    }
-    
-    // server define status 200 連線成功
-    if ([_connectStatusCode isEqualToString:@"200"]) {
-        
-        // 取得 server connect address
-        NSArray *serverAddress = [xmlDoc nodesForXPath:@"/auth_token_down/address" error:nil];
-        for (DDXMLElement *element in serverAddress) {
-            
-            NSString *serverType = [[element attributeForName:@"type"] stringValue];
-            if ([@"service" isEqualToString:serverType]) {
-                _serviceServerIP = [[element elementForName:@"IP"] stringValue];
-                _serviceServerPort = [[element elementForName:@"port"] stringValue];
-            } else if ([@"query" isEqualToString:serverType]) {
-                _queryServerIP = [[element elementForName:@"IP"] stringValue];
-                _queryServerPort = [[element elementForName:@"port"] stringValue];
-            }
-        }
-        
-        // 取得 token
-        NSArray *authToken = [xmlDoc nodesForXPath:@"/auth_token_down" error:nil];
-        for (DDXMLElement *element in authToken) {
-            _accessToken = [[element elementForName:@"token"] stringValue];
-            _expiredAccessTokenDateTime = [[element elementForName:@"expired"] stringValue];
-            _systemDateTime = [[element elementForName:@"system_time"] stringValue];
-        }
-        
-        // 取得 appPackageData
-        PackageType *appPackageData = [[PackageType alloc] init];
-        
-        NSArray *packageType = [xmlDoc nodesForXPath:@"/auth_token_down/package" error:nil];
-        for (DDXMLElement *element in packageType) {
-            appPackageData.package_id = [[element elementForName:@"id"] stringValue];
-            appPackageData.package_name = [[element elementForName:@"name"] stringValue];
-            appPackageData.expired = [[element elementForName:@"expired"] stringValue];
-        }
-        
-        NSArray *authorityType = [xmlDoc nodesForXPath:@"/auth_token_down/package/authority" error:nil];
-        for (DDXMLElement *element in authorityType) {
-            
-            NSString *inSessionPermission = [[element elementForName:@"insession"] stringValue];
-            NSString *diyPermission = [[element elementForName:@"diy"] stringValue];
-            NSInteger portfolioQuota = [[[element elementForName:@"max_portfolio"] stringValue] intValue];
-            
-            Authority *authority = [[Authority alloc] init];
-            authority.portfolioQuota = portfolioQuota;
-            
-            // 圖示選股 盤中搜尋權限
-            if ([@"true" isEqualToString:inSessionPermission]) {
-                authority.insession = YES;
-            } if ([@"true" isEqualToString:inSessionPermission]) {
-                authority.insession = NO;
-            }
-            
-            // DIY Pattern 功能權限
-            if ([@"true" isEqualToString:diyPermission]) {
-                authority.diy = YES;
-            } else if ([@"true" isEqualToString:diyPermission]) {
-                authority.diy = NO;
-            }
-            
-            authority.portfolioQuota = portfolioQuota;
-            
-            appPackageData.authority = authority;
-        }
-        
-        _appPackageData = appPackageData;
-        
-        // 回傳server驗證成功訊息
-        if ([self.delegate respondsToSelector:@selector(fsAuthDidFinishWithData:)]) {
-            [self.delegate fsAuthDidFinishWithData:self];
-        }
-        
-    } else {
-        // 回傳server驗證錯誤訊息
-        if ([self.delegate respondsToSelector:@selector(fsAuthDidFailWithData:)]) {
-            [self.delegate fsAuthDidFailWithData:self];
-        }
-    }
-    
-#else
-#endif
-*/
+
 
 }
 

@@ -179,7 +179,7 @@
         contentLabel.text = @"----";
     }
     else {
-        contentLabel.text = [CodingUtil stringWithVolumeByValue2:[value doubleValue]] ;
+        contentLabel.text = [CodingUtil volumeRoundRownWithDouble:[value doubleValue]] ;
     }
     return contentLabel;
 }
@@ -192,26 +192,26 @@
 //InfoPanel裡面的文字
 - (UILabel *)updateContentLabel:(UILabel *) contentLabel value:(NSNumber *) value referencePrice:(NSNumber *) referencePrice sign:(BOOL) sign
 {
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    if ([value doubleValue] >= 1000.00) {
-        [formatter setMaximumFractionDigits:1];
-        [formatter setMinimumFractionDigits:1];
-    }else{
-        [formatter setMaximumFractionDigits:2];
-        [formatter setMinimumFractionDigits:2];
-    }
-
-    if (sign) {
-        [formatter setPositiveFormat:@"+#,##0.00"];
-        [formatter setNegativeFormat:@"-#,##0.00"];
-    }
+//    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+//    if ([value doubleValue] >= 1000.00) {
+//        [formatter setMaximumFractionDigits:1];
+//        [formatter setMinimumFractionDigits:1];
+//    }else{
+//        [formatter setMaximumFractionDigits:2];
+//        [formatter setMinimumFractionDigits:2];
+//    }
+//
+//    if (sign) {
+//        [formatter setPositiveFormat:@"+#,##0.00"];
+//        [formatter setNegativeFormat:@"-#,##0.00"];
+//    }
     
     if ([value isKindOfClass:[NSNull class]] || [value doubleValue] == 0.00) {
         contentLabel.text = @"----";
         contentLabel.textColor = [UIColor blueColor];
-    }
-    else {
-        contentLabel.text = [formatter stringFromNumber:value];
+    }else {
+//        contentLabel.text = [formatter stringFromNumber:value];
+        contentLabel.text = [CodingUtil priceRoundRownWithDouble:[value doubleValue]];
         if (referencePrice != nil) {
 //            if ([value compare:referencePrice] == NSOrderedDescending) {
             if ([value floatValue] > [referencePrice floatValue]) {

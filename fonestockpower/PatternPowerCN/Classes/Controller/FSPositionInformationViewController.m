@@ -161,7 +161,7 @@
         label.text = NSLocalizedStringFromTable(dealStr, @"Trade", nil);
     }
     if (columnIndex == 2) {
-        if ([[[_positionInfoArray objectAtIndex:indexPath.row] objectForKey:@"Deal"] isEqualToString:@"Buy"]|| [[[_positionInfoArray objectAtIndex:indexPath.row] objectForKey:@"Deal"] isEqualToString:@"Short"]) {
+        if ([[[_positionInfoArray objectAtIndex:indexPath.row] objectForKey:@"Deal"] isEqualToString:@"BUY"]|| [[[_positionInfoArray objectAtIndex:indexPath.row] objectForKey:@"Deal"] isEqualToString:@"SHORT"]) {
             label.text = [NSString stringWithFormat:@"+%@", [[_positionInfoArray objectAtIndex:indexPath.row] objectForKey:@"Count"]];
         }else{
             label.text = [NSString stringWithFormat:@"%@", [[_positionInfoArray objectAtIndex:indexPath.row] objectForKey:@"Count"]];
@@ -172,7 +172,7 @@
     }
     if (columnIndex == 4) {
         label.textAlignment = NSTextAlignmentRight;
-        if ([[[_positionInfoArray objectAtIndex:indexPath.row] objectForKey:@"Deal"] isEqualToString:@"Buy"]) {
+        if ([[[_positionInfoArray objectAtIndex:indexPath.row] objectForKey:@"Deal"] isEqualToString:@"BUY"]) {
             label.text = [CodingUtil CoverFloatWithComma:[[[_positionInfoArray objectAtIndex:indexPath.row] objectForKey:@"Amount"] floatValue]*-1 DecimalPoint:0];
             
         }else{

@@ -52,7 +52,14 @@
     
 	NSString *identCodeString = [NSString stringWithUTF8String:&item->identCode[0]];
 	
-	if([identCodeString isEqualToString:@"TW"] || [identCodeString isEqualToString:@"SS"] || [identCodeString isEqualToString:@"SZ"] || [identCodeString isEqualToString:@"GX"] || [identCodeString isEqualToString:@"HK"] ||item->type_id == 10 || (item->type_id == 3 && [identCodeString isEqualToString:@"US"])){
+	if([identCodeString isEqualToString:@"TW"] ||
+       [identCodeString isEqualToString:@"SS"] ||
+       [identCodeString isEqualToString:@"SZ"] ||
+       [identCodeString isEqualToString:@"GX"] ||
+       [identCodeString isEqualToString:@"HK"] ||
+       item->type_id == 10 ||
+       (item->type_id == 3 && [identCodeString isEqualToString:@"US"]) ||
+       (item->type_id == 6 && [identCodeString isEqualToString:@"US"])) {
 		
 		return item->fullName;	// TW, SS, SZ, GX HK, tyie_id=10 .
 	}

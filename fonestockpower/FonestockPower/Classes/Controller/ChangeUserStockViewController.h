@@ -10,7 +10,7 @@
 #import "SecuritySearchDelegate.h"
 #import "MacroeconomicDrawViewController.h"
 
-@interface ChangeUserStockViewController : UIViewController<SecuritySearchDelegate>
+@interface ChangeUserStockViewController : FSUIViewController <SecuritySearchDelegate>
 @property (strong, nonatomic) id <SecuritySearchDelegate> delegate;
 @property (nonatomic, strong) MacroeconomicDrawViewController *macroeconomicViewController;
 - (id)initWithNumber:(int)num;

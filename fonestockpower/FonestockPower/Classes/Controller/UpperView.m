@@ -41,44 +41,44 @@
 
 
 - (void)drawRect:(CGRect)rect {
-    CGRect r = drawAndScrollController.indexScrollView.frame;
-    float x = r.size.width + 1;
+    CGRect drawViewFram = drawAndScrollController.indexScrollView.frame;
+    float drawViewWidth = drawViewFram.size.width + 1;
     int screenWidth;
-    if (UIInterfaceOrientationIsPortrait(drawAndScrollController.interfaceOrientation)){
+    if (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
         screenWidth = drawAndScrollController.view.bounds.size.width;
-        currentStatus = 1;
+//        currentStatus = 1;
     }else{
         screenWidth = drawAndScrollController.view.bounds.size.width *0.91-1;
-        currentStatus = 2;
+//        currentStatus = 2;
     }
     
-    float w = screenWidth - x;
+    float w = screenWidth - drawViewWidth;
     float titleLabelWidth;
     if(IS_IPAD)
-        titleLabelWidth = UIInterfaceOrientationIsPortrait(drawAndScrollController.interfaceOrientation)?45 : 38;//w;//45;
+        titleLabelWidth = (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation))?45 : 38;//w;//45;
     else{
         if(w < 0)
             titleLabelWidth = 45;
         else
             titleLabelWidth = w;
     }
-    float titleLabelOffsetDown = 1;
+    [titleLabel removeFromSuperview];
+    titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    titleLabel.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:140.0f/255.0f blue:204.0f/255.0f alpha:1.0f];
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.font = [UIFont systemFontOfSize:10.0f];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
     
-    if(currentStatus == lastStatus){
-        [titleLabel setFrame:CGRectMake(x - 0.5, titleLabelOffsetDown, titleLabelWidth, 13)];
+    if (!UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
+        [titleLabel setFrame:CGRectMake(drawViewWidth + 0.5, 0, titleLabelWidth - 0.5, 13)];
     }else{
-        [titleLabel removeFromSuperview];
-        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x - 0.5, titleLabelOffsetDown, titleLabelWidth, 13)];
-        titleLabel.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:140.0f/255.0f blue:204.0f/255.0f alpha:1.0f];
-        titleLabel.textColor = [UIColor whiteColor];
-        titleLabel.font = [UIFont systemFontOfSize:10.0f];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        [self addSubview:titleLabel];
+
+        [titleLabel setFrame:CGRectMake(drawViewWidth + 0.5, 0, titleLabelWidth, 13)];
     }
-    lastStatus = currentStatus;
+    
+    [self addSubview:titleLabel];
     
     if (drawAndScrollController.twoLine) {
-        titleLabel.adjustsFontSizeToFitWidth = YES;
         titleLabel.text =NSLocalizedStringFromTable(@"DBL stk", @"Draw", @"");
     }else{
         if (drawAndScrollController.upperViewMainChar == UpperViewCandleChar) {
@@ -95,7 +95,7 @@
     CGContextSetLineDash(context1, 0, length, 1);
 	[[UIColor lightGrayColor] set];
     
-    UIRectFrame(CGRectMake(-1, r.origin.y-1, r.origin.x+r.size.width+2, r.size.height+2));
+    UIRectFrame(CGRectMake(-1, drawViewFram.origin.y-1, drawViewFram.origin.x+drawViewFram.size.width+2, drawViewFram.size.height+2));
     
     CGContextSetLineDash(context1, 0, NULL, 0);
     //畫外框
@@ -125,33 +125,16 @@
         period = @"minuteLine";
     }
     
-    float title1Location;
-    float title2Location;
-    float title2_2Location;
-    float title3Location;
+    float title1Location, title2Location, title2_2Location, title3Location;
+    float value1Location, value1_2Location, value2Location, value2_2Location, value3Location;
+    float BBvalue1, BBvalue2;
     
-    if (self.frame.size.width<=320) {
+    if (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
         title1Location = 3;
-        title2Location = 110;
+        title2Location = 140;
         title2_2Location = 100;
         title3Location = 190;
-    }else{
         
-        title1Location = 3;
-        title2Location = 210;
-        title2_2Location = 140;
-        title3Location = 280;
-        
-    }
-    float value1Location;
-    float value1_2Location;
-    float value2Location;
-    float value2_2Location;
-    float value3Location;
-    float BBvalue1;
-    float BBvalue2;
-    
-    if (self.frame.size.width <=320) {
         value1Location = 50;
         value1_2Location = 35;
         value2Location = 200;
@@ -160,6 +143,11 @@
         BBvalue1 = 150;
         BBvalue2 = 220;
     }else{
+        title1Location = 3;
+        title2Location = 240;
+        title2_2Location = 140;
+        title3Location = 280;
+        
         value1Location = 100;
         value1_2Location = 35;
         value2Location = 340;
@@ -191,6 +179,7 @@
                 attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[UIColor blueColor]};
                 movingAverage1 = [NSString stringWithFormat:@"%0.2f",parmValue1];
             }
+            value1Location=title1Location+50;//bug#10967
             [movingAverage1 drawAtPoint:CGPointMake(value1Location, 2) withAttributes:attributes];
         }
         
@@ -214,6 +203,7 @@
                 attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[UIColor blueColor]};
                 bollinger = [NSString stringWithFormat:@"%0.2f",parmValue2];
             }
+            value2Location=title2Location+50;//bug#10967
             [bollinger drawAtPoint:CGPointMake(value2Location, 2) withAttributes:attributes];
         }
 
@@ -420,6 +410,12 @@
             
             NSString *bollinger;
 			bollinger = [NSString stringWithFormat:@"BB%02d:",parm];
+            if (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
+                title2Location = 100;
+            }else{
+            
+                title2Location = 200;
+            }
             [bollinger drawAtPoint:CGPointMake(title2Location, 2) withAttributes:attributes];
 			
             if(parmValue3 > 0 && parmValue3 != INFINITY){ //十字線定位取值畫value
@@ -465,7 +461,7 @@
 			NSString *sar;
             sar = [NSString stringWithFormat:@"SAR%02d:",parm];
             [sar drawAtPoint:CGPointMake(title1Location, 2) withAttributes:attributes];
-			
+
             if(parmValue1 > 0 && parmValue1 != INFINITY){ //十字線定位取值畫value
                 if(parmValue1>parmValue2){
                     attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceUpColor]};
@@ -477,6 +473,7 @@
                     attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[UIColor blueColor]};
                     sar = [NSString stringWithFormat:@"%0.2f",parmValue1];
                 }
+                value2_2Location = 50;
                 [sar drawAtPoint:CGPointMake(value2_2Location, 2) withAttributes:attributes];
             }
         }
@@ -559,15 +556,15 @@
 }
 
 - (void)refleshPeriodTitleAndIndicatorValue{
-	
-//	parmValue1 = -1;
-//	parmValue2 = -1;
-//	parmValue3 = -1;
-//    parmValue4 = -1;
-//	parmValue5 = -1;
-//	parmValue6 = -1;
+//
+////	parmValue1 = -1;
+////	parmValue2 = -1;
+////	parmValue3 = -1;
+////    parmValue4 = -1;
+////	parmValue5 = -1;
+////	parmValue6 = -1;
 	[self setNeedsDisplay];
-	
+//
 }
 
 - (NSString *)upperViewIndicatorNameWithIndex:(int)index{
@@ -579,10 +576,10 @@
 			name = NSLocalizedStringFromTable(@"Moving Average", @"Draw", @"");
 			break;
 		case 2:
-			name = NSLocalizedStringFromTable(@"Bollinger Bands", @"Draw", @"");
+            name = NSLocalizedStringFromTable(@"SAR", @"Draw", @"");
 			break;
         case 3:
-            name = NSLocalizedStringFromTable(@"SAR", @"Draw", @"");
+            name = NSLocalizedStringFromTable(@"Bollinger Bands", @"Draw", @"");
 			break;
 		default:
 			break;
@@ -611,9 +608,9 @@
     
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    //[self openUpperIndicatorPicker];
-}
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+//    //[self openUpperIndicatorPicker];
+//}
 
 
 #pragma mark PickerList
@@ -627,7 +624,7 @@
     
     cxAlertView = [[CustomIOS7AlertView alloc]init];
     float viewH,viewW;
-    if (UIInterfaceOrientationIsPortrait(drawAndScrollController.interfaceOrientation)){
+    if (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
         viewH = 350;
         viewW = self.frame.size.width-30;
     }else{
@@ -904,10 +901,10 @@
 			drawAndScrollController.upperViewIndicator = UpperViewMAIndicator;			
 			break;
 		case 1:
-			drawAndScrollController.upperViewIndicator = UpperViewBBIndicator;
-			break;
-        case 2:
             drawAndScrollController.upperViewIndicator = UpperViewSARIndicator;
+            break;
+        case 2:
+            drawAndScrollController.upperViewIndicator = UpperViewBBIndicator;
             break;
 		default:
 			break;

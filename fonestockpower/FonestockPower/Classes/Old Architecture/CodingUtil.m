@@ -1632,7 +1632,7 @@
 		//港股
 		if(value<10)
 		{
-			valueString = [NSString stringWithFormat:@"%.3lf",value];
+			valueString = [NSString stringWithFormat:@"%.2lf",value];
 		}
 		else
 		{
@@ -1983,6 +1983,72 @@
 	return valueString;
     
 }
++ (NSString *)stringWithVolumeByValue2NoFloat:(double)value{
+    
+    NSString *valueString;
+    int unit;
+    
+    if(isinf(value))
+        return @"----";
+    if(value == 0)
+    {
+        return [NSString stringWithFormat:@"----"];
+    }
+    else if(fabs(value) > 1000000000000)
+    {
+        unit = 4;
+        value = value / 1000000000000;
+        
+    }
+    else if(fabs(value) > 10000000000)
+    {
+        unit = 3;
+        value = value / 1000000000;
+    }
+    else if(fabs(value) > 10000000)//千萬才用M
+    {
+        unit = 2;
+        value = value / 1000000;
+    }
+    else if(fabs(value) > 100000)
+    {
+        unit = 1;
+        value = value / 1000;
+    }
+    else
+    {
+        unit = 0;
+    }
+    
+    if((value-(int)value)/0.1>=0.5){//四捨五入
+        value+=1;
+    }
+    switch (unit) {
+        case 0:
+            valueString = [NSString stringWithFormat:@"%d", (int)value];//去小數點
+            break;
+        case 1:
+            valueString = [NSString stringWithFormat:@"%d%@", (int)value,@"K"];
+            break;
+        case 2:
+            valueString = [NSString stringWithFormat:@"%d%@", (int)value,@"M"];
+            break;
+        case 3:
+            valueString = [NSString stringWithFormat:@"%d%@", (int)value,@"B"];
+            break;
+        case 4:
+            valueString = [NSString stringWithFormat:@"%d%@", (int)value,@"T"];
+            break;
+        case 5:
+            valueString = [NSString stringWithFormat:@"%d%@", (int)value,@"Q"];
+            break;
+            
+            
+    }
+    
+    return valueString;
+    
+}
 
 + (NSString *)stringWithVolumeByValueNoDecimal:(double)value{
     
@@ -2328,10 +2394,10 @@
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterDecimalStyle;
     
-    if (value < pow(10, 2)) {
-        [formatter setPositiveFormat:@"###,##0.000"];
-    }else if (value < pow(10, 4)){
+    if (value < pow(10, 3)) {
         [formatter setPositiveFormat:@"###,##0.00"];
+    }else if (value < pow(10, 4)){
+        [formatter setPositiveFormat:@"###,##0.0"];
     }else{
         [formatter setPositiveFormat:@"###,###"];
     }
@@ -2361,9 +2427,9 @@
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.numberStyle = NSNumberFormatterDecimalStyle;
     
-    if (value < pow(10, 4)) {
+    if (fabs(value) < pow(10, 4)) {
         [formatter setPositiveFormat:@"###,##0.00"];
-    }else if (value < pow(10, 5)){
+    }else if (fabs(value) < pow(10, 5)){
         [formatter setPositiveFormat:@"###,##0.0"];
     }else{
         [formatter setPositiveFormat:@"###,###"];

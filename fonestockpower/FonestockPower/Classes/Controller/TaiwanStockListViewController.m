@@ -129,7 +129,9 @@
     
     self.promptLabel = [[UILabel alloc]init];
     _promptLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    
     _promptLabel.text = NSLocalizedStringFromTable(@"橘色為已加入自選股", @"SecuritySearch", nil);
+    
     _promptLabel.textColor = [UIColor blueColor];
     _promptLabel.font = [UIFont systemFontOfSize:18.0f];
     [_objDictionary setObject:_promptLabel forKey:@"_promptLabel"];
@@ -148,6 +150,10 @@
     _group2CollectionView.layer.borderColor = [UIColor blackColor].CGColor;
     _group2CollectionView.layer.borderWidth = 1.0f;
     _group2CollectionView.btnArray = _data2Array;
+    if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionCN) {
+        _group2CollectionView.btnFlag = 1;
+    }
+    
     [_objDictionary setObject:_group2CollectionView forKey:@"_group2CollectionView"];
     [self.view addSubview:_group2CollectionView];
     
@@ -230,10 +236,15 @@
         if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionTW) {
             if([_id3Array count]>0){
                 _stringV = @"V:|-2-[_titleScrollView1(44)][_titleScrollView2(44)]-3-[_group1CollectionView][_group3CollectionView(==_group1CollectionView)]-3-[_titleLabel(20)]-3-[_group2CollectionView(==_group1CollectionView)]-2-[_promptLabel(20)]-2-|";
+                if (_changeStock) {
+                    _stringV = @"V:|-2-[_titleScrollView1(44)][_titleScrollView2(44)]-3-[_group1CollectionView][_group3CollectionView(==_group1CollectionView)]-3-[_titleLabel(20)]-3-[_group2CollectionView(==_group1CollectionView)]-2-|";
+                }
                 
             }else{
                 _stringV = @"V:|-2-[_titleScrollView1(44)][_titleScrollView2(44)]-3-[_group1CollectionView]-3-[_titleLabel(20)]-3-[_group2CollectionView(==_group1CollectionView)]-2-[_promptLabel(20)]-2-|";
-                
+                if (_changeStock){
+                    _stringV = @"V:|-2-[_titleScrollView1(44)][_titleScrollView2(44)]-3-[_group1CollectionView]-3-[_titleLabel(20)]-3-[_group2CollectionView(==_group1CollectionView)]-2-|";
+                }
             }
         }
         else if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionCN) {
@@ -262,9 +273,15 @@
             
             if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionTW) {
                 _stringV = @"V:|-2-[_titleScrollView1(44)][_titleScrollView2(44)]-3-[_group1CollectionView]-3-[_titleLabel(20)]-3-[_group2CollectionView(==_group1CollectionView)]-2-[_promptLabel(20)]-2-|";
+                if (_changeStock){
+                    _stringV = @"V:|-2-[_titleScrollView1(44)][_titleScrollView2(44)]-3-[_group1CollectionView]-3-[_titleLabel(20)]-3-[_group2CollectionView(==_group1CollectionView)]-2-|";
+                }
             }
             else if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionCN) {
                 _stringV = @"V:|-2-[_titleScrollView1(44)]-3-[_group1CollectionView(110)]-3-[_titleLabel(20)]-3-[_group2CollectionView]-2-[_promptLabel(20)]-2-|";
+                if(_changeStock){
+                    _stringV = @"V:|-2-[_titleScrollView1(44)]-3-[_group1CollectionView(110)]-3-[_titleLabel(20)]-3-[_group2CollectionView]-2-|";
+                }
             }
             //        SKCustomButton * newDataBtn =  [_group1CollectionView.btnDictionary objectForKey:@"btn0"];
             //        newDataBtn.selected = YES;
@@ -274,9 +291,12 @@
 
             if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionTW) {
                 _stringV = @"V:|-2-[_titleScrollView1(44)][_titleScrollView2(44)]-3-[_titleLabel(20)]-3-[_group2CollectionView][_group1CollectionView(1)]-2-[_promptLabel(20)]-2-|";
+                if(_changeStock){
+                    _stringV = @"V:|-2-[_titleScrollView1(44)][_titleScrollView2(44)]-3-[_titleLabel(20)]-3-[_group2CollectionView][_group1CollectionView(1)]-2-|";
+                }
             }
             else if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionCN) {
-                _stringV = @"V:|-2-[_titleScrollView1(44)]-3-[_titleLabel(20)]-3-[_group2CollectionView][_group1CollectionView(1)]-2-[_promptLabel(20)]-2-|";
+                _stringV = @"V:|-2-[_titleScrollView1(44)]-3-[_titleLabel(20)]-3-[_group2CollectionView][_group1CollectionView(1)]-2-|";
             }
             
 //            _stringV = @"V:|-2-[_titleScrollView1(44)][_titleScrollView2(44)]-3-[_titleLabel(20)]-3-[_group2CollectionView]-2-|";
@@ -321,25 +341,7 @@
     }
 }
 
--(void)notifySqlDataArrive:(NSMutableArray *)array{
-    //選group1
-    _id2Array = [array objectAtIndex:1];
-    _data2Array = [array objectAtIndex:0];
-    _id2IdentCodeArray = [array objectAtIndex:2];
-    _group2CollectionView.btnArray = _data2Array;
-    
-    if(_changeStock){
-        _titleLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"選取股票", @"SecuritySearch", nil)];
-        _group2CollectionView.chooseArray = [[NSMutableArray alloc]init];
-    }else{
-        
-        _group2CollectionView.chooseArray = [self changeBtnColor];
-        _titleLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"選取幾隻股票", @"SecuritySearch", nil),count];
-    }
-//    [self groupReset:_group2CollectionView];
-    [_group2CollectionView reloadData];
-    _group2CollectionView.holdBtn = 99999;
-}
+
 
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -375,7 +377,11 @@
     
     [self groupReset:_group2CollectionView];
     
-    _stringV = @"V:|-2-[_titleScrollView1(44)][_titleScrollView2(44)]-3-[_group1CollectionView]-3-[_titleLabel(20)]-3-[_group2CollectionView(==_group1CollectionView)]-2-|";
+    _stringV = @"V:|-2-[_titleScrollView1(44)][_titleScrollView2(44)]-3-[_group1CollectionView]-3-[_titleLabel(20)]-3-[_group2CollectionView(==_group1CollectionView)]-2-[_promptLabel(20)]-2-|";
+    if(_changeStock){
+        [_promptLabel setHidden:YES];
+        _stringV = @"V:|-2-[_titleScrollView1(44)][_titleScrollView2(44)]-3-[_group1CollectionView]-3-[_titleLabel(20)]-3-[_group2CollectionView(==_group1CollectionView)]-2-|";
+    }
     
 }
 
@@ -398,10 +404,29 @@
         _titleLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"選取幾隻股票", @"SecuritySearch", nil),count];
     }
     _group2CollectionView.holdBtn = 99999;
-    [_group2CollectionView reloadData];
+//    [_group2CollectionView reloadData];
     
 }
 
+-(void)notifySqlDataArrive:(NSMutableArray *)array{
+    //選group1
+    _id2Array = [array objectAtIndex:1];
+    _data2Array = [array objectAtIndex:0];
+    _id2IdentCodeArray = [array objectAtIndex:2];
+    _group2CollectionView.btnArray = _data2Array;
+    
+    if(_changeStock){
+        _titleLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"選取股票", @"SecuritySearch", nil)];
+        _group2CollectionView.chooseArray = [[NSMutableArray alloc]init];
+    }else{
+        
+        _group2CollectionView.chooseArray = [self changeBtnColor];
+        _titleLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(@"選取幾隻股票", @"SecuritySearch", nil),count];
+    }
+    //    [self groupReset:_group2CollectionView];
+    [_group2CollectionView reloadData];
+    _group2CollectionView.holdBtn = 99999;
+}
 -(NSMutableArray *)changeBtnColor{
     count = 0;
     NSMutableArray * array = [[NSMutableArray alloc]init];
@@ -677,7 +702,7 @@
 //                        totalCount+=1;
 //                        count+=1;
                     }else{
-                        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:NSLocalizedStringFromTable(@"警告", @"SecuritySearch", nil) message:NSLocalizedStringFromTable(@"自選股已達上限", @"SecuritySearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確定", @"SecuritySearch", nil) otherButtonTitles:nil];
+                        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:NSLocalizedStringFromTable(@"警告", @"SecuritySearch", nil) message:NSLocalizedStringFromTable(@"自選股已達上限", @"SecuritySearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確認", @"SecuritySearch", nil) otherButtonTitles:nil];
                         [alert show];
                     }
                 }

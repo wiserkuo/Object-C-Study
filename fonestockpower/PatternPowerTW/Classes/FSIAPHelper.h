@@ -33,5 +33,12 @@ typedef void (^CompletionHandler)(BOOL success);
 - (NSString *)productToBase64String:(NSArray *)products;
 
 @property (nonatomic, copy) void (^requestProductsCompletion)(NSArray *products);
+@property (readonly) NSString *subscriptionStatus;
+@property (readonly) BOOL canSubscription;
+@property (readonly) NSString *canSubscriptionDate;
+
+
+- (void)addTransactionObserver;
+- (void)removeTransactionObserver;
 
 @end

@@ -101,12 +101,6 @@
     [lockCategory lock];
 	for (AddSector *add in obj->sectorAdd)
 	{
-        if([add.sectorName  isEqual: @"行业"]||
-           [add.sectorName isEqual:@"地域"]||
-           [add.sectorName isEqual:@"概念"]){
-            NSLog(@"=====================superID=%d,sectorID=%d , sectorName=%@ , order=%d\n",add->superID,add->sectorIDAdd , add.sectorName , add->sectorOrder);
-        
-        }
 		[self AddWithName:add.sectorName catID:add->sectorIDAdd parentID:add->superID isLeaf:add->flag type:add->sectorType Order:add->sectorOrder];
 		if (add->superID == 0)
 			[self AddMarketID:add->sectorIDAdd marketID:add->marketID count:add->marketIDCount];
@@ -301,16 +295,28 @@
     
     NSMutableArray * keyArray = [[NSMutableArray alloc]init];
     NSMutableArray * sectorIdArray = [[NSMutableArray alloc]init];
-    
+    int __block sameCount = 0;
     for (int i=0; i<[idArray count]; i++) {
         [ dbAgent  inDatabase: ^ ( FMDatabase  * db )   {
             
             FMResultSet *message = [db executeQuery:@"SELECT CatName from category where CatID = ?",[idArray objectAtIndex:i]];
             while ([message next]) {
                 NSString * catName = [message stringForColumn:@"CatName"];
-                [keyArray addObject:catName];
-                [sectorIdArray addObject:[dataDic objectForKey:[idArray objectAtIndex:i]]];
+                NSString *dataDicName = [dataDic objectForKey:[idArray objectAtIndex:i]];
+                for (NSString *dataName in sectorIdArray) {
+                    if ([[dataName substringToIndex:2] isEqualToString:[dataDicName substringToIndex:2]]) {
+                        sameCount = 1;
+                        break;
+                    }else{
+                        sameCount = 0;
+                    }
+                }
+                if (sameCount == 0) {
+                    [keyArray addObject:catName];
+                    [sectorIdArray addObject:dataDicName];
+                }
             }
+            [message close];
         }];
 
     }

@@ -16,7 +16,7 @@ typedef enum {
 }trendType;
 
 
-@interface FigureCustomCaseViewController : UIViewController
+@interface FigureCustomCaseViewController : FSUIViewController
 
 - (id)initWithCurrentOption:(enum CurrentOption)current SearchNum:(int)searchNumber;
 @property (nonatomic) BOOL firstTimeFlag;//bug#10581 wiser.kuo

@@ -33,6 +33,7 @@
     #import "UIViewController+ActionSheet.h"
     #import "FSNotificationCenter.h"
     #import "UIViewController+CustomNavigationBar.h"
+    #import "UIActivityViewController+Rotation.h"
 #define FS_REQUEST_TIMEOUT 30
 
 #ifdef DEBUG

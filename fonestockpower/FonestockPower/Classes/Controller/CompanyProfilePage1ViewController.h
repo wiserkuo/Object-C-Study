@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CompanyProfilePage1ViewController : UIViewController
+@interface CompanyProfilePage1ViewController : FSUIViewController
 //@property (strong, nonatomic) PortfolioItem *portfolioItem;
 @end

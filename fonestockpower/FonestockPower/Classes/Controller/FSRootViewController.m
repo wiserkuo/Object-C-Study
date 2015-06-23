@@ -111,7 +111,24 @@
     account = @"ios.pattw@tips.fonestock.com";
     password = @"133958";
     [accountManager setLoginFreeAccount:account password:password];
+    
+    
+    
+#elif PatternPowerUS
+    NSString *account, *password;
+    account = @"ios.us@charttrade.fonestock.com";
+    password = @"378678";
+    [accountManager setLoginFreeAccount:account password:password];
+#elif PatternPowerCN
+    NSString *account, *password;
+    account = @"ios.cn@charttrade.fonestock.com";
+    password = @"666595";
+    [accountManager setLoginFreeAccount:account password:password];
 #else
+    
+    
+    
+    
     [accountManager reloadAccountAndPassword];
 #endif
     
@@ -221,7 +238,6 @@
 {
 #ifdef PatternPowerUS
     // 設定美國國旗
-    countryImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"美國國旗"]];
     logoView.image = [UIImage imageNamed:@"AppLogo"];
 #elif DivergenceTipsUS || PatternTipsUS
     //設定美國國旗
@@ -251,7 +267,6 @@
 
 - (void)setupLogoView {
     int constrantOffset = 0;
-    UIImageView *countryImg;
     logoView = [[UIImageView alloc] init];
     logoView.translatesAutoresizingMaskIntoConstraints = NO;
     [mainView addSubview:logoView];
@@ -290,9 +305,6 @@
             break;
     }
 
-    countryImg.frame = CGRectMake(0, 20, 270 * 0.5, 186 * 0.5);
-    [self.view addSubview:countryImg];
-
     NSLog(@"screenBounds %.0f",screenBounds.size.height);
     
     // 垂直
@@ -313,6 +325,13 @@
     
     
 //#endif
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)setupButtonAndLabelView {
@@ -388,6 +407,7 @@
         FSAccountManager *a = [FSAccountManager sharedInstance];
         
         FSLoginViewController *loginViewController = [[FSLoginViewController alloc] initWithAccount:a.account AndPassword:a.password];
+        loginViewController.hasBackButton = YES;
         [self.navigationController pushViewController:loginViewController animated:NO];
     }
 }

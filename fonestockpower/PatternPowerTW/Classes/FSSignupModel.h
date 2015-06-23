@@ -12,6 +12,7 @@
     NSURL *_signupURL;
     NSURL *_resetpwURL;
     NSURL *_openProjectURL;
+    NSURL *_checkSubscriptionURL;
     NSURL *_fbSharedURL;
     NSString *_appId;
     NSString *_uuid;
@@ -22,6 +23,7 @@
                        resetPWURL:(NSString *)resetpwURL
                    openProjectURL:(NSString *)openProjectURL
                       fbSharedURL:(NSString *)fbSharedURL
+             checkSubscriptionURL:(NSString *)checkSubscriptionURL
                             appId:(NSString *)appId
                              uuid:(NSString *)uuid
                              lang:(NSString *)lang;
@@ -29,4 +31,5 @@
 - (NSURLRequest *)forgetPWRequest;
 - (NSURLRequest *)openProjectWithAccount:(NSString *)account;
 - (NSURLRequest *)fbSharedRequestWithAccount:(NSString *)account;
+- (NSURLRequest *)checkSubscriptionStatus:(NSString *)account;
 @end

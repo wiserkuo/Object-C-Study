@@ -310,7 +310,12 @@
         CGRect rectangle = CGRectMake(reserveLeftWidth + histogramGapWidth + histogramGapWidth * i + histogramWidth * i, rect.size.height - reserveBottomHeight, histogramWidth, -histogramBaseSize);
         CGPathAddRect(path, NULL, rectangle);
         
-        [[FGColor colorWithIndex:i] setFill];
+        if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionTW) {
+            [[FGColor colorWithIndex:month%12] setFill];
+        } else {
+            [[FGColor colorWithIndex:month%4] setFill];
+        }
+        
         
         CGContextAddPath(context, path);
         CGContextDrawPath(context, kCGPathFillStroke);

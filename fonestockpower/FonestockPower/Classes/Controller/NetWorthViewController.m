@@ -70,9 +70,8 @@
     [self initView];
     [self setDefaultSetting];;
     
-    [self.view setNeedsUpdateConstraints];
-
     [[UIDevice currentDevice] setOrientation:UIInterfaceOrientationLandscapeRight];
+    [self.view setNeedsUpdateConstraints];
 }
 
 -(void)setDefaultSetting{
@@ -86,15 +85,24 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[[FSDataModelProc sharedInstance] investedModel]setTargetNotify:nil];
+    [[[FSDataModelProc sharedInstance] investedModel]stopWatch];
+
     [upperView removeLabel];
+    upperView = nil;
+    bottonView = nil;
+    
 
 }
 
+-(void)dealloc{
+
+}
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[[FSDataModelProc sharedInstance] investedModel]setTargetNotify:self];
     [self.view showHUDWithTitle:@""];
 }
+
 -(void)initView{
     threeMonthBtn = [[FSUIButton alloc]initWithButtonType:FSUIButtonTypeNormalRed];
     threeMonthBtn.translatesAutoresizingMaskIntoConstraints = NO;
@@ -340,6 +348,9 @@
 }
 
 -(void)dataCallBack:(FSInvestedModel *)investedModel{
+    [netWorthDataArray removeAllObjects];
+    [upperView.histDataArray removeAllObjects];
+    [bottonView.histDataArray removeAllObjects];
     
     maxTotal = [[[FSDataModelProc sharedInstance] investedModel]maxTotal];
     minTotal = [[[FSDataModelProc sharedInstance] investedModel]minTotal];
@@ -363,7 +374,14 @@
     }
     
     int min;
-    min = minTotal / blockNum;
+    double tempmin = minTotal / blockNum;
+    if (tempmin < 0) {
+        min = -1;
+    }else if (tempmin == 0){
+        min = 1;
+    }else{
+        min = tempmin;
+    }
     minTotal = min * blockNum;
     int maxInt = maxTotal;
     double num = ceil(maxInt / blockNum) ;
@@ -443,10 +461,20 @@
     
     bottonRightLabel1.text = [CodingUtil stringNoDecimalByValue:maxDaily/2.0f Sign:YES];
     bottonRightLabel3.text = [CodingUtil stringNoDecimalByValue:maxDaily/-2.0f Sign:YES];
-    if([bottonRightLabel1.text isEqualToString:@"----"]){
-        bottonRightLabel1.text = @"";
-        bottonRightLabel3.text = @"";
+
+    if ([netWorthDataArray count] == 0) {
+        bottonRightLabel1.text = bottonRightLabel3.text = @"";
+        upperRightLabel1.text = @"";
+        upperRightLabel2.text = @"";
+        upperRightLabel3.text = @"";
+        upperRightLabel4.text = @"";
+        upperRightLabel5.text = @"";
+        upperRightLabel6.text = @"";
     }
+    if (maxDaily == 0) {
+        bottonRightLabel1.text = bottonRightLabel3.text = @"";
+    }
+
 }
 
 - (void)doTouchesWithPoint:(CGPoint)point Date:(NSString *)date Value:(float)value

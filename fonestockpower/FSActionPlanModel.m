@@ -12,6 +12,7 @@
 #import "EODActionModel.h"
 #import "Commodity.h"
 #import "PortfolioOut.h"
+#import "FSInstantInfoWatchedPortfolio.h"
 
 @implementation FSActionPlanModel
 
@@ -62,6 +63,22 @@
         }
     }
     
+    NSString *icSymbol;
+    if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
+        icSymbol = @"US ^DJI";
+    } else if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionCN) {
+        icSymbol = @"SS 000001";
+    } else if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionTW) {
+        icSymbol = @"TW ^tse01";
+    } else {
+        icSymbol = @"TW ^tse01";
+    }
+    
+    FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
+    [dataModel.portfolioData addWatchListItemByIdentSymbolArray:@[icSymbol]];
+    
+    PortfolioItem *comparedPortfolioItem = [[[FSDataModelProc sharedInstance]portfolioData] findItemByIdentCodeSymbol:icSymbol];
+    [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio].comparedPortfolioItem = comparedPortfolioItem;
 }
 
 -(void)addWatchIdentcodeSymbol:(NSString *)ids{

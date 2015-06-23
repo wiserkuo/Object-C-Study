@@ -11,7 +11,7 @@
 #import "FSWatchlistItemProtocol.h"
 #import "TextFieldTableViewDelegate.h"
 
-@interface AmericaEditConditionViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,TextFieldTableViewDelegate>
+@interface AmericaEditConditionViewController : FSUIViewController<UITableViewDelegate,UITableViewDataSource,TextFieldTableViewDelegate>
 @property (strong, nonatomic) id <SecuritySearchDelegate> delegate;
 
 @property (strong) UITableView *mainTableView;

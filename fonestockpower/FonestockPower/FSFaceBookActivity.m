@@ -8,7 +8,7 @@
 
 #import "FSFaceBookActivity.h"
 #import <Social/Social.h>
-#import "SGInfoAlert.h"
+
 
 @implementation FSFaceBookActivity
 
@@ -77,17 +77,17 @@
                                 [[[FSDataModelProc sharedInstance] loginService] loginAuthUsingSelfAccount];
 //                                [SGInfoAlert showInfo:@"FB分享成功,謝謝您的分享,神乎贈送一天圖是力(一天一次)" bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:[[UIApplication sharedApplication] keyWindow]];
                                 
-                                [[[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedStringFromTable(@"FB分享成功,謝謝您的分享,神乎贈送一天圖是力(一天一次)",@"Launcher",nil) delegate:nil cancelButtonTitle:NSLocalizedStringFromTable(@"確認",@"Launcher",nil) otherButtonTitles: nil] show];
+//                                [[[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedStringFromTable(@"FB分享成功,謝謝您的分享,神乎贈送一天圖是力(一天一次)",@"Launcher",nil) delegate:nil cancelButtonTitle:NSLocalizedStringFromTable(@"確認",@"Launcher",nil) otherButtonTitles: nil] show];
                                 
                             }else{
-                                [[[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedStringFromTable(@"FB分享成功,謝謝您的分享",@"Launcher",nil) delegate:nil cancelButtonTitle:NSLocalizedStringFromTable(@"確認",@"Launcher",nil) otherButtonTitles: nil] show];
+//                                [[[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedStringFromTable(@"FB分享成功,謝謝您的分享",@"Launcher",nil) delegate:nil cancelButtonTitle:NSLocalizedStringFromTable(@"確認",@"Launcher",nil) otherButtonTitles: nil] show];
 //                                [SGInfoAlert showInfo:@"FB分享成功,謝謝您的分享" bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:[[UIApplication sharedApplication] keyWindow]];
                             }
                         }else{
-                            [[[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedStringFromTable(@"FB分享成功,謝謝您的分享",@"Launcher",nil) delegate:nil cancelButtonTitle:NSLocalizedStringFromTable(@"確認",@"Launcher",nil) otherButtonTitles: nil] show];
+//                            [[[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedStringFromTable(@"FB分享成功,謝謝您的分享",@"Launcher",nil) delegate:nil cancelButtonTitle:NSLocalizedStringFromTable(@"確認",@"Launcher",nil) otherButtonTitles: nil] show];
                         }
                     }else{
-                        [[[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedStringFromTable(@"FB分享成功,謝謝您的分享",@"Launcher",nil) delegate:nil cancelButtonTitle:NSLocalizedStringFromTable(@"確認",@"Launcher",nil) otherButtonTitles: nil] show];
+//                        [[[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedStringFromTable(@"FB分享成功,謝謝您的分享",@"Launcher",nil) delegate:nil cancelButtonTitle:NSLocalizedStringFromTable(@"確認",@"Launcher",nil) otherButtonTitles: nil] show];
                     }
                 }];
             }

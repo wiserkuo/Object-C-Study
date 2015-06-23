@@ -25,7 +25,7 @@
 //@property (nonatomic) int currentOption;
 //@property (nonatomic) int kNumber;
 @property (nonatomic) float range;
-
+@property (nonatomic) float originRange;
 @property(nonatomic)float defaultHeight;
 @property(nonatomic)float lineDefaultX;
 @property(nonatomic)float rectDefaultX;
@@ -100,7 +100,7 @@
 @property (strong) NSMutableArray * figureSearchArray;
 @property (strong, nonatomic) FSTeachPopView * explainView;
 //@property (nonatomic) BOOL firstIn;
-
+@property (nonatomic) BOOL alreadyShowed;
 
 @property (strong, nonatomic) UIColor * kRectUpColor;
 @property (strong, nonatomic) UIColor * kRectDownColor;
@@ -130,7 +130,6 @@
     }
     return self;
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -214,8 +213,7 @@
     //[self setRange];
     [_titleLabel setText:[_searchKeyArray objectAtIndex:_kNumber + _storeDWM * 5]];
     _analysisPeriod = _storeDWM - 1;
-    _storeDWM = _kNumber + _storeDWM * 5;
-    
+    //_storeDWM = _kNumber + _storeDWM * 5;
     if (_firstIn) {
         NSString * show = [_customModel searchInstructionByControllerName:[[self class] description]];
         if ([show isEqualToString:@"YES"]) {
@@ -409,28 +407,36 @@
     int figureSearchId = [(NSNumber *)[_figureSearchArray objectAtIndex:0]intValue];
     [self setRange];
     NSMutableArray * dataArray = [[NSMutableArray alloc]init];
-    dataArray = [_customModel searchCustomKbarWithFigureSearchId:[NSNumber numberWithInt:figureSearchId] TNumber:[NSNumber numberWithInt:_kNumber]];
+    dataArray = [_customModel searchCustomKbarWithFigureSearchId:[NSNumber numberWithInt:figureSearchId*10] TNumber:[NSNumber numberWithInt:_kNumber]];
     _alreadyHaveOne = YES;
-    if(!dataArray.count){
+    if(!dataArray.count){ //空的 原本沒K棒
         figureSearchId = figureSearchId * 10;
         dataArray = [_customModel searchCustomKbarWithFigureSearchId:[NSNumber numberWithInt:figureSearchId] TNumber:[NSNumber numberWithInt:_kNumber]];
         _alreadyHaveOne = NO;
     }
-    if (![dataArray count]==0) {
-        _high = (_range+0.5-[(NSNumber *)[dataArray objectAtIndex:0]floatValue]*100)*_defaultHeight;
-        _low = (_range+0.5-[(NSNumber *)[dataArray objectAtIndex:1]floatValue]*100)*_defaultHeight;
-        _open = (_range+0.5-[(NSNumber *)[dataArray objectAtIndex:2]floatValue]*100)*_defaultHeight;
-        _close = (_range+0.5-[(NSNumber *)[dataArray objectAtIndex:3]floatValue]*100)*_defaultHeight;
-    }else{
+    if (![dataArray count]==0) { //有值 已有設定的K棒 取該值出來用
+//        _high = (_range+0.5-[(NSNumber *)[dataArray objectAtIndex:0]floatValue]*100)*_defaultHeight;
+//        _low = (_range+0.5-[(NSNumber *)[dataArray objectAtIndex:1]floatValue]*100)*_defaultHeight;
+//        _open = (_range+0.5-[(NSNumber *)[dataArray objectAtIndex:2]floatValue]*100)*_defaultHeight;
+//        _close = (_range+0.5-[(NSNumber *)[dataArray objectAtIndex:3]floatValue]*100)*_defaultHeight;
+        _high  = _rectView.frame.size.height/2- ([(NSNumber *)[dataArray objectAtIndex:0]floatValue]*100)*_rectView.frame.size.height/22;
+        _low   = _rectView.frame.size.height/2- ([(NSNumber *)[dataArray objectAtIndex:1]floatValue]*100)*_rectView.frame.size.height/22;
+        _open  = _rectView.frame.size.height/2- ([(NSNumber *)[dataArray objectAtIndex:2]floatValue]*100)*_rectView.frame.size.height/22;
+        _close = _rectView.frame.size.height/2- ([(NSNumber *)[dataArray objectAtIndex:3]floatValue]*100)*_rectView.frame.size.height/22;
+    }else if(_alreadyShowed==NO){//空的 取預設的K棒
+        
         NSMutableArray * dataArray = [[NSMutableArray alloc]init];
         dataArray = [_customModel searchDefaultKbarWithNumber:[NSNumber numberWithInt:1]];
         
-        float changeRange = 10.0f/[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue];
-        
-        _high = (_range+0.5-([(NSNumber *)[dataArray objectAtIndex:0]floatValue]/changeRange)*100)*_defaultHeight;
-        _low = (_range+0.5-([(NSNumber *)[dataArray objectAtIndex:1]floatValue]/changeRange)*100)*_defaultHeight;
-        _open = (_range+0.5-([(NSNumber *)[dataArray objectAtIndex:2]floatValue]/changeRange)*100)*_defaultHeight;
-        _close = (_range+0.5-([(NSNumber *)[dataArray objectAtIndex:3]floatValue]/changeRange)*100)*_defaultHeight;
+     //   float changeRange = 10.0f/[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue];
+        _high  = _rectView.frame.size.height/2- ([(NSNumber *)[dataArray objectAtIndex:0]floatValue]*100)*_rectView.frame.size.height/22;
+        _low   = _rectView.frame.size.height/2- ([(NSNumber *)[dataArray objectAtIndex:1]floatValue]*100)*_rectView.frame.size.height/22;
+        _open  = _rectView.frame.size.height/2- ([(NSNumber *)[dataArray objectAtIndex:2]floatValue]*100)*_rectView.frame.size.height/22;
+        _close = _rectView.frame.size.height/2- ([(NSNumber *)[dataArray objectAtIndex:3]floatValue]*100)*_rectView.frame.size.height/22;
+        //_high = (_range+0.5-([(NSNumber *)[dataArray objectAtIndex:0]floatValue]/changeRange)*100)*_defaultHeight;
+//        _low = (_range+0.5-([(NSNumber *)[dataArray objectAtIndex:1]floatValue]/changeRange)*100)*_defaultHeight;
+//        _open = (_range+0.5-([(NSNumber *)[dataArray objectAtIndex:2]floatValue]/changeRange)*100)*_defaultHeight;
+//        _close = (_range+0.5-([(NSNumber *)[dataArray objectAtIndex:3]floatValue]/changeRange)*100)*_defaultHeight;
     }
     
 }
@@ -476,17 +482,31 @@
 }
 
 -(void)setRange{
+    float rate=1;
+    if(_storeDWM==0){
+        rate =1;
+    }
+    else if(_storeDWM==1){
+        rate =[(NSNumber *)[_figureSearchArray objectAtIndex:3]floatValue]/[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue];
+    }
+    else if(_storeDWM==2){
+        rate =[(NSNumber *)[_figureSearchArray objectAtIndex:4]floatValue]/[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue];
+    }
+    
+    
     _range = [(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue];
-    _tenPercentLabel.text = [NSString stringWithFormat:@"-%.1f%%",_range];
-    _negativeTenPercentLabel.text = [NSString stringWithFormat:@"--%.1f%%",_range];
+    _tenPercentLabel.text = [NSString stringWithFormat:@"-%.1f%%",_range*rate];
+    _negativeTenPercentLabel.text = [NSString stringWithFormat:@"--%.1f%%",_range*rate];
     
-    float number1 = [(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*2.0f/5.0f;
-    float number2 = [(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*4.0f/5.0f;
     
-    _percentTextLabel.text = [NSString stringWithFormat:@"-%.1f%%",number1];
-    _negativePercentTextLabel.text = [NSString stringWithFormat:@"--%.1f%%",number1];
-    _percent2TextLabel.text = [NSString stringWithFormat:@"-%.1f%%",number2];
-    _negativePercent2TextLabel.text = [NSString stringWithFormat:@"--%.1f%%",number2];
+    
+    float number1 = _range*2.0f/5.0f;
+    float number2 = _range*4.0f/5.0f;
+    
+    _percentTextLabel.text = [NSString stringWithFormat:@"-%.1f%%",number1*rate];
+    _negativePercentTextLabel.text = [NSString stringWithFormat:@"--%.1f%%",number1*rate];
+    _percent2TextLabel.text = [NSString stringWithFormat:@"-%.1f%%",number2*rate];
+    _negativePercent2TextLabel.text = [NSString stringWithFormat:@"--%.1f%%",number2*rate];
 }
 
 -(void)initTitle{
@@ -504,6 +524,7 @@
     [self.view addSubview:_titleLabel];
     
     self.editRangeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.editRangeBtn.hidden = NO ;
     [_editRangeBtn setImage:[UIImage imageNamed:@"GearButton_Black"] forState:UIControlStateNormal];
     _editRangeBtn.translatesAutoresizingMaskIntoConstraints = NO;
     [_editRangeBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -1001,12 +1022,21 @@
     if ([btn isEqual:_backBtn]) {
         FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
         if(dataModel.figureSearchModel.beSubmit){
-            [_customModel editKbarValueWithFigureSearchId:[NSNumber numberWithInt:(int)[_figureSearchArray objectAtIndex:0]*10] TNumber:[NSNumber numberWithInt:_kNumber] High:[NSNumber numberWithFloat:(_range+0.5-_high/_defaultHeight)/100] Low:[NSNumber numberWithFloat:(_range+0.5-_low/_defaultHeight)/100] Open:[NSNumber numberWithFloat:(_range+0.5-_open/_defaultHeight)/100] Close:[NSNumber numberWithFloat:(_range+0.5-_close/_defaultHeight)/100]];
+           // [_customModel editKbarValueWithFigureSearchId:[NSNumber numberWithInt:(int)[_figureSearchArray objectAtIndex:0]*10] TNumber:[NSNumber numberWithInt:_kNumber] High:[NSNumber numberWithFloat:(_range+0.5-_high/_defaultHeight)/100] Low:[NSNumber numberWithFloat:(_range+0.5-_low/_defaultHeight)/100] Open:[NSNumber numberWithFloat:(_range+0.5-_open/_defaultHeight)/100] Close:[NSNumber numberWithFloat:(_range+0.5-_close/_defaultHeight)/100]];
+            [_customModel editKbarValueWithFigureSearchId:[NSNumber numberWithInt:(int)[_figureSearchArray objectAtIndex:0]*10] TNumber:[NSNumber numberWithInt:_kNumber]
+                                                    High :[NSNumber numberWithFloat:((_rectView.frame.size.height/2-_high)*22/_rectView.frame.size.height)/100]
+                                                    Low  :[NSNumber numberWithFloat:((_rectView.frame.size.height/2-_low)*22/_rectView.frame.size.height)/100]
+                                                    Open :[NSNumber numberWithFloat:((_rectView.frame.size.height/2-_open)*22/_rectView.frame.size.height)/100]
+                                                    Close:[NSNumber numberWithFloat:((_rectView.frame.size.height/2-_close)*22/_rectView.frame.size.height)/100]];
 //        }else if(!dataModel.figureSearchModel.beSubmit){
 //            int targetID = [_figureSearchArray[0] intValue] * 10;
 //            [_customModel deleteAllKbarWithFigureSearchId:[NSNumber numberWithInt:targetID]];
         }
         
+        if(!_alreadyHaveOne){
+            int figureSearchId = [(NSNumber *)[_figureSearchArray objectAtIndex:0]intValue];
+            [_customModel deleteKbarWithFigureSearchId:[NSNumber numberWithInt:figureSearchId*10] tNum:[NSNumber numberWithInt:_kNumber]];
+        }
         //hasBeenToDetail and beSubmit
         
 //        }else{
@@ -1015,6 +1045,8 @@
         
         [self.navigationController popViewControllerAnimated:NO];
     }else if ([btn isEqual:_editRangeBtn]){
+        _alreadyShowed=YES;
+        
 //        [_customModel editKbarValueWithFigureSearchId:[_figureSearchArray objectAtIndex:0] TNumber:[NSNumber numberWithInt:_kNumber] High:[NSNumber numberWithFloat:(_range+0.5-_high/_defaultHeight)/100] Low:[NSNumber numberWithFloat:(_range+0.5-_low/_defaultHeight)/100] Open:[NSNumber numberWithFloat:(_range+0.5-_open/_defaultHeight)/100] Close:[NSNumber numberWithFloat:(_range+0.5-_close/_defaultHeight)/100]];
         FigureRangeSetupViewController * rangeSetupView = [[FigureRangeSetupViewController alloc]initWithCurrentOption:_currentOption SearchNum:_searchNum dataArray:_figureSearchArray kNumber:_kNumber];
         [self.navigationController pushViewController:rangeSetupView animated:NO];
@@ -1022,6 +1054,7 @@
 }
 
 -(void)goToDetailBtnClick:(FSUIButton *)btn{
+    _alreadyShowed=YES;
     int mutliTen = [_figureSearchArray[0] intValue] * 10;
     NSDictionary *sendObj = @{@"kLineBackColor":_kUpLineColor,
                               @"downKLineBackColor":_kDownLineColor,
@@ -1039,14 +1072,26 @@
                               @"yOffset":[NSString stringWithFormat:@"%f",_kView.frame.origin.y],
                               @"storeDWM":[NSString stringWithFormat:@"%d",_storeDWM]};
     if(_alreadyHaveOne){
-        [_customModel editTheOriginNum:[NSNumber numberWithInt:[_figureSearchArray[0] intValue]] ToMutliTen:[NSNumber numberWithInt:mutliTen] TNumber:[NSNumber numberWithInt:_kNumber]];
+      //  [_customModel editTheOriginNum:[NSNumber numberWithInt:[_figureSearchArray[0] intValue]] ToMutliTen:[NSNumber numberWithInt:mutliTen] TNumber:[NSNumber numberWithInt:_kNumber]];
         
-        [_customModel editKbarValueWithFigureSearchId:[NSNumber numberWithInt:mutliTen] TNumber:[NSNumber numberWithInt:_kNumber] High:[NSNumber numberWithFloat:(_range+0.5-_high/_defaultHeight)/100] Low:[NSNumber numberWithFloat:(_range+0.5-_low/_defaultHeight)/100] Open:[NSNumber numberWithFloat:(_range+0.5-_open/_defaultHeight)/100] Close:[NSNumber numberWithFloat:(_range+0.5-_close/_defaultHeight)/100]];
+//   [_customModel editKbarValueWithFigureSearchId:[NSNumber numberWithInt:mutliTen] TNumber:[NSNumber numberWithInt:_kNumber]
+//                                                 High :[NSNumber numberWithFloat:(_range+0.5-_high/_defaultHeight)/100]
+//                                                 Low  :[NSNumber numberWithFloat:(_range+0.5-_low/_defaultHeight)/100]
+//                                                 Open :[NSNumber numberWithFloat:(_range+0.5-_open/_defaultHeight)/100]
+//                                                 Close:[NSNumber numberWithFloat:(_range+0.5-_close/_defaultHeight)/100]];
+     [_customModel editKbarValueWithFigureSearchId:[NSNumber numberWithInt:mutliTen] TNumber:[NSNumber numberWithInt:_kNumber]
+                                                   High :[NSNumber numberWithFloat:((_rectView.frame.size.height/2-_high)*22/_rectView.frame.size.height)/100]
+                                                   Low  :[NSNumber numberWithFloat:((_rectView.frame.size.height/2-_low)*22/_rectView.frame.size.height)/100]
+                                                   Open :[NSNumber numberWithFloat:((_rectView.frame.size.height/2-_open)*22/_rectView.frame.size.height)/100]
+                                                   Close:[NSNumber numberWithFloat:((_rectView.frame.size.height/2-_close)*22/_rectView.frame.size.height)/100]];
     }else{
-        [_customModel editKbarValueWithFigureSearchId:[NSNumber numberWithInt:mutliTen] TNumber:[NSNumber numberWithInt:_kNumber] High:[NSNumber numberWithFloat:(_range+0.5-_high/_defaultHeight)/100] Low:[NSNumber numberWithFloat:(_range+0.5-_low/_defaultHeight)/100] Open:[NSNumber numberWithFloat:(_range+0.5-_open/_defaultHeight)/100] Close:[NSNumber numberWithFloat:(_range+0.5-_close/_defaultHeight)/100]];
+        [_customModel editKbarValueWithFigureSearchId:[NSNumber numberWithInt:mutliTen] TNumber:[NSNumber numberWithInt:_kNumber]
+                                                High :[NSNumber numberWithFloat:((_rectView.frame.size.height/2-_high)*22/_rectView.frame.size.height)/100]
+                                                Low  :[NSNumber numberWithFloat:((_rectView.frame.size.height/2-_low)*22/_rectView.frame.size.height)/100]
+                                                Open :[NSNumber numberWithFloat:((_rectView.frame.size.height/2-_open)*22/_rectView.frame.size.height)/100]
+                                                Close:[NSNumber numberWithFloat:((_rectView.frame.size.height/2-_close)*22/_rectView.frame.size.height)/100]];
     }
-    
-    FigureCustomDetailViewController *fcdvc = [[FigureCustomDetailViewController alloc] initWithNeededObjectFromDictionary:sendObj :_currentOption :_searchNum :_kNumber];
+    FigureCustomDetailViewController *fcdvc = [[FigureCustomDetailViewController alloc] initWithNeededObjectFromDictionary:sendObj :_currentOption :_searchNum :_kNumber :_figureSearchArray];
     [self.navigationController pushViewController:fcdvc animated:NO];
 }
 
@@ -1055,13 +1100,15 @@
     NSMutableArray * dataArray = [[NSMutableArray alloc]init];
     dataArray = [_customModel searchDefaultKbarWithNumber:[NSNumber numberWithInteger:btn.tag]];
     
-    float changeRange = 10.0f/[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue];
-    
-    _high = (_range+0.5-([(NSNumber *)[dataArray objectAtIndex:0]floatValue]/changeRange)*100)*_defaultHeight;
-    _low = (_range+0.5-([(NSNumber *)[dataArray objectAtIndex:1]floatValue]/changeRange)*100)*_defaultHeight;
-    _open = (_range+0.5-([(NSNumber *)[dataArray objectAtIndex:2]floatValue]/changeRange)*100)*_defaultHeight;
-    _close = (_range+0.5-([(NSNumber *)[dataArray objectAtIndex:3]floatValue]/changeRange)*100)*_defaultHeight;
-    
+//    float changeRange = 10.0f/[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue];
+//    _high = (_range+0.5-([(NSNumber *)[dataArray objectAtIndex:0]floatValue]/changeRange)*100)*_defaultHeight;
+//    _low = (_range+0.5-([(NSNumber *)[dataArray objectAtIndex:1]floatValue]/changeRange)*100)*_defaultHeight;
+//    _open = (_range+0.5-([(NSNumber *)[dataArray objectAtIndex:2]floatValue]/changeRange)*100)*_defaultHeight;
+//    _close = (_range+0.5-([(NSNumber *)[dataArray objectAtIndex:3]floatValue]/changeRange)*100)*_defaultHeight;
+    _high  = _rectView.frame.size.height/2- ([(NSNumber *)[dataArray objectAtIndex:0]floatValue]*100)*_rectView.frame.size.height/22;
+    _low   = _rectView.frame.size.height/2- ([(NSNumber *)[dataArray objectAtIndex:1]floatValue]*100)*_rectView.frame.size.height/22;
+    _open  = _rectView.frame.size.height/2- ([(NSNumber *)[dataArray objectAtIndex:2]floatValue]*100)*_rectView.frame.size.height/22;
+    _close = _rectView.frame.size.height/2- ([(NSNumber *)[dataArray objectAtIndex:3]floatValue]*100)*_rectView.frame.size.height/22;
     
     [self setKBar];
 }

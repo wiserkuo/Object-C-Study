@@ -310,7 +310,7 @@ static int currentDataRow;
     [ dbAgent  inDatabase: ^ ( FMDatabase  * db )   {
         [db executeUpdate:@"DELETE FROM FigureSearchKBarValue WHERE ref_figureSearch_ID = ?",figureSearchId];
     }];
-
+    
 }
 
 -(void)deleteKbarWithFigureSearchId:(NSNumber *)figureSearchId tNum:(NSNumber *)num{
@@ -411,7 +411,7 @@ static int currentDataRow;
     
     [ dbAgent  inDatabase: ^ ( FMDatabase  * db )   {
         
-        FMResultSet *message = [db executeQuery:@"SELECT * FROM FigureSearch WHERE figureSearch_ID = ?",[NSNumber numberWithInt:target]];
+        FMResultSet *message = [db executeQuery:@"SELECT * FROM FigureSearch WHERE figureSearch_ID = ?",[NSNumber numberWithInt:target/10]];
         while ([message next]) {
             [dataArray addObject:[message stringForColumn:@"dayRange"]];
             [dataArray addObject:[message stringForColumn:@"weekRange"]];
@@ -490,7 +490,7 @@ static int currentDataRow;
     }
         //修改
         [ dbAgent  inDatabase: ^ ( FMDatabase  * db )  {
-            [db executeUpdate:@"UPDATE FigureSearch SET trend = -1,title = ?,dayRange = 3.5,weekRange = 5,monthRange = 10,flatTrendDay = 3,flatTrendWeek = 5,flatTrendMonth = 10 WHERE figureSearch_ID = ?",name,figureSearchId];
+            [db executeUpdate:@"UPDATE FigureSearch SET trend = -1,title = ?,dayRange = 5,weekRange = 7,monthRange = 10,flatTrendDay = 3,flatTrendWeek = 5,flatTrendMonth = 10 WHERE figureSearch_ID = ?",name,figureSearchId];
         }];
 }
 

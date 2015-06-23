@@ -1,4 +1,4 @@
-//
+//  走勢
 //  FSEquityDrawViewController.m
 //  WirtsLeg
 //
@@ -23,6 +23,8 @@
 #import "FSSocketProc.h"
 #import "FSBAQuery.h"
 #import "FSSnapshotQueryOut.h"
+
+#define SNAPSHOT_FONTSIZE 19.0f
 
 static NSString *MainItemKVOIdentifier = @"MainItemKVOIdentifier";
 static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
@@ -83,15 +85,6 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
--(id)init{
-    self = [super init];
-    if (self) {
-    
-    }
-    return self;
-}
-
 
 #pragma mark - UIViewController
 
@@ -324,6 +317,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
 
 -(void)reloadData{
     [dataLock lock];
+
     [_tickPlotDataSource updateMarketTime];
     if (_tickPlotDataSource.totalTime !=0) {
         [self configureXRange];
@@ -772,19 +766,13 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
     CPTXYPlotSpace *xyPlotSpace3 = (CPTXYPlotSpace *) self.crossLineView.hostedGraph.defaultPlotSpace;
     xyPlotSpace3.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(0.0) length:CPTDecimalFromFloat(_crossLineView.hostedGraph.frame.size.height)];
     xyPlotSpace3.globalYRange = xyPlotSpace3.yRange;
-    
 
 }
 
 - (void)configureYRangeBValue:(FSSnapshot *)snapshot {
     [self showSnapshotPriceLabel2:snapshot];
     [self scalePriceGraphToFitPrice2:snapshot];
-    if (_isCDPVisible) {
-        [self showCDP];
-    }
-    
     [self configureScrollLineYRange];
-    
     
     //檢查十字線面板是否需要更換位置
     [self updateCrossHairVerticalLinePosition];
@@ -793,11 +781,15 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
     //把量圖的yRange移動到最大量，讓最大量可以被看見
     [self scaleVolumeGraphToFitVolume];
     
-    if (_comparedValue) {
+    if (_comparedValue && _twoStock) {
         [self clearSnapshotPriceLabel];
         [self clearVolumeLabel];
         [self scaleComparedVolumeGraphToFitComparedVolume];
         [self showComparedVolumeLabel];
+        [self showPriceLabel];
+    }
+    if (_isCDPVisible) {
+        [self showCDP];
     }
 }
 
@@ -958,12 +950,15 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
 - (void)reloadCDP
 {
     [dataLock lock];
+    
     [_priceHostView.hostedGraph addPlot:_cdp.ahPlot];
     [_priceHostView.hostedGraph addPlot:_cdp.nhPlot];
     [_priceHostView.hostedGraph addPlot:_cdp.cdpPlot];
     [_priceHostView.hostedGraph addPlot:_cdp.alPlot];
     [_priceHostView.hostedGraph addPlot:_cdp.nlPlot];
     
+
+
     if (_isCDPVisible) {
 //        [self showCDP];
         [self reloadPriceGraph];
@@ -975,25 +970,39 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
 
 - (void)reloadPriceGraph
 {
-
-    if (_priceHostView.hostedGraph != nil) {
+    if ([_priceHostView.hostedGraph respondsToSelector:@selector(reloadData)]) {
         [_priceHostView.hostedGraph reloadData];
     }
-    if (_comparedPriceHostView.hostedGraph != nil) {
+    
+    if ([_comparedPriceHostView.hostedGraph respondsToSelector:@selector(reloadData)]) {
         [_comparedPriceHostView.hostedGraph reloadData];
     }
+//    if (_priceHostView.hostedGraph != nil) {
+//        [_priceHostView.hostedGraph reloadData];
+//    }
+//    if (_comparedPriceHostView.hostedGraph != nil) {
+//        [_comparedPriceHostView.hostedGraph reloadData];
+//    }
 
 }
 
 - (void)reloadVolumeGraph
 {
-    if (_volumeHostView.hostedGraph != nil) {
+    if ([_volumeHostView.hostedGraph respondsToSelector:@selector(reloadData)]) {
         [_volumeHostView.hostedGraph reloadData];
-        //[_volumeHostView.hostedGraph.defaultPlotSpace scaleToFitPlots:[_volumeHostView.hostedGraph allPlots]];
     }
-    if (_comparedVolumeHostView.hostedGraph != nil) {
+    
+    if ([_comparedVolumeHostView.hostedGraph respondsToSelector:@selector(reloadData)]) {
         [_comparedVolumeHostView.hostedGraph reloadData];
     }
+    
+//    if (_volumeHostView.hostedGraph != nil) {
+//        [_volumeHostView.hostedGraph reloadData];
+        //[_volumeHostView.hostedGraph.defaultPlotSpace scaleToFitPlots:[_volumeHostView.hostedGraph allPlots]];
+//    }
+//    if (_comparedVolumeHostView.hostedGraph != nil) {
+//        [_comparedVolumeHostView.hostedGraph reloadData];
+//    }
 }
 
 - (void)reloadInfoPanel:(NSObject *) snapshot_src
@@ -1562,8 +1571,6 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         if (portfolioItem->identCode[0] == 'T' && portfolioItem->identCode[1] == 'W' && _buttonContainerScrollView.fitPriceGraphScopeButton.selected == NO && ![snapshot isKindOfClass:[IndexSnapshotDecompressed class]] && (snapshot.ceilingPrice !=0 && snapshot.ceilingPrice !=0)) {
             maxY = snapshot.ceilingPrice;// + snapshot.referencePrice *0.07;
             minY = snapshot.floorPrice;// - snapshot.referencePrice *0.07;
-            
-
         }else{
             if (increasePercentage >= decreasePercentage && increasePercentage > 0.01) {
                 minY = snapshot.referencePrice*(1-increasePercentage-0.002);
@@ -1645,8 +1652,6 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         if (portfolioItem->identCode[0] == 'T' && portfolioItem->identCode[1] == 'W' && _buttonContainerScrollView.fitPriceGraphScopeButton.selected == NO && ![snapshot isKindOfClass:[IndexSnapshotDecompressed class]] && (snapshot.top_price.calcValue !=0 && snapshot.bottom_price.calcValue !=0) && portfolioItem->type_id != 3 && portfolioItem->type_id != 6) {
             maxY = snapshot.top_price.calcValue;// + snapshot.referencePrice *0.07;
             minY = snapshot.bottom_price.calcValue;// - snapshot.referencePrice *0.07;
-            
-            
         }else{
             if (increasePercentage >= decreasePercentage && increasePercentage > 0.01) {
                 minY = snapshot.reference_price.calcValue*(1-increasePercentage-0.002);
@@ -1661,6 +1666,17 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
                 maxY = snapshot.reference_price.calcValue*1.01;
             }
 
+            if (_twoStock) {
+                if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionTW) {
+                    if (increasePercentage >= 0.1) {
+                        minY = snapshot.reference_price.calcValue*(1-increasePercentage);
+                        maxY = snapshot.high_price.calcValue;
+                    }else{
+                        minY = snapshot.reference_price.calcValue*0.9;
+                        maxY = snapshot.reference_price.calcValue*1.1;
+                    }
+                }
+            }
         }
         
         
@@ -1727,19 +1743,28 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
                 
                 
             }else{
-                if (increasePercentage >= decreasePercentage && increasePercentage > 0.01) {
-                    minY = snapshot.referencePrice*(1-increasePercentage-0.002);
-                    maxY = snapshot.highestPrice;
+                if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionTW) {
+                    if (increasePercentage >= 0.1) {
+                        minY = snapshot.referencePrice*(1-increasePercentage);
+                        maxY = snapshot.highestPrice;
+                    }else{
+                        minY = snapshot.referencePrice*0.9;
+                        maxY = snapshot.referencePrice*1.1;
+                    }
+                }else{
+                    if (increasePercentage >= decreasePercentage && increasePercentage > 0.01) {
+                        minY = snapshot.referencePrice*(1-increasePercentage-0.002);
+                        maxY = snapshot.highestPrice;
+                    }
+                    else if (increasePercentage < decreasePercentage && decreasePercentage > 0.01) {
+                        minY = snapshot.lowestPrice-(snapshot.referencePrice*decreasePercentage/10);
+                        maxY = snapshot.referencePrice*(1+decreasePercentage);
+                    }
+                    else {
+                        minY = snapshot.referencePrice*0.989;
+                        maxY = snapshot.referencePrice*1.01;
+                    }
                 }
-                else if (increasePercentage < decreasePercentage && decreasePercentage > 0.01) {
-                    minY = snapshot.lowestPrice-(snapshot.referencePrice*decreasePercentage/10);
-                    maxY = snapshot.referencePrice*(1+decreasePercentage);
-                }
-                else {
-                    minY = snapshot.referencePrice*0.989;
-                    maxY = snapshot.referencePrice*1.01;
-                }
-                
                 /*
                  設定價圖表的上下區間
                  CorePlot會把新設定的yRange限制在globalRange內，所以先把globalYRange設為nil，避免此限制，要特別注意
@@ -1800,24 +1825,39 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         
         PortfolioItem *portfolioItem = [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio].portfolioItem;
         
-        if (portfolioItem->identCode[0] == 'T' && portfolioItem->identCode[1] == 'W' && _buttonContainerScrollView.fitPriceGraphScopeButton.selected == NO && ![snapshot isKindOfClass:[IndexSnapshotDecompressed class]] && (snapshot.top_price.calcValue !=0 && snapshot.bottom_price.calcValue !=0) && portfolioItem->type_id != 3 && portfolioItem->type_id != 6) {
+        if (portfolioItem->identCode[0] == 'T' && portfolioItem->identCode[1] == 'W' && _buttonContainerScrollView.fitPriceGraphScopeButton.selected == NO &&
+            ![snapshot isKindOfClass:[IndexSnapshotDecompressed class]] &&
+            (snapshot.top_price.calcValue !=0 && snapshot.bottom_price.calcValue !=0) &&
+            portfolioItem->type_id != 3 && portfolioItem->type_id != 6) {
             maxY = snapshot.top_price.calcValue;// + snapshot.referencePrice *0.07;
             minY = snapshot.bottom_price.calcValue;// - snapshot.referencePrice *0.07;
             
             
         }else{
-            if (increasePercentage >= decreasePercentage && increasePercentage > 0.01) {
-                minY = snapshot.reference_price.calcValue*(1-increasePercentage-0.002);
-                maxY = snapshot.high_price.calcValue;
+            if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionTW) {
+                if (increasePercentage >= 0.1) {
+                    minY = snapshot.reference_price.calcValue*(1-increasePercentage);
+                    maxY = snapshot.high_price.calcValue;
+                }else{
+                    minY = snapshot.reference_price.calcValue*0.9;
+                    maxY = snapshot.reference_price.calcValue*1.1;
+                }
+            }else{
+
+                if (increasePercentage >= decreasePercentage && increasePercentage > 0.01) {
+                    minY = snapshot.reference_price.calcValue*(1-increasePercentage-0.002);
+                    maxY = snapshot.high_price.calcValue;
+                }
+                else if (increasePercentage < decreasePercentage && decreasePercentage > 0.01) {
+                    minY = snapshot.low_price.calcValue-(snapshot.reference_price.calcValue*decreasePercentage/10);
+                    maxY = snapshot.reference_price.calcValue*(1+decreasePercentage);
+                }
+                else {
+                    minY = snapshot.reference_price.calcValue*0.989;
+                    maxY = snapshot.reference_price.calcValue*1.01;
+                }
             }
-            else if (increasePercentage < decreasePercentage && decreasePercentage > 0.01) {
-                minY = snapshot.low_price.calcValue-(snapshot.reference_price.calcValue*decreasePercentage/10);
-                maxY = snapshot.reference_price.calcValue*(1+decreasePercentage);
-            }
-            else {
-                minY = snapshot.reference_price.calcValue*0.989;
-                maxY = snapshot.reference_price.calcValue*1.01;
-            }
+            
         }
         
         
@@ -1873,12 +1913,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         
         CPTMutableTextStyle *normalStyle = [axisSet.yAxis.labelTextStyle mutableCopy];
         normalStyle.color = [CPTColor blueColor];
-        
-        if (snapshot.lowestPrice>=10000) {
-            normalStyle.fontSize = 16.0f;
-        }else{
-            normalStyle.fontSize = 19.0f;
-        }
+        normalStyle.fontSize = SNAPSHOT_FONTSIZE;
         
         
         /**
@@ -1918,11 +1953,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         
         CPTMutableTextStyle *lowHighPriceStyle = [axisSet.yAxis.labelTextStyle mutableCopy];
         lowHighPriceStyle.color = [CPTColor blueColor];
-        if (snapshot.lowestPrice>=10000) {
-            lowHighPriceStyle.fontSize = 16.0f;
-        }else{
-            lowHighPriceStyle.fontSize = 19.0f;
-        }
+        lowHighPriceStyle.fontSize = SNAPSHOT_FONTSIZE;
         
         CPTAxisLabel *lowerBoundLabel;
         if (minY == snapshot.floorPrice) {
@@ -1981,12 +2012,8 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         //標示參考價
         CPTMutableTextStyle *referencePriceStyle = [axisSet.yAxis.labelTextStyle mutableCopy];
         referencePriceStyle.color = [CPTColor brownColor];
+        referencePriceStyle.fontSize = SNAPSHOT_FONTSIZE;
         
-        if (snapshot.lowestPrice>=10000) {
-            referencePriceStyle.fontSize = 16.0f;
-        }else{
-            referencePriceStyle.fontSize = 19.0f;
-        }
         //參考價
         CPTAxisLabel *referencePriceLabel = [self axisLabelWithPrice:snapshot.referencePrice textStyle:referencePriceStyle];
         referencePriceLabel.offset = 1;
@@ -1996,7 +2023,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         }
         
         axisSet.yAxis.axisLabels = yLabels;
-        axisSet.yAxis.majorTickLength = 1;
+        axisSet.yAxis.majorTickLength = 0;
         axisSet.yAxis.majorTickLocations = yLocations;
     }
     else if (snapshot.referencePrice > 0) {
@@ -2006,11 +2033,8 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         //標示參考價
         CPTMutableTextStyle *referencePriceStyle = [axisSet.yAxis.labelTextStyle mutableCopy];
         referencePriceStyle.color = [CPTColor brownColor];
-        if (snapshot.lowestPrice>=10000) {
-            referencePriceStyle.fontSize = 16.0f;
-        }else{
-            referencePriceStyle.fontSize = 19.0f;
-        }
+        referencePriceStyle.fontSize = SNAPSHOT_FONTSIZE;
+        
         //參考價
         CPTAxisLabel *referencePriceLabel = [self axisLabelWithPrice:snapshot.referencePrice textStyle:referencePriceStyle];
         
@@ -2021,7 +2045,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
 
         
         axisSet.yAxis.axisLabels = yLabels;
-        axisSet.yAxis.majorTickLength = 1;
+        axisSet.yAxis.majorTickLength = 0;
         axisSet.yAxis.majorTickLocations = yLocations;
     }
 }
@@ -2029,6 +2053,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
 - (void)showSnapshotPriceLabel2:(FSSnapshot *) snapshot
 {
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *) self.priceHostView.hostedGraph.axisSet;
+
     if (snapshot.reference_price.calcValue > 0 && snapshot.high_price.calcValue > 0 && snapshot.low_price.calcValue > 0) {
         /*
          Y軸標示各個價格
@@ -2042,13 +2067,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         
         CPTMutableTextStyle *normalStyle = [axisSet.yAxis.labelTextStyle mutableCopy];
         normalStyle.color = [CPTColor blueColor];
-        
-        if (snapshot.low_price.calcValue>=10000) {
-            normalStyle.fontSize = 16.0f;
-        }else{
-            normalStyle.fontSize = 19.0f;
-        }
-        
+        normalStyle.fontSize = SNAPSHOT_FONTSIZE;
         
         /**
          *  區間預設先以上下各1%來看，如果漲幅或跌幅超過1%，就要scale到該大小。而相對應的另一方向，也要scale到相同大小。例如漲幅5%，那麼上下就各5%的空間。
@@ -2064,8 +2083,6 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         if (portfolioItem->identCode[0] == 'T' && portfolioItem->identCode[1] == 'W' && _buttonContainerScrollView.fitPriceGraphScopeButton.selected == NO && ![snapshot isKindOfClass:[IndexSnapshotDecompressed class]] && (snapshot.top_price.calcValue !=0 && snapshot.bottom_price.calcValue !=0) && portfolioItem->type_id != 3 && portfolioItem->type_id != 6) {
             maxY = snapshot.top_price.calcValue;// + snapshot.referencePrice *0.07;
             minY = snapshot.bottom_price.calcValue;// - snapshot.referencePrice *0.07;
-            
-            
         }else{
             if (increasePercentage >= decreasePercentage && increasePercentage > 0.01) {
                 minY = snapshot.reference_price.calcValue*(1-increasePercentage);
@@ -2078,6 +2095,18 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
             else {
                 minY = snapshot.reference_price.calcValue*0.99;
                 maxY = snapshot.reference_price.calcValue*1.01;
+            }
+            
+            if (_twoStock) {
+                if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionTW) {
+                    if (increasePercentage >= 0.1) {
+                        minY = snapshot.reference_price.calcValue*(1-increasePercentage);
+                        maxY = snapshot.high_price.calcValue;
+                    }else{
+                        minY = snapshot.reference_price.calcValue*0.9;
+                        maxY = snapshot.reference_price.calcValue*1.1;
+                    }
+                }
             }
         }
         
@@ -2092,11 +2121,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
 //        upperBoundLabel.alignment = CPTAlignmentTop;
         CPTMutableTextStyle *lowHighPriceStyle = [axisSet.yAxis.labelTextStyle mutableCopy];
         lowHighPriceStyle.color = [CPTColor blueColor];
-        if (snapshot.low_price.calcValue>=10000) {
-            lowHighPriceStyle.fontSize = 16.0f;
-        }else{
-            lowHighPriceStyle.fontSize = 19.0f;
-        }
+        lowHighPriceStyle.fontSize = SNAPSHOT_FONTSIZE;
 
         
         CPTAxisLabel *lowerBoundLabel;
@@ -2156,12 +2181,8 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         //標示參考價
         CPTMutableTextStyle *referencePriceStyle = [axisSet.yAxis.labelTextStyle mutableCopy];
         referencePriceStyle.color = [CPTColor brownColor];
-        
-        if (snapshot.low_price.calcValue>=10000) {
-            referencePriceStyle.fontSize = 16.0f;
-        }else{
-            referencePriceStyle.fontSize = 19.0f;
-        }
+        referencePriceStyle.fontSize = SNAPSHOT_FONTSIZE;
+
         //參考價
         CPTAxisLabel *referencePriceLabel = [self axisLabelWithPrice:snapshot.reference_price.calcValue textStyle:referencePriceStyle];
         referencePriceLabel.offset = 1;
@@ -2171,7 +2192,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         }
         
         axisSet.yAxis.axisLabels = yLabels;
-        axisSet.yAxis.majorTickLength = 1;
+        axisSet.yAxis.majorTickLength = 0;
         axisSet.yAxis.majorTickLocations = yLocations;
     }
     else if (snapshot.reference_price.calcValue > 0) {
@@ -2181,11 +2202,8 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         //標示參考價
         CPTMutableTextStyle *referencePriceStyle = [axisSet.yAxis.labelTextStyle mutableCopy];
         referencePriceStyle.color = [CPTColor brownColor];
-        if (snapshot.low_price.calcValue>=10000) {
-            referencePriceStyle.fontSize = 16.0f;
-        }else{
-            referencePriceStyle.fontSize = 19.0f;
-        }
+        referencePriceStyle.fontSize = SNAPSHOT_FONTSIZE;
+
         //參考價
         CPTAxisLabel *referencePriceLabel = [self axisLabelWithPrice:snapshot.reference_price.calcValue textStyle:referencePriceStyle];
         
@@ -2196,7 +2214,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         
         
         axisSet.yAxis.axisLabels = yLabels;
-        axisSet.yAxis.majorTickLength = 1;
+        axisSet.yAxis.majorTickLength = 0;
         axisSet.yAxis.majorTickLocations = yLocations;
     }
 }
@@ -2259,6 +2277,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
 
 
 -(void)FitPriceGraphScope{
+    [dataLock lock];
 #ifdef LPCB
     FSSnapshot *snapshot = ((EquityTick *) _tickPlotDataSource.dataSource).snapshot_b;
     [self configureYRangeBValue:snapshot];
@@ -2267,6 +2286,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
     [self configureYRange:snapshot];
 #endif
     [self reloadPriceGraph];
+    [dataLock unlock];
 }
 
 #pragma mark - Volume
@@ -2512,8 +2532,14 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         }
         
     }
+    [self showPriceLabel];
+    [self hideCrossHair];
+    [self hideCrossInfoPanel];
+}
+
+- (void)showPriceLabel{
     if (!_isCDPVisible) {
-        if (_comparedValue) {
+        if (_comparedValue && _twoStock) {
             [self clearVolumeLabel];
             [self showComparedVolumeLabel];
             [self clearSnapshotPriceLabel];
@@ -2522,12 +2548,9 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
 #else
             [self showComparedPriceLabel:((EquityTick *)_tickPlotDataSource.comparedDataSource).snapshot];
 #endif
-            
-            [_volumeHostView.hostedGraph plotWithIdentifier:@"Volume Plot"].hidden = YES;
             [_comparedVolumeHostView.hostedGraph plotWithIdentifier:@"Compared Volume Plot"].hidden = NO;
+            [_volumeHostView.hostedGraph plotWithIdentifier:@"Volume Plot"].hidden = YES;
         }else{
-            
-            [_comparedVolumeHostView.hostedGraph plotWithIdentifier:@"Compared Volume Plot"].hidden = YES;
             [self clearComparedVolumeLabel];
             [self showVolumeLabel];
             [self clearComparedPriceLabel];
@@ -2536,12 +2559,8 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
 #else
             [self showSnapshotPriceLabel:((EquityTick *)_tickPlotDataSource.dataSource).snapshot];
 #endif
-            
-            
         }
     }
-    [self hideCrossHair];
-    [self hideCrossInfoPanel];
 }
 
 - (void)showComparedPortfolioPlot
@@ -2549,7 +2568,6 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
     _twoStock = YES;
     [_comparedPriceHostView.hostedGraph plotWithIdentifier:@"CPDComparedTickerSymbolPortfolio"].hidden = NO;
     [_comparedPriceHostView.hostedGraph plotWithIdentifier:@"ComparedSymbolLineBeforeFirstTick"].hidden = NO;
-//    [_comparedVolumeHostView.hostedGraph plotWithIdentifier:@"Compared Volume Plot"].hidden = NO;
     _crossInfoPanel.comparedMode = _buttonContainerScrollView.compareOtherPortfoioButton.selected;
 
     [_crossInfoPanel setLayout];
@@ -2560,22 +2578,10 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
     _twoStock = NO;
     [_comparedPriceHostView.hostedGraph plotWithIdentifier:@"CPDComparedTickerSymbolPortfolio"].hidden = YES;
     [_comparedPriceHostView.hostedGraph plotWithIdentifier:@"ComparedSymbolLineBeforeFirstTick"].hidden = YES;
-    
     [_comparedVolumeHostView.hostedGraph plotWithIdentifier:@"Compared Volume Plot"].hidden = YES;
     [_volumeHostView.hostedGraph plotWithIdentifier:@"Volume Plot"].hidden = NO;
     _crossInfoPanel.comparedMode = _buttonContainerScrollView.compareOtherPortfoioButton.selected;
     [_crossInfoPanel setLayout];
-    if (!_isCDPVisible) {
-        
-        [self clearComparedPriceLabel];
-#ifdef LPCB
-        [self showSnapshotPriceLabel2:((EquityTick *)_tickPlotDataSource.dataSource).snapshot_b];
-#else
-        [self showSnapshotPriceLabel:((EquityTick *)_tickPlotDataSource.dataSource).snapshot];
-#endif
-    }
-    [self clearComparedVolumeLabel];
-    [self showVolumeLabel];
 }
 
 - (BOOL)isComparedPortfolioPlotVisible
@@ -2723,12 +2729,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         
         CPTMutableTextStyle *normalStyle = [axisSet.yAxis.labelTextStyle mutableCopy];
         normalStyle.color = [CPTColor colorWithComponentRed:224.0f/255.0f green:100.0f/255.0f blue:16.0f/255.0f alpha:1.000];
-        
-        if (snapshot.lowestPrice>=10000) {
-            normalStyle.fontSize = 16.0f;
-        }else{
-            normalStyle.fontSize = 19.0f;
-        }
+        normalStyle.fontSize = SNAPSHOT_FONTSIZE;
         
         
         /**
@@ -2797,12 +2798,8 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         //標示參考價
         CPTMutableTextStyle *referencePriceStyle = [axisSet.yAxis.labelTextStyle mutableCopy];
         referencePriceStyle.color = [CPTColor brownColor];
+        referencePriceStyle.fontSize = SNAPSHOT_FONTSIZE;
         
-        if (snapshot.lowestPrice>=10000) {
-            referencePriceStyle.fontSize = 16.0f;
-        }else{
-            referencePriceStyle.fontSize = 19.0f;
-        }
         //參考價
         CPTAxisLabel *referencePriceLabel = [self comparedAxisLabelWithPrice:snapshot.referencePrice textStyle:referencePriceStyle];
         referencePriceLabel.offset = 1;
@@ -2822,11 +2819,8 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         //標示參考價
         CPTMutableTextStyle *referencePriceStyle = [axisSet.yAxis.labelTextStyle mutableCopy];
         referencePriceStyle.color = [CPTColor brownColor];
-        if (snapshot.lowestPrice>=10000) {
-            referencePriceStyle.fontSize = 16.0f;
-        }else{
-            referencePriceStyle.fontSize = 19.0f;
-        }
+        referencePriceStyle.fontSize = SNAPSHOT_FONTSIZE;
+        
         //參考價
         CPTAxisLabel *referencePriceLabel =
         [self comparedAxisLabelWithPrice:snapshot.referencePrice textStyle:referencePriceStyle];
@@ -2846,6 +2840,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
 - (void)showComparedPriceLabelWithBValue:(FSSnapshot *) snapshot
 {
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *) self.comparedPriceHostView.hostedGraph.axisSet;
+    
     if (snapshot.reference_price.calcValue > 0 && snapshot.high_price.calcValue > 0 && snapshot.low_price.calcValue > 0) {
         /*
          Y軸標示各個價格
@@ -2859,12 +2854,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         
         CPTMutableTextStyle *normalStyle = [axisSet.yAxis.labelTextStyle mutableCopy];
         normalStyle.color = [CPTColor colorWithComponentRed:224.0f/255.0f green:100.0f/255.0f blue:16.0f/255.0f alpha:1.000];
-        
-        if (snapshot.low_price.calcValue>=10000) {
-            normalStyle.fontSize = 16.0f;
-        }else{
-            normalStyle.fontSize = 19.0f;
-        }
+        normalStyle.fontSize = SNAPSHOT_FONTSIZE;
         
         
         /**
@@ -2884,22 +2874,30 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
             
             
         }else{
-            if (increasePercentage >= decreasePercentage && increasePercentage > 0.01) {
-                minY = snapshot.reference_price.calcValue*(1-increasePercentage);
-                maxY = snapshot.high_price.calcValue;
-            }
-            else if (increasePercentage < decreasePercentage && decreasePercentage > 0.01) {
-                minY = snapshot.low_price.calcValue;
-                maxY = snapshot.reference_price.calcValue*(1+decreasePercentage);
-            }
-            else {
-                minY = snapshot.reference_price.calcValue*0.99;
-                maxY = snapshot.reference_price.calcValue*1.01;
+            if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionTW) {
+                if (increasePercentage >= 0.1) {
+                    minY = snapshot.reference_price.calcValue*(1-increasePercentage);
+                    maxY = snapshot.high_price.calcValue;
+                }else{
+                    minY = snapshot.reference_price.calcValue*0.9;
+                    maxY = snapshot.reference_price.calcValue*1.1;
+                }
+            }else{
+                if (increasePercentage >= decreasePercentage && increasePercentage > 0.01) {
+                    minY = snapshot.reference_price.calcValue*(1-increasePercentage);
+                    maxY = snapshot.high_price.calcValue;
+                }
+                else if (increasePercentage < decreasePercentage && decreasePercentage > 0.01) {
+                    minY = snapshot.low_price.calcValue;
+                    maxY = snapshot.reference_price.calcValue*(1+decreasePercentage);
+                }
+                else {
+                    minY = snapshot.reference_price.calcValue*0.99;
+                    maxY = snapshot.reference_price.calcValue*1.01;
+                }
             }
         }
-        
-        
-        
+    
         //        _maxPrice = maxY;
         //        _minPrice = minY;
         CPTAxisLabel *lowerBoundLabel = [self comparedAxisLabelWithPrice:minY textStyle:normalStyle];
@@ -2925,19 +2923,19 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         middleNumberOfMaxAndReference = (snapshot.reference_price.calcValue+maxY)/2;
         
         CPTAxisLabel *middleNumberOfMinAndReferenceLabel =[self comparedAxisLabelWithPrice:middleNumberOfMinAndReference textStyle:normalStyle];
-        
         middleNumberOfMinAndReferenceLabel.offset = 1;
-        CPTAxisLabel *middleNumberOfMaxAndReferenceLabel =[self comparedAxisLabelWithPrice:middleNumberOfMaxAndReference textStyle:normalStyle];
         
+        CPTAxisLabel *middleNumberOfMaxAndReferenceLabel =[self comparedAxisLabelWithPrice:middleNumberOfMaxAndReference textStyle:normalStyle];
         middleNumberOfMaxAndReferenceLabel.offset = 1;
+        
         //標示最低價與參考價中間的數字
-        if (lowerBoundLabel != nil) {
+        if (middleNumberOfMinAndReferenceLabel != nil) {
             [yLabels addObject:middleNumberOfMinAndReferenceLabel];
             [yLocations addObject:[NSDecimalNumber decimalNumberWithDecimal:middleNumberOfMinAndReferenceLabel.tickLocation]];
         }
         
         //標示最高價與參考價中間的數字
-        if (lowerBoundLabel != nil) {
+        if (middleNumberOfMaxAndReferenceLabel != nil) {
             [yLabels addObject:middleNumberOfMaxAndReferenceLabel];
             [yLocations addObject:[NSDecimalNumber decimalNumberWithDecimal:middleNumberOfMaxAndReferenceLabel.tickLocation]];
         }
@@ -2945,12 +2943,8 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         //標示參考價
         CPTMutableTextStyle *referencePriceStyle = [axisSet.yAxis.labelTextStyle mutableCopy];
         referencePriceStyle.color = [CPTColor brownColor];
+        referencePriceStyle.fontSize = SNAPSHOT_FONTSIZE;
         
-        if (snapshot.low_price.calcValue>=10000) {
-            referencePriceStyle.fontSize = 16.0f;
-        }else{
-            referencePriceStyle.fontSize = 19.0f;
-        }
         //參考價
         CPTAxisLabel *referencePriceLabel = [self comparedAxisLabelWithPrice:snapshot.reference_price.calcValue textStyle:referencePriceStyle];
         referencePriceLabel.offset = 1;
@@ -2970,11 +2964,8 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
         //標示參考價
         CPTMutableTextStyle *referencePriceStyle = [axisSet.yAxis.labelTextStyle mutableCopy];
         referencePriceStyle.color = [CPTColor brownColor];
-        if (snapshot.low_price.calcValue>=10000) {
-            referencePriceStyle.fontSize = 16.0f;
-        }else{
-            referencePriceStyle.fontSize = 19.0f;
-        }
+        referencePriceStyle.fontSize = SNAPSHOT_FONTSIZE;
+        
         //參考價
         CPTAxisLabel *referencePriceLabel =
         [self comparedAxisLabelWithPrice:snapshot.reference_price.calcValue textStyle:referencePriceStyle];
@@ -3159,7 +3150,6 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
 - (void)showCDP
 {
     _isCDPVisible = YES;
-    
     [_cdp startWatch];
     
     [self showCDPPriceLabel];
@@ -3356,14 +3346,29 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
      *  如果CDP的資料還沒回來，裡面資料會是空的，這樣設range會造成圖表空白，所以要檢查是否為空值
      */
     if (![_cdp isDataEmpty]) {
-        if(_cdp.cdp<0.1){
-            xyPlotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(_cdp.al*0.99-0.005) length:CPTDecimalFromFloat((_cdp.ah-_cdp.al)+_cdp.al*0.02+0.010)];
+        if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionCN) {
+            xyPlotSpace.globalYRange = nil;
+            double minY = 0;
+            double maxY = 0;
+            minY = _cdp.cdp*0.9;
+            maxY = _cdp.cdp*1.1;
+            xyPlotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(minY) length:CPTDecimalFromFloat(maxY - minY)];
+            CPTMutablePlotRange *yRange = [xyPlotSpace.yRange mutableCopy];
+            [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.1f)];
+            xyPlotSpace.yRange = yRange;
+            
+            //把globalYRange設為yRange可以防止scroll
+            xyPlotSpace.globalYRange = yRange;
         }else{
-            xyPlotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(_cdp.al*0.99-0.015) length:CPTDecimalFromFloat((_cdp.ah-_cdp.al)+_cdp.al*0.02+0.015)];
+            if(_cdp.cdp<0.1){
+                xyPlotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(_cdp.al*0.99-0.005) length:CPTDecimalFromFloat((_cdp.ah-_cdp.al)+_cdp.al*0.02+0.010)];
+            }else{
+                xyPlotSpace.globalYRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat(_cdp.al*0.99-0.015) length:CPTDecimalFromFloat((_cdp.ah-_cdp.al)+_cdp.al*0.02+0.015)];
+            }
+            
+            //把globalYRange設為yRange可以防止scroll
+            xyPlotSpace.yRange = xyPlotSpace.globalYRange;
         }
-        
-        //把globalYRange設為yRange可以防止scroll
-        xyPlotSpace.yRange = xyPlotSpace.globalYRange;
     }
 }
 
@@ -3436,7 +3441,7 @@ static NSString *ComparedItemKVOIdentifier = @"ComparedItemKVOIdentifier";
     if (comparedEquityTickDecompressed == nil) {
         crossHairInfo.comparedLast = [NSNumber numberWithFloat:0.00];
     }else{
-        if (portfolioItem->type_id == 6) {
+        if (comparedEquityTickDecompressed.indexValue.calcValue) {
             crossHairInfo.comparedLast = @(comparedEquityTickDecompressed.indexValue.calcValue);
         }else{
             crossHairInfo.comparedLast = @(comparedEquityTickDecompressed.last.calcValue);

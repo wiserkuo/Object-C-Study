@@ -114,7 +114,6 @@
 }
 
 - (BOOL)shouldAutorotate {
-    
 #ifdef SERVER_SYNC
     if ([self.visibleViewController isKindOfClass:NSClassFromString(@"FSMainViewController")]){
         FSMainViewController *mainView = (FSMainViewController *)self.visibleViewController;
@@ -155,19 +154,26 @@
         return YES;
     }else if([self.visibleViewController isKindOfClass:NSClassFromString(@"FSAddActionPlanSettingViewController")]){
         return YES;
+    } else {
+        return self.visibleViewController.shouldAutorotate;
     }
 #endif
     return NO;//[self.visibleViewController shouldAutorotate];
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    if([self.visibleViewController isKindOfClass:NSClassFromString(@"FSLauncherPageViewController")] || [self.visibleViewController isKindOfClass:NSClassFromString(@"FSRootViewController")]){
-        return UIInterfaceOrientationMaskPortrait;
-    }else if ([self.visibleViewController isKindOfClass:NSClassFromString(@"NetWorthViewController")]){
-        return UIInterfaceOrientationMaskLandscape;
-    }else{
-        return self.visibleViewController.supportedInterfaceOrientations;
-    }
+    
+    return self.visibleViewController.supportedInterfaceOrientations;
+//    if ([self.visibleViewController isKindOfClass:NSClassFromString(@"FSLauncherPageViewController")] ||
+//        [self.visibleViewController isKindOfClass:NSClassFromString(@"FSRootViewController")]) {
+//        
+//        return UIInterfaceOrientationMaskPortrait;
+//        
+//    } else if ([self.visibleViewController isKindOfClass:NSClassFromString(@"NetWorthViewController")]){
+//        return UIInterfaceOrientationMaskLandscape;
+//    } else {
+//        return self.visibleViewController.supportedInterfaceOrientations;
+//    }
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {

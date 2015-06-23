@@ -26,6 +26,7 @@
     FSFonestock *fonestock;
     BOOL isFirstDivergenceTipsAD;
     UIView *toastView;
+    UILabel *msgLabelView;
     
     FSUIButton *changeBullOrBearButton;
     UILabel *updateTimeLabel;
@@ -82,10 +83,6 @@
         [self performSelector:@selector(reloadProtocolBuffersData) withObject:nil afterDelay:0.5];
         
         [FSHUD showGlobalProgressHUDWithTitle:NSLocalizedStringFromTable(@"資料下載中, 請稍候", @"DivergenceTips", nil) hideAfterDelay:2];
-    }
-    if (authResultType == 123) {
-        //[UIApplication sharedApplication].keyWindow
-//        [self showTheLoginToast];
     }
 }
 
@@ -308,26 +305,5 @@
     [self.navigationController pushViewController:techViewController animated:NO];
 }
 
--(void)showTheLoginToast
-{
-    if(!toastView){
-        toastView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2 - 50, self.view.frame.size.height - 100, 100, 30)];
-        UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
-        lbl.text = NSLocalizedStringFromTable(@"登入成功", @"Launcher", nil);
-        lbl.textColor = [UIColor whiteColor];
-        lbl.textAlignment = NSTextAlignmentCenter;
-        [toastView.layer setMasksToBounds:YES];
-        toastView.layer.cornerRadius = 10;
-        [toastView addSubview:lbl];
-        toastView.backgroundColor = [UIColor blackColor];
-    }
-    toastView.hidden = NO;
-    [[[UIApplication sharedApplication] keyWindow] addSubview:toastView];
-    [self performSelector:@selector(closeTheLoginToast) withObject:nil afterDelay:3];
-}
-
--(void)closeTheLoginToast
-{
-    toastView.hidden = YES;
-}
+    
 @end

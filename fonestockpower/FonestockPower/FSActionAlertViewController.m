@@ -402,17 +402,17 @@
     
     if (moreOptionButton.selected == YES) {
         trade.termStr = @"Long";
-        if ([button.titleLabel.text isEqualToString:NSLocalizedStringFromTable(@"Buy", @"ActionPlan", nil)]) {
-            trade.dealStr = @"Buy";
+        if ([button.titleLabel.text isEqualToString:NSLocalizedStringFromTable(@"BUY", @"ActionPlan", nil)]) {
+            trade.dealStr = @"BUY";
         }else{
-            trade.dealStr = @"Sell";
+            trade.dealStr = @"SELL";
         }
     }else{
         trade.termStr = @"Short";
-        if ([button.titleLabel.text isEqualToString:NSLocalizedStringFromTable(@"Short", @"ActionPlan", nil)]) {
-            trade.dealStr = @"Short";
+        if ([button.titleLabel.text isEqualToString:NSLocalizedStringFromTable(@"SHORT", @"ActionPlan", nil)]) {
+            trade.dealStr = @"SHORT";
         }else{
-            trade.dealStr = @"Cover";
+            trade.dealStr = @"COVER";
         }
     }
     
@@ -472,7 +472,9 @@
             //    FSDataModelProc *dataModal = [FSDataModelProc sharedInstance];
             //    PortfolioItem *portfolioItem = [dataModal.portfolioData findItemByIdentCodeSymbol:idSymbol];
             //    [[[FSDataModelProc sharedInstance]portfolioData] RemoveItem:portfolioItem->identCode andSymbol:portfolioItem->symbol];
-
+            
+            NSString *fullName = [[[FSDataModelProc sharedInstance] securitySearchModel] searchFullNameWithIdentCode:[_actionPlan.identCodeSymbol substringToIndex:2] Symbol:[_actionPlan.identCodeSymbol substringFromIndex:3]];
+            [FSHUD showMsg:[NSString stringWithFormat:@"%@ %@ %@", NSLocalizedStringFromTable(@"移除", @"ActionPlan", nil), fullName, NSLocalizedStringFromTable(@"於 交易計劃", @"ActionPlan", nil)]];
             [_actionPlanModel stopWatchIdentcodeSymbol:_actionPlan.identCodeSymbol];
             [_actionPlanDB deleteActionPlanDataWithSymbol:_actionPlan.identCodeSymbol Term:_actionPlan.longShortType];
             _actionPlan.buySellType = FSActionPlanAlertTypeNone ;
@@ -891,9 +893,9 @@
     tradeBtn.tag = indexPath.row;
     if (moreOptionButton.selected == YES) {
         
-        [tradeBtn setTitle:NSLocalizedStringFromTable(@"Buy", @"ActionPlan", nil) forState:UIControlStateNormal];
+        [tradeBtn setTitle:NSLocalizedStringFromTable(@"BUY", @"ActionPlan", nil) forState:UIControlStateNormal];
     }else{
-        [tradeBtn setTitle:NSLocalizedStringFromTable(@"Short", @"ActionPlan", nil) forState:UIControlStateNormal];
+        [tradeBtn setTitle:NSLocalizedStringFromTable(@"SHORT", @"ActionPlan", nil) forState:UIControlStateNormal];
     }
     [tradeBtn addTarget:self action:@selector(tradeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -1057,18 +1059,18 @@
     //tradeBtn
     tradeBtn.tag = indexPath.row;
     if (moreOptionButton.selected == YES) {
-        [tradeBtn setTitle:NSLocalizedStringFromTable(@"Buy", @"ActionPlan", nil) forState:UIControlStateNormal];
+        [tradeBtn setTitle:NSLocalizedStringFromTable(@"BUY", @"ActionPlan", nil) forState:UIControlStateNormal];
     }else{
-        [tradeBtn setTitle:NSLocalizedStringFromTable(@"Short", @"ActionPlan", nil) forState:UIControlStateNormal];
+        [tradeBtn setTitle:NSLocalizedStringFromTable(@"SHORT", @"ActionPlan", nil) forState:UIControlStateNormal];
     }
     [tradeBtn addTarget:self action:@selector(tradeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
     //trade2Btn
     trade2Btn.tag = indexPath.row;
     if (moreOptionButton.selected == YES) {
-        [trade2Btn setTitle:NSLocalizedStringFromTable(@"Sell", @"ActionPlan", nil) forState:UIControlStateNormal];
+        [trade2Btn setTitle:NSLocalizedStringFromTable(@"SELL", @"ActionPlan", nil) forState:UIControlStateNormal];
     }else{
-        [trade2Btn setTitle:NSLocalizedStringFromTable(@"Cover", @"ActionPlan", nil) forState:UIControlStateNormal];
+        [trade2Btn setTitle:NSLocalizedStringFromTable(@"COVER", @"ActionPlan", nil) forState:UIControlStateNormal];
     }
     [trade2Btn addTarget:self action:@selector(tradeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -1789,6 +1791,14 @@
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
     [self.view setNeedsUpdateConstraints];
     [self setNavigationBtn];
+}
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 @end

@@ -14,6 +14,9 @@
 - (void)reloadGraph;
 - (void)updateSingleDateLabelText:(NSString *) dateString;
 - (void)updateAccumulativeDateLabelText:(NSString *) dateString;
-- (void)firstInLoadPeriodRequest;
+
 -(void)configurePlotsPeriodVolumeBarWidth:(float)width;
+
+@optional
+- (void)firstInLoadPeriodRequest;
 @end

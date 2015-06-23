@@ -9,7 +9,7 @@
 	<key>AppId</key>
 	<string>twcharttrade</string>
 	<key>PaymentPageURL</key>
-	<string>http://172.31.5.104/fs_register/subscription.php</string>
+	<string>https://www.fonestock.com.tw/fs_register/subscription.php</string>
 	<key>PurchaseVerifyURL</key>
 	<string>https://www.fonestock.com.tw/fs_service/apiSubscription/apple</string>
 	<key>SignupPageURL</key>
@@ -26,5 +26,7 @@
 	<string>https://www.fonestock.com.tw/fs_register/request</string>
 	<key>OpenProjectURL</key>
 	<string>https://www.fonestock.com.tw/fs_service/apiSignup/initial</string>
+	<key>CheckSubscriptionURL</key>
+	<string>https://www.fonestock.com.tw/fs_service/apiSubscription/status</string>
 </dict>
 </plist>

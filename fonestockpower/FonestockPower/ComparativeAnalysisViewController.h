@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ComparativeAnalysisViewController : UIViewController
+@interface ComparativeAnalysisViewController : FSUIViewController
 -(void)reload:(NSMutableArray *)saveArray touchPoint:(double)pointX;
 -(void)sendHandler;
 @end

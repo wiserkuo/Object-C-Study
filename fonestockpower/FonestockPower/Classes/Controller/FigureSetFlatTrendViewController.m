@@ -8,7 +8,7 @@
 
 #import "FigureSetFlatTrendViewController.h"
 #import "FigureSearchMyProfileModel.h"
-#import "SGInfoAlert.h"
+
 
 @interface FigureSetFlatTrendViewController ()<UITextFieldDelegate>
 
@@ -75,7 +75,7 @@
 }
 - (void)popCurrentViewController {
     if ([_dayText.text isEqualToString:@""] || [_weekText.text isEqualToString:@""] || [_monthText.text isEqualToString:@""]) {
-        [SGInfoAlert showInfo:NSLocalizedStringFromTable(@"超過上限", @"FigureSearch",nil) bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+        [FSHUD showMsg:NSLocalizedStringFromTable(@"請輸入數值", @"FigureSearch",nil)];
     }else{
         [self.navigationController popViewControllerAnimated:NO];
     }
@@ -268,7 +268,7 @@
     
     
     if (![alertStr isEqualToString:@""]) {
-        [SGInfoAlert showInfo:alertStr bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+        [FSHUD showMsg:alertStr];
     }
 
     

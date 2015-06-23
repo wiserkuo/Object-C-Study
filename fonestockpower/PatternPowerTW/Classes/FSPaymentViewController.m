@@ -18,7 +18,28 @@
 
 - (instancetype)initWithPaymentURL:(NSString *)paymentURL {
     if (self = [super init]) {
-        _paymentURL = paymentURL;
+        
+        // _paymentURL = paymentURL;
+        
+        NSString *path = [CodingUtil fonestockDocumentsPath];
+        path = [path stringByAppendingPathComponent:@"inapp_apple"];
+        path = [path stringByAppendingPathComponent:@"subscription.html"];
+        path = [path stringByAppendingFormat:@"?forapp=1"];
+        path = [path stringByAppendingFormat:@"&lang=%@", [FSFonestock sharedInstance].lang];
+        
+        FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
+        
+        if (dataModel.iapHelper.canSubscription) {
+            // 可以訂閱狀態
+            path = [path stringByAppendingFormat:@"&request_iap=1"];
+        } else {
+            // 關閉訂閱狀態
+            
+        }
+        
+        _paymentURL = path;
+        
+        firstInFlag = YES;
     }
     return self;
 }
@@ -115,10 +136,25 @@
         } error:^(NSError *error) {
             //
         }];
+        
+        [dataModel.iapHelper addTransactionObserver];
     }
     else {
         [hud hide:YES];
+        
+        if (firstInFlag) {
+            firstInFlag = NO;
+
+            FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
+            if (!dataModel.iapHelper.canSubscription && dataModel.iapHelper.canSubscriptionDate) {
+                NSString *js_showMsg = [NSString stringWithFormat:@"showDialogue('%@', '%@');", dataModel.iapHelper.subscriptionStatus , dataModel.iapHelper.canSubscriptionDate];
+                [webView stringByEvaluatingJavaScriptFromString:js_showMsg];
+            }
+        }
     }
+    
+
+    
     
     // webview內容自動捲到最上方
 //    NSString *js_scrollToTop = @"scrollTo(0, 0)";
@@ -146,6 +182,9 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     [[[FSDataModelProc sharedInstance] accountManager] isReadyLogin];
+    
+    FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
+    [dataModel.iapHelper removeTransactionObserver];
 }
 
 

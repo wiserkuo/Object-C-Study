@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "CompanyProfilePage4Cell.h"
-@interface CompanyProfilePage4ViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface CompanyProfilePage4ViewController : FSUIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @end

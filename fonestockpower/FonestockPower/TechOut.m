@@ -37,7 +37,7 @@
 }
 - (int)getPacketSize {
     if (_queryType == 0 || _queryType == 2) {
-        return 8+ (int)[_identCodeSymbol length];
+        return 8 + (int)[_identCodeSymbol length];
     } else {
         return 6 + (int)[_identCodeSymbol length];
     }
@@ -64,21 +64,33 @@
     *buffer++ = _commodityType;
     *buffer++ = _queryType;
     
+//    if (_queryType == 0) {
+//        [CodingUtil setUInt16:buffer Value:_startDate];
+//        buffer += sizeof(_startDate);
+//        [CodingUtil setUInt16:buffer Value:_endDate];
+//        buffer += sizeof(_endDate);
+//        
+//    } else if (_queryType == 1) {
+//        [CodingUtil setUInt16:buffer Value:_dataCount];
+//        buffer += sizeof(_dataCount);
+//        
+//    } else if (_queryType == 2) {
+//        [CodingUtil setUInt16:buffer Value:_startDate];
+//        buffer += sizeof(_startDate);
+//        [CodingUtil setUInt16:buffer Value:_dataCount];
+//        buffer += sizeof(_dataCount);
+//    }
+    
     if (_queryType == 0) {
-        [CodingUtil setUInt16:buffer Value:_startDate];
-        buffer += sizeof(_startDate);
-        [CodingUtil setUInt16:buffer Value:_endDate];
-        buffer += sizeof(_endDate);
+        [CodingUtil setUInt16:&buffer value:_startDate needOffset:YES];
+        [CodingUtil setUInt16:&buffer value:_endDate needOffset:YES];
         
     } else if (_queryType == 1) {
-        [CodingUtil setUInt16:buffer Value:_dataCount];
-    buffer += sizeof(_dataCount);
+        [CodingUtil setUInt16:&buffer value:_dataCount needOffset:YES];
         
     } else if (_queryType == 2) {
-        [CodingUtil setUInt16:buffer Value:_startDate];
-        buffer += sizeof(_startDate);
-        [CodingUtil setUInt16:buffer Value:_dataCount];
-        buffer += sizeof(_dataCount);
+        [CodingUtil setUInt16:&buffer value:_startDate needOffset:YES];
+        [CodingUtil setUInt16:&buffer value:_dataCount needOffset:YES];
     }
     
     buffer = tmpPtr;

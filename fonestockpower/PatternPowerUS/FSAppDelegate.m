@@ -79,6 +79,16 @@
     }
     
 #endif
+    
+    _msgLabelView = [[FSInsetsLabel alloc] init];
+    _msgLabelView.translatesAutoresizingMaskIntoConstraints = NO;
+    _msgLabelView.textColor = [UIColor whiteColor];
+    _msgLabelView.textAlignment = NSTextAlignmentLeft;
+    _msgLabelView.layer.masksToBounds = YES;
+    _msgLabelView.layer.cornerRadius = 5;
+    _msgLabelView.numberOfLines = 0;
+    _msgLabelView.backgroundColor = [UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1];
+    
     return YES;
 }
 
@@ -195,6 +205,7 @@
         
         [_rootViewNavController popToRootViewControllerAnimated:NO];
         FSLoginViewController *loginViewController = [[FSLoginViewController alloc] initWithAccount:account AndPassword:@""];
+        loginViewController.hasBackButton = NO;
         [_rootViewNavController pushViewController:loginViewController animated:NO];
     }
     return YES;

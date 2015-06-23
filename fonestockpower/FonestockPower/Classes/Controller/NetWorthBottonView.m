@@ -136,11 +136,9 @@
     if([_netWorthDataArray count] != 0){
         NetWorthData *data = [_netWorthDataArray objectAtIndex:0];
         if([CodingUtil makeDateFromDate:touchDate] >= [CodingUtil makeDateFromDate:data->date]){
-            if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionCN ||
-                [FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
-                valueLabel.text = [NSString stringWithFormat:@"$%@",[CodingUtil CoverFloatWithCommaForCN:value]];
-            }else{
-                valueLabel.text = [NSString stringWithFormat:@"$%@",[CodingUtil CoverFloatWithComma:value DecimalPoint:0]];
+            valueLabel.text = [NSString stringWithFormat:@"$%@",[CodingUtil CoverFloatWithCommaForCN:value]];
+            if (value == 0) {
+                valueLabel.text = @"0";
             }
         }else{
             valueLabel.text = @"";
@@ -148,9 +146,9 @@
     }else{
         valueLabel.text = @"";
     }
-    if (value>0) {
+    if (value > 0) {
         valueLabel.textColor = [StockConstant PriceUpColor];
-    }else if (value<0){
+    }else if (value < 0){
         valueLabel.textColor = [StockConstant PriceDownColor];
     }else{
         valueLabel.textColor = [UIColor blueColor];

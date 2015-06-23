@@ -50,13 +50,13 @@
 -(NSMutableArray *)searchPositionWithTerm:(NSString *)term;
 -(NSMutableArray *)searchPositionWithTermNotOrderBySeq:(NSString *)term;
 -(NSMutableArray *)searchPositionidSymbolWithTerm:(NSString *)term;
--(NSMutableDictionary *)searchPositionWithIdSybol:(NSString *)ids Term:(NSString *)term;
+-(NSMutableArray *)searchPositionWithIdSybol:(NSString *)ids Term:(NSString *)term;
 -(NSMutableArray *)searchPositionFirstDateWithIdSybol:(NSString *)ids Term:(NSString *)term;
 -(NSMutableArray *)searchPositionWithTerm:(NSString *)term Symbol:(NSString *)symbol;
 -(NSMutableArray *)searchTradeCountWithSymbol:(NSString *)symbol Date:(NSString *)date;
 -(NSMutableArray *)searchDiaryWithDeal:(NSString *)deal;
 -(NSMutableArray *)searchAvgCostWithSymbol:(NSString *)symbol;
--(NSMutableDictionary *)searchRealizedWithIdSymbol:(NSString *)ids Term:(NSString *)term Deal:(NSString *)deal;
+-(NSMutableArray *)searchRealizedWithIdSymbol:(NSString *)ids Term:(NSString *)term Deal:(NSString *)deal;
 -(NSMutableArray *)searchPositionWithTerm:(NSString *)term Deal:(NSString *)deal;
 -(NSMutableArray *)searchRealizedOfNetWorthWithTerm:(NSString *)term;
 -(NSMutableArray *)searchRealizedOfTradeWithDate:(NSString *)date;

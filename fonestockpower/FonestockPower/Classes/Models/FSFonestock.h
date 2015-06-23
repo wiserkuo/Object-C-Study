@@ -80,6 +80,7 @@ typedef NS_ENUM(NSUInteger, FSPermissionType) {
 @property (readonly, nonatomic) NSString *appStoreURL;
 @property (readonly, nonatomic) NSString *forgotPasswordURL;
 @property (readonly, nonatomic) NSString *openProjectURL;
+@property (readonly, nonatomic) NSString *checkSubscriptionURL;
 @property (readonly, nonatomic) NSInteger TipsLocationUpdataType;
 
 

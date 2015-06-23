@@ -61,8 +61,11 @@
     CGRect r = CGRectMake(x+xOffset, y-size.height/2, size.width, size.height);
     NSMutableParagraphStyle *paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-    paragraphStyle.alignment = NSTextAlignmentRight;
     
+    paragraphStyle.alignment = NSTextAlignmentRight;
+    if((int)bottonView.subDataViewsIndex==BottomViewAnalysisTypeOBV){
+        paragraphStyle.alignment = NSTextAlignmentLeft;
+    }
     NSDictionary *attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[UIColor blueColor],
                                   NSParagraphStyleAttributeName: paragraphStyle };
 //    [str drawInRect:r withFont:font lineBreakMode:NSLineBreakByWordWrapping alignment:NSTextAlignmentRight];
@@ -148,7 +151,7 @@
     float title2_2Location;
     float title3Location;
     
-    if (self.frame.size.width<=330) {
+    if (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
         title1Location = 3;
         title2Location = 130;
         title2_2Location = 100;
@@ -329,7 +332,15 @@
             titleLabelWidth = w;
         float titleLabelOffsetDown = 0;
         
-        if (UIInterfaceOrientationIsPortrait(drawAndScrollController.interfaceOrientation)){
+        if(currentStatus==0){
+            titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x - 0.5, titleLabelOffsetDown, titleLabelWidth, 13)];
+            [self addSubview:titleLabel];
+            titleLabel.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:140.0f/255.0f blue:204.0f/255.0f alpha:1.0f];
+            titleLabel.textColor = [UIColor whiteColor];
+            titleLabel.font = [UIFont systemFontOfSize:10.0f];
+            titleLabel.textAlignment = NSTextAlignmentCenter;
+        }
+        if (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
             currentStatus = 1;
         }else{
             currentStatus = 2;
@@ -338,13 +349,13 @@
         if(currentStatus == lastStatus){
             [titleLabel setFrame:CGRectMake(x - 0.5, titleLabelOffsetDown, titleLabelWidth, 13)];
         }else{
-            [titleLabel removeFromSuperview];
-            titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x - 0.5, titleLabelOffsetDown, titleLabelWidth, 13)];
+            //[titleLabel removeFromSuperview];
+            //titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(x - 0.5, titleLabelOffsetDown, titleLabelWidth, 13)];
             titleLabel.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:140.0f/255.0f blue:204.0f/255.0f alpha:1.0f];
             titleLabel.textColor = [UIColor whiteColor];
             titleLabel.font = [UIFont systemFontOfSize:10.0f];
             titleLabel.textAlignment = NSTextAlignmentCenter;
-            [self addSubview:titleLabel];
+            //[self addSubview:titleLabel];
         }
         lastStatus = currentStatus;
 
@@ -542,19 +553,26 @@
                 OBVView * obvView =[bottonView.subDataViews objectAtIndex:bottonView.subDataViewsIndex];
                 float highestVolume = [obvView maxValue];
                 y0 = chartHeight / 2 + y;
-
-
+                NSArray *textArray = @[@"", @"K", @"M", @"B", @"T", @"Q"];
+                [texts addObject:@"0"];
+                
                 for (int i = 2; i < n; i += 2) {
                     v = highestVolume * i / n;
-                    [texts addObject:[ValueUtil stringWithValue:v unit:maxUnit font:font width:w-4 sign:YES]];
-                    [texts addObject:[ValueUtil stringWithValue:-v unit:maxUnit font:font width:w-4 sign:YES]];
+                    
+                    [texts addObject:[[CodingUtil volumeRoundRownWithDouble:v]stringByAppendingString:textArray[maxUnit]]];
+                    [texts addObject:[[CodingUtil volumeRoundRownWithDouble:-v]stringByAppendingString:textArray[maxUnit]]];
+                       //[texts addObject:[ValueUtil stringWithValue:v unit:maxUnit font:font width:w-4 sign:YES]];
+                       //[texts addObject:[ValueUtil stringWithValue:-v unit:maxUnit font:font width:w-4 sign:YES]];
+//                   [texts addObject:[NSString stringWithFormat:@"%d"];
+//                   [texts addObject:[ValueUtil stringWithValue:-v unit:maxUnit font:font width:w-4 sign:YES]];
                 }
 
                 for (NSString *s in texts)
                     [self gridValueSize:&size fromString:s];
 
-                [self drawGridValue:@"0" atY:y0 withSize:size xOffset:0];
                 int index = 0;
+                [self drawGridValue:[texts objectAtIndex:index++] atY:y0 withSize:size xOffset:0];
+                
 
                 for (int i = 2; i < n; i += 2) {
                     v = chartHeight / 2 * i / n;
@@ -735,7 +753,7 @@
     float value2_2Location;
     float value3Location;
     
-    if (self.frame.size.width <=330) {
+    if (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
         value1Location = 40;
         value1_2Location = 40;
         value2Location = 170;
@@ -1135,17 +1153,18 @@
 				[valueString drawAtPoint:CGPointMake(value2_2Location - 90, 1) withAttributes:attributes];
 				break;
 			case BottomViewAnalysisTypeOBV:
+                
                 if (value2 != -0.0) {
                     if(value1>value2){
                         attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceUpColor]};
-                        valueString = [NSString stringWithFormat:@"%@↑",[CodingUtil stringWithVolumeByValue:value1]];
+                        valueString = [NSString stringWithFormat:@"%@↑",[CodingUtil stringWithVolumeByValue2NoFloat:value1]];
                     }else if (value2>value1){
                         attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceDownColor]};
-                        valueString = [NSString stringWithFormat:@"%@↓",[CodingUtil stringWithVolumeByValue:value1]];
+                        valueString = [NSString stringWithFormat:@"%@↓",[CodingUtil stringWithVolumeByValue2NoFloat:value1]];
                     }else{
                         attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[UIColor blueColor]};
                         if (value1 !=-0.0) {
-                            valueString = [NSString stringWithFormat:@"%@",[CodingUtil stringWithVolumeByValue:value1]];
+                            valueString = [NSString stringWithFormat:@"%@",[CodingUtil stringWithVolumeByValue2NoFloat:value1]];
                         }else{
                             valueString = @"";
                         }
@@ -1153,7 +1172,7 @@
                 }else{
                     attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[UIColor blueColor]};
                     if (value1 !=-0.0) {
-                        valueString = [NSString stringWithFormat:@"%@",[CodingUtil stringWithVolumeByValue:value1]];
+                        valueString = [NSString stringWithFormat:@"%@",[CodingUtil stringWithVolumeByValue2NoFloat:value1]];
                     }else{
                         valueString = @"";
                     }

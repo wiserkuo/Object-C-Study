@@ -11,7 +11,7 @@
 "操作導覽" = "Show walk-through";
 "前往" = "Here";
 "開啟" ="On";
-"版本資訊" = "Version";
+"版本資訊" = "Version:";
 "服務說明/版權宣告" = "Terms of Service";
 "服務內容" = "<font face='Arial' size=5>1. The information and content provided in the <b>Pattern Power App</b> is for informational and/or educational purposes only.&nbsp;&nbsp;The information presented or discussed is not, and should not be considered, a recommendation or an offer of, or solicitation of an offer by, Fonestock Technology Inc.&nbsp;or its affiliates to buy, sell or hold any security or other financial product or an endorsement or affirmation of any specific investment strategy.&nbsp;&nbsp;You are fully responsible for your investment decisions.&nbsp;&nbsp;Your choice to engage in a particular investment or investment strategy should be based solely on your own research and evaluation of the risks involved, your financial circumstances and your investment objectives.&nbsp;&nbsp;Fonestock Technology Inc.&nbsp;and its affiliates are not offering or providing, and will not offer or provide, any advice, opinion or recommendation of the suitability, value or profitability of any particular investment or investment strategy.</br></br>2. <b>Pattern Power App</b> does not make recommendations or offer investment advice of any kind. 　 </br></br>3. We are very committed to protecting the privacy of your personal information and will not sell, rent or license this information to anyone.&nbsp;&nbsp;We may use your personal information to notify you of useful products or services and send email communications such as newsletters, new client information, event invitations and offers.&nbsp;&nbsp;You will always have the option to unsubscribe from any promotional email communications from Fonestock Technology Inc.&nbsp;</br></br>4. Any specific securities, or types of securities, used as examples are for demonstration purposes only.&nbsp;&nbsp;None of the information provided should be considered a recommendation or solicitation to invest in, or liquidate, a particular security or type of security.</font>";
 
@@ -26,7 +26,8 @@
 "登入" = "Log In";
 "服務訊息" = "Account status";
 "客服電話" = "contact:help@fonestock.com";//"For customer support, contact:help@fonestock.com";
-"未登入" = "Log Out";
+"未登入" = "Not logged in";
+"已登入" = "Logged in";
 "清除盤後資料" = "Clear Off Session Data";
 "要清除盤後資料嗎" = "Do you want to delete Off Session Data?";
 "盤後資料清除完畢" = "Off Session Data has been cleared!";
@@ -41,4 +42,14 @@
 "請輸入帳號密碼"="Please enter your account/password";
 "忘記密碼"="Forget password";
 
+
+
+
+
+"不允許程式內支付購買功能" = "You did not allow In App Purchase.";
+"無法取得產品訊息" = "The product does not exist. Failed to purchase.";
+"交易出現問題，請稍候確認" = "There is a problem with the transaction. Please check your receipt.";
+"交易成功" = "Transaction complete.";
+"交易失敗" = "Transaction Failed.";
+"交易取消" = "Transaction Cancelled";
 

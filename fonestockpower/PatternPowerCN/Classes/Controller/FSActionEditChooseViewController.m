@@ -1,4 +1,4 @@
-//
+//  美股AddSymbols
 //  FSActionEditChooseViewController.m
 //  FonestockPower
 //
@@ -116,10 +116,10 @@
 
     self.bottomLabel = [[UILabel alloc]init];
     _bottomLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    _bottomLabel.text = NSLocalizedStringFromTable(@"自選股數", @"SecuritySearch", nil);
+    _bottomLabel.text = NSLocalizedStringFromTable(@"橘色為已加入自選股", @"SecuritySearch", nil);
     _bottomLabel.textColor = [UIColor blueColor];
-    _bottomLabel.font = [UIFont systemFontOfSize:18.0f];
-//    [self.view addSubview:_bottomLabel];
+    _bottomLabel.font = [UIFont systemFontOfSize:15.0f];
+    [self.view addSubview:_bottomLabel];
     
     self.noStockLabel = [[UILabel alloc]init];
     _noStockLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -138,11 +138,12 @@
     NSDictionary *viewControllers = NSDictionaryOfVariableBindings(_searchText , _searchBtn, _titleLabel,_collectionView,_bottomLabel);
     NSMutableArray *constraints = [[NSMutableArray alloc] initWithCapacity:10];
     
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_searchText(38)]-2-[_titleLabel]-2-[_collectionView]-2-|" options:0 metrics:nil views:viewControllers]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_searchBtn(38)]" options:0 metrics:nil views:viewControllers]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_searchText(44)]-2-[_titleLabel]-2-[_collectionView]-2-[_bottomLabel(25)]|" options:0 metrics:nil views:viewControllers]];
+    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_searchBtn(44)]" options:0 metrics:nil views:viewControllers]];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-3-[_searchText]-2-[_searchBtn(65)]-5-|" options:0 metrics:nil views:viewControllers]];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_titleLabel]-5-|" options:0 metrics:nil views:viewControllers]];
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-3-[_collectionView]-3-|" options:0 metrics:nil views:viewControllers]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_bottomLabel]-5-|" options:0 metrics:nil views:viewControllers]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_noStockLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_collectionView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
     [constraints addObject:[NSLayoutConstraint constraintWithItem:_noStockLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_collectionView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
 
@@ -248,7 +249,7 @@
     NSMutableArray * array = [[NSMutableArray alloc]init];
     for (int i=0; i<[_dataIdArray count]; i++) {
         for (int j=0; j<[_groupDataIdArray count]; j++) {
-            if ([[_dataIdArray objectAtIndex:i] isEqual:[_groupDataIdArray objectAtIndex:j]]) {
+            if ([[_dataIdArray objectAtIndex:i] isEqualToString:[_groupDataIdArray objectAtIndex:j]]) {
                 [array addObject:[NSNumber numberWithInt:i]];
             }
         }
@@ -276,6 +277,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
     [self registerTickDataNotificationCallBack:self seletor:@selector(TickDataNotification)];
     [self registerLoginNotificationCallBack:self seletor:@selector(TickDataNotification)];
     FSDataModelProc *dataModal = [FSDataModelProc sharedInstance];
@@ -313,6 +315,7 @@
         SecurityName* secu = [dataModal.securityName securityNameWithIdentCodeSymbol:[NSString stringWithFormat:@"%@ %@",[_dataIdentCodeArray objectAtIndex:button.tag],[_dataIdArray objectAtIndex:button.tag]]];
         [dataModal.portfolioData RemoveItem:secu->identCode andSymbol:secu->symbol];
         [self editTotalCount:[NSNumber numberWithInt:-1]];
+        [_groupDataIdArray removeObject:[_dataIdArray objectAtIndex:button.tag]];
         _totalCount-=1;
         userCount-=1;
     }else{
@@ -328,10 +331,11 @@
             SecurityName* secu = [dataModal.securityName securityNameWithIdentCodeSymbol:[NSString stringWithFormat:@"%@ %@",[_dataIdentCodeArray objectAtIndex:button.tag],[_dataIdArray objectAtIndex:button.tag]]];
             _identSymbol = [NSString stringWithFormat:@"%@ %@",[_dataIdentCodeArray objectAtIndex:button.tag],[_dataIdArray objectAtIndex:button.tag]];
             [dataModal.portfolioData AddItem:secu];
+            [_groupDataIdArray addObject:[_dataIdArray objectAtIndex:button.tag]];
             _totalCount+=1;
             userCount+=1;
         }else{
-            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:NSLocalizedStringFromTable(@"警告", @"SecuritySearch", nil) message:NSLocalizedStringFromTable(@"自選股已達上限", @"SecuritySearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確定", @"SecuritySearch", nil) otherButtonTitles:nil];
+            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:NSLocalizedStringFromTable(@"警告", @"SecuritySearch", nil) message:NSLocalizedStringFromTable(@"自選股已達上限", @"SecuritySearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確認", @"SecuritySearch", nil) otherButtonTitles:nil];
             [alert show];
         }
     }

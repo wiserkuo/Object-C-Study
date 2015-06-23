@@ -516,8 +516,9 @@
     return dataArray;
 }
 
--(NSMutableDictionary *)searchRealizedWithIdSymbol:(NSString *)ids Term:(NSString *)term Deal:(NSString *)deal{
-    NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] init];
+-(NSMutableArray *)searchRealizedWithIdSymbol:(NSString *)ids Term:(NSString *)term Deal:(NSString *)deal{
+
+    NSMutableArray *dataArray = [[NSMutableArray alloc]init];
     FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
     FSDatabaseAgent *dbAgent = dataModel.mainDB;
     
@@ -525,18 +526,19 @@
         FMResultSet *message = [db executeQuery:@"SELECT Date, Count, Price FROM Trade WHERE Symbol = ? AND Term = ? AND Deal = ?",ids,term,deal];
         while ([message next]) {
             NSString *date = [message stringForColumn:@"Date"];
-            
+            NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] init];
             NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
             int count = [message intForColumn:@"Count"];
             [dic setObject:[NSNumber numberWithInt:count] forKey:@"Count"];
             float price = [message doubleForColumn:@"Price"];
             [dic setObject:[NSNumber numberWithFloat:price] forKey:@"Price"];
-            
             [dataDictionary setObject:dic forKey:date];
+            [dataArray addObject:dataDictionary];
+            
         }
         [message close];
     }];
-    return dataDictionary;
+    return dataArray;
 }
 
 -(NSMutableArray *)searchPositionWithTerm:(NSString *)term Deal:(NSString *)deal{
@@ -577,14 +579,15 @@
     return dataArray;
 }
 
--(NSMutableDictionary *)searchPositionWithIdSybol:(NSString *)ids Term:(NSString *)term{
-    NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] init];
+-(NSMutableArray *)searchPositionWithIdSybol:(NSString *)ids Term:(NSString *)term{
+    NSMutableArray *dataArray = [[NSMutableArray alloc]init];
     FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
     FSDatabaseAgent *dbAgent = dataModel.mainDB;
     
     [dbAgent inDatabase:^(FMDatabase *db) {
         FMResultSet *message = [db executeQuery:@"SELECT * FROM Trade WHERE Symbol = ? AND Term = ? ORDER BY Date",ids, term];
         while ([message next]) {
+            NSMutableDictionary *dataDictionary = [[NSMutableDictionary alloc] init];
             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
             NSString *date = [message stringForColumn:@"Date"];
             int count = [message intForColumn:@"Count"];
@@ -593,10 +596,11 @@
             [dic setObject:[NSNumber numberWithFloat:price] forKey:@"Price"];
             
             [dataDictionary setObject:dic forKey:date];
+            [dataArray addObject:dataDictionary];
         }
         [message close];
     }];
-    return dataDictionary;
+    return dataArray;
 }
 
 -(NSMutableArray *)searchPositionFirstDateWithIdSybol:(NSString *)ids Term:(NSString *)term{

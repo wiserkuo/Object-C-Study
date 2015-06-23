@@ -28,6 +28,8 @@
 
 @property (strong, nonatomic) FSUIButton * searchGroupBtn;
 @property (strong, nonatomic) FSUIButton * userStockBtn;
+@property (strong, nonatomic) FSUIButton *backButton;
+
 
 @property (strong, nonatomic) ChangeStockSearchViewController * searchStockView;
 @property (strong, nonatomic) TaiwanChangeStockViewController * taiwanStockView;
@@ -61,18 +63,20 @@
 }
 
 -(void)viewDidLoad{
-    [self setUpImageBackButton];
-    [self initView];
     [super viewDidLoad];
+    
+    [self initView];
 }
 
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
--(void)viewWillDisappear:(BOOL)animated
-{
+-(void)viewWillDisappear:(BOOL)animated {
+    
+    [self.navigationController setNavigationBarHidden:NO];
+    
     NSString *path = [[CodingUtil fonestockDocumentsPath] stringByAppendingPathComponent:
                       [NSString stringWithFormat:@"ChangeStock.plist"]];
     self.mainDict = [NSMutableDictionary dictionaryWithContentsOfFile:path];
@@ -90,6 +94,12 @@
 -(void)initView{
     [self.navigationItem setTitle:NSLocalizedStringFromTable(@"換股", @"Equity", nil)];
     self.objDictionary = [[NSMutableDictionary alloc]init];
+    
+    _backButton = [[FSUIButton alloc] initWithButtonType:FSUIButtonTypeBlackLeftArrow];
+    [_objDictionary setObject:_backButton forKey:@"_backButton"];
+    _backButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [_backButton addTarget:self action:@selector(popCurrentViewController) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_backButton];
     
     self.searchGroupBtn = [[FSUIButton alloc]initWithButtonType:FSUIButtonTypeNormalRed];
     self.searchGroupBtn.translatesAutoresizingMaskIntoConstraints = NO;
@@ -175,7 +185,7 @@
 -(void)btnClick:(FSUIButton *)btn{
     _searchGroupBtn.selected = NO;
     _userStockBtn.selected = NO;
-
+    
     if ([btn isEqual:_searchGroupBtn]) {
         [_userStockView.view removeFromSuperview];
         if( [FSFonestock sharedInstance].marketVersion == FSMarketVersionCN || [FSFonestock sharedInstance].marketVersion == FSMarketVersionTW){
@@ -202,10 +212,17 @@
 }
 
 -(void)setAutoLayout{
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-2-[_searchGroupBtn(44)]-2-[_rootView]|" options:NSLayoutFormatAlignAllLeft metrics:nil views:_objDictionary]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-2-[_userStockBtn(44)]-2-[_rootView]|" options:NSLayoutFormatAlignAllRight metrics:nil views:_objDictionary]];
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_searchGroupBtn]-3-[_userStockBtn(==_searchGroupBtn)]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:_objDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_backButton(33)]" options:0 metrics:nil views:_objDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_backButton(33)]" options:NSLayoutFormatAlignAllCenterY metrics:nil views:_objDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_backButton(33)][_searchGroupBtn]-3-[_userStockBtn(_searchGroupBtn)]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:_objDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_searchGroupBtn(44)]" options:0 metrics:nil views:_objDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_userStockBtn(44)]" options:0 metrics:nil views:_objDictionary]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-22-[_backButton]-[_rootView]|" options:NSLayoutFormatAlignAllLeft metrics:nil views:_objDictionary]];
+    
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_rootView]|" options:0 metrics:nil views:_objDictionary]];
 }
 

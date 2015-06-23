@@ -15,7 +15,7 @@
 #import "TermExplainWebViewController.h"
 #import "TextFieldTableViewDelegate.h"
 #import "IndicatorParameterUrlCenter.h"
-#import "SGInfoAlert.h"
+
 
 @interface SettingIndicatorsViewController ()<UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,TextFieldTableViewDelegate,IndicatorParameterUrlCenterDelegate,FSSettingIndicatorsTableViewCellDelegate,UITextFieldDelegate,UIAlertViewDelegate>
 
@@ -379,7 +379,7 @@
             _targetTextField.text = [alertView textFieldAtIndex:0].text;
             [self storeUserInput:[alertView textFieldAtIndex:0].text];
         }else{
-            [SGInfoAlert showInfo:NSLocalizedStringFromTable(@"請輸入大於零的數字", @"Draw", nil) bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+            [FSHUD showMsg:NSLocalizedStringFromTable(@"請輸入大於零的數字", @"Draw", nil)];
         }
     }else if(alertView == _inputAlert && buttonIndex ==0){
         return;

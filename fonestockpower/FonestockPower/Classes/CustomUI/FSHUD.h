@@ -18,4 +18,8 @@
 + (MBProgressHUD *)showGlobalProgressHUDWithTitle:(NSString *)title hideAfterDelay:(NSTimeInterval)delay;
 + (MBProgressHUD *)showGlobalProgressHUDWithTitleTextOnly:(NSString *)title hideAfterDelay:(NSTimeInterval)delay;
 + (void)hideGlobalHUD;
+
+
++ (void)showMsg:(NSString *)msg;
++ (void)showMsg:(NSString *)msg hideAfterDelay:(NSTimeInterval)delay;
 @end

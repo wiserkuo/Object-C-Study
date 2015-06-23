@@ -20,6 +20,8 @@
 
 @interface FSPriceVolumeViewController (){
     NSTimer *timer;
+    int downLoadIngCount;
+    int sendRequestCount;
 }
 @property (strong, nonatomic) FSInstantInfoWatchedPortfolio * warchPortfolio;
 @property (nonatomic, strong) FSPriceVolumeControlSpace *controlSpace;
@@ -84,13 +86,17 @@
     [_dataModal.tradeDistribute SetTarget:_dataSource];
 
     if (_warchPortfolio.portfolioItem != nil) {
+        sendRequestCount = downLoadIngCount = 0;
+        
         _dataSource.portfolioItem = _warchPortfolio.portfolioItem;
         [_dataSource startWatch];
         if (_dataSource.singleDay) {
             [_dataSource sendSingleDayRequest:_dataSource.singleDayIndex];
+            sendRequestCount ++;
         }
         if (_dataSource.periodDay) {
             [_dataSource sendPeriodRequest:_dataSource.periodIndex];
+            sendRequestCount ++;
         }
     //        [self reloadGraph];
 
@@ -195,7 +201,14 @@
         [self updateXAxisLabel];
         [self updateYAxisLabel];
     }
-    [self.view hideHUD];
+    downLoadIngCount ++;
+    if (downLoadIngCount == sendRequestCount) {
+        [self.view hideHUD];
+        [timer invalidate];
+    }
+    
+    
+    
 }
 
 -(void)configureHost {
@@ -348,8 +361,8 @@
     
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *) self.hostView.hostedGraph.axisSet;
     CPTAxis *xAxis = axisSet.xAxis;
-    NSMutableSet *xLabels = [NSMutableSet setWithCapacity:5];
-    NSMutableSet *xLocations = [NSMutableSet setWithCapacity:5];
+    NSMutableSet *xLabels = [NSMutableSet setWithCapacity:3];
+    NSMutableSet *xLocations = [NSMutableSet setWithCapacity:3];
     
     NSInteger baseUnit = floor([maxVolume doubleValue] * 0.9 / 3);
     if (baseUnit < 3) {
@@ -357,7 +370,7 @@
     }
     if ([maxVolume integerValue] != 0) {
         for (NSInteger counter = baseUnit; counter < [maxVolume integerValue] ; counter += baseUnit) {
-            CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[CodingUtil stringWithVolumeByValue2:counter] textStyle:xAxis.labelTextStyle];
+            CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[CodingUtil volumeRoundRownWithDouble:(double)counter] textStyle:xAxis.labelTextStyle];
             label.alignment = CPTAlignmentCenter;
             CGFloat location = counter;
             label.tickLocation = CPTDecimalFromCGFloat(location);
@@ -1051,12 +1064,15 @@
     self.controlSpace.singleCheckButton.selected = !self.controlSpace.singleCheckButton.selected;
     [self setSingleDayPlotVisible:NO];
     [self setAccumulationPlotVisible:NO];
+    timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(timerHideHud:) userInfo:nil repeats:NO];
+    sendRequestCount = 1;
     if (self.controlSpace.singleCheckButton.selected && self.controlSpace.accumulativeCheckButton.selected) {
         [self enableSingleFeature];
         [self enableAccumulativeFeature];
-        
         [self.dataSource sendSingleDayRequest:self.dataSource.singleDayIndex];
         [self.dataSource sendPeriodRequest:self.dataSource.periodIndex];
+        
+        sendRequestCount = 2;
     }else if (self.controlSpace.singleCheckButton.selected){
         [self disableAccumulativeFeature];
         [self enableSingleFeature];
@@ -1074,19 +1090,23 @@
     [self hideCrossHair];
     [self.crossInfoPanel updateConstraints];
     [self.view showHUDWithTitle:@""];
+    downLoadIngCount = 0;
 }
 
 -(void)accumulativeCheckButtonClick{
     self.controlSpace.accumulativeCheckButton.selected = !self.controlSpace.accumulativeCheckButton.selected;
     [self setSingleDayPlotVisible:NO];
     [self setAccumulationPlotVisible:NO];
+    timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(timerHideHud:) userInfo:nil repeats:NO];
+    sendRequestCount = 1;
     if (self.controlSpace.singleCheckButton.selected && self.controlSpace.accumulativeCheckButton.selected) {
         
         [self enableSingleFeature];
         [self enableAccumulativeFeature];
-        
         [self.dataSource sendSingleDayRequest:self.dataSource.singleDayIndex];
         [self.dataSource sendPeriodRequest:self.dataSource.periodIndex];
+        
+        sendRequestCount = 2;
     }else if (self.controlSpace.accumulativeCheckButton.selected){
         [self disableSingleFeature];
         [self enableAccumulativeFeature];
@@ -1104,18 +1124,20 @@
     [self hideCrossHair];
     [self.crossInfoPanel updateConstraints];
     [self.view showHUDWithTitle:@""];
+    downLoadIngCount = 0;
 }
+
 
 - (void)addSingleDayActionSheet
 {
-    self.singleDayActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"Cancel", @"Draw", @"cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedStringFromTable(@"今日", @"Equity", @"Today"), NSLocalizedStringFromTable(@"前1日", @"Equity", @"T-1"), NSLocalizedStringFromTable(@"前2日", @"Equity", @""), NSLocalizedStringFromTable(@"前3日", @"Equity", @""), NSLocalizedStringFromTable(@"前4日", @"Equity", @""),NSLocalizedStringFromTable(@"前5日", @"Equity", @""), nil];
+    self.singleDayActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedStringFromTable(@"單日", @"Draw", @"cancel") delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"Cancel", @"Draw", @"cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedStringFromTable(@"今日", @"Equity", @"Today"), NSLocalizedStringFromTable(@"前1日", @"Equity", @"T-1"), NSLocalizedStringFromTable(@"前2日", @"Equity", @""), NSLocalizedStringFromTable(@"前3日", @"Equity", @""), NSLocalizedStringFromTable(@"前4日", @"Equity", @""),NSLocalizedStringFromTable(@"前5日", @"Equity", @""), nil];
     
     [self showActionSheet:_singleDayActionSheet];
 }
 
 - (void)addPeriodActionSheet
 {
-    self.accumulativeActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"Cancel", @"Draw", @"cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedStringFromTable(@"5日", @"Equity", @""), NSLocalizedStringFromTable(@"10日", @"Equity", @""), NSLocalizedStringFromTable(@"15日", @"Equity", @""), nil];
+    self.accumulativeActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedStringFromTable(@"累積", @"Draw", @"cancel") delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"Cancel", @"Draw", @"cancel") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedStringFromTable(@"5日", @"Equity", @""), NSLocalizedStringFromTable(@"10日", @"Equity", @""), NSLocalizedStringFromTable(@"15日", @"Equity", @""), nil];
     
     [self showActionSheet:_accumulativeActionSheet];
 }

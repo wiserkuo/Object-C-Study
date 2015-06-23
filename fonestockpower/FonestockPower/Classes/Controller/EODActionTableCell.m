@@ -17,7 +17,6 @@
     int imgCount;
     NSMutableArray *imgArray;
     NSMutableArray *nameArray;
-    BOOL isUS;
 }
 static NSString *itemIdentifier = @"FigureSearchItemIdentifier";
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier controller:(id)obj
@@ -46,14 +45,6 @@ static NSString *itemIdentifier = @"FigureSearchItemIdentifier";
         _horizontalLine.backgroundColor = [UIColor grayColor];
         [self addSubview:_horizontalLine];
         
-        NSString * appid = [FSFonestock sharedInstance].appId;
-        NSString * group = [appid substringWithRange:NSMakeRange(0, 2)];
-        if ([group isEqualToString:@"us"])
-        {
-            isUS = YES;
-        }else{
-            isUS = NO;
-        }
         
         imgArray = [[NSMutableArray alloc] init];
         nameArray = [[NSMutableArray alloc] init];
@@ -104,7 +95,7 @@ static NSString *itemIdentifier = @"FigureSearchItemIdentifier";
 -(void)setCount:(int)count
 {
     imgCount = count;
-    [self.collectionView setFrame:CGRectMake(0, -25, 200, 145)];
+    [self.collectionView setFrame:CGRectMake(0, -30, 200, 155)];
 }
 
 -(void)setImgCount:(int)count
@@ -145,8 +136,11 @@ static NSString *itemIdentifier = @"FigureSearchItemIdentifier";
     cell.title.adjustsFontSizeToFitWidth = NO;
     cell.title.lineBreakMode = NSLineBreakByWordWrapping;
     cell.title.numberOfLines = 2;
-    if (isUS) {
-        cell.title.font = [UIFont boldSystemFontOfSize:13.0f];
+    
+    if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
+        cell.title.font = [UIFont systemFontOfSize:15.0f];
+    }else if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionCN) {
+        cell.title.font = [UIFont boldSystemFontOfSize:16.0f];
     }else{
         cell.title.font = [UIFont boldSystemFontOfSize:18.0f];
     }

@@ -10,10 +10,10 @@
 #import "MarqueeLabel.h"
 
 @interface FSWatchlistTableCell : FSUITableViewCell
-#ifdef PatternPowerUS
-@property (nonatomic, strong) MarqueeLabel *nameLabel;
-#else 
+#ifdef PatternPowerTW
 @property (nonatomic, strong) UILabel *nameLabel;
+#else 
+@property (nonatomic, strong) MarqueeLabel *nameLabel;
 #endif
 @property (nonatomic, strong) UILabel *dynamicLabel0;
 @property (nonatomic, strong) UILabel *dynamicLabel1;

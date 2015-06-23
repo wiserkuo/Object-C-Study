@@ -17,7 +17,7 @@
 #import "TrackCenter.h"
 #import "FSTeachPopDelegate.h"
 #import "SecuritySearchModel.h"
-#import "SGInfoAlert.h"
+
 @interface FigureTrackListViewController ()<SortingTableViewDelegate,TrackCenterDelegate,FSTeachPopDelegate,UIActionSheetDelegate,UIAlertViewDelegate>{
     UIAlertView * deleteAlert;
 }
@@ -176,7 +176,7 @@
     [super viewDidLoad];
     
     [self setUpImageBackButton];
-    self.navigationItem.title = NSLocalizedStringFromTable(@"型態追蹤", @"FigureSearch", nil);
+    self.navigationItem.title = NSLocalizedStringFromTable(@"型態追蹤列表", @"FigureSearch", nil);
     
     self.trackDataArray = [[NSMutableArray alloc]init];
     self.customModel = [[FigureSearchMyProfileModel alloc]init];
@@ -398,8 +398,7 @@
                 [dataModal.securitySearchModel setChooseTarget:self];
                 [dataModal.securitySearchModel performSelector:@selector(searchUserStockWithGroup:) onThread:dataModal.thread withObject:[NSNumber numberWithInt:0] waitUntilDone:NO];
             NSString *title = [actionSheet buttonTitleAtIndex:buttonIndex];
-            
-            [SGInfoAlert showInfo:[NSString stringWithFormat:@"新增自選股：%@", title] bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+            [FSHUD showMsg:[NSString stringWithFormat:@"%@：%@", NSLocalizedStringFromTable(@"新增自選股", @"FigureSearch", nil), title]];
         }
     }else{
         if (buttonIndex<3) {
@@ -679,9 +678,9 @@
     UILabel * label =(UILabel *)sender.view;
     _trackDown = [_trackDataArray objectAtIndex:label.tag];
     
-    self.groupActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedStringFromTable(@"加入自選", @"SecuritySearch", nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    self.groupActionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedStringFromTable(@"加入自選", @"FigureSearch", nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
         int i;
-        for (i=0;i<[_categoryArray count];i++) {
+        for (i = 0;i < [_categoryArray count]; i++) {
             NSString * title = [_categoryArray objectAtIndex:i];
             [self.groupActionSheet addButtonWithTitle:title];
         }

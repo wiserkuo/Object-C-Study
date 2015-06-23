@@ -10,7 +10,7 @@
 #import "FSLineActivity.h"
 #import "FSFaceBookActivity.h"
 #import <Social/Social.h>
-#import "SGInfoAlert.h"
+
 
 @interface FSUIViewController () {
     NSMutableArray *layoutConstraints;
@@ -149,6 +149,14 @@
 - (void)replaceCustomizeConstraints:(NSArray *)newConstraints {
     [self removeCustomizeConstraints];
     [self addCustomizeConstraints:newConstraints];
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end

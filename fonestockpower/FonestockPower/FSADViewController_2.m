@@ -39,6 +39,9 @@
 -(void)initView
 {
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 82)];
+    if ([[[UIDevice currentDevice] model] rangeOfString:@"iPad"].location != NSNotFound) {
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+    }
     
 #if defined(PatternPowerUS) || defined(PatternPowerTW) || defined(PatternPowerCN)
     imageView.image = [UIImage imageNamed:@"型態.jpg"];

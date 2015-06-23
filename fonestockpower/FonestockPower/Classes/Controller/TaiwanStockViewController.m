@@ -166,7 +166,7 @@
     alertView.contentScrollViewMaxHeight = 380;
     alertView.contentScrollViewMinHeight = 300;
     [alertView.contentView setFrame:CGRectMake(0, 0, 280, 380)];
-    [alertView addButtonWithTitle:NSLocalizedStringFromTable(@"確定", @"SecuritySearch", nil) type:CXAlertViewButtonTypeDefault handler:^(CXAlertView *alertView, CXAlertButtonItem *button) {
+    [alertView addButtonWithTitle:NSLocalizedStringFromTable(@"確認", @"SecuritySearch", nil) type:CXAlertViewButtonTypeDefault handler:^(CXAlertView *alertView, CXAlertButtonItem *button) {
         [alertView dismiss];
         [self btnClick];
     }];

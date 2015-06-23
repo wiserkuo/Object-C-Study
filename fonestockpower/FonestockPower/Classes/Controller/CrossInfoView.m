@@ -108,54 +108,54 @@
         volumeLabel.adjustsFontSizeToFitWidth = YES;
         
         //兩檔比較
-        self.stock1CloseTitle= [[UILabel alloc]initWithFrame:CGRectMake(3, 35, 35, 19)];
+        self.stock1CloseTitle= [[UILabel alloc]initWithFrame:CGRectMake(3, 35, 40, 19)];
         _stock1CloseTitle.text = NSLocalizedStringFromTable(@"Close", @"Draw", @"");
         _stock1CloseTitle.textColor = [UIColor blueColor];
-        _stock1CloseTitle.adjustsFontSizeToFitWidth = YES;
+        _stock1CloseTitle.font = [UIFont systemFontOfSize:14.0f];
         _stock1CloseTitle.hidden = YES;
         [self addSubview:_stock1CloseTitle];
         
         self.stock1VolumeTitle= [[UILabel alloc]initWithFrame:CGRectMake(3, 57, 35, 19)];
         _stock1VolumeTitle.text = NSLocalizedStringFromTable(@"doubleStockVolume", @"Draw", @"");
         _stock1VolumeTitle.textColor = [UIColor blueColor];
+        _stock1VolumeTitle.font = [UIFont systemFontOfSize:14.0f];
         _stock1VolumeTitle.hidden = YES;
         [self addSubview:_stock1VolumeTitle];
         
-        
-        self.stock1Close= [[UILabel alloc]initWithFrame:CGRectMake(40, 35, 63, 19)];
+        self.stock1Close= [[UILabel alloc]initWithFrame:CGRectMake(55, 35, 63, 19)];
         _stock1Close.textColor = [UIColor blueColor];
         _stock1Close.textAlignment = NSTextAlignmentRight;
         _stock1Close.adjustsFontSizeToFitWidth = YES;
         [self addSubview:_stock1Close];
         
-        self.stock1Volume= [[UILabel alloc]initWithFrame:CGRectMake(40, 57, 63, 19)];
+        self.stock1Volume= [[UILabel alloc]initWithFrame:CGRectMake(55, 57, 63, 19)];
         _stock1Volume.adjustsFontSizeToFitWidth = YES;
         _stock1Volume.textColor = [UIColor blueColor];
         _stock1Volume.textAlignment = NSTextAlignmentRight;
         [self addSubview:_stock1Volume];
         
         
-        self.stock2CloseTitle= [[UILabel alloc]initWithFrame:CGRectMake(3, 79, 35, 19)];
+        self.stock2CloseTitle= [[UILabel alloc]initWithFrame:CGRectMake(3, 79, 40, 19)];
         _stock2CloseTitle.text = NSLocalizedStringFromTable(@"Close", @"Draw", @"");
         _stock2CloseTitle.textColor = [UIColor brownColor];
-        _stock2CloseTitle.adjustsFontSizeToFitWidth = YES;
+        _stock2CloseTitle.font = [UIFont systemFontOfSize:14.0f];
         _stock2CloseTitle.hidden = YES;
         [self addSubview:_stock2CloseTitle];
         
         self.stock2VolumeTitle= [[UILabel alloc]initWithFrame:CGRectMake(3, 101, 35, 19)];
         _stock2VolumeTitle.text = NSLocalizedStringFromTable(@"doubleStockVolume", @"Draw", @"");
         _stock2VolumeTitle.textColor = [UIColor brownColor];
+        _stock2VolumeTitle.font = [UIFont systemFontOfSize:14.0f];
         _stock2VolumeTitle.hidden = YES;
         [self addSubview:_stock2VolumeTitle];
         
-        
-        self.stock2Close= [[UILabel alloc]initWithFrame:CGRectMake(40, 79, 63, 19)];
+        self.stock2Close= [[UILabel alloc]initWithFrame:CGRectMake(55, 79, 63, 19)];
         _stock2Close.textColor = [UIColor brownColor];
         _stock2Close.adjustsFontSizeToFitWidth = YES;
         _stock2Close.textAlignment = NSTextAlignmentRight;
         [self addSubview:_stock2Close];
         
-        self.stock2Volume= [[UILabel alloc]initWithFrame:CGRectMake(40, 101, 63, 19)];
+        self.stock2Volume= [[UILabel alloc]initWithFrame:CGRectMake(55, 101, 63, 19)];
         _stock2Volume.adjustsFontSizeToFitWidth = YES;
         _stock2Volume.textColor = [UIColor brownColor];
         _stock2Volume.textAlignment = NSTextAlignmentRight;

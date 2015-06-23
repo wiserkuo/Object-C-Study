@@ -210,12 +210,12 @@
                 }else{ //加入
                     _storeBtn = button;
                     NSArray *numArray = @[@"", @"一", @"二", @"三", @"四", @"五", @"六", @"七", @"八", @"九", @"十"];
-                    _existAlert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedStringFromTable(@"此檔股票已存在確定要移到自選嗎",@"SecuritySearch",nil), [numArray objectAtIndex:[(NSNumber *)[storeArray objectAtIndex:1] intValue]]] message:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"取消", @"SecuritySearch", nil) otherButtonTitles:NSLocalizedStringFromTable(@"確定", @"SecuritySearch", nil), nil];
+                    _existAlert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:NSLocalizedStringFromTable(@"此檔股票已存在確定要移到自選嗎",@"SecuritySearch",nil), [numArray objectAtIndex:[(NSNumber *)[storeArray objectAtIndex:1] intValue]]] message:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"取消", @"SecuritySearch", nil) otherButtonTitles:NSLocalizedStringFromTable(@"確認", @"SecuritySearch", nil), nil];
                     [_existAlert show];
                     return;
                 }
             }else{
-                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:NSLocalizedStringFromTable(@"警告", @"SecuritySearch", nil) message:NSLocalizedStringFromTable(@"自選股已達上限", @"SecuritySearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確定", @"SecuritySearch", nil) otherButtonTitles:nil];
+                UIAlertView * alert = [[UIAlertView alloc]initWithTitle:NSLocalizedStringFromTable(@"警告", @"SecuritySearch", nil) message:NSLocalizedStringFromTable(@"自選股已達上限", @"SecuritySearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確認", @"SecuritySearch", nil) otherButtonTitles:nil];
                 [alert show];
             }
         }

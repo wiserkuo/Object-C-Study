@@ -311,14 +311,14 @@
 
         }
     }
-    
+    index+=10;
     if (index<[sumValues count]) {
         sum = ([(NSNumber *)[sumValues objectAtIndex:index] doubleValue] / oscParameter)  * 100;
-        if (index>oscParameter+oscParameter-1) {
+        if (index>0) {
             beforeSum = ([(NSNumber *)[sumValues objectAtIndex:index-1] doubleValue] / oscParameter)  * 100;
         }
-        
     }
+    
 	*value1 = osc ;
 	*value2 = sum;
 	*value3 = beforeOSC;

@@ -56,6 +56,7 @@ typedef NS_ENUM(NSUInteger, FSLoginResultType) {
 - (void)disconnectReloginAuth;
 - (void)loginAuthUsingPromoteAccount;
 - (void)loginAuthUsingSelfAccount;
+- (void)disconnect;
 
 - (void)fsAuthLoginWithAccount:(NSString *)account
                       password:(NSString *)password

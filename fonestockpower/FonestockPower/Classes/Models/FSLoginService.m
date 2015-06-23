@@ -34,6 +34,9 @@
     UIAlertController *_alertControllerForReLoginCount;
     UIAlertView *_alertView;
     UIAlertView *_alertViewForReLoginCount;
+    
+    UILabel *msgLabelView;
+    
     int ios8AlertTag;
 }
 @property (nonatomic, strong) UIView *toastView;
@@ -53,6 +56,8 @@
 - (void)loginAuth {
     _loginCounter++;
     FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
+    _loginResultType = FSLoginResultTypeNoLogin;
+    
     if(dataModel.isRejectReLogin) return;
     [self loginAuthUsingSelfAccount];
 }
@@ -171,7 +176,7 @@
         // 登入service server
         [self connectServiceServer];
         
-        [self showTheStatus:@""];
+//        [self showTheStatus:@""];
     }
     
     
@@ -228,10 +233,14 @@
 //        alertMessage = @"Bad Request";
         alertTitle = @"";
         alertMessage = NSLocalizedStringFromTable(@"帳號或密碼錯誤", @"Launcher", @"帳號或密碼錯誤");
+        
+        _alertView = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確定", @"AccountSetting", nil) otherButtonTitles:nil];
     }
     else if ([@"401" isEqualToString:pointsAuthData.connectStatusCode]) {
         alertTitle = @"";
         alertMessage = NSLocalizedStringFromTable(@"帳號或密碼錯誤", @"Launcher", @"帳號或密碼錯誤");
+        
+        _alertView = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確定", @"AccountSetting", nil) otherButtonTitles:nil];
     }
     else if ([@"402" isEqualToString:pointsAuthData.connectStatusCode]) {
         
@@ -243,65 +252,48 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"loginAuthStatus" object:[NSNumber numberWithInteger:FSLoginResultTypePaymentRequired]];
-        if(IS_IOS8){
-            _alertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedStringFromTable(@"您的服務已經到期，請前往繳費", @"Launcher", nil) preferredStyle:UIAlertControllerStyleAlert];
-            [_alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"離開", @"Launcher", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){[self okBtnBeClicked:1];}]];
-            [_alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"前往付費", @"Launcher", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){[self okBtnBeClicked:2];}]];
-        }else{
+        
+        
         _alertView = [[UIAlertView alloc] initWithTitle:nil
                                                 message:NSLocalizedStringFromTable(@"您的服務已經到期，請前往繳費", @"Launcher", @"您的服務已經到期，請前往繳費")
-                                                delegate:self
-                                       cancelButtonTitle:NSLocalizedStringFromTable(@"離開", @"Launcher", nil)
-                                       otherButtonTitles:NSLocalizedStringFromTable(@"前往付費", @"Launcher", nil), nil];
-        }
+                                               delegate:self
+                                      cancelButtonTitle:NSLocalizedStringFromTable(@"離開", @"Launcher", nil)
+                                      otherButtonTitles:NSLocalizedStringFromTable(@"前往付費", @"Launcher", nil), nil];
     }
     
     else if ([@"500" isEqualToString:pointsAuthData.connectStatusCode]) {
         alertMessage = @"Internal Server Error";
+        
+        _alertView = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確定", @"AccountSetting", nil) otherButtonTitles:nil];
     }
     else if ([@"503" isEqualToString:pointsAuthData.connectStatusCode]) {
         alertMessage = @"Service Unavailable";
+        
+        _alertView = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確定", @"AccountSetting", nil) otherButtonTitles:nil];
+        
+        [_alertView show];
     }
     else if ([@"505" isEqualToString:pointsAuthData.connectStatusCode]) {
         alertTitle = @"重大更新";
         alertMessage = @"強制更新版本";
+        
+        _alertView = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確定", @"AccountSetting", nil) otherButtonTitles:nil];
+        
+        [_alertView show];
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loginAuthStatus" object:[NSNumber numberWithInteger:FSLoginResultTypeLoginFailed]];
     
     [FSHUD hideGlobalHUD];
-    if(IS_IOS8){
-        if(!_alertController){
-            _alertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
-            [_alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"確定", @"Launcher", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){[self okBtnBeClicked:1];}]];
-        }
-    }else {
-        if (!_alertView) {
-            _alertView = [[UIAlertView alloc] initWithTitle:alertTitle message:alertMessage delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確定", @"AccountSetting", nil) otherButtonTitles:nil];
-        }
-    }
+    
+    
     if([pointsAuthData.connectStatusCode intValue]){
-        if(IS_IOS8){
-            ios8AlertTag = [pointsAuthData.connectStatusCode intValue];
-//            [_aTarget presentViewController:_alertController animated:YES completion:nil];
-//            [rootViewController presentViewController:_alertController animated:YES completion:nil];
-//            [[UIApplication sharedApplication].keyWindow.rootViewController.presentedViewController presentViewController:_alertController animated:YES completion:nil];
-            [[CodingUtil getTopMostViewController] presentViewController:_alertController animated:YES completion:nil];
-        }else{
-             _alertView.tag = [pointsAuthData.connectStatusCode intValue];
-            [_alertView show];
-        }
+        _alertView.tag = [pointsAuthData.connectStatusCode intValue];
+        [_alertView show];
     }
     else {
-        if(IS_IOS8){
-            _alertControllerForReLoginCount = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromTable(@"系統忙線中", @"Launcher", nil) message:NSLocalizedStringFromTable(@"登入失敗，請問是否重連", @"Launcher", nil) preferredStyle:UIAlertControllerStyleAlert];
-            [_alertControllerForReLoginCount addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"否", @"Launcher", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){[self reLoginBtnBeClicked:1];}]];
-            [_alertControllerForReLoginCount addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"是", @"Launcher", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){[self reLoginBtnBeClicked:2];}]];
-            [[CodingUtil getTopMostViewController] presentViewController:_alertControllerForReLoginCount animated:YES completion:nil];
-        }else{
-            _alertViewForReLoginCount = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"系統忙線中", @"Launcher", nil) message:NSLocalizedStringFromTable(@"登入失敗，請問是否重連", @"Launcher", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"否", @"Launcher", nil) otherButtonTitles:NSLocalizedStringFromTable(@"是", @"Launcher", nil), nil];
-            [_alertViewForReLoginCount show];
-        }
+        _alertViewForReLoginCount = [[UIAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"系統忙線中", @"Launcher", nil) message:NSLocalizedStringFromTable(@"登入失敗，請問是否重連", @"Launcher", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"否", @"Launcher", nil) otherButtonTitles:NSLocalizedStringFromTable(@"是", @"Launcher", nil), nil];
+        [_alertViewForReLoginCount show];
     }
     
     if (![@"402" isEqualToString:pointsAuthData.connectStatusCode]){
@@ -328,6 +320,8 @@
     
     _loginResultType = FSLoginResultTypeNoLogin;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"loginAuthStatus" object:[NSNumber numberWithInteger:FSLoginResultTypeServiceUnavailable]];
+    
+    [self performSelector:@selector(disconnectReloginAuth) withObject:nil afterDelay:3];
 }
 
 - (void)connectServiceServer {
@@ -353,11 +347,16 @@
 }
 
 - (void)serviceServerLoginCallBack:(FSAuthLoginIn *)data {
+    
     if (data->statusCode == 200) {
         
         _loginResultType = FSLoginResultTypeServiceServerLoginSuccess;
         
         [FSHUD hideGlobalHUD];
+        
+        [FSHUD showMsg:NSLocalizedStringFromTable(@"已登入", @"Launcher", nil)];
+        
+        
 
 #ifdef PatternPowerTW
 #elif PatternPowerUS
@@ -389,7 +388,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"loginServiceStatus" object:[NSNumber numberWithInteger:FSLoginResultTypeServiceServerLoginSuccess]];
     }
     else {
-        [FSHUD showGlobalProgressHUDWithTitle:@"報價系統連線失敗" hideAfterDelay:3];
+        [FSHUD showGlobalProgressHUDWithTitle:NSLocalizedStringFromTable(@"登入中", @"AccountSetting", nil) hideAfterDelay:3];
         
         _loginResultType = FSLoginResultTypeNoLogin;
     }
@@ -497,38 +496,54 @@
     _aTarget = aTarget;
 }
 
--(void)showTheStatus:(NSString *)showMsg
-{
-    CGFloat theWidth = [[UIApplication sharedApplication] keyWindow].frame.size.width;
-    CGFloat theHeight = [[UIApplication sharedApplication] keyWindow].frame.size.height;
-    if(!_toastView){
-        _toastView = [[UIView alloc] initWithFrame:CGRectMake(theWidth / 2 - 48, theHeight - 80, 93, 40)];
-        UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 90, 40)];
-        lbl.numberOfLines = 0;
-        NSString * appid = [FSFonestock sharedInstance].appId;
-        NSString * group = [appid substringWithRange:NSMakeRange(0, 2)];
-        if ([group isEqualToString:@"us"])
-        {
-            [_toastView setFrame:CGRectMake(theWidth / 2 - 48, theHeight - 100, 96, 40)];
-        }
-        lbl.text = NSLocalizedStringFromTable(@"登入成功", @"Launcher", nil);
-        lbl.textColor = [UIColor whiteColor];
-        lbl.font = [UIFont systemFontOfSize:18.0f];
-        lbl.textAlignment = NSTextAlignmentLeft;
-        [_toastView addSubview:lbl];
-        _toastView.backgroundColor = [UIColor blackColor];
-        [_toastView.layer setMasksToBounds:YES];
-        _toastView.layer.cornerRadius = 5;
-    }
-    _toastView.hidden = NO;
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"loginAuthStatus" object:[NSNumber numberWithInteger:FSLoginResultTypeBeKickedOut]];
-    [[[UIApplication sharedApplication] keyWindow] addSubview:_toastView];
-    [self performSelector:@selector(closeTheLoginToast) withObject:nil afterDelay:3];
+-(void)showTheStatus:(NSString *)showMsg {
+    
+    
+//    [FSHUD showMsg:@"脆迪酥"];
+    
+//    FSAppDelegate *application = (FSAppDelegate *)[UIApplication sharedApplication].delegate;
+//    UIWindow *window = application.window;
+    
+//    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithWindow:window];
+//    hud.userInteractionEnabled = NO;
+//    hud.labelText = [NSString stringWithFormat:@"%@", NSLocalizedStringFromTable(@"已登入", @"Launcher", nil)];
+//    
+//    [window addSubview:hud];
+//    
+//    
+//    
+//    [hud show:YES];
+//    
+//    [hud hide:YES afterDelay:2];
+    
+//    if (!msgLabelView) {
+//        msgLabelView = [[UILabel alloc] init];
+//        msgLabelView.translatesAutoresizingMaskIntoConstraints = NO;
+//        msgLabelView.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedStringFromTable(@"已登入", @"Launcher", nil)];
+//        msgLabelView.textColor = [UIColor whiteColor];
+//        msgLabelView.textAlignment = NSTextAlignmentLeft;
+//        msgLabelView.layer.masksToBounds = YES;
+//        msgLabelView.layer.cornerRadius = 10;
+//        msgLabelView.backgroundColor = [UIColor blackColor];
+//        
+//        [window addSubview:msgLabelView];
+//        
+//        [window addConstraint:[NSLayoutConstraint constraintWithItem:msgLabelView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:window attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+//        
+//        [window addConstraint:[NSLayoutConstraint constraintWithItem:msgLabelView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:window attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-22]];
+//    } else {
+//        msgLabelView.hidden = NO;
+//    }
+//    
+//    [self performSelector:@selector(hiddenMsgLabel) withObject:nil afterDelay:3];
 }
 
--(void)closeTheLoginToast
-{
-    _toastView.hidden = YES;
+- (void)hiddenMsgLabel {
+    [msgLabelView performSelectorOnMainThread:@selector(setHidden:) withObject:@YES waitUntilDone:NO];
+}
+
+- (void)disconnect {
+    _loginResultType = FSLoginResultTypeNoLogin;
 }
 
 @end

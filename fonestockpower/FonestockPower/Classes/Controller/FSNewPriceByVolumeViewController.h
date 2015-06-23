@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "FSDistributeIn.h"
 @interface FSNewPriceByVolumeViewController : FSUIViewController
 
 -(void)sectorIdCallBack:(NSMutableArray *)dataArray;
-
+-(void)dataArrive:(FSDistributeIn *)data;
 @end

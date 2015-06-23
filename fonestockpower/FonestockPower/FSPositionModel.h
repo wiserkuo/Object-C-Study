@@ -73,6 +73,7 @@
 @property (unsafe_unretained, nonatomic) float totalCost;
 @property (unsafe_unretained, nonatomic) float avgCost;
 @property (unsafe_unretained, nonatomic) float costAmount;
+@property (nonatomic) NSMutableDictionary *realizedValue;
 @end
 
 @interface FSTradeHistory : NSObject

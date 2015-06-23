@@ -40,6 +40,10 @@
 -(void)initView
 {
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 82)];
+    if ([[[UIDevice currentDevice] model] rangeOfString:@"iPad"].location != NSNotFound) {
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    
     ADSystem *adSystem = [[ADSystem alloc]init];
     NSMutableArray *AdData = [adSystem getLoaclAdPlist];
     if ([AdData count] > 0) {

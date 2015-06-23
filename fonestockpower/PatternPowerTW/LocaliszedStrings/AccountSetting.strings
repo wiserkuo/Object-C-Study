@@ -11,7 +11,7 @@
 "操作導覽" = "操作導覽";
 "前往" = "前往";
 "開啟" ="開啟";
-"版本資訊" = "版本資訊";
+"版本資訊" = "版本";
 "服務說明/版權宣告" = "服務說明/版權宣告";
 "服務內容" = "<font face='Arial' size=5>1. The information and content provided in the <b>Pattern Power App</b> is for informational and/or educational purposes only.&nbsp;&nbsp;The information presented or discussed is not, and should not be considered, a recommendation or an offer of, or solicitation of an offer by, Fonestock Technology Inc.&nbsp;or its affiliates to buy, sell or hold any security or other financial product or an endorsement or affirmation of any specific investment strategy.&nbsp;&nbsp;You are fully responsible for your investment decisions.&nbsp;&nbsp;Your choice to engage in a particular investment or investment strategy should be based solely on your own research and evaluation of the risks involved, your financial circumstances and your investment objectives.&nbsp;&nbsp;Fonestock Technology Inc.&nbsp;and its affiliates are not offering or providing, and will not offer or provide, any advice, opinion or recommendation of the suitability, value or profitability of any particular investment or investment strategy.</br></br>2. <b>Pattern Power App</b> does not make recommendations or offer investment advice of any kind. 　 </br></br>3. We are very committed to protecting the privacy of your personal information and will not sell, rent or license this information to anyone.&nbsp;&nbsp;We may use your personal information to notify you of useful products or services and send email communications such as newsletters, new client information, event invitations and offers.&nbsp;&nbsp;You will always have the option to unsubscribe from any promotional email communications from Fonestock Technology Inc.&nbsp;</br></br>4. Any specific securities, or types of securities, used as examples are for demonstration purposes only.&nbsp;&nbsp;None of the information provided should be considered a recommendation or solicitation to invest in, or liquidate, a particular security or type of security.</font>";
 
@@ -23,6 +23,7 @@
 "密碼" = "密碼:";
 "連線狀態" = "連線狀態:";
 "登出" = "登出";
+"已登入" = "已登入";
 "登入" = "登入";
 "服務訊息" = "服務訊息";
 "客服電話" = "客服電話:02-5589-4589#1";
@@ -39,3 +40,11 @@
 "輸入錯誤的下方按鈕"="再試一次";
 "請輸入帳號密碼"="請輸入帳號密碼";
 "帳號或密碼錯誤" = "您的帳號密碼錯誤，請重新輸入";
+
+
+"不允許程式內支付購買功能" = "不允許程式內支付購買功能";
+"無法取得產品訊息" = "無法取得產品訊息";
+"交易出現問題，請稍候確認" = "交易出現問題，請稍候確認";
+"交易成功" = "交易成功";
+"交易失敗" = "交易失敗";
+"交易取消" = "交易取消";

@@ -7,6 +7,8 @@
 //
 
 #import "FSHUD.h"
+#import "FSAppDelegate.h"
+#import "FSInsetsLabel.h"
 
 @implementation FSHUD
 
@@ -26,22 +28,11 @@
     if (nil != title) {
         hud.labelText = title;
     }
-//    [NSTimer scheduledTimerWithTimeInterval:10 block:^(NSTimer *timer) {
-//        [MBProgressHUD hideAllHUDsForView:view animated:animated];
-//        [timer invalidate];
-//    } repeats:YES];
     
-//    } else {
-//		MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:animated];
-//        hud.labelText = NSLocalizedStringFromTable(@"Connection Require", @"ConnectionWarning", nil);
-//        
-//        [NSTimer scheduledTimerWithTimeInterval:3 block:^(NSTimer *timer) {
-//            if (socket.isConnected) {
-//                [MBProgressHUD hideAllHUDsForView:view animated:animated];
-//                [timer invalidate];
-//            }
-//        } repeats:YES];
-//    }
+    FSLoginService *service = [[FSDataModelProc sharedInstance] loginService];
+    if (service.loginResultType == FSLoginResultTypeNoLogin) {
+        [MBProgressHUD hideAllHUDsForView:view animated:YES];
+    }
 }
 
 + (void)hideHUDFor:(UIView *)view {
@@ -90,6 +81,29 @@
     return hud;
 }
 
++ (void)showMsg:(NSString *)msg {
+    [FSHUD showMsg:msg hideAfterDelay:3];
+}
 
++ (void)showMsg:(NSString *)msg hideAfterDelay:(NSTimeInterval)delay {
+    FSAppDelegate *appDelegate = (FSAppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIWindow *window = appDelegate.window;
+    FSInsetsLabel *msgLabelView = appDelegate.msgLabelView;
+    msgLabelView.leftInset = 5;
+    msgLabelView.numberOfLines = 0;
+    msgLabelView.preferredMaxLayoutWidth = window.frame.size.width;
+
+    [window addSubview:msgLabelView];
+    
+    [window addConstraint:[NSLayoutConstraint constraintWithItem:msgLabelView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:window attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0]];
+    
+    [window addConstraint:[NSLayoutConstraint constraintWithItem:msgLabelView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:window attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-44]];
+    
+    msgLabelView.text = [NSString stringWithFormat:@"%@  ", msg];
+    
+//    [msgLabelView cancelPreviousPerformRequestsWithTarget:msgLabelView selector:@selector(removeFromSuperview) object:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:msgLabelView];
+    [msgLabelView performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:delay];
+}
 
 @end

@@ -14,6 +14,7 @@
 #import "FSDistributeIn.h"
 
 #import "FSNewPriceByVolumeViewController.h"
+#import "FSPriceVolumeChartDataSource.h"
 @implementation TDParam
 
 @synthesize arrayData;
@@ -47,7 +48,7 @@
 
 @interface TradeDistribute (){
     NSRecursiveLock *dataLock;
-    
+    int downloadCount;//防止頁面來回點擊，造成電文接收錯頁
 }
 @end
 
@@ -82,11 +83,6 @@
 	return value*n;
 }
 
-- (void)SetTarget:(NSObject <TDNotifyProtocol>*) obj
-{
-	notifyTarget = obj;
-}
-
 - (void)AskOneDaySecurityNum:(UInt32)cn DayCount:(UInt8)dc BeforeDate:(UInt16)d
 {
 	[oneDay.arrayData removeAllObjects];
@@ -104,15 +100,30 @@
 	[FSDataModelProc sendData:self WithPacket:tdOut];
 }
 
+- (void)SetTarget:(NSObject <TDNotifyProtocol>*) obj
+{
+    notifyTarget = obj;
+    downloadCount = 0;
+}
+
 -(void)setTarget:(id)obj{
     notifyObj = obj;
+    downloadCount = 0;
 }
 
 -(void)fSDistributeIn:(NSObject *)data{
-    if ([notifyObj respondsToSelector:@selector(dataArrive:)]) {
-        [notifyObj performSelectorOnMainThread:@selector(dataArrive:) withObject:data waitUntilDone:NO];        
-    }else{
-        [self TDIn:data];
+    downloadCount ++;
+    FSDistributeIn *td = (FSDistributeIn *)data;
+    if (td -> dayType == 0 && [notifyObj isKindOfClass:[FSNewPriceByVolumeViewController class]]){
+        [notifyObj performSelectorOnMainThread:@selector(dataArrive:) withObject:data waitUntilDone:NO];
+    }
+    if ([notifyTarget isKindOfClass:[FSPriceVolumeChartDataSource class]]) {
+        if (td -> dayType == 0) {
+            downloadCount++;
+        }
+        if (downloadCount == 2 || td -> dayType == 1) {
+            [self TDIn:data];
+        }
     }
 }
 
@@ -269,7 +280,7 @@
 {
     [period.arrayData removeAllObjects];
     period.hightVolume = -1;
-    
+    downloadCount = 0;
     FSDistributeOut *packetOut = [[FSDistributeOut alloc]initWithAddDayIdentCodeSymbol:ident number:n date:d];
 
     [FSDataModelProc sendData:self WithPacket:packetOut];
@@ -279,6 +290,7 @@
 {
     [oneDay.arrayData removeAllObjects];
     oneDay.hightVolume = -1;
+    downloadCount = 0;
     FSDistributeOut *packetOut = [[FSDistributeOut alloc]initWithOneDayIdentCodeSymbol:ident number:n date:d];
     
     [FSDataModelProc sendData:self WithPacket:packetOut];

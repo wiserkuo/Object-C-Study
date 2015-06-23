@@ -99,6 +99,7 @@ static FSDataModelProc *sharedInstance = nil;
                                                  resetPWURL:_fonestock.forgotPasswordURL
                                              openProjectURL:_fonestock.openProjectURL
                                                 fbSharedURL:_fonestock.FBShareNotificationURL
+                                       checkSubscriptionURL:_fonestock.checkSubscriptionURL
                                                       appId:_fonestock.appId
                                                        uuid:[FSFonestock uuid]
                                                        lang:_fonestock.lang];
@@ -106,7 +107,7 @@ static FSDataModelProc *sharedInstance = nil;
     
 
     
-    _iapHelper = [[FSIAPHelper alloc] initWithProductsListsURL:@"http://172.31.5.104/fs_service/apiQuery/subscription_id" verifyReceiptURL:@"https://www.fonestock.com.tw/fs_service/apiPayment/receipt_ios"];
+    _iapHelper = [[FSIAPHelper alloc] initWithProductsListsURL:@"https://www.fonestock.com.tw/fs_service/apiQuery/subscription_id" verifyReceiptURL:_fonestock.purchaseVerifyURL];
     
     _category = [[FSCategoryTree alloc] init];
     //portfolio
@@ -320,6 +321,8 @@ static FSDataModelProc *sharedInstance = nil;
         return;
     }
     else if ([mainSocket isConnected] == NO) {
+        [FSHUD showMsg:NSLocalizedStringFromTable(@"連線失敗!請重新連線或請稍後再試", @"Launcher", nil)];
+        [FSHUD hideGlobalHUD];
         return;
     }
     

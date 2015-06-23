@@ -49,7 +49,7 @@
 "交易" = "交易";
 "Trade" = "交易";
 "Symbol" = "名称";
-"Buy" = "买进";
+"BUY" = "买进";
 "Pattern" = "警示形态";
 "SRef." = "参考价";
 "BRef." = "参考价";
@@ -62,12 +62,12 @@
 "S@L" = "停损价";
 "目標價" = "目标价";
 "成本價" = " 成本价";
-"Cover" = "回补";
+"COVER" = "回补";
 "Remove" = "删除";
 "Cancel" = "取消";
 "Custom" = "自设目标";
-"Sell" = "卖出";
-"Short" = "放空";
+"SELL" = "卖出";
+"SHORT" = "放空";
 "空方選股形勢" = "空方";
 "多方選股形勢" = "多方";
 "Setting" = "自选设定";
@@ -141,10 +141,12 @@
 
 //刪除
 "Action & Alert" = "交易警示";
-"Are you sure you want to delete it?" = "确定要删除吗?";
+"Are you sure you want to delete?" = "确定要删除吗?";
+"於 交易計劃" = "於 交易计划";
+
 
 //警示形態
-"編輯警示型態" = "编辑警示型态";
+"編輯警示型態" = "编辑警示形态";
 "Typical Pattern (Long)" = "系统形态 (多)";
 "Typical Pattern (Short)" = "系统形态 (空)";
 "DIY Pattern (Long)" = "自订形态 (多)";

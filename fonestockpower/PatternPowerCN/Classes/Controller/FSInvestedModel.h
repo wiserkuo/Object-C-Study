@@ -26,5 +26,6 @@
 
 -(void)startWithTerm:(NSString *)t Deal:(NSString *)d beginDate:(UInt16)beginDay;
 -(void)setTargetNotify:(NSObject*)object;
+-(void)stopWatch;
 
 @end

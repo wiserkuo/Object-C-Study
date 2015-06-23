@@ -316,17 +316,21 @@
             CGContextStrokePath(currentContext);
             
             
-            NSString *zeroString = @"0.00";
             NSString *maxValueString = [NSString stringWithFormat:@"%.2f", max];
             NSString *minValueString = [NSString stringWithFormat:@"%.2f", min];
             
-            if([[[item getIdentCodeSymbol]substringToIndex:2]isEqualToString:@"TW"]){
+            if (max == 0 || min == 0) {
+                
+            } else {
+                NSString *zeroString = @"0.00";
                 attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[UIColor blueColor]};
+                
+                [zeroString drawAtPoint:CGPointMake(realWidth - reserveRightWidth + valueRightOffset, reserveTopHeight + baseZeroLineY + valueTopOffset) withAttributes:attributes];
             }
             
-            [zeroString drawAtPoint:CGPointMake(realWidth - reserveRightWidth + valueRightOffset, reserveTopHeight + baseZeroLineY + valueTopOffset) withAttributes:attributes];
-            
-            if (max > 0) {
+            if (max == 0) {
+                attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[UIColor blueColor]};
+            } else if (max > 0) {
                 attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceUpColor]};
             } else {
                 attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceDownColor]};
@@ -334,15 +338,17 @@
             [maxValueString drawAtPoint:CGPointMake(realWidth - reserveRightWidth + valueRightOffset, reserveTopHeight + valueTopOffset) withAttributes:attributes];
             
             if([[[item getIdentCodeSymbol]substringToIndex:2]isEqualToString:@"TW"]){
-                if (min > 0) {
-                    attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceUpColor]};
-                } else if(min == 0) {
+                if (min == 0) {
                     attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[UIColor blueColor]};
+                } else if (min > 0) {
+                    attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceUpColor]};
                 } else {
                     attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceDownColor]};
                 }
             }else{
-                if (min > 0) {
+                if (min == 0) {
+                    attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[UIColor blueColor]};
+                } else if (min > 0) {
                     attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceUpColor]};
                 } else {
                     attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceDownColor]};
@@ -520,19 +526,20 @@
             CGContextAddLineToPoint(currentContext, realWidth - reserveRightWidth - barChartWidth * [epsRecords count], realHeight - reserveBottomHeight);
             CGContextStrokePath(currentContext);
             
-            
-            NSString *zeroString = @"0.00";
             NSString *maxValueString = [NSString stringWithFormat:@"%.2f", max];
             NSString *minValueString = [NSString stringWithFormat:@"%.2f", min];
             
-            if([[[item getIdentCodeSymbol]substringToIndex:2]isEqualToString:@"TW"]){
+            if (max == 0 || min == 0) {
                 
+            } else {
                 attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[UIColor blueColor]};
+                NSString *zeroString = @"0.00";
+                [zeroString drawAtPoint:CGPointMake(realWidth - reserveRightWidth + valueRightOffset, reserveTopHeight + baseZeroLineY + valueTopOffset) withAttributes:attributes];
             }
-
-            [zeroString drawAtPoint:CGPointMake(realWidth - reserveRightWidth + valueRightOffset, reserveTopHeight + baseZeroLineY + valueTopOffset) withAttributes:attributes];
             
-            if (max > 0) {
+            if (max == 0) {
+                attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[UIColor blueColor]};
+            } else if (max > 0) {
                 attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceUpColor]};
             } else {
                 attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceDownColor]};
@@ -540,15 +547,17 @@
             [maxValueString drawAtPoint:CGPointMake(realWidth - reserveRightWidth + valueRightOffset, reserveTopHeight + valueTopOffset) withAttributes:attributes];
             
             if([[[item getIdentCodeSymbol]substringToIndex:2]isEqualToString:@"TW"]){
-                if (min > 0) {
-                    attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceUpColor]};
-                } else if(min == 0) {
+                if (min == 0) {
                     attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[UIColor blueColor]};
+                } else if (min > 0) {
+                    attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceUpColor]};
                 } else {
                     attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceDownColor]};
                 }
             }else{
-                if (min > 0) {
+                if (min == 0) {
+                    attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[UIColor blueColor]};
+                } else if (min > 0) {
                     attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceUpColor]};
                 } else {
                     attributes = @{ NSFontAttributeName: font,NSForegroundColorAttributeName:[StockConstant PriceDownColor]};

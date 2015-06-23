@@ -190,6 +190,7 @@ enum
 + (NSString *)stringWithVolumeValueAndUnit:(double)value unit:(UInt8)unit;
 + (NSString *)stringWithVolumeByValue:(double)value;
 + (NSString *)stringWithVolumeByValue2:(double)value;
++ (NSString *)stringWithVolumeByValue2NoFloat:(double)value; //百萬為K  千萬才M  去小數點
 + (NSString *)stringWithVolumeByValueNoDecimal:(double)value;
 + (NSString *)twStringWithVolumeByValue:(double)value;
 + (NSString *)twStringWithVolumeByValue3:(double)value;

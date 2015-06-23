@@ -19,6 +19,7 @@
     NSMutableDictionary * mainDict;
     PortfolioItem *item;
     NSDateComponents *components;
+    BOOL isOnSession;
     //公式Flag
     BOOL price0_20HighFlag;
     BOOL price0_20LowFlag;

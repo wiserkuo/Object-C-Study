@@ -14,7 +14,7 @@
 #import "FSInstantInfoWatchedPortfolio.h"
 #import "UIViewController+CustomNavigationBar.h"
 #import "ExplanationViewController.h"
-#import "SGInfoAlert.h"
+
 @interface EODActionController ()<EODActionTableCellDelegate>
 @property (nonatomic, strong) NSObject<FSWatchlistItemProtocol> *watchlistItem;
 @end
@@ -55,6 +55,7 @@ static NSString *itemIdentifier = @"FigureSearchItemIdentifier";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     UIButton *pointButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     [pointButton addTarget:self action:@selector(explantation:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *barAddButtonItem = [[UIBarButtonItem alloc] initWithCustomView:pointButton];
@@ -77,6 +78,8 @@ static NSString *itemIdentifier = @"FigureSearchItemIdentifier";
     shortCount = 0;
     
     [self.view setNeedsUpdateConstraints];
+    
+    [self.view showHUDWithTitle:NSLocalizedStringFromTable(@"資料載入中, 請稍候...", @"SecuritySearch", nil)];
 }
 
 -(void)explantation:(UIButton *)sender
@@ -87,8 +90,9 @@ static NSString *itemIdentifier = @"FigureSearchItemIdentifier";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self hideHud];
+    
     self.navigationController.navigationBarHidden = NO;
-    [SGInfoAlert showInfo_EOD:NSLocalizedStringFromTable(@"搜尋結果為最近一次收盤資料.", @"FigureSearch", nil) bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -173,14 +177,13 @@ static NSString *itemIdentifier = @"FigureSearchItemIdentifier";
 
 -(void)notifyLongData:(ArrayData *)target
 {
+
     ArrayData *arrayData = target;
     if(arrayData->dataArray !=nil){
         [imageLongDictionary setObject:arrayData->dataArray forKey:[NSString stringWithFormat:@"%d",longCount]];
         [imageLongDictionary setObject:arrayData->nameArray forKey:[NSString stringWithFormat:@"name%d",longCount]];
     }
     longCount ++;
-    [mainTableView reloadData];
-    
     symbolCount ++;
 
     ActionObject *object = [[ActionObject alloc] init];
@@ -188,25 +191,32 @@ static NSString *itemIdentifier = @"FigureSearchItemIdentifier";
         object = [dataArray objectAtIndex:symbolCount];
         [model.edoActionModel getFigureImage:object.symbol Type:object.term];
     }
-
+    [mainTableView reloadData];
+    [self hideHud];
 }
 
 -(void)notifyShortData:(ArrayData *)target
 {
+
     ArrayData *arrayData = target;
     if(arrayData->dataArray !=nil){
         [imageShortDictionary setObject:arrayData->dataArray forKey:[NSString stringWithFormat:@"%d",shortCount]];
         [imageShortDictionary setObject:arrayData->nameArray forKey:[NSString stringWithFormat:@"name%d",shortCount]];
     }
     shortCount ++;
-    [mainTableView reloadData];
-    
     symbolCount ++;
     
     ActionObject *object = [[ActionObject alloc] init];
     if(symbolCount < [dataArray count]){
         object = [dataArray objectAtIndex:symbolCount];
         [model.edoActionModel getFigureImage:object.symbol Type:object.term];
+    }
+    [mainTableView reloadData];
+    [self hideHud];
+}
+-(void)hideHud{
+    if (symbolCount == [dataArray count]) {
+        [self.view hideHUD];
     }
 }
 

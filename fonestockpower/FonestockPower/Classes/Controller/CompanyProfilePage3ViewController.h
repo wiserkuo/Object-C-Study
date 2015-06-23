@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CompanyProfilePage3ViewController : UIViewController
+@interface CompanyProfilePage3ViewController : FSUIViewController
 
 @end

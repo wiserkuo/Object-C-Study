@@ -832,7 +832,7 @@ static UInt16 RoundMinuteTimeByMinutePeriod(UInt16 time, UInt16 openTime, UInt16
 	reopenTime = (pMarket->startTime_2 + 14) / 15 * 15; // round to a multiple of 15
 	closeTime = pMarket->endTime_2;
     if ((pMarket->identCode[0] == 'U' && pMarket->identCode[1] == 'S') || (pMarket->identCode[0] == 'T' && pMarket->identCode[1] == 'W') || (pMarket->identCode[0] == 'C' && pMarket->identCode[1] == 'N')) {
-        closeTime = breakTime;
+//        closeTime = breakTime;    // connor Bug #11002 個股功能-技術 - 分線揭示k線停在11：30
         breakTime = 0;
     }else{
         midTime = (breakTime + reopenTime) / 2;
@@ -879,6 +879,7 @@ static UInt16 RoundMinuteTimeByMinutePeriod(UInt16 time, UInt16 openTime, UInt16
         }else{
             price = tick.last.calcValue;
         }
+        
 		if (time0 != time)
 		{
 			time0 = time;

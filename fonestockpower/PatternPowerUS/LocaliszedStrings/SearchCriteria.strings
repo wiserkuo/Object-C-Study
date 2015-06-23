@@ -10,11 +10,11 @@
 "週轉率排行" = "Top 300 Turnover Rate";
 "市值排行" = "Top 300 Market Cap";
 "股價區間" = "Price";
-"營收成長率" = "GR(OPerating Income)";
-"營業利益率" = "Operating Margin";
+"營收成長率" = "GR(REV, This Q)";
+"營業利益率" = "Operating Margin(This Q)";
 "每股盈餘" = "EPS(This Q)";
-"每股盈餘成長率" = "GR(EPS)(This Q)";
-"營業利益成長率" = "Operating Profit Growth Rate(This Quarter)";
+"每股盈餘成長率" = "GR(EPS, This Q)";
+"營業利益成長率" = "GR(Operating Income, This Q)";
 "股東權益報酬率" = "ROE(This Year)";
 "本益比" = "P/E";
 "設定篩選條件" = "Add Search Criteria";

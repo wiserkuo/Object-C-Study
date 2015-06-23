@@ -67,7 +67,7 @@
     [self hideCrossInfoPanel];
     self.compareOtherPortfoioButton.selected = !self.compareOtherPortfoioButton.selected;
     self.fitPriceGraphScopeButton.enabled = !self.compareOtherPortfoioButton.selected;
-    [self.delegate addComparedPortfolioPlot];
+
     _fitPriceGraphScopeButton.selected = NO;
     if ([self.delegate isComparedPortfolioPlotVisible] /*&& ![self.delegate isCDPVisible]*/) {
 //        _fitPriceGraphScopeButton.enabled = NO;
@@ -78,6 +78,7 @@
         [self.delegate showComparedPortfolioPlot];
         self.drawCDPButton.enabled = YES;
     }
+    [self.delegate addComparedPortfolioPlot];
     [self.delegate FitPriceGraphScope];
 
 

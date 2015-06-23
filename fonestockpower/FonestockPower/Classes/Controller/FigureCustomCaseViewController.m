@@ -13,7 +13,7 @@
 #import "FSTeachPopView.h"
 #import "FigureSetFlatTrendViewController.h"
 #import "FSTeachPopDelegate.h"
-#import "SGInfoAlert.h"
+
 #import "CXAlertView.h"
 
 #define IS_IOS8 [[UIDevice currentDevice] systemVersion].floatValue >= 8.0
@@ -22,6 +22,7 @@
     UIAlertView * noKlineAlert;
     CustomIOS7AlertView *hintAlertView;//bug#10581 wiser.kuo
     int newId;
+
 }
 
 @property (nonatomic)int analysisPeriod;
@@ -142,6 +143,7 @@
 //bug#10581 wiser start
 @property (nonatomic, strong) FSUIButton *checkBtn;
 @property (nonatomic, strong) UILabel *checkLabel;
+@property (nonatomic, strong) UILabel *msgLabel;
 @property (nonatomic, strong) UIView *checkView;
 //bug#10581 wiser end
 @end
@@ -182,9 +184,38 @@
         }
     }
     _firstIn = NO;
+    
+    
     [self setDefaultTrendSettingView];
+    
+    
+    int trend = [_customModel searchTrendTypeByFigureSearch_ID:[_figureSearchArray objectAtIndex:0]];
+    if(trend!=-1){
+        _trendLine=YES;
+        if(trend==0){
+            _trend=upTrend;
+            _selectNum=0;
+        }
+        else if(trend==1){
+            _trend=downTrend;
+            _selectNum=1;
+        }
+        else if(trend==2){
+            _trend=flatTrend;
+            _selectNum=2;
+        }
+    }
+    
     [self setKLineWidth];
     [self setkBackGroundViewFrame];
+  //  [self setKbar];
+
+    [self showTrendLine];
+    [self showTeachPop];
+    for (int i=0; i<=4; i++) {
+        UIView * rectView = [_viewDictionary objectForKey:[NSString stringWithFormat:@"_kRectView%d",i]];
+        rectView.layer.borderWidth = 2;
+    }
 //    [self setKbar];
     
     //[self setTitle];
@@ -243,22 +274,40 @@
 //bug#10581 wiser start
 - (void)showHint
 {
-    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapCheckBox)];
     
     hintAlertView = [[CustomIOS7AlertView alloc]init];
-    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 60, self.view.frame.size.width-30, 50)];
-    UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(5, 10, self.view.frame.size.width-30, 50)];
-    label.textAlignment = NSTextAlignmentLeft;
+    UIView * view;
+    if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
+        view = [[UIView alloc]initWithFrame:CGRectMake(0, 40, self.view.frame.size.width-30, 90)];
+    }
+    else {
+        view = [[UIView alloc]initWithFrame:CGRectMake(0, 40, self.view.frame.size.width-30, 60)];
+    }
+    UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, self.view.frame.size.width-30, 30)];
+    label.textAlignment = NSTextAlignmentCenter;
     [label setNumberOfLines:2];
     [label setFont:[UIFont boldSystemFontOfSize:16]];
-    label.text = NSLocalizedStringFromTable(@"請由右往左開始編輯一根以上的K棒", @"FigureSearch", nil);
+    label.text = NSLocalizedStringFromTable(@"我的型態", @"FigureSearch", nil);
     [hintAlertView setTitleLabel:label];
     [hintAlertView setContainerView:view];
     [hintAlertView setButtonTitles:@[NSLocalizedStringFromTable(@"確定", @"FigureSearch", nil)]];
     hintAlertView.delegate = self;
+    if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
+        _msgLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,view.frame.size.width, 60)];
+        _checkView = [[UIView alloc] initWithFrame:CGRectMake(0, 60, view.frame.size.width, 30)];
+    }
+    else {
+        _msgLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,view.frame.size.width, 30)];
+        _checkView = [[UIView alloc] initWithFrame:CGRectMake(0, 30, view.frame.size.width, 30)];
+    }
     
-    _checkView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, view.frame.size.width, 30)];
+    [_msgLabel setFont:[UIFont boldSystemFontOfSize:16]];
+    _msgLabel.backgroundColor = [UIColor whiteColor];
+    [_msgLabel setNumberOfLines:2];
+    _msgLabel.text = NSLocalizedStringFromTable(@"請由右往左開始編輯一根以上的K棒", @"FigureSearch", nil);
+    [view addSubview:_msgLabel];
+    
     _checkView.backgroundColor = [UIColor whiteColor];
     _checkView.userInteractionEnabled = YES;
     [_checkView addGestureRecognizer:tapGestureRecognizer];
@@ -307,6 +356,7 @@
         [self showHint];
         _firstTimeFlag = NO;
     }
+   // [self setKbar];
 }
 //bug#10581 wiser end
 
@@ -363,6 +413,21 @@
     _firstIn = YES;
     _trendFirstIn = YES;
 	// Do any additional setup after loading the view.
+
+    NSDictionary *viewControllers = NSDictionaryOfVariableBindings(_percentLabel,_negativePercentLabel,_percentLabel1,_negativePercentLabel1,_percentLabel2,_negativePercentLabel2);
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_percentLabel(45)]" options:0 metrics:nil views:viewControllers]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_negativePercentLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_rectView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_negativePercentLabel(45)]" options:0 metrics:nil views:viewControllers]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_percentLabel1 attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_rectView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_percentLabel1(45)]" options:0 metrics:nil views:viewControllers]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_negativePercentLabel1 attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_rectView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_negativePercentLabel1(45)]" options:0 metrics:nil views:viewControllers]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_percentLabel2 attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_rectView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_percentLabel2(45)]" options:0 metrics:nil views:viewControllers]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_negativePercentLabel2 attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_rectView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_negativePercentLabel2(45)]" options:0 metrics:nil views:viewControllers]];
 }
 
 -(void)showTeachPop{
@@ -383,19 +448,19 @@
     
     self.topView = [[UIView alloc] init];
     _topView.layer.borderWidth = 1.0f;
-    _topView.layer.BorderColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2].CGColor;
+    _topView.layer.borderColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2].CGColor;
     _topView.translatesAutoresizingMaskIntoConstraints = NO;
     [_trendSettingView addSubview:_topView];
     
     self.centerView = [[UIView alloc] init];
     _centerView.layer.borderWidth = 1.0f;
-    _centerView.layer.BorderColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2].CGColor;
+    _centerView.layer.borderColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2].CGColor;
     _centerView.translatesAutoresizingMaskIntoConstraints = NO;
     [_trendSettingView addSubview:_centerView];
     
     self.bottomView = [[UIView alloc] init];
     _bottomView.layer.borderWidth = 1.0f;
-    _bottomView.layer.BorderColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2].CGColor;
+    _bottomView.layer.borderColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2].CGColor;
     _bottomView.translatesAutoresizingMaskIntoConstraints = NO;
     [_trendSettingView addSubview:_bottomView];
     
@@ -790,8 +855,13 @@
     //設定趨勢線頁
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_backBtn(44)]-3-[_trendSettingView]-2-|" options:0 metrics:nil views:viewControllers]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_trendSettingView]|" options:0 metrics:nil views:viewControllers]];
-    
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-3-[_textLabel(60)]-5-[_topView]-5-[_centerView(==_topView)]-5-[_bottomView(120)]-5-[_skipBtn(35)]-5-|" options:0 metrics:nil views:viewControllers]];
+
+    if (self.view.frame.size.height > 480) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_textLabel(33)][_topView]-5-[_centerView(_topView)]-5-[_bottomView(_topView)]-5-[_skipBtn(35)]-2-|" options:0 metrics:nil views:viewControllers]];
+    }
+    else {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_textLabel][_topView(99)]-5-[_centerView(99)]-5-[_bottomView(130)]-5-[_skipBtn(35)]-2-|" options:0 metrics:nil views:viewControllers]];
+    }
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_textLabel]-15-|" options:0 metrics:nil views:viewControllers]];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_topView]-15-|" options:0 metrics:nil views:viewControllers]];
@@ -843,7 +913,10 @@
     
     //upDownLineSlider
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_upDownLineSlider]" options:0 metrics:nil views:viewControllers]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-25-[_upDownLineBtn(60)]" options:0 metrics:nil views:viewControllers]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_upDownLineBtn attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_upDownLineBtn.superview attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+    
+    
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[_upDownLineBtn(80)]-10-[_upDownLineSlider]-10-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewControllers]];
     
 //    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_upDownTextLabel(120)]" options:0 metrics:nil views:viewControllers]];
@@ -855,7 +928,7 @@
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_setUpDownTrend(130)]" options:0 metrics:nil views:viewControllers]];
     }
     else{
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_setUpDownTrend(40)]" options:0 metrics:nil views:viewControllers]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_setUpDownTrend(80)]" options:0 metrics:nil views:viewControllers]];
     }
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_setUpDownTrend(30)]" options:0 metrics:nil views:viewControllers]];
     
@@ -886,46 +959,23 @@
     if (_changeNameFlag) {
         _changeNameFlag = NO;
     }else{
-        NSDictionary *viewControllers = NSDictionaryOfVariableBindings(_percentLabel,_negativePercentLabel,_percentLabel1,_negativePercentLabel1,_percentLabel2,_negativePercentLabel2);
         [self.upLineImage setFrame:CGRectMake(-20,_allRectView.frame.size.height/2+10, 150, _allRectView.frame.size.height/2-45)];
         [self.downLineImage setFrame:CGRectMake(-20, -10, 150, _allRectView.frame.size.height/2-55)];
         [self.flatLineImage setFrame:CGRectMake(0, (_allRectView.frame.size.height/2)-_allRectView.frame.origin.y-55, 100, 150)];
         
+        
         self.defaultHeight = (_allRectView.frame.size.height-15)/22;
-        _num1 = 4*_defaultHeight;
-        _num2 = 8*_defaultHeight;
         float percentNum =10*_defaultHeight;
         float percent1Num = 4*_defaultHeight;
         float percent2Num = 8*_defaultHeight;
-        
-        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_percentLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_zeroPercentLabel attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:percentNum*-1]];
+        printf("%f %f\n",_defaultHeight,_allRectView.frame.size.height);
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_percentLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_rectView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_percentLabel(45)]" options:0 metrics:nil views:viewControllers]];
-        
-        
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_percentLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_zeroPercentLabel attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:percentNum*-1]];
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_negativePercentLabel attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_zeroPercentLabel attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:percentNum]];
-        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_negativePercentLabel attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_rectView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_negativePercentLabel(45)]" options:0 metrics:nil views:viewControllers]];
-        
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_percentLabel1 attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_zeroPercentLabel attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:(percent1Num*-1)]];
-        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_percentLabel1 attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_rectView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_percentLabel1(45)]" options:0 metrics:nil views:viewControllers]];
-        
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_negativePercentLabel1 attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_zeroPercentLabel attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:percent1Num]];
-        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_negativePercentLabel1 attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_rectView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_negativePercentLabel1(45)]" options:0 metrics:nil views:viewControllers]];
-        
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_percentLabel2 attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_zeroPercentLabel attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:(percent2Num*-1)]];
-        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_percentLabel2 attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_rectView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_percentLabel2(45)]" options:0 metrics:nil views:viewControllers]];
-        
-        
         [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_negativePercentLabel2 attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_zeroPercentLabel attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:percent2Num]];
-        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_negativePercentLabel2 attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_rectView attribute:NSLayoutAttributeRight multiplier:1.0 constant:0]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_negativePercentLabel2(45)]" options:0 metrics:nil views:viewControllers]];
-        
-        
-        
         
         float width,height;
         double version = [[UIDevice currentDevice].systemVersion doubleValue];
@@ -944,24 +994,73 @@
             view.frame = CGRectMake(width-i*(_kRectWidth+3)-(_kRectWidth+3), 0, _kRectWidth, height);
             
         }
+        
+       
+        [self.view layoutSubviews];
+        
         [self setKbar];
         
-        [self.view layoutSubviews];
     }
-    
     
     
 }
 -(void)setLabelText{
-    
-    _percentLabel.text = [NSString stringWithFormat:@"-%.1f%%",_range*2.0f];
-    _negativePercentLabel.text = [NSString stringWithFormat:@"--%.1f%%",_range*2.0f];
-    _percentLabel1.text = [NSString stringWithFormat:@"-%.1f%%",(_range*2)*(2.0f/5.0f)];
-    _negativePercentLabel1.text = [NSString stringWithFormat:@"--%.1f%%",(_range*2)*(2.0f/5.0f)];
-    
-    _percentLabel2.text = [NSString stringWithFormat:@"-%.1f%%",(_range*2)*(4.0f/5.0f)];
-    _negativePercentLabel2.text = [NSString stringWithFormat:@"--%.1f%%",(_range*2)*(4.0f/5.0f)];
+    float num  = 1;
+    if ((_analysisPeriod % 3) ==0) {
+        num = 1;
+        _storeDWM = FSFigureDWMForD;
+    }else if ((_analysisPeriod % 3) ==1) {
+        _storeDWM = FSFigureDWMForW;
+        num = ([(NSNumber *)[_figureSearchArray objectAtIndex:3]floatValue]/[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]);;
+    }else{
+        _storeDWM = FSFigureDWMForM;
+        num = ([(NSNumber *)[_figureSearchArray objectAtIndex:4]floatValue]/[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]);
+    }
 
+    
+    if(_range>10){
+        _percentLabel.text = [NSString stringWithFormat:@"-%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*_range/10 *num];
+        _negativePercentLabel.text = [NSString stringWithFormat:@"--%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*_range/10*num];
+        
+        _percentLabel1.text = [NSString stringWithFormat:@"-%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*_range/10*(2.0f/5.0f)*num];
+        _negativePercentLabel1.text = [NSString stringWithFormat:@"--%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*_range/10*(2.0f/5.0f)*num];
+        
+        _percentLabel2.text = [NSString stringWithFormat:@"-%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*_range/10*(4.0f/5.0f)*num];
+        _negativePercentLabel2.text = [NSString stringWithFormat:@"--%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*_range/10*(4.0f/5.0f)*num];
+    }
+    else{
+        _percentLabel.text = [NSString stringWithFormat:@"-%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*num];
+        _negativePercentLabel.text = [NSString stringWithFormat:@"--%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*num];
+        
+        _percentLabel1.text = [NSString stringWithFormat:@"-%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*(2.0f/5.0f)*num];
+        _negativePercentLabel1.text = [NSString stringWithFormat:@"--%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*(2.0f/5.0f)*num];
+        
+        _percentLabel2.text = [NSString stringWithFormat:@"-%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*(4.0f/5.0f)*num];
+        _negativePercentLabel2.text = [NSString stringWithFormat:@"--%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*(4.0f/5.0f)*num];
+    }
+//_changeNameFlag = YES;
+//_analysisPeriod+=1;
+//float num  = 1;
+//if ((_analysisPeriod % 3) ==0) {
+//    num = 1;
+//    _storeDWM = FSFigureDWMForD;
+//    _rangeLabel.text = NSLocalizedStringFromTable(@"Daily",@"Draw",@"");
+//}else if ((_analysisPeriod % 3) ==1) {
+//    _storeDWM = FSFigureDWMForW;
+//    num = ([(NSNumber *)[_figureSearchArray objectAtIndex:3]floatValue]/[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]);;
+//    _rangeLabel.text = NSLocalizedStringFromTable(@"Weekly",@"Draw",@"");
+//}else{
+//    _storeDWM = FSFigureDWMForM;
+//    num = ([(NSNumber *)[_figureSearchArray objectAtIndex:4]floatValue]/[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]);
+//    _rangeLabel.text = NSLocalizedStringFromTable(@"Monthly",@"Draw",@"");
+//}
+//_percentLabel.text = [NSString stringWithFormat:@"-%.1f%%",_range*num];
+//_negativePercentLabel.text = [NSString stringWithFormat:@"--%.1f%%",_range*num];
+//_percentLabel1.text = [NSString stringWithFormat:@"-%.1f%%",_range*(2.0f/5.0f)*num];
+//_negativePercentLabel1.text = [NSString stringWithFormat:@"--%.1f%%",_range*(2.0f/5.0f)*num];
+//
+//_percentLabel2.text = [NSString stringWithFormat:@"-%.1f%%",_range*(4.0f/5.0f)*num];
+//_negativePercentLabel2.text = [NSString stringWithFormat:@"--%.1f%%",_range*(4.0f/5.0f)*num];
 }
 
 -(void)setkBackGroundViewFrame{
@@ -995,21 +1094,22 @@
     
     int figureSearchId = newId;//[(NSNumber *)[_figureSearchArray objectAtIndex:0]intValue];
     float zero = 0.0f;
-    for (int i=4; i>=0; i--) {
+    for (int i=4; i>=0; i--) { // 掃過所有K棒的high,low找上下極值
         NSMutableArray * dataArray = [[NSMutableArray alloc]init];
         dataArray = [_customModel searchCustomKbarWithFigureSearchId:[NSNumber numberWithInt:figureSearchId] TNumber:[NSNumber numberWithInt:i]];
-        if (![dataArray count]==0) {
-            if (([(NSNumber *)[dataArray objectAtIndex:0]floatValue]+zero)*100>_range) {
+        if (![dataArray count]==0) {//不為空 有存k棒
+            if (([(NSNumber *)[dataArray objectAtIndex:0]floatValue]+zero)*100>_range) {//這一天的high是否超過上極值
                 _range = ([(NSNumber *)[dataArray objectAtIndex:0]floatValue]+zero)*100;
             }
-            if (([(NSNumber *)[dataArray objectAtIndex:1]floatValue]+zero)*100<_negativeRange) {
+            if (([(NSNumber *)[dataArray objectAtIndex:1]floatValue]+zero)*100<_negativeRange) {//這一天的low是否低於下極值
                 _negativeRange = ([(NSNumber *)[dataArray objectAtIndex:1]floatValue]+zero)*100;
             }
-            zero +=[(NSNumber *)[dataArray objectAtIndex:3]floatValue];
+            zero +=[(NSNumber *)[dataArray objectAtIndex:3]floatValue];//這一天的close收盤價為下一天的0%起點
         }
     }
+    printf("range=%f , negative range=%f\n",_range,_negativeRange);
 //    if (_range>0) {
-        _range = fabs(_range);
+        _range = fabs(_range); //絕對值
 //    }else{
 //        _range = abs(floorf(_range));
 //    }
@@ -1018,10 +1118,10 @@
 //    }else{
 //        _negativeRange = abs(floorf(_negativeRange));
 //    }
-    _range = MAX(_range,_negativeRange);
-        _range = [(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]/2;
-        _range = [(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]/2;
-            
+    _range = MAX(_range,_negativeRange);//上下極值比較
+    //_range = [(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]/2;
+    //_range = [(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]/2;
+        printf("range=%f\n",_range);
     [self setLabelText];
 //    [self setTitle];
     float defaultZero =0.0f;
@@ -1034,7 +1134,7 @@
         UIView * upLineView = [_viewDictionary objectForKey:[NSString stringWithFormat:@"_kUpLineView%d",i]];
         UIView * downLineView = [_viewDictionary objectForKey:[NSString stringWithFormat:@"_kDownLineView%d",i]];
         
-        if (![dataArray count]==0) {
+        if (![dataArray count]==0) { //不為空
             [self setDefaultColorWithkNumber:i];
             
             float width,height;
@@ -1047,12 +1147,23 @@
                 width = self.view.frame.size.width-50;
                 height = self.view.frame.size.height-160;
             }
-            self.defaultHeight = height/(_range*4);
-            float high = (_range*2-([(NSNumber *)[dataArray objectAtIndex:0]floatValue]+defaultZero)*100)*_defaultHeight;
-            float low = (_range*2-([(NSNumber *)[dataArray objectAtIndex:1]floatValue]+defaultZero)*100)*_defaultHeight;
-            float open = (_range*2-([(NSNumber *)[dataArray objectAtIndex:2]floatValue]+defaultZero)*100)*_defaultHeight;
-            float close = (_range*2-([(NSNumber *)[dataArray objectAtIndex:3]floatValue]+defaultZero)*100)*_defaultHeight;
-            
+//            self.defaultHeight = height/(_range*4);
+//            float high = (_range*2-([(NSNumber *)[dataArray objectAtIndex:0]floatValue]+defaultZero)*100)*_defaultHeight;
+//            float low = (_range*2-([(NSNumber *)[dataArray objectAtIndex:1]floatValue]+defaultZero)*100)*_defaultHeight;
+//            float open = (_range*2-([(NSNumber *)[dataArray objectAtIndex:2]floatValue]+defaultZero)*100)*_defaultHeight;
+//            float close = (_range*2-([(NSNumber *)[dataArray objectAtIndex:3]floatValue]+defaultZero)*100)*_defaultHeight;
+            //rectView在allRectView裡面 扣除numberRectView跟上下部分多出非range的空間
+            printf("%f\n",_rectView.frame.size.height);
+            float high =_rectView.frame.size.height/2 -([(NSNumber *)[dataArray objectAtIndex:0]floatValue]+defaultZero)*100* _rectView.frame.size.height/20 ;
+            float low = _rectView.frame.size.height/2 -([(NSNumber *)[dataArray objectAtIndex:1]floatValue]+defaultZero)*100* _rectView.frame.size.height/20;
+            float open =_rectView.frame.size.height/2 -([(NSNumber *)[dataArray objectAtIndex:2]floatValue]+defaultZero)*100* _rectView.frame.size.height/20;
+            float close=_rectView.frame.size.height/2 -([(NSNumber *)[dataArray objectAtIndex:3]floatValue]+defaultZero)*100* _rectView.frame.size.height/20;
+            if(_range>10){
+                high  =_rectView.frame.size.height/2 - ([(NSNumber *)[dataArray objectAtIndex:0]floatValue]+defaultZero)*100* _rectView.frame.size.height/20*10/_range ;
+                low   =_rectView.frame.size.height/2 - ([(NSNumber *)[dataArray objectAtIndex:1]floatValue]+defaultZero)*100* _rectView.frame.size.height/20*10/_range ;
+                open  =_rectView.frame.size.height/2 - ([(NSNumber *)[dataArray objectAtIndex:2]floatValue]+defaultZero)*100* _rectView.frame.size.height/20*10/_range ;
+                close =_rectView.frame.size.height/2 - ([(NSNumber *)[dataArray objectAtIndex:3]floatValue]+defaultZero)*100* _rectView.frame.size.height/20*10/_range ;
+            }
             if (open>close) {
                 rectView.frame = CGRectMake(width-i*(_kRectWidth+3)-(_kRectWidth+3), close, _kRectWidth, open-close);
                 rectView.backgroundColor = [UIColor colorWithRed:22.0f/255.0f green:130.0f/255.0f blue:24.0f/255.0f alpha:1.0f];
@@ -1080,7 +1191,7 @@
             defaultZero +=[(NSNumber *)[dataArray objectAtIndex:3]floatValue];
             upLineView.backgroundColor = _kUpLineColor;
             downLineView.backgroundColor = _kDownLineColor;
-        }else{
+        }else{ //沒有值
             float width,height;
             double version = [[UIDevice currentDevice].systemVersion doubleValue];
             if(version>=8.0f){
@@ -1287,6 +1398,27 @@
 -(void)changeNumberView{
     _changeNameFlag = YES;
     _analysisPeriod+=1;
+//    float num  = 1;
+//    if ((_analysisPeriod % 3) ==0) {
+//        num = 1;
+//        _storeDWM = FSFigureDWMForD;
+//        _rangeLabel.text = NSLocalizedStringFromTable(@"Daily",@"Draw",@"");
+//    }else if ((_analysisPeriod % 3) ==1) {
+//        _storeDWM = FSFigureDWMForW;
+//        num = ([(NSNumber *)[_figureSearchArray objectAtIndex:3]floatValue]/[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]);;
+//        _rangeLabel.text = NSLocalizedStringFromTable(@"Weekly",@"Draw",@"");
+//    }else{
+//        _storeDWM = FSFigureDWMForM;
+//        num = ([(NSNumber *)[_figureSearchArray objectAtIndex:4]floatValue]/[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]);
+//        _rangeLabel.text = NSLocalizedStringFromTable(@"Monthly",@"Draw",@"");
+//    }
+//    _percentLabel.text = [NSString stringWithFormat:@"-%.1f%%",_range*num];
+//    _negativePercentLabel.text = [NSString stringWithFormat:@"--%.1f%%",_range*num];
+//    _percentLabel1.text = [NSString stringWithFormat:@"-%.1f%%",_range*(2.0f/5.0f)*num];
+//    _negativePercentLabel1.text = [NSString stringWithFormat:@"--%.1f%%",_range*(2.0f/5.0f)*num];
+//    
+//    _percentLabel2.text = [NSString stringWithFormat:@"-%.1f%%",_range*(4.0f/5.0f)*num];
+//    _negativePercentLabel2.text = [NSString stringWithFormat:@"--%.1f%%",_range*(4.0f/5.0f)*num];
     float num  = 1;
     if ((_analysisPeriod % 3) ==0) {
         num = 1;
@@ -1301,14 +1433,28 @@
         num = ([(NSNumber *)[_figureSearchArray objectAtIndex:4]floatValue]/[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]);
         _rangeLabel.text = NSLocalizedStringFromTable(@"Monthly",@"Draw",@"");
     }
-    _percentLabel.text = [NSString stringWithFormat:@"-%.1f%%",_range*2.0f*num];
-    _negativePercentLabel.text = [NSString stringWithFormat:@"--%.1f%%",_range*2.0f*num];
-    _percentLabel1.text = [NSString stringWithFormat:@"-%.1f%%",(_range*2)*(2.0f/5.0f)*num];
-    _negativePercentLabel1.text = [NSString stringWithFormat:@"--%.1f%%",(_range*2)*(2.0f/5.0f)*num];
     
-    _percentLabel2.text = [NSString stringWithFormat:@"-%.1f%%",(_range*2)*(4.0f/5.0f)*num];
-    _negativePercentLabel2.text = [NSString stringWithFormat:@"--%.1f%%",(_range*2)*(4.0f/5.0f)*num];
     
+    if(_range>10){
+        _percentLabel.text = [NSString stringWithFormat:@"-%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*_range/10 *num];
+        _negativePercentLabel.text = [NSString stringWithFormat:@"--%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*_range/10*num];
+        
+        _percentLabel1.text = [NSString stringWithFormat:@"-%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*_range/10*(2.0f/5.0f)*num];
+        _negativePercentLabel1.text = [NSString stringWithFormat:@"--%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*_range/10*(2.0f/5.0f)*num];
+        
+        _percentLabel2.text = [NSString stringWithFormat:@"-%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*_range/10*(4.0f/5.0f)*num];
+        _negativePercentLabel2.text = [NSString stringWithFormat:@"--%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*_range/10*(4.0f/5.0f)*num];
+    }
+    else{
+        _percentLabel.text = [NSString stringWithFormat:@"-%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*num];
+        _negativePercentLabel.text = [NSString stringWithFormat:@"--%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*num];
+        
+        _percentLabel1.text = [NSString stringWithFormat:@"-%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*(2.0f/5.0f)*num];
+        _negativePercentLabel1.text = [NSString stringWithFormat:@"--%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*(2.0f/5.0f)*num];
+        
+        _percentLabel2.text = [NSString stringWithFormat:@"-%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*(4.0f/5.0f)*num];
+        _negativePercentLabel2.text = [NSString stringWithFormat:@"--%.1f%%",[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]*(4.0f/5.0f)*num];
+    }
 }
 
 -(void)trendBtnClick{
@@ -1318,13 +1464,13 @@
 
 #pragma mark Store Button Event
 -(void)storeBtnClick:(FSUIButton *)btn{
-    int plus10 = [_customModel getCounts:[NSNumber numberWithInt:newId]];
-    int origin = [_customModel getCounts:[NSNumber numberWithInt:newId/10]];
+    //int plus10 = [_customModel getCounts:[NSNumber numberWithInt:newId]];
+   // int origin = [_customModel getCounts:[NSNumber numberWithInt:newId/10]];
     
-    FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
-    if((![_titleText.text isEqualToString:[_figureSearchArray objectAtIndex:1]] || dataModel.figureSearchModel.beSubmit) || (plus10 == origin)){
+   // FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
+   // if((![_titleText.text isEqualToString:[_figureSearchArray objectAtIndex:1]] || dataModel.figureSearchModel.beSubmit) || (plus10 == origin)){
         [self storeTitleText];
-    }else{
+    /*}else{
         if(btn == _storeBtn) {
             [_customModel doneEditKBarFigureSearchID:[NSNumber numberWithInt:newId/10] NewFigureSearchId:[NSNumber numberWithInt:newId] TNumber:nil theData:nil type:FSFigureCustomStoreTypeSubmitStore];
             [self storeAction];
@@ -1332,13 +1478,14 @@
             [_customModel deleteAllKbarWithFigureSearchId:[NSNumber numberWithInt:newId]];
             [self.navigationController popViewControllerAnimated:NO];
         }
-    }
+    }*/
 }
 
 -(void)storeTitleText
 {
     if ([_titleText.text isEqualToString:@""]) {
-        [SGInfoAlert showInfo:[NSString stringWithFormat:@"%@",NSLocalizedStringFromTable(@"名稱不可空白", @"FigureSearch",nil)] bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+        [FSHUD showMsg:[NSString stringWithFormat:@"%@",NSLocalizedStringFromTable(@"名稱不可空白", @"FigureSearch",nil)]];
+
     }else{
         if([_customModel checkFigureSearchTitle:_titleText.text SearchID:[_figureSearchArray objectAtIndex:0] System:self.gategory] == 0){
             if(IS_IOS8){
@@ -1351,7 +1498,7 @@
                 [_checkTitleAlert show];
             }
         }else{
-            [SGInfoAlert showInfo:NSLocalizedStringFromTable(@"此名稱已存在,請重新輸入",@"FigureSearch",nil) bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+            [FSHUD showMsg:NSLocalizedStringFromTable(@"此名稱已存在,請重新輸入",@"FigureSearch",nil)];
         }
     }
 }
@@ -1381,6 +1528,10 @@
             _upLineImage.frame = CGRectMake(_upLineImage.frame.origin.x-15, _upLineImage.frame.origin.y-40, _upLineImage.frame.size.width+70, _upLineImage.frame.size.height+40);
             _downLineImage.frame = CGRectMake(_downLineImage.frame.origin.x, _downLineImage.frame.origin.y, _downLineImage.frame.size.width+35, _downLineImage.frame.size.height+40);
             _flatLineImage.frame = CGRectMake(_flatLineImage.frame.origin.x-15, _flatLineImage.frame.origin.y-15, _flatLineImage.frame.size.width+50, _flatLineImage.frame.size.height+30);
+
+            _upLineImage.frame = CGRectMake(_upLineImage.frame.origin.x+30, _upLineImage.frame.origin.y+40, _upLineImage.frame.size.width-70, _upLineImage.frame.size.height-30);
+            _downLineImage.frame = CGRectMake(_downLineImage.frame.origin.x+10, _downLineImage.frame.origin.y-10, _downLineImage.frame.size.width-30, _downLineImage.frame.size.height-30);
+            _flatLineImage.frame = CGRectMake(_flatLineImage.frame.origin.x+20, _flatLineImage.frame.origin.y, _flatLineImage.frame.size.width-30, _flatLineImage.frame.size.height-5);
             
         }else{
             kNum=i;
@@ -1458,14 +1609,7 @@
         dataModel.figureSearchModel.beSubmit = NO;
         [self.navigationController pushViewController:editView animated:NO];
     }else{
-        if(IS_IOS8){
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedStringFromTable(@"請由右往左開始編輯一根以上的K棒", @"FigureSearch", nil) preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"確認", @"FigureSearch", nil) style:UIAlertActionStyleCancel handler:nil]];
-            [self presentViewController:alert animated:YES completion:nil];
-        }else{
-            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:nil message:NSLocalizedStringFromTable(@"請由右往左開始編輯一根以上的K棒", @"FigureSearch", nil) delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedStringFromTable(@"確定", @"FigureSearch", nil), nil];
-            [alert show];
-        }
+        [FSHUD showMsg:NSLocalizedStringFromTable(@"請由右往左開始編輯一根以上的K棒", @"FigureSearch", nil)];
     }
     
 }
@@ -1603,7 +1747,7 @@
         if(target == 1){
             //bug#10713 start
             if([[_canMoveArray objectAtIndex:4]isEqualToString:@"NO"]){
-                [SGInfoAlert showInfo:[NSString stringWithFormat:@"%@",NSLocalizedStringFromTable(@"請設定至少1根k棒", @"FigureSearch",nil)] bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+                [FSHUD showMsg:[NSString stringWithFormat:@"%@",NSLocalizedStringFromTable(@"請設定至少1根k棒", @"FigureSearch",nil)]];
                 return;
             }
             //bug#10713 end
@@ -1618,7 +1762,9 @@
     }else if(sender == _deleteAlertController){
         if (target==1) {
             [_customModel deleteAllKbarWithFigureSearchId:[NSNumber numberWithInt:newId]];
-            [_customModel setFigureSearchToDefaultWithFigureSearchId:[_figureSearchArray objectAtIndex:0]];
+            [_customModel deleteAllKbarWithFigureSearchId:[NSNumber numberWithInt:newId/10]];
+            int figureSearchId = [(NSNumber *)[_figureSearchArray objectAtIndex:0]intValue];
+            [_customModel setFigureSearchToDefaultWithFigureSearchId: [NSNumber numberWithInt:figureSearchId]];
             [_customModel editTrendValueWithFigureSearchId:[NSNumber numberWithInt:newId] UpLine:[NSNumber numberWithFloat:5] DownLine:[NSNumber numberWithFloat:5] FlatLine:[NSNumber numberWithFloat:5]];
             
             UIImage * defaultImage;
@@ -1628,7 +1774,7 @@
                 defaultImage = [UIImage imageNamed:@"DIY Pattern - Short Default"];
             }
             NSData *imageData = UIImagePNGRepresentation(defaultImage);
-            [_customModel changeFigureSearchImageWithFigureSearchId:[NSNumber numberWithInt:newId] Image:imageData];
+            [_customModel changeFigureSearchImageWithFigureSearchId:[NSNumber numberWithInt:newId/10] Image:imageData];
             _trendLine = NO;
             [self deleteOldData];
             [self setKLineWidth];
@@ -1645,6 +1791,8 @@
     }else if(sender == _deleteOneAlertController){
         if (target == 1) {
             [_customModel deleteKbarWithFigureSearchId:[NSNumber numberWithInt:newId] tNum:[NSNumber numberWithInt:_deleteKbar]];
+            //if(_deleteKbar==0)
+            //    [_customModel deleteAllKbarWithFigureSearchId:[NSNumber numberWithInt:newId/10]];
             [self deleteOldData];
             [self setKbar];
             [self setLayout];
@@ -1656,7 +1804,10 @@
     if ([alertView isEqual:_deleteAlert]) {
         if (buttonIndex==1) {
             [_customModel deleteAllKbarWithFigureSearchId:[NSNumber numberWithInt:newId]];
-            [_customModel setFigureSearchToDefaultWithFigureSearchId:[_figureSearchArray objectAtIndex:0]];
+            [_customModel deleteAllKbarWithFigureSearchId:[NSNumber numberWithInt:newId/10]];
+            int figureSearchId = [(NSNumber *)[_figureSearchArray objectAtIndex:0]intValue];
+            [_customModel setFigureSearchToDefaultWithFigureSearchId: [NSNumber numberWithInt:figureSearchId]];
+            //[_customModel setFigureSearchToDefaultWithFigureSearchId:(NSNumber *)[_figureSearchArray objectAtIndex:0]];
             [_customModel editTrendValueWithFigureSearchId:[_figureSearchArray objectAtIndex:0] UpLine:[NSNumber numberWithFloat:5] DownLine:[NSNumber numberWithFloat:5] FlatLine:[NSNumber numberWithFloat:5]];
             
             UIImage * defaultImage;
@@ -1666,7 +1817,8 @@
                 defaultImage = [UIImage imageNamed:@"DIY Pattern - Short Default"];
             }
             NSData *imageData = UIImagePNGRepresentation(defaultImage);
-            [_customModel changeFigureSearchImageWithFigureSearchId:[_figureSearchArray objectAtIndex:0] Image:imageData];
+            
+            [_customModel changeFigureSearchImageWithFigureSearchId:[NSNumber numberWithInt:newId/10] Image:imageData];
             _trendLine = NO;
             [self deleteOldData];
             [self setKLineWidth];
@@ -1698,11 +1850,14 @@
     }else if ([alertView isEqual:_deleteOneAlert]){
         if (buttonIndex == 1) {
             [_customModel deleteKbarWithFigureSearchId:[NSNumber numberWithInt:newId] tNum:[NSNumber numberWithInt:_deleteKbar]];
+            //if(_deleteKbar==0)
+            //    [_customModel deleteAllKbarWithFigureSearchId:[NSNumber numberWithInt:newId/10]];
+            
             [self deleteOldData];
             [self setKbar];
             [self setLayout];
         }
-    }else if ([alertView isEqual:_trendLineBackAlert]){
+    }/*else if ([alertView isEqual:_trendLineBackAlert]){
         if (buttonIndex==1) {
             if (_upLineBtn.selected) {
                 _trend = upTrend;
@@ -1734,7 +1889,7 @@
         }else{
             [self.navigationController popViewControllerAnimated:NO];
         }
-    }else if (noKlineAlert){
+    }*/else if (noKlineAlert){
         if (buttonIndex == 0) {
             UIImage * defaultImage;
             if (_currentOption ==2){
@@ -1749,7 +1904,7 @@
     }else if([alertView isEqual:_checkTitleAlert]){
         if(buttonIndex == 1){
             if([[_canMoveArray objectAtIndex:4]isEqualToString:@"NO"]){//bug#10713 start
-                [SGInfoAlert showInfo:[NSString stringWithFormat:@"%@",NSLocalizedStringFromTable(@"請設定至少1根k棒", @"FigureSearch",nil)] bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+                [FSHUD showMsg:[NSString stringWithFormat:@"%@",NSLocalizedStringFromTable(@"請設定至少1根k棒", @"FigureSearch",nil)]];
                 return;
             }//bug#10713 end
             [_customModel doneEditKBarFigureSearchID:[NSNumber numberWithInt:newId/10] NewFigureSearchId:[NSNumber numberWithInt:newId] TNumber:nil theData:nil type:FSFigureCustomStoreTypeSubmitStore];

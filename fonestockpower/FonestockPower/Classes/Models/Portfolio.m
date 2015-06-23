@@ -658,25 +658,15 @@
 	
 	[lock unlock];
     
-    if(firstIn){
-        //取的兩檔比較股票之portfolio
-        NSString * appid = [FSFonestock sharedInstance].appId;
-        NSString * group = [appid substringWithRange:NSMakeRange(0, 2)];
-        NSString *icSymbol;
-        if ([group isEqualToString:@"us"]) {
-            icSymbol = @"US ^DJI";
-        }else if ([group isEqualToString:@"cn"]){
-            icSymbol = @"SS 000001";
-        }else{
-            icSymbol = @"TW ^tse01";
-        }
+    
+    
+    
+    
         
-        FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
-        [dataModel.portfolioData addWatchListItemByIdentSymbolArray:@[icSymbol]];
-        PortfolioItem *comparedPortfolioItem = [self findItemByIdentCodeSymbol:icSymbol];
-        [FSInstantInfoWatchedPortfolio sharedFSInstantInfoWatchedPortfolio].comparedPortfolioItem = comparedPortfolioItem;
-        firstIn = NO;
-    }
+    
+    
+    
+
     
 #endif
 }

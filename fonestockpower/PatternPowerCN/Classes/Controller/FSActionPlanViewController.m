@@ -467,10 +467,10 @@
     trade.lastNum = _actionPlan.last;
     if (_longButton.selected == YES) {
         trade.termStr = @"Long";
-        trade.dealStr = @"Buy";
+        trade.dealStr = @"BUY";
     }else{
         trade.termStr = @"Short";
-        trade.dealStr = @"Short";
+        trade.dealStr = @"SHORT";
     }
     [self.navigationController pushViewController:trade animated:NO];
 }
@@ -646,7 +646,7 @@
     UILabel * label =(UILabel *)sender.view;
     _tap = sender;
     _actionPlan = [_actionArray objectAtIndex:label.tag];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedStringFromTable(@"Are you sure you want to delete it?", @"ActionPlan", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"取消", @"ActionPlan", nil) otherButtonTitles:NSLocalizedStringFromTable(@"OK", @"ActionPlan", nil), nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedStringFromTable(@"Are you sure you want to delete?", @"ActionPlan", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"取消", @"ActionPlan", nil) otherButtonTitles:NSLocalizedStringFromTable(@"OK", @"ActionPlan", nil), nil];
     [alertView show];
 }
 
@@ -1054,9 +1054,9 @@
 
 -(NSArray *)columnsInMainTableView{
     if (_longButton.selected == YES) {
-        return @[NSLocalizedStringFromTable(@"Buy", @"ActionPlan", nil), NSLocalizedStringFromTable(@"Price", @"ActionPlan", nil), NSLocalizedStringFromTable(@"Profit & loss", @"ActionPlan", nil), NSLocalizedStringFromTable(@"Sell", @"ActionPlan", nil)];
+        return @[NSLocalizedStringFromTable(@"BUY", @"ActionPlan", nil), NSLocalizedStringFromTable(@"Price", @"ActionPlan", nil), NSLocalizedStringFromTable(@"Profit & loss", @"ActionPlan", nil), NSLocalizedStringFromTable(@"SELL", @"ActionPlan", nil)];
     }else{
-        return @[NSLocalizedStringFromTable(@"Short", @"ActionPlan", nil), NSLocalizedStringFromTable(@"Price", @"ActionPlan", nil), NSLocalizedStringFromTable(@"Profit & loss", @"ActionPlan", nil), NSLocalizedStringFromTable(@"Cover", @"ActionPlan", nil)];
+        return @[NSLocalizedStringFromTable(@"SHORT", @"ActionPlan", nil), NSLocalizedStringFromTable(@"Price", @"ActionPlan", nil), NSLocalizedStringFromTable(@"Profit & loss", @"ActionPlan", nil), NSLocalizedStringFromTable(@"COVER", @"ActionPlan", nil)];
     }
 }
 

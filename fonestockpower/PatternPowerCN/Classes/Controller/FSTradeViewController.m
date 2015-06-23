@@ -247,13 +247,13 @@
     _suggestQTYTitle = [[UILabel alloc] init];
     _suggestQTY = [[UILabel alloc] init];
 
-    if ([_dealStr isEqualToString:@"Buy"] || [_dealStr isEqualToString:@"Short"]) {
+    if ([_dealStr isEqualToString:@"BUY"] || [_dealStr isEqualToString:@"SHORT"]) {
         _suggestQTYTitle.translatesAutoresizingMaskIntoConstraints = NO;
         _suggestQTYTitle.adjustsFontSizeToFitWidth = YES;
-        if ([_dealStr isEqualToString:@"Buy"]) {
+        if ([_dealStr isEqualToString:@"BUY"]) {
             _suggestQTYTitle.text = NSLocalizedStringFromTable(@"建議買進張數小於", @"Trade", nil);
             _promptLabel.hidden = NO;
-        }else if ([_dealStr isEqualToString:@"Short"]){
+        }else if ([_dealStr isEqualToString:@"SHORT"]){
             _suggestQTYTitle.text = NSLocalizedStringFromTable(@"建議放空張數小於", @"Trade", nil);
             _promptLabel.hidden = NO;
         }
@@ -278,7 +278,7 @@
     [layoutContraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_scrollView]|" options:0 metrics:nil views:viewControllers]];
     
     [layoutContraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_contentView(==_scrollView)]" options:0 metrics:nil views:viewControllers]];
-    if ([_dealStr isEqualToString:@"Buy"] || [_dealStr isEqualToString:@"Short"]) {
+    if ([_dealStr isEqualToString:@"BUY"] || [_dealStr isEqualToString:@"SHORT"]) {
         if ([_dateString isEqualToString:todayStr]) {
             [layoutContraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_contentView(>=335)]|" options:0 metrics:nil views:viewControllers]];
         }else{
@@ -293,7 +293,7 @@
     [layoutContraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_dealTitleLabel][_tradeLabel(_dealTitleLabel)]-|" options:0 metrics:nil views:viewControllers]];
     [layoutContraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_countTitleLabel][_countTextField(_countTitleLabel)]-|" options:0 metrics:nil views:viewControllers]];
     
-    if ([_dealStr isEqualToString:@"Buy"] || [_dealStr isEqualToString:@"Short"]) {
+    if ([_dealStr isEqualToString:@"BUY"] || [_dealStr isEqualToString:@"SHORT"]) {
         if ([_dateString isEqualToString:todayStr]) {
             [layoutContraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_suggestQTYTitle][_suggestQTY(_suggestQTYTitle)]-|" options:0 metrics:nil views:viewControllers]];
         }
@@ -306,7 +306,7 @@
     [layoutContraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_doneButton(100)]-|" options:0 metrics:nil views:viewControllers]];
     [layoutContraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_promptLabel]|" options:0 metrics:nil views:viewControllers]];
 
-    if ([_dealStr isEqualToString:@"Buy"] || [_dealStr isEqualToString:@"Short"]) {
+    if ([_dealStr isEqualToString:@"BUY"] || [_dealStr isEqualToString:@"SHORT"]) {
         if ([_dateString isEqualToString:todayStr]) {
             [layoutContraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_dateTitleLabel(30)][_symbolTitleLabel(30)][_dealTitleLabel(30)][_countTitleLabel(30)][_suggestQTYTitle(30)][_promptLabel(30)][_priceTitleLabel(30)][_amountPayableTitleLabel(30)][_sharesOwnedTitleLabel(30)][_cashTitleLabel(30)]" options:0 metrics:nil views:viewControllers]];
             [layoutContraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[_dateButton(30)][_symbolLabel(30)][_tradeLabel(30)][_countTextField(30)][_suggestQTY(30)]-30-[_priceTextField(30)][_amountPayableLabel(30)][_sharesOwnedLabel(30)][_cashLabel(30)][_doneButton(30)]" options:0 metrics:nil views:viewControllers]];
@@ -432,7 +432,7 @@
         
         [self calculateCashValue];
         
-        if ([_dealStr isEqualToString:@"Buy"] || [_dealStr isEqualToString:@"Short"]) {
+        if ([_dealStr isEqualToString:@"BUY"] || [_dealStr isEqualToString:@"SHORT"]) {
             [self.view setNeedsUpdateConstraints];
             if ([_dateString isEqualToString:todayStr]) {
                 _suggestQTYTitle.hidden = NO;
@@ -464,7 +464,7 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedStringFromTable(@"價格未輸入", @"Trade", nil) delegate:nil cancelButtonTitle:NSLocalizedStringFromTable(@"OK", @"Trade", nil) otherButtonTitles:nil];
         [alertView show];
         
-    }else if ([_tradeLabel.text isEqualToString:NSLocalizedStringFromTable(@"Buy", @"Trade", nil)]) {
+    }else if ([_tradeLabel.text isEqualToString:NSLocalizedStringFromTable(@"BUY", @"Trade", nil)]) {
         if (cash < [self determineCountry:count * price]) {
             alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedStringFromTable(@"現金餘額不足, 請先投入資金", @"Trade", @"") delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"OK", @"Trade", nil) otherButtonTitles: nil];
             alert.tag = 400;
@@ -486,7 +486,7 @@
             custAlertView.tag = 500;
             [custAlertView show];
         }
-    }else if ([_tradeLabel.text isEqualToString:NSLocalizedStringFromTable(@"Short", @"Trade", nil)]){
+    }else if ([_tradeLabel.text isEqualToString:NSLocalizedStringFromTable(@"SHORT", @"Trade", nil)]){
         if (cash < [self determineCountry:count * price]) {
             alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedStringFromTable(@"現金餘額不足, 請先投入資金", @"Trade", @"") delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"OK", @"ActionPlan", nil) otherButtonTitles: nil];
             alert.tag = 400;
@@ -507,7 +507,7 @@
             custAlertView.tag = 501;
             [custAlertView show];
         }
-    }else if ([_tradeLabel.text isEqualToString:NSLocalizedStringFromTable(@"Sell", @"Trade", nil)]) {
+    }else if ([_tradeLabel.text isEqualToString:NSLocalizedStringFromTable(@"SELL", @"Trade", nil)]) {
         _tradeArray = [[NSMutableArray alloc] init];
         _tradeArray = [[FSActionPlanDatabase sharedInstances] searchTradeCountWithSymbol:_symbolStr Date:_dateString];
         if ([(NSNumber *)_countTextField.text floatValue] > [(NSNumber *)[[_tradeArray lastObject] objectForKey:@"TotalCount"] floatValue]) {
@@ -530,7 +530,7 @@
             custAlertView.tag = 502;
             [custAlertView show];
         }
-    }else if ([_tradeLabel.text isEqualToString:NSLocalizedStringFromTable(@"Cover", @"Trade", nil)]){
+    }else if ([_tradeLabel.text isEqualToString:NSLocalizedStringFromTable(@"COVER", @"Trade", nil)]){
         _tradeArray = [[NSMutableArray alloc] init];
         _tradeArray = [[FSActionPlanDatabase sharedInstances] searchTradeCountWithSymbol:_symbolStr Date:_dateString];
         if ([(NSNumber *)_countTextField.text floatValue] > [(NSNumber *)[[_tradeArray lastObject] objectForKey:@"TotalCount"] floatValue]) {
@@ -687,7 +687,7 @@
 
     //已實現損益
     NSMutableArray *realizedDataArray = [[NSMutableArray alloc] init];
-    if ([_dealStr isEqualToString:@"Buy"] || [_dealStr isEqualToString:@"Sell"]) {
+    if ([_dealStr isEqualToString:@"BUY"] || [_dealStr isEqualToString:@"SELL"]) {
         realizedDataArray = [_actionPlanDB searchRealizedOfTradeWithDate:_dateString];
     }else{
         realizedDataArray = [_actionPlanDB searchRealizedOfTradeWithDate:_dateString];
@@ -695,69 +695,119 @@
     float totalGain = 0;
     float position = 0;
 
+
+//Michael:這段太神了,有時間再重構==============
+
     for (int i = 0; i < [realizedDataArray count]; i++) {
         NSMutableArray *costArray = [[NSMutableArray alloc] init];
         costArray = [[FSActionPlanDatabase sharedInstances] searchAvgCosOfTradetWithSymbol:[[realizedDataArray objectAtIndex:i] objectForKey:@"Symbol"] Date:_dateString];
         
         NSMutableArray *buyCostDataArray = [[NSMutableArray alloc] init];
-        if ([_dealStr isEqualToString:@"Buy"] || [_dealStr isEqualToString:@"Sell"]) {
-            buyCostDataArray = [[FSActionPlanDatabase sharedInstances] searchBuyDataOrderByPriceWithSymbol:[[realizedDataArray objectAtIndex:i] objectForKey:@"Symbol"] deal:@"Buy" date:_dateString];
+        if ([_dealStr isEqualToString:@"BUY"] || [_dealStr isEqualToString:@"SELL"]) {
+            buyCostDataArray = [[FSActionPlanDatabase sharedInstances] searchBuyDataOrderByPriceWithSymbol:[[realizedDataArray objectAtIndex:i] objectForKey:@"Symbol"] deal:@"BUY" date:_dateString];
         }else{
-            buyCostDataArray = [[FSActionPlanDatabase sharedInstances] searchBuyDataOrderByPriceWithSymbol:[[realizedDataArray objectAtIndex:i] objectForKey:@"Symbol"] deal:@"Short" date:_dateString];
+            buyCostDataArray = [[FSActionPlanDatabase sharedInstances] searchBuyDataOrderByPriceWithSymbol:[[realizedDataArray objectAtIndex:i] objectForKey:@"Symbol"] deal:@"SHORT" date:_dateString];
         }
         NSMutableArray *gainArray = [[NSMutableArray alloc] init];
         for (int j = 0; j < [costArray count]; j++) {
             NSString *deal = [[costArray objectAtIndex:j] objectForKey:@"Deal"];
-            if ([deal isEqualToString:@"Sell"]||[deal isEqualToString:@"Cover"]){
+            if ([deal isEqualToString:@"SELL"]||[deal isEqualToString:@"COVER"]){
                 float sellCount = [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Count"] floatValue];
                 for (int z = 0; z < [buyCostDataArray count]; z++) {
-                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                    if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
-                        [dateFormatter setDateFormat:@"MM/dd/yyyy"];
-                    }else{
-                        [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+                    if ([deal isEqualToString:@"SELL"] && ([[[buyCostDataArray objectAtIndex:z]objectForKey:@"Deal"] isEqualToString:@"BUY"] || [[[buyCostDataArray objectAtIndex:z]objectForKey:@"Deal"] isEqualToString:@"SELL"])) {
+                        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                        if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
+                            [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+                        }else{
+                            [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+                        }
+                        NSDate *date = [dateFormatter dateFromString:[[costArray objectAtIndex:j] objectForKey:@"Date"]];
+                        NSDate *buyDate = [dateFormatter dateFromString:[[buyCostDataArray objectAtIndex:z] objectForKey:@"Date"]];
+                        if ([date compare:buyDate] == NSOrderedDescending || [date compare:buyDate] == NSOrderedSame) {
+                            float buyCount = [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Count"] floatValue];
+                            if (fabsf(sellCount) >= buyCount && buyCount > 0) {
+                                NSDictionary *dict = [buyCostDataArray objectAtIndex:z];
+                                NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:dict];
+                                [gainArray addObject:[buyCostDataArray objectAtIndex:z]];
+                                
+                                //更新count
+                                [mutableDict setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"Count"];
+                                [buyCostDataArray setObject: mutableDict atIndexedSubscript:z];
+                                
+                                //獲利
+                                totalGain += [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Price"] floatValue]*fabsf(sellCount) - [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Price"] floatValue]*fabsf(sellCount);
+                                
+                                sellCount = sellCount + buyCount;
+                            }else if (buyCount > fabsf(sellCount) && fabsf(sellCount) > 0){
+                                NSDictionary *dict = [buyCostDataArray objectAtIndex:z];
+                                NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:dict];
+                                
+                                //更新count
+                                [mutableDict setObject:[NSString stringWithFormat:@"%.f", buyCount + sellCount] forKey:@"Count"];
+                                
+                                NSDictionary *addGaindict = [buyCostDataArray objectAtIndex:z];
+                                NSMutableDictionary *addGainMutableDict = [NSMutableDictionary dictionaryWithDictionary:addGaindict];
+                                [addGainMutableDict setObject:[NSString stringWithFormat:@"%f", fabsf(sellCount)] forKey:@"Count"];
+                                
+                                [gainArray addObject:addGainMutableDict];
+                                [buyCostDataArray setObject:mutableDict atIndexedSubscript:z];
+                                
+                                //獲利
+                                totalGain += [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Price"] floatValue]*fabsf(sellCount) - [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Price"] floatValue]*fabsf(sellCount);
+                                
+                                sellCount = 0;
+                            }
+                        }
                     }
-                    NSDate *date = [dateFormatter dateFromString:[[costArray objectAtIndex:j] objectForKey:@"Date"]];
-                    NSDate *buyDate = [dateFormatter dateFromString:[[buyCostDataArray objectAtIndex:z] objectForKey:@"Date"]];
-                    if ([date compare:buyDate] == NSOrderedDescending || [date compare:buyDate] == NSOrderedSame) {
-                        float buyCount = [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Count"] floatValue];
-                        if (abs(sellCount) >= buyCount && buyCount > 0) {
-                            NSDictionary *dict = [buyCostDataArray objectAtIndex:z];
-                            NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:dict];
-                            [gainArray addObject:[buyCostDataArray objectAtIndex:z]];
-                            
-                            //更新count
-                            [mutableDict setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"Count"];
-                            [buyCostDataArray setObject: mutableDict atIndexedSubscript:z];
-                            
-                            //獲利
-                            totalGain += [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Price"] floatValue]*abs(sellCount) - [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Price"] floatValue]*abs(sellCount);
-                            
-                            sellCount = sellCount + buyCount;
-                        }else if (buyCount > abs(sellCount) && abs(sellCount) > 0){
-                            NSDictionary *dict = [buyCostDataArray objectAtIndex:z];
-                            NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:dict];
-                            
-                            //更新count
-                            [mutableDict setObject:[NSString stringWithFormat:@"%.f", buyCount + sellCount] forKey:@"Count"];
-                            
-                            NSDictionary *addGaindict = [buyCostDataArray objectAtIndex:z];
-                            NSMutableDictionary *addGainMutableDict = [NSMutableDictionary dictionaryWithDictionary:addGaindict];
-                            [addGainMutableDict setObject:[NSString stringWithFormat:@"%d", abs(sellCount)] forKey:@"Count"];
-                            
-                            [gainArray addObject:addGainMutableDict];
-                            [buyCostDataArray setObject:mutableDict atIndexedSubscript:z];
-                            
-                            //獲利
-                            totalGain += [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Price"] floatValue]*abs(sellCount) - [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Price"] floatValue]*abs(sellCount);
-                            
-                            sellCount = 0;
+   
+                    if ([deal isEqualToString:@"COVER"] && ([[[buyCostDataArray objectAtIndex:z]objectForKey:@"Deal"] isEqualToString:@"SHORT"] || [[[buyCostDataArray objectAtIndex:z]objectForKey:@"Deal"] isEqualToString:@"COVER"])) {
+                        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                        if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
+                            [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+                        }else{
+                            [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+                        }
+                        NSDate *date = [dateFormatter dateFromString:[[costArray objectAtIndex:j] objectForKey:@"Date"]];
+                        NSDate *buyDate = [dateFormatter dateFromString:[[buyCostDataArray objectAtIndex:z] objectForKey:@"Date"]];
+                        if ([date compare:buyDate] == NSOrderedDescending || [date compare:buyDate] == NSOrderedSame) {
+                            float buyCount = [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Count"] floatValue];
+                            if (fabsf(sellCount) >= buyCount && buyCount > 0) {
+                                NSDictionary *dict = [buyCostDataArray objectAtIndex:z];
+                                NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:dict];
+                                [gainArray addObject:[buyCostDataArray objectAtIndex:z]];
+                                
+                                //更新count
+                                [mutableDict setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"Count"];
+                                [buyCostDataArray setObject: mutableDict atIndexedSubscript:z];
+                                
+                                //獲利
+                                totalGain += [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Price"] floatValue]*fabsf(sellCount) - [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Price"] floatValue]*fabsf(sellCount);
+                                
+                                sellCount = sellCount + buyCount;
+                            }else if (buyCount > fabsf(sellCount) && fabsf(sellCount) > 0){
+                                NSDictionary *dict = [buyCostDataArray objectAtIndex:z];
+                                NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:dict];
+                                
+                                //更新count
+                                [mutableDict setObject:[NSString stringWithFormat:@"%.f", buyCount + sellCount] forKey:@"Count"];
+                                
+                                NSDictionary *addGaindict = [buyCostDataArray objectAtIndex:z];
+                                NSMutableDictionary *addGainMutableDict = [NSMutableDictionary dictionaryWithDictionary:addGaindict];
+                                [addGainMutableDict setObject:[NSString stringWithFormat:@"%f", fabsf(sellCount)] forKey:@"Count"];
+                                
+                                [gainArray addObject:addGainMutableDict];
+                                [buyCostDataArray setObject:mutableDict atIndexedSubscript:z];
+                                
+                                //獲利
+                                totalGain += [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Price"] floatValue]*fabsf(sellCount) - [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Price"] floatValue]*fabsf(sellCount);
+                                
+                                sellCount = 0;
+                            }
                         }
                     }
                 }
             }
         }
-        
         //持有部位
         for (int j = 0; j < [buyCostDataArray count]; j++) {
             float countNum = [(NSNumber *)[[buyCostDataArray objectAtIndex:j] objectForKey:@"Count"] floatValue];
@@ -766,24 +816,22 @@
         }
     }
     
+//================================
+    
     //現金餘額
     
-//    cash = _positionModel.netWorth - _positionModel.unrealized * _positionModel.suggestCount - _positionModel.totalCost * _positionModel.suggestCount;
-    cash = fund + totalGain * _positionModel.suggestCount - position * _positionModel.suggestCount;
+    cash = fund + totalGain * _positionModel.suggestCount - position * _positionModel.suggestCount ;
+
     _cashLabel.text = [NSString stringWithFormat:@"$%@", [CodingUtil CoverFloatWithComma:cash DecimalPoint:0]];
 }
 
 #pragma mark - 建議張數計算
 -(void)calculateSuggestQTY{
-    if ([_dealStr isEqualToString:@"Buy"] || [_dealStr isEqualToString:@"Short"]) {
+    if ([_dealStr isEqualToString:@"BUY"] || [_dealStr isEqualToString:@"SHORT"]) {
         FSPositionModel *positionModel = [[FSDataModelProc sharedInstance] positionModel];
-        float networth = positionModel.netWorth;
         float suggestNum = 0;
         float avgCost = 0;
-        
 //        float userPrice = [_priceTextField.text floatValue];
-        float stopLossPrice = 0;
-        
         //均價
         NSMutableArray *positionArray = positionModel.positionArray;
         for (FSPositions *positions in positionArray) {
@@ -792,51 +840,109 @@
                 break;
             }
         }
-        
-        if ([_dealStr isEqualToString:@"Buy"] || [_dealStr isEqualToString:@"Short"]) {
+        if ([_dealStr isEqualToString:@"BUY"] || [_dealStr isEqualToString:@"SHORT"]) {
             if (price == _actionPlan.last) {
                 if (_costType) { //買進最高價
-                    //停損價
-                    if (price > _actionPlan.cost) {
-                        stopLossPrice = price * (100 - _actionPlan.sellSLPercent)/100;
-                    }else{
-                        stopLossPrice = _actionPlan.cost * (100 - _actionPlan.sellSLPercent) / 100;
-                    }
-                    suggestNum = floorf(((networth * 0.02) - (_actionPlan.cost * qty * _positionModel.suggestCount) + (stopLossPrice * qty * _positionModel.suggestCount)) / ((price - stopLossPrice) * _positionModel.suggestCount));
+                    suggestNum = [self highestBuyingPrice:avgCost];
+                    
                     if (suggestNum < 0) {
-                        suggestNum = [self buyAveragePrice];
+                        suggestNum = [self averageBuyingPrice:avgCost];
                     }
                 }else{ //買進均價
-                    suggestNum = [self buyAveragePrice];
-
+                    suggestNum = [self averageBuyingPrice:avgCost];
                 }
-                _suggestQTY.text = [NSString stringWithFormat:@"%.f", suggestNum];
             }else{
                 _suggestQTY.text = @"";
             }
         }
-        if (suggestNum == INFINITY || suggestNum < 0 || isnan(suggestNum)) {
-            _suggestQTY.text = @"---";
+
+
+        if (suggestNum < 0 || suggestNum == -0){
+            _suggestQTY.text = @"0";
+        }else if (suggestNum == INFINITY || isnan(suggestNum)){
+            _suggestQTY.text = @"----";
+        }else{
+            _suggestQTY.text = [NSString stringWithFormat:@"%.f",floorf(suggestNum / _positionModel.suggestCount)];
         }
     }
 }
-
--(float)buyAveragePrice{
+-(float)highestBuyingPrice:(float)avgCost {
     FSPositionModel *positionModel = [[FSDataModelProc sharedInstance] positionModel];
     float networth = positionModel.netWorth;
+    float suggestNum = 0;
+    float stopLossPrice = 0;
     
+    if ([_dealStr isEqualToString:@"BUY"]) {
+//        多
+        if (price > _actionPlan.cost) {
+            stopLossPrice = price * (1 - (_actionPlan.sellSLPercent / 100));
+        }else{
+            stopLossPrice = _actionPlan.cost * (1 - (_actionPlan.sellSLPercent / 100));
+        }
+        suggestNum = floorf(((networth * 0.02) - ((avgCost - stopLossPrice) * qty * _positionModel.suggestCount)) / (1.02 * price - stopLossPrice - (0.02 * _actionPlan.last)));
+        
+        int suggestNum_temp = suggestNum / 1000;
+        
+        if (suggestNum_temp <= 0) {
+            suggestNum = floorf(((0.02 * networth) - ((_actionPlan.sellSLPercent / 100) * avgCost * qty * _positionModel.suggestCount)) / ((((_actionPlan.sellSLPercent / 100) + 0.02) * price) - (0.02 * _actionPlan.last)));
+        }else{
+            if (_actionPlan.last < (((avgCost * qty * _positionModel.suggestCount + (price * suggestNum)) / (suggestNum + qty * _positionModel.suggestCount)) * (1 - (_actionPlan.sellSLPercent / 100)))) {
+                suggestNum = floorf(((0.02 * networth) - ((avgCost - _actionPlan.last) * qty * _positionModel.suggestCount)) / (1.02 * price - (1.02 * _actionPlan.last)));
+            }
+        }
+    }else{
+//        空
+        if (price < _actionPlan.cost) {
+            stopLossPrice = price * (1 + (_actionPlan.sellSLPercent / 100));
+        }else{
+            stopLossPrice = _actionPlan.cost * (1 + (_actionPlan.sellSLPercent / 100));
+        }
+        
+        suggestNum = floorf((((0.02 * networth) - ((stopLossPrice - avgCost) * qty * _positionModel.suggestCount)) / (stopLossPrice - 1.02 * price + (0.02 * _actionPlan.last))));
+        
+        int suggestNum_temp = suggestNum / 1000;
+        
+        if (suggestNum_temp <= 0) {
+            suggestNum = floorf(((0.02 * networth) - ((_actionPlan.sellSLPercent / 100) * avgCost * qty * _positionModel.suggestCount)) / ((((_actionPlan.sellSLPercent / 100) - 0.02) * price) + (0.02 * _actionPlan.last)));
+        }else{
+            if (_actionPlan.last > ((avgCost * qty * _positionModel.suggestCount + (price * suggestNum)) / ((suggestNum + qty * _positionModel.suggestCount)) * (1 + (_actionPlan.sellSLPercent / 100)))) {
+                suggestNum = floorf(((0.02 * networth) - ((_actionPlan.last - avgCost) * qty * _positionModel.suggestCount)) / (1.02 * _actionPlan.last - (1.02 * price)));
+            }
+        }
+    }
+    
+    if (_actionPlan.last >= stopLossPrice) {
+        if (price < stopLossPrice) {
+            _suggestQTY.text = @"----";
+        }
+    }else{
+        if (price >= stopLossPrice) {
+            _suggestQTY.text = @"----";
+        }
+    }
+    return suggestNum;
+}
+
+-(float)averageBuyingPrice:(float)avgCost {
+    FSPositionModel *positionModel = [[FSDataModelProc sharedInstance] positionModel];
+    float networth = positionModel.netWorth;
     float suggestNum = 0;
     
-    if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionCN) {
-        suggestNum = floorf((((networth * 0.02) - (_actionPlan.cost * qty * (_actionPlan.sellSLPercent / 100.0f) * _positionModel.suggestCount)) / (_actionPlan.last * (_actionPlan.sellSLPercent / 100.0f))) / 100.0f);
-        
+    if ([_dealStr isEqualToString:@"BUY"]){
+        suggestNum = floorf(((networth * 0.02) - ((_actionPlan.sellSLPercent / 100) * avgCost * qty * _positionModel.suggestCount)) / ((((_actionPlan.sellSLPercent / 100) + 0.02) * price) - (0.02 * _actionPlan.last)));
+        if (_actionPlan.last < (((avgCost * qty * _positionModel.suggestCount + (price * suggestNum)) / (suggestNum + qty * _positionModel.suggestCount)) * (1 - (_actionPlan.sellSLPercent / 100)))) {
+            suggestNum = floorf(((0.02 * networth) - ((avgCost - _actionPlan.last) * qty * _positionModel.suggestCount)) / (1.02 * price - (1.02 * _actionPlan.last)));
+        }
     }else{
-        suggestNum = floorf(((networth * 0.02) - (_actionPlan.cost * qty * (_actionPlan.sellSLPercent / 100.0f) * _positionModel.suggestCount)) / (_actionPlan.last * (_actionPlan.sellSLPercent / 100.0f)));
+        suggestNum = floorf(((networth * 0.02) - ((_actionPlan.sellSLPercent / 100.0f) * avgCost * qty * _positionModel.suggestCount)) / ((((_actionPlan.sellSLPercent / 100) - 0.02) * price) + (0.02 * _actionPlan.last)));
+        if (_actionPlan.last > ((avgCost * qty * _positionModel.suggestCount + (price * suggestNum)) / ((suggestNum + qty * _positionModel.suggestCount)) * (1 + (_actionPlan.sellSLPercent / 100)))) {
+            suggestNum = floorf(((0.02 * networth) - ((_actionPlan.last - avgCost) * qty * _positionModel.suggestCount)) / (1.02 * _actionPlan.last - (1.02 * price)));
+        }
     }
     
     return suggestNum;
 }
-#pragma mark - 現金餘額更新
+#pragma mark - 交易金額更新
 -(void)setAmountPayableLabel{
     float amountPayableNum = [self determineCountry:count * price];
     
@@ -869,6 +975,13 @@
     }
     
     return amountPayableNum;
+}
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 @end

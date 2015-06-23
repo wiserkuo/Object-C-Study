@@ -243,20 +243,30 @@
 
 #else
     
+    
+    
+
 //    NSString * appid = [FSFonestock sharedInstance].appId;
 //    NSString * group = [appid substringWithRange:NSMakeRange(0, 2)];
     [self setTitle:NSLocalizedStringFromTable(@"圖是力", @"Launcher", nil)];
+    
+    
+    
+    
+#ifdef PatternPowerTW
     UIButton *serviceButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 33, 33)];
     [serviceButton setImage:[UIImage imageNamed:@"Macroeconomic"] forState:UIControlStateNormal];
     [serviceButton setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, -10)];
     [serviceButton addTarget:self action:@selector(rightTapped:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *serviceBarButton = [[UIBarButtonItem alloc] initWithCustomView:serviceButton];
+    self.navigationItem.leftBarButtonItems = @[serviceBarButton];
+#endif
     
     UIButton *expButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     [expButton addTarget:self action:@selector(showExplanationView) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     UIBarButtonItem *itemButton = [[UIBarButtonItem alloc] initWithCustomView:expButton];
-    self.navigationItem.leftBarButtonItems = @[serviceBarButton];
+    
     self.navigationItem.rightBarButtonItem = itemButton;
 
     [self.navigationItem setHidesBackButton:YES];

@@ -232,6 +232,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    if (!_hasBackButton) {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
     
     
     // 登入狀態通知註冊
@@ -325,6 +328,12 @@
         [self.navigationController setNavigationBarHidden:NO];
         [self.navigationController pushViewController:page animated:NO];
     }
+}
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end

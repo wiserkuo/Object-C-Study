@@ -14,6 +14,7 @@
 #import "FSAddFundsViewController.h"
 #import "FSActionPlanDatabase.h"
 
+
 @interface FSInvestedViewController () <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate> {
     UITableView *mainTableView;
     UIScrollView *scrollView;
@@ -21,6 +22,7 @@
     UIAlertView *alert;
     NSMutableArray *investedFunds;
     NSMutableArray *investedArray;
+    NSMutableArray *investedArrayForShowMessage;
 }
 
 @property (weak, nonatomic) FSInvestedModel *invested;
@@ -51,10 +53,26 @@
     [super viewWillAppear:animated];
     investedFunds = [[NSMutableArray alloc] init];
     investedFunds = [[FSActionPlanDatabase sharedInstances] searchInvestedByTerm:_termStr];
+    
+    [self showInvestedLabel];
+    
     [mainTableView reloadData];
     _invested = [[FSDataModelProc sharedInstance] investedModel];
     investedArray = _invested.dataArray;
 //    [self goToBottom];
+}
+
+-(void)showInvestedLabel{
+    if (investedArrayForShowMessage && [investedArrayForShowMessage count] < [investedFunds count]) {
+        [FSHUD showMsg:[NSString stringWithFormat:@"%@ $%@ %@",
+                        [[investedFunds firstObject] objectForKey:@"Remit"],
+                        [CodingUtil CoverFloatWithComma:fabs([(NSNumber *)[[investedFunds firstObject] objectForKey:@"Amount"] doubleValue]) DecimalPoint:0],
+                        NSLocalizedStringFromTable(@"成功", @"Position", nil)]];
+        investedArrayForShowMessage = investedFunds;
+        
+    }else{
+        investedArrayForShowMessage = [[NSMutableArray alloc]initWithArray:investedFunds];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -233,6 +251,14 @@
         investedFunds = [[FSActionPlanDatabase sharedInstances] searchInvestedByTerm:_termStr];
         [mainTableView reloadData];
     }
+}
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 @end

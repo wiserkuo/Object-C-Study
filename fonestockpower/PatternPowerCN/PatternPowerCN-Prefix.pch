@@ -47,5 +47,6 @@
     #import "UIViewController+Notification.h"
     #import "UIViewController+ActionSheet.h"
     #import "FSNotificationCenter.h"
+    #import "UIActivityViewController+Rotation.h"
 
 #endif

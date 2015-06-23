@@ -321,7 +321,14 @@
     UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 40,viewW , viewH)];
     UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, viewW, 30)];
     label.textAlignment = NSTextAlignmentCenter;
-    label.text = [NSString stringWithFormat:@"%@(%@%@)", NSLocalizedStringFromTable(@"BottonIndicatorSheetTitle", @"Draw", @"The title of the picker list for selecting indicators"),NSLocalizedStringFromTable(@"圖", @"Draw",nil),numStr];
+    
+    
+    if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionTW) {
+        label.text = [NSString stringWithFormat:@"%@ (%@%@)", NSLocalizedStringFromTable(@"BottonIndicatorSheetTitle", @"Draw", @"The title of the picker list for selecting indicators"),NSLocalizedStringFromTable(@"圖", @"Draw",nil),numStr];
+    }
+    else {
+        label.text = [NSString stringWithFormat:@"%@", NSLocalizedStringFromTable(@"BottonIndicatorSheetTitle", @"Draw", @"The title of the picker list for selecting indicators")];
+    }
     [cxAlertView setTitleLabel:label];
     [cxAlertView setContainerView:view];
     cxAlertView.delegate = self;

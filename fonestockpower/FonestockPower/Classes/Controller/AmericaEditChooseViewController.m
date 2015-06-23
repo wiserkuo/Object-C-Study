@@ -178,7 +178,7 @@
             [dataModal.portfolioData AddItem:secu];
             _totalCount+=1;
         }else{
-            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:nil message:NSLocalizedStringFromTable(@"自選股已達上限", @"SecuritySearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確定", @"SecuritySearch", nil) otherButtonTitles:nil];
+            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:nil message:NSLocalizedStringFromTable(@"自選股已達上限", @"SecuritySearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確認", @"SecuritySearch", nil) otherButtonTitles:nil];
             [alert show];
         }
     }

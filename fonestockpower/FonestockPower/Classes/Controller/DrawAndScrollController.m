@@ -456,8 +456,11 @@ static NSCalendar *gCalendar;
 	[upperView addSubview:indexScrollView];
 	[indexScrollView addSubview:indexView];
 	[indexScrollView addSubview:indexScaleView];
-	//self.indexView.backgroundColor = [UIColor clearColor];
+
+    
     self.indexScaleView.backgroundColor = [UIColor clearColor];
+    //self.indexView.backgroundColor = [UIColor clearColor];
+	self.indexView.backgroundColor = [UIColor clearColor];
 
 	//預設技術指標
     [bottonView1 loadWithDefaultPage:indicator.bottomView1Indicator];
@@ -571,6 +574,7 @@ static NSCalendar *gCalendar;
     noteView.backgroundColor = [UIColor whiteColor];
     noteView.layer.borderColor = [UIColor blackColor].CGColor;
     noteView.layer.borderWidth = 0.5;
+    [noteView setBackgroundColor:[UIColor brownColor]];
     [self.view addSubview:noteView];
     
     noteTextView = [[UITextView alloc]init];
@@ -1277,7 +1281,7 @@ if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBa
             _penBtn.enabled = YES;
             _eraserBtn.enabled = YES;
         }
-    if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+        if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
             _changeCompareStockBtn.hidden = !_twoLine;
         }else{
             _blueCompareStockName.hidden = !_twoLine;
@@ -1638,27 +1642,43 @@ if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBa
 }
 
 -(void)viewDidLayoutSubviews{
-    _blueStockName.continuousMarqueeExtraBuffer = 10.0f;
-    [_blueStockName beginScroll];
-    _blueCompareStockName.continuousMarqueeExtraBuffer = 10.0f;
-    [_blueCompareStockName beginScroll];
-    UITapGestureRecognizer *upperTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    
-    if (_upperTouchView) {
-        if (upperView.frame.size.width>330) {
-            [self.upperTouchView setFrame:CGRectMake(upperView.frame.size.width-45, upperView.frame.origin.y, 45,upperView.frame.size.height)];
-        }else{
+    if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+        if (_upperTouchView) {
             [self.upperTouchView setFrame:CGRectMake(upperView.frame.size.width, upperView.frame.origin.y, 320-upperView.frame.size.width,upperView.frame.size.height)];
-        }
-        
-    }else{
-        if (upperView.frame.size.width>330) {
-            self.upperTouchView = [[UIView alloc]initWithFrame:CGRectMake(upperView.frame.size.width-45, upperView.frame.origin.y, 45,upperView.frame.size.height)];
         }else{
             self.upperTouchView = [[UIView alloc]initWithFrame:CGRectMake(upperView.frame.size.width, upperView.frame.origin.y, 320-upperView.frame.size.width,upperView.frame.size.height)];
         }
         
+    }else{
+        _blueStockName.continuousMarqueeExtraBuffer = 10.0f;
+        [_blueStockName beginScroll];
+        _blueCompareStockName.continuousMarqueeExtraBuffer = 10.0f;
+        [_blueCompareStockName beginScroll];
+        
+        if (_upperTouchView) {
+            [self.upperTouchView setFrame:CGRectMake(upperView.frame.size.width-45, upperView.frame.origin.y, 45,upperView.frame.size.height)];
+        }else{
+            self.upperTouchView = [[UIView alloc]initWithFrame:CGRectMake(upperView.frame.size.width-45, upperView.frame.origin.y, 45,upperView.frame.size.height)];
+        }
     }
+    
+    UITapGestureRecognizer *upperTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    
+//    if (_upperTouchView) {
+//        if (upperView.frame.size.width>330) {
+//            [self.upperTouchView setFrame:CGRectMake(upperView.frame.size.width-45, upperView.frame.origin.y, 45,upperView.frame.size.height)];
+//        }else{
+//            [self.upperTouchView setFrame:CGRectMake(upperView.frame.size.width, upperView.frame.origin.y, 320-upperView.frame.size.width,upperView.frame.size.height)];
+//        }
+//        
+//    }else{
+//        if (upperView.frame.size.width>330) {
+//            self.upperTouchView = [[UIView alloc]initWithFrame:CGRectMake(upperView.frame.size.width-45, upperView.frame.origin.y, 45,upperView.frame.size.height)];
+//        }else{
+//            self.upperTouchView = [[UIView alloc]initWithFrame:CGRectMake(upperView.frame.size.width, upperView.frame.origin.y, 320-upperView.frame.size.width,upperView.frame.size.height)];
+//        }
+//        
+//    }
     
     _upperTouchView.backgroundColor = [UIColor clearColor];
     [_upperTouchView addGestureRecognizer:upperTap];
@@ -1703,7 +1723,7 @@ if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBa
         _upperViewClickLabel.text = @"◢";
         [self.upperTouchView addSubview:_upperViewClickLabel];
     }else{
-        [self.upperViewClickLabel setFrame:CGRectMake(35, _upperTouchView.frame.size.height-10, 10, 10)];
+        [self.upperViewClickLabel setFrame:CGRectMake(34, _upperTouchView.frame.size.height-10, 10, 10)];
     }
     
     
@@ -2020,7 +2040,8 @@ if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBa
 		
 		if(hasArrive == NO)
 		{
-			
+            
+            
 			forceUpdate = NO;
 			dataSource = historicData;
             indexScaleView.comparedHistoricData = _comparedHistoricData;
@@ -2096,7 +2117,8 @@ if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBa
 				}
 			}
 			
-			
+            //wiser
+            //[_dataModal.operationalIndicator prepareDataToDrawByPeriod];
 		}
 		else
 		{
@@ -2171,8 +2193,10 @@ if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBa
 				
 			}
 			else if(num >= DateNumMax)
-			{
-				BOOL bRedrawAll = NO;
+			{   //wiser
+               // [_dataModal.operationalIndicator prepareDataToDrawByPeriod];
+				
+                BOOL bRedrawAll = NO;
 				UInt8 type = self.historicType;
 				switch (analysisPeriod) 
 				{
@@ -2401,7 +2425,8 @@ if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBa
 		if([self crossVisible])
 			[self updateCrossView];
 	}	
-	
+    //wiser
+    [_dataModal.operationalIndicator prepareDataToDrawByPeriod];
 	//資訊地雷 query date . (queryType = 0)
 	if(isNeedOpenInformationMine)
 	{
@@ -2416,6 +2441,7 @@ if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBa
 		}
 		
 	}
+
 }
 
 
@@ -3175,14 +3201,14 @@ if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBa
         
         
         crossInfo.stock1Close.text = [CodingUtil ConvertPriceValueToString:hist.close withIdSymbol:idSymbol];
-        crossInfo.stock1Volume.text =[CodingUtil twStringWithVolumeByValue:hist.volume ];
+        crossInfo.stock1Volume.text =[CodingUtil volumeRoundRownWithDouble:hist.volume ];
         
         float stock2Close =[(NSNumber *)[indexScaleView.compDictionary objectForKey:[NSNumber numberWithInt:[self getSeqNumberFromPointXValue:crossX]]]floatValue];
         crossInfo.stock2Close.text =[NSString stringWithFormat:@"%.2f",stock2Close];
         
         float stock2Volume =[(NSNumber *)[indexScaleView.compVolumeDictionary objectForKey:[NSNumber numberWithInt:[self getSeqNumberFromPointXValue:crossX]]]floatValue];
         
-        crossInfo.stock2Volume.text = [CodingUtil twStringWithVolumeByValue:stock2Volume];
+        crossInfo.stock2Volume.text = [CodingUtil volumeRoundRownWithDouble:stock2Volume];
         
         
         
@@ -5091,7 +5117,6 @@ if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBa
        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:_autoLayoutString options:NSLayoutFormatAlignAllLeft metrics:nil views:viewsDictionary]];
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_dayLine(btnWidth)][_weekLine(btnWidth)][_monthLine(btnWidth)][_minLine(btnWidth)][_kLineParameterButton(btnWidth)][_rowButton(btnWidth)]" options:NSLayoutFormatAlignAllTop|NSLayoutFormatAlignAllBottom metrics:widthDictionary views:viewsDictionary]];
         
-        
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_twoStock(46)][_changeCompareStockBtn(compareStockBtnWidth)][_penBtn(secBtnWidth)][_eraserBtn(secBtnWidth)][_biggerBtn(secBtnWidth)][_smallerBtn(secBtnWidth)]" options:NSLayoutFormatAlignAllTop metrics:widthDictionary views:viewsDictionary]];
         
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_twoStock]" options:0 metrics:nil views:viewsDictionary]];
@@ -6150,22 +6175,26 @@ if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBa
 }
 
 -(void)prePareDrawLineData{
-    drawLineTitleArray = [[NSMutableArray alloc]initWithObjects:NSLocalizedStringFromTable(@"趨勢線", @"Draw", nil),
-        NSLocalizedStringFromTable(@"平行線", @"Draw", nil),
-        NSLocalizedStringFromTable(@"黃金分割線", @"Draw", nil),
-        NSLocalizedStringFromTable(@"甘氏角度線", @"Draw", nil),
-        NSLocalizedStringFromTable(@"黃金扇", @"Draw", nil),
-        NSLocalizedStringFromTable(@"阻速線", @"Draw", nil),
-        NSLocalizedStringFromTable(@"黃金弧", @"Draw", nil),
-        NSLocalizedStringFromTable(@"費波南希轉折", @"Draw", nil),nil];
+    drawLineTitleArray = [[NSMutableArray alloc]initWithObjects:
+                            NSLocalizedStringFromTable(@"趨勢線", @"Draw", nil),
+                            NSLocalizedStringFromTable(@"平行線", @"Draw", nil),
+                            NSLocalizedStringFromTable(@"黃金分割線", @"Draw", nil),
+                            NSLocalizedStringFromTable(@"甘氏角度線", @"Draw", nil),
+                            NSLocalizedStringFromTable(@"黃金扇", @"Draw", nil),
+                            NSLocalizedStringFromTable(@"阻速線", @"Draw", nil),
+                            NSLocalizedStringFromTable(@"黃金弧", @"Draw", nil),
+                            NSLocalizedStringFromTable(@"費波南希轉折", @"Draw", nil),nil];
     
-    eraserTitleArray = [[NSMutableArray alloc]initWithObjects:NSLocalizedStringFromTable(@"擦掉單線", @"Draw", nil),NSLocalizedStringFromTable(@"擦全部線", @"Draw", nil),NSLocalizedStringFromTable(@"儲存線", @"Draw", nil), nil];
+    eraserTitleArray = [[NSMutableArray alloc] initWithObjects:
+                        NSLocalizedStringFromTable(@"清除單線", @"Draw", nil),
+                        NSLocalizedStringFromTable(@"清除全部", @"Draw", nil),
+                        NSLocalizedStringFromTable(@"劃線儲存", @"Draw", nil), nil];
 }
 
 
 -(void)showDrawLineActionSheet{
     //NSLocalizedStringFromTable(@"選擇畫線種類", @"Draw", nil) ← 原本的title 字樣
-    drawLineActionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
+    drawLineActionSheet = [[UIActionSheet alloc]initWithTitle:NSLocalizedStringFromTable(@"選擇畫線種類", @"Draw", @"選擇畫線種類") delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil, nil];
     
     [drawLineActionSheet addButtonWithTitle:NSLocalizedStringFromTable(@"顯示上次內容", @"Draw", nil)];
     
@@ -6210,16 +6239,16 @@ if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBa
         NSMutableDictionary * dic =[_dateDictionary objectForKey:[indexScaleView.objDataArray lastObject]];
         arrowData * data = [[arrowData alloc]init];
         
-        data = [dic objectForKey:@"Buy"];
+        data = [dic objectForKey:@"BUY"];
         
         if (data==nil) {
-            data = [dic objectForKey:@"Short"];
+            data = [dic objectForKey:@"SHORT"];
         }
         if (data==nil) {
-            data = [dic objectForKey:@"Sell"];
+            data = [dic objectForKey:@"SELL"];
         }
         if (data==nil) {
-            data = [dic objectForKey:@"Cover"];
+            data = [dic objectForKey:@"COVER"];
         }
         if (_first) {
             _first = NO;
@@ -6365,9 +6394,15 @@ if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBa
         self.navigationItem.title = NSLocalizedStringFromTable(@"Gain", @"Draw", @"");
     }
     if (isNotes) {
-        self.navigationItem.title = [NSString stringWithFormat:@"%@ - %@ (%@)",self.navigationItem.title,portfolioItem->symbol,portfolioItem->fullName];
+        self.navigationItem.title = [NSString stringWithFormat:@"%@ - %@ (%@)",self.navigationItem.title,portfolioItem->fullName,portfolioItem->symbol];
     }
 }
+- (BOOL)shouldAutorotate {
+    return YES;
+}
 
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAllButUpsideDown;
+}
 
 @end

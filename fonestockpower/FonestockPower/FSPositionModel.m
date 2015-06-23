@@ -41,10 +41,10 @@
     _position = 0;
     if ([term isEqualToString:@"Long"]) {
         _actionArray = _actionPlanModel.actionPlanLongArray;
-        [self loadDiaryData:@"Sell"];
+        [self loadDiaryData:@"SELL"];
     }else{
         _actionArray = _actionPlanModel.actionPlanShortArray;
-        [self loadDiaryData:@"Cover"];
+        [self loadDiaryData:@"COVER"];
     }
     
     _diaryArray = self.diaryArray;
@@ -62,11 +62,11 @@
         NSMutableArray *buyDataArray = [[NSMutableArray alloc] init];
         NSMutableArray *sellDataArray = [[NSMutableArray alloc] init];
         if ([term isEqualToString:@"Long"]) {
-            buyDataArray = [[FSActionPlanDatabase sharedInstances] searchBuyDataOrderByPriceWithSymbol:[[_positionDataArray objectAtIndex:i] objectForKey:@"Symbol"] deal:@"Buy"];
-            sellDataArray = [[FSActionPlanDatabase sharedInstances] searchBuyDataOrderByPriceWithSymbol:[[_positionDataArray objectAtIndex:i] objectForKey:@"Symbol"] deal:@"Sell"];
+            buyDataArray = [[FSActionPlanDatabase sharedInstances] searchBuyDataOrderByPriceWithSymbol:[[_positionDataArray objectAtIndex:i] objectForKey:@"Symbol"] deal:@"BUY"];
+            sellDataArray = [[FSActionPlanDatabase sharedInstances] searchBuyDataOrderByPriceWithSymbol:[[_positionDataArray objectAtIndex:i] objectForKey:@"Symbol"] deal:@"SELL"];
         }else{
-            buyDataArray = [[FSActionPlanDatabase sharedInstances] searchBuyDataOrderByPriceWithSymbol:[[_positionDataArray objectAtIndex:i] objectForKey:@"Symbol"] deal:@"Short"];
-            sellDataArray = [[FSActionPlanDatabase sharedInstances] searchBuyDataOrderByPriceWithSymbol:[[_positionDataArray objectAtIndex:i] objectForKey:@"Symbol"] deal:@"Cover"];
+            buyDataArray = [[FSActionPlanDatabase sharedInstances] searchBuyDataOrderByPriceWithSymbol:[[_positionDataArray objectAtIndex:i] objectForKey:@"Symbol"] deal:@"SHORT"];
+            sellDataArray = [[FSActionPlanDatabase sharedInstances] searchBuyDataOrderByPriceWithSymbol:[[_positionDataArray objectAtIndex:i] objectForKey:@"Symbol"] deal:@"COVER"];
         }
         
         float highestBuyingPrice = 0;
@@ -82,7 +82,7 @@
         //最高買進價
         for (int j = 0 ; j < [ costArray count]; j++) {
             NSString *deal = [[costArray objectAtIndex:j] objectForKey:@"Deal"];
-            if ([deal isEqualToString:@"Buy"]||[deal isEqualToString:@"Short"]) {
+            if ([deal isEqualToString:@"BUY"]||[deal isEqualToString:@"SHORT"]) {
                 buyCount = [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Count"] floatValue];
                 totalHold += buyCount;
                 [costAddArray addObject:[costArray objectAtIndex:j]];
@@ -95,13 +95,13 @@
                 totalHold += sellCount;
                 for (int z = 0; z < [costAddArray count]; z++) {
                     float mostHighPriceBuyCount = [(NSNumber *)[[costAddArray objectAtIndex:z] objectForKey:@"Count"] floatValue];
-                    if (abs(sellCount) > mostHighPriceBuyCount) {
+                    if (fabsf(sellCount) > mostHighPriceBuyCount) {
                         sellCount += mostHighPriceBuyCount;
                         NSDictionary *dict = [costAddArray objectAtIndex:z];
                         NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:dict];
                         [mutableDict setObject:[NSString stringWithFormat:@"%d", 0] forKey:@"Count"];
                         [costAddArray setObject: mutableDict atIndexedSubscript:z];
-                    }else if (abs(sellCount) == mostHighPriceBuyCount){
+                    }else if (fabsf(sellCount) == mostHighPriceBuyCount){
                         sellCount += mostHighPriceBuyCount;
                         NSDictionary *dict = [costAddArray objectAtIndex:z];
                         NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:dict];
@@ -136,7 +136,7 @@
 
         for (int j = 0; j < [costAddArray count]; j++) {
             NSString *deal = [[costAddArray objectAtIndex:j] objectForKey:@"Deal"];
-            if ([deal isEqualToString:@"Buy"] || [deal isEqualToString:@"Sell"]){
+            if ([deal isEqualToString:@"BUY"] || [deal isEqualToString:@"SELL"]){
                 float buyCount = [(NSNumber *)[[costAddArray objectAtIndex:j] objectForKey:@"Count"] floatValue];
                 float buyPrice = [(NSNumber *)[[costAddArray objectAtIndex:j] objectForKey:@"Price"] floatValue];
                 if(buyPrice > longstoreBuyPrice && buyCount > 0){
@@ -283,16 +283,17 @@
     _diaryArray = [[NSMutableArray alloc] init];
     _diaryDataArray = [[FSActionPlanDatabase sharedInstances] searchDiaryWithDeal:deal];
     _totalGainRatio = 0;
+    NSMutableDictionary *realizedDic = [[NSMutableDictionary alloc]init];
     
     for (int i = 0; i < [_diaryDataArray count]; i++) {
         NSMutableArray *costArray = [[NSMutableArray alloc] init];
         costArray = [[FSActionPlanDatabase sharedInstances] searchAvgCostWithSymbol:[[_diaryDataArray objectAtIndex:i] objectForKey:@"Symbol"]];
         
         NSMutableArray *buyCostDataArray = [[NSMutableArray alloc] init];
-        if ([deal isEqualToString:@"Sell"]) {
-            buyCostDataArray = [[FSActionPlanDatabase sharedInstances] searchBuyDataOrderByPriceWithSymbol:[[_diaryDataArray objectAtIndex:i] objectForKey:@"Symbol"] deal:@"Buy"];
+        if ([deal isEqualToString:@"SELL"]) {
+            buyCostDataArray = [[FSActionPlanDatabase sharedInstances] searchBuyDataOrderByPriceWithSymbol:[[_diaryDataArray objectAtIndex:i] objectForKey:@"Symbol"] deal:@"BUY"];
         }else{
-            buyCostDataArray = [[FSActionPlanDatabase sharedInstances] searchBuyDataOrderByPriceWithSymbol:[[_diaryDataArray objectAtIndex:i] objectForKey:@"Symbol"] deal:@"Short"];
+            buyCostDataArray = [[FSActionPlanDatabase sharedInstances] searchBuyDataOrderByPriceWithSymbol:[[_diaryDataArray objectAtIndex:i] objectForKey:@"Symbol"] deal:@"SHORT"];
         }
 
         NSMutableArray *diaryGainArray = [[NSMutableArray alloc] init];
@@ -303,7 +304,7 @@
         
         for (int j = 0; j < [costArray count]; j++) {
             NSString *deal = [[costArray objectAtIndex:j] objectForKey:@"Deal"];
-            if ([deal isEqualToString:@"Sell"]||[deal isEqualToString:@"Cover"]){
+            if ([deal isEqualToString:@"SELL"]||[deal isEqualToString:@"COVER"]){
                 float sellCount = [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Count"] floatValue];
                 for (int z = 0; z < [buyCostDataArray count]; z++) {
                     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -312,7 +313,7 @@
                     NSDate *buyDate = [dateFormatter dateFromString:[[buyCostDataArray objectAtIndex:z] objectForKey:@"Date"]];
                     if ([date compare:buyDate] == NSOrderedDescending || [date compare:buyDate] == NSOrderedSame) {
                         float buyCount = [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Count"] floatValue];
-                        if (abs(sellCount) >= buyCount && buyCount > 0) {
+                        if (fabsf(sellCount) >= buyCount && buyCount > 0) {
                             NSDictionary *dict = [buyCostDataArray objectAtIndex:z];
                             NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:dict];
                             [diaryGainArray addObject:[buyCostDataArray objectAtIndex:z]];
@@ -322,14 +323,15 @@
                             [buyCostDataArray setObject: mutableDict atIndexedSubscript:z];
                             
                             //獲利
-                            if ([deal isEqualToString:@"Sell"]) {
-                                totalGain += [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Price"] floatValue]*abs(sellCount) - [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Price"] floatValue]*abs(sellCount);
+                            if ([deal isEqualToString:@"SELL"]) {
+                                totalGain += [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Price"] floatValue]*fabsf(sellCount) -
+                                [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Price"] floatValue]*fabsf(sellCount);
                             }else{
-                                totalGain += [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Price"] floatValue]*abs(sellCount) - [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Price"] floatValue]*abs(sellCount);
+                                totalGain += [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Price"] floatValue]*fabsf(sellCount) - [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Price"] floatValue]*fabsf(sellCount);
                             }
                             
                             sellCount = sellCount + buyCount;
-                        }else if (buyCount > abs(sellCount) && abs(sellCount) > 0){
+                        }else if (buyCount > fabsf(sellCount) && fabsf(sellCount) > 0){
                             NSDictionary *dict = [buyCostDataArray objectAtIndex:z];
                             NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary:dict];
                             
@@ -338,21 +340,27 @@
                             
                             NSDictionary *addGaindict = [buyCostDataArray objectAtIndex:z];
                             NSMutableDictionary *addGainMutableDict = [NSMutableDictionary dictionaryWithDictionary:addGaindict];
-                            [addGainMutableDict setObject:[NSString stringWithFormat:@"%d", abs(sellCount)] forKey:@"Count"];
+                            [addGainMutableDict setObject:[NSString stringWithFormat:@"%f", fabsf(sellCount)] forKey:@"Count"];
                             
                             [diaryGainArray addObject:addGainMutableDict];
                             [buyCostDataArray setObject:mutableDict atIndexedSubscript:z];
                             
                             //獲利
-                            if ([deal isEqualToString:@"Sell"]) {
-                                totalGain += [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Price"] floatValue]*abs(sellCount) - [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Price"] floatValue]*abs(sellCount);
+                            if ([deal isEqualToString:@"SELL"]) {
+                                totalGain += [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Price"] floatValue]*fabsf(sellCount) - [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Price"] floatValue]*fabsf(sellCount);
                             }else{
-                                totalGain += [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Price"] floatValue]*abs(sellCount) - [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Price"] floatValue]*abs(sellCount);
+                                totalGain += [(NSNumber *)[[buyCostDataArray objectAtIndex:z] objectForKey:@"Price"] floatValue]*fabsf(sellCount) - [(NSNumber *)[[costArray objectAtIndex:j] objectForKey:@"Price"] floatValue]*fabsf(sellCount);
                             }
 
                             sellCount = 0;
                         }
                     }
+                    NSInteger seconds = [[NSTimeZone systemTimeZone] secondsFromGMT];
+                    NSDateFormatter *localDateFormatter = [[NSDateFormatter alloc] init];
+                    [localDateFormatter setDateFormat:_dateFormatter];
+                    [localDateFormatter setTimeZone :[NSTimeZone timeZoneForSecondsFromGMT: seconds]];
+                    NSString *dateStr = [localDateFormatter stringFromDate:date];
+                    [realizedDic setObject:[NSNumber numberWithFloat:totalGain] forKey:dateStr];
                 }
             }
         }
@@ -373,7 +381,9 @@
         diary.avgCost = sellAvgCost;
         diary.totalCost = sellTotalCost;
         diary.gainDollar = totalGain;
-        if ([deal isEqualToString:@"Sell"]) {
+        diary.realizedValue = realizedDic;
+        
+        if ([deal isEqualToString:@"SELL"]) {
             diary.gainPercent = (diary.avgPrice - diary.avgCost) / diary.avgCost;
         }else{
             diary.gainPercent = (diary.avgCost - diary.avgPrice) / diary.avgCost;
@@ -411,7 +421,7 @@
         
         tradeHistory.qty = [(NSNumber *)[[tradeHistoryDataArray objectAtIndex:i] objectForKey:@"Count"] floatValue];
         NSString *dealStr = [[tradeHistoryDataArray objectAtIndex:i] objectForKey:@"Deal"];
-        if ([dealStr isEqualToString:@"Buy"]||[dealStr isEqualToString:@"Short"]) {
+        if ([dealStr isEqualToString:@"BUY"]||[dealStr isEqualToString:@"SHORT"]) {
             tradeHistory.buyDealPrice = [(NSNumber *)[[tradeHistoryDataArray objectAtIndex:i] objectForKey:@"Price"] floatValue];
             tradeHistory.buyAmount = tradeHistory.buyDealPrice * tradeHistory.qty;
         }else {

@@ -191,11 +191,13 @@
                     _snapshot_b.bid_price = lastTick.bid;
                     _snapshot_b.ask_price = lastTick.ask;
                     _snapshot_b.accumulated_volume = lastTick.accumulated_volume;
-
-                    if (lastTick.last.calcValue > _snapshot_b.high_price.calcValue) {
+                    if (_snapshot_b.open_price.calcValue == 0) {
+                        _snapshot_b.open_price = lastTick.last;
+                    }
+                    if (_snapshot_b.high_price.calcValue == 0 || lastTick.last.calcValue > _snapshot_b.high_price.calcValue) {
                         _snapshot_b.high_price = lastTick.last;
                     }
-                    if (lastTick.last.calcValue < _snapshot_b.low_price.calcValue) {
+                    if (_snapshot_b.low_price.calcValue == 0 || lastTick.last.calcValue < _snapshot_b.low_price.calcValue) {
                         _snapshot_b.low_price = lastTick.last;
                     }
                 }
@@ -245,9 +247,9 @@
     [lock lock];
     
     
-    for (FSTickData *tick in newTicksData) {
-        NSLog(@"%@", tick.time.timeString);
-    }
+//    for (FSTickData *tick in newTicksData) {
+//        NSLog(@"%@", tick.time.timeString);
+//    }
     
     
     // 沒資料時, 無條件加入

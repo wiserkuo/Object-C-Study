@@ -14,7 +14,7 @@
 #import "FSInstantInfoWatchedPortfolio.h"
 #import "UIViewController+CustomNavigationBar.h"
 #import "SecuritySearchDelegate.h"
-#import "SGInfoAlert.h"
+
 #import "FSActionPlanDatabase.h"
 
 @interface FigureSearchResultViewController ()<SecuritySearchDelegate>{
@@ -400,7 +400,7 @@
     
     self.watchListLabel = [[UILabel alloc] init];
     self.watchListLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.watchListLabel.text = NSLocalizedStringFromTable(@"加入自選", @"FigureSearch", nil);
+    self.watchListLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedStringFromTable(@"加入自選", @"FigureSearch", nil)];
     [self.watchListRectView addSubview:self.watchListLabel];
     
     self.watchListBtn = [[FSUIButton alloc]initWithButtonType:FSUIButtonTypeBlueGreenDetailButton];
@@ -631,7 +631,7 @@
         SymbolFormat1 * symbol = [_resultSymbolData objectAtIndex:sender.view.tag];
         if (location.y > _trackRectView.frame.origin.y && location.y<_watchListRectView.frame.origin.y) {
             if ([_trackBtnNameArray count] >= 12) {
-                [SGInfoAlert showInfo:NSLocalizedStringFromTable(@"追蹤股票支數已超過", @"FigureSearch",nil) bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+                [FSHUD showMsg:NSLocalizedStringFromTable(@"追蹤股票支數已超過", @"FigureSearch",nil)];
             }else{
                 NSNumber * markPrice = [_markPriceArray objectAtIndex:sender.view.tag];
                 [self addTrackList:symbol MarkPrice:markPrice];
@@ -677,12 +677,12 @@
         if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS){
             NSString *addToTrackList = NSLocalizedStringFromTable(@"加入某支追蹤", @"FigureSearch",nil);
             addToTrackList = [addToTrackList stringByReplacingCharactersInRange:NSMakeRange(4, 1) withString:symbol -> symbol];
-            [SGInfoAlert showInfo:addToTrackList bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+            [FSHUD showMsg:addToTrackList];
         }else{
-            [SGInfoAlert showInfo:[NSString stringWithFormat:@"%@ %@",NSLocalizedStringFromTable(@"加入追蹤", @"FigureSearch",nil),symbol -> fullName] bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+            [FSHUD showMsg:[NSString stringWithFormat:@"%@ %@",NSLocalizedStringFromTable(@"加入追蹤", @"FigureSearch",nil),symbol -> fullName]];
         }
     }else {
-        [SGInfoAlert showInfo:[NSString stringWithFormat:@"%@",NSLocalizedStringFromTable(@"已加入追蹤", @"FigureSearch",nil)] bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+        [FSHUD showMsg:[NSString stringWithFormat:@"%@",NSLocalizedStringFromTable(@"已加入追蹤", @"FigureSearch",nil)]];
     }
 }
 //加入watchList
@@ -708,14 +708,14 @@
         
         int count = [dataModal.securitySearchModel searchUserStockWithName:track->symbol Group:groupNum + 1 Country:group];
         if (count>0) {
-            [SGInfoAlert showInfo:[NSString stringWithFormat:@"%@",NSLocalizedStringFromTable(@"已加入自選", @"FigureSearch",nil)] bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+            [FSHUD showMsg:[NSString stringWithFormat:@"%@",NSLocalizedStringFromTable(@"已加入自選", @"FigureSearch",nil)]];
         }else{
             if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
                 NSString *addToWatchList = NSLocalizedStringFromTable(@"加入某支自選", @"FigureSearch",nil);
                 addToWatchList = [addToWatchList stringByReplacingCharactersInRange:NSMakeRange(4, 1) withString:track -> symbol];
-                [SGInfoAlert showInfo:addToWatchList bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+                [FSHUD showMsg:addToWatchList];
             }else{
-                [SGInfoAlert showInfo:[NSString stringWithFormat:@"%@ %@",NSLocalizedStringFromTable(@"加入自選", @"FigureSearch",nil),track->fullName] bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+                [FSHUD showMsg:[NSString stringWithFormat:@"%@ %@",NSLocalizedStringFromTable(@"加入自選", @"FigureSearch",nil),track->fullName]];
             }
         }
         //判斷是否已存在 如已加入則修改
@@ -767,9 +767,9 @@
     if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
         NSString *removeFromTrackList = NSLocalizedStringFromTable(@"取消追蹤股票", @"FigureSearch",nil);
         removeFromTrackList = [removeFromTrackList stringByReplacingCharactersInRange:NSMakeRange(7, 1) withString:track -> symbol];
-        [SGInfoAlert showInfo:removeFromTrackList bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+        [FSHUD showMsg:removeFromTrackList];
     }else{
-        [SGInfoAlert showInfo:[NSString stringWithFormat:@"%@ %@",NSLocalizedStringFromTable(@"取消追蹤股票", @"FigureSearch",nil),track -> fullName] bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+        [FSHUD showMsg:[NSString stringWithFormat:@"%@ %@",NSLocalizedStringFromTable(@"取消追蹤股票", @"FigureSearch",nil),track -> fullName]];
     }
 }
 //取消watchList
@@ -789,10 +789,10 @@
             _watchListCollectionView.btnArray = watchListSymbolArray;
             NSString *removeFromWatchList = NSLocalizedStringFromTable(@"取消自選", @"FigureSearch",nil);
             removeFromWatchList = [removeFromWatchList stringByReplacingCharactersInRange:NSMakeRange(7, 1) withString:secu -> symbol];
-            [SGInfoAlert showInfo:removeFromWatchList bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+            [FSHUD showMsg:removeFromWatchList];
         }else{
             _watchListCollectionView.btnArray = watchListNameArray;
-            [SGInfoAlert showInfo:[NSString stringWithFormat:@"%@ %@",NSLocalizedStringFromTable(@"取消自選", @"FigureSearch",nil),secu->fullName] bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+            [FSHUD showMsg:[NSString stringWithFormat:@"%@ %@",NSLocalizedStringFromTable(@"取消自選", @"FigureSearch",nil),secu->fullName]];
         }
         [_watchListCollectionView reloadData];
     }else{
@@ -800,7 +800,7 @@
             UIAlertView *deleteAlert = [[UIAlertView alloc]initWithTitle:@"Watchlists" message:@"This stock is in Action Plan.\nIf you wish to remove it from the watchlist,\nplease go to Action Plan to delete it first." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
             [deleteAlert show];
         }else{
-            [SGInfoAlert showInfo:NSLocalizedStringFromTable(@"請先由交易計劃清單移除此檔股票", @"FigureSearch",nil) bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+            [FSHUD showMsg:NSLocalizedStringFromTable(@"請先由交易計劃清單移除此檔股票", @"FigureSearch",nil)];
         }
     }
 }

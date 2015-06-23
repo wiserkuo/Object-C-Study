@@ -340,7 +340,7 @@
     //(賣)成交價
     if (tradeHistory.sellDealPrice != 0) {
         sellDealLable.text = [NSString stringWithFormat:@"%@", [CodingUtil ConvertFloatWithComma:tradeHistory.sellDealPrice DecimalPoint:2]];
-        sellAmountLabel.text = [self setPrice:abs(tradeHistory.sellAmount * positionModel.suggestCount) Decimal:0];
+        sellAmountLabel.text = [self setPrice:fabsf(tradeHistory.sellAmount * positionModel.suggestCount) Decimal:0];
     }else{
         sellDealLable.text = @"";
         sellAmountLabel.text = @"";
@@ -367,6 +367,14 @@
     }
     
     return tempStr;
+}
+
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 @end

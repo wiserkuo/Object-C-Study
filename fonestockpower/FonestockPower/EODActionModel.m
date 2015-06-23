@@ -96,6 +96,7 @@
 }
 
 -(void)notifyDataArrive:(NSObject<HistoricTickDataSourceProtocol> *)dataSource{
+
     FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
     historicData = [[HistoricDataAgent alloc] init];
     char * ident = malloc(2 * sizeof(UInt8));
@@ -104,6 +105,18 @@
     NSString *symbol = [[dataSource getIdenCodeSymbol]substringFromIndex:3];
     item = [dataModel.portfolioData findInPortfolio:ident Symbol:symbol];
     [historicData updateData:dataSource forPeriod:AnalysisPeriodDay portfolioItem:item];
+    PortfolioTick *itickBank = [[FSDataModelProc sharedInstance] portfolioTickBank];
+    FSSnapshot *snapShot = [itickBank getSnapshotBvalueFromIdentCodeSymbol:[dataSource getIdenCodeSymbol]];
+    MarketInfoItem *pMarket = [[[FSDataModelProc sharedInstance]marketInfo] getMarketInfo: item ->market_id];
+    
+    NSDate *nowDate = [NSDate date];
+    NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *dateComponents = [cal components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:nowDate];
+    int tempHour = (int)[dateComponents hour];
+    int tempMinute = (int)[dateComponents minute];
+    int tempNowDate = tempHour * 60 + tempMinute;
+    int snapShotDate = snapShot.trading_date.date16;
+    
     BOOL YESNO = NO;
 
     if([dataSource isLatestData:'D'])
@@ -116,31 +129,63 @@
 
         NSMutableArray *dataArray = [[NSMutableArray alloc] init];
         int countNum;
-            if([historicData.dataArray count]<60){
+            if([historicData.dataArray count] < 60){
                 countNum = (int)[historicData.dataArray count];
             }else{
                 countNum = 60;
             }
-        int latestDay = [dataSource quertyDataDate:'D'];
-        NSLog(@"latestDay : %@", [[NSNumber numberWithInt:latestDay]uint16ToDate]);
-        for(NSUInteger i=[historicData.dataArray count]-1; countNum >=0; i--){
+        for(NSUInteger i = [historicData.dataArray count] - 1; countNum >=0; i--){
             hist = [historicData copyHistoricTick:'D' sequenceNo:(int)i];
-            if (hist.date > latestDay) continue;
-
-            FigureSearchData *data = [[FigureSearchData alloc] init];
-            data->highPrice = hist.high;
-            data->closePrice = hist.close;
-            data->lowPrice = hist.low;
-            data->openPrice = hist.open;
-            data->date = hist.date;
+            FigureSearchData *data = [[FigureSearchData alloc]init];
+            
+//            即時盤
+            if (isOnSession) {
+                if (i == [historicData.dataArray count] - 1 ) {
+                    if (hist.date < snapShotDate) {
+                        data->highPrice = snapShot.high_price.calcValue;
+                        data->closePrice = snapShot.last_price.calcValue;
+                        data->lowPrice = snapShot.low_price.calcValue;
+                        data->openPrice = snapShot.open_price.calcValue;
+                        data->date = snapShotDate;
+                    }else{
+                        data = [self setFigureSearchData:data DecompressedHistoricData:hist];
+                    }
+                }else{
+                    data = [self setFigureSearchData:data DecompressedHistoricData:hist];
+                }
+                
+//             盤後
+            }else{
+                if (pMarket -> startTime_1 < tempNowDate && pMarket -> endTime_1 > tempNowDate) {
+                    if (hist.date < snapShotDate) {
+                        data = [self setFigureSearchData:data DecompressedHistoricData:hist];
+                    }
+                }else{
+                    if (hist.date <= snapShotDate) {
+                        data = [self setFigureSearchData:data DecompressedHistoricData:hist];
+                    }
+                }
+            }
             countNum --;
-            [dataArray addObject:data];
+            if (data -> date != 0) {
+                [dataArray addObject:data];
+            }
         }
         [tickBank stopWatch:self ForEquity:[dataSource getIdenCodeSymbol]];
         [self setArray:dataArray setIdentCodeSymbol:[dataSource getIdenCodeSymbol]];
     }
 }
 
+-(FigureSearchData *)setFigureSearchData:(FigureSearchData *)figureSearchData DecompressedHistoricData:(DecompressedHistoricData *)decompressedHistoricData {
+    
+    figureSearchData->highPrice = decompressedHistoricData.high;
+    figureSearchData->closePrice = decompressedHistoricData.close;
+    figureSearchData->lowPrice = decompressedHistoricData.low;
+    figureSearchData->openPrice = decompressedHistoricData.open;
+    figureSearchData->date = decompressedHistoricData.date;
+    
+    return figureSearchData;
+}
 -(void)setArray:(NSMutableArray*)array setIdentCodeSymbol:(NSString *)is;
 {
     ArrayData *arrayData = [[ArrayData alloc] init];
@@ -174,7 +219,7 @@
         FigureSearchData *figureSearchData = [[FigureSearchData alloc] init];
         figureSearchData = [array objectAtIndex:i];
         if(i==0){
-            NSLog(@"%@",[[NSNumber numberWithInt:figureSearchData->date]uint16ToDate]);
+//            NSLog(@"%@",[[NSNumber numberWithInt:figureSearchData->date]uint16ToDate]);
         }
         [figureSearchArray addObject:figureSearchData];
     
@@ -283,6 +328,7 @@
     }else if([systemType isEqualToString:@"Short"]){
         [notifyObj notifyShortData:arrayData];
     }
+
 }
 
 -(BOOL)CalculateFormula:(NSMutableArray *)DataArray Count:(int)count
@@ -369,7 +415,7 @@
     price2_20HighFlag = YES;
     for(int i = 3 ; i < [DataArray count] && i < 23;i++){
         FigureSearchData *data =[DataArray objectAtIndex:i];
-        if(twoData->highPrice < data->highPrice){
+        if(twoData->highPrice > data->highPrice){
             price2_20HighFlag = NO;
         }
     }
@@ -410,6 +456,8 @@
     
     //近3日日最低價最小值
     double low3MinPrice = MIN(todayData->lowPrice, MIN(oneData->lowPrice,twoData->lowPrice));
+    
+    double last3MinPrice = MIN(todayData->closePrice, MIN(oneData->closePrice,twoData->closePrice));
     
     
     
@@ -535,8 +583,16 @@
             break;
         case 10:
             //多方醞釀
-            if((threeData->closePrice - threeData->openPrice) > fourData->closePrice * [NSLocalizedStringFromTable(@"PARAM_Day", @"FigureSearchFormula", nil)doubleValue] && high3MaxPrice <= threeData->highPrice && low3MinPrice >= ((threeData->openPrice + threeData->closePrice)/2)){
-                return YES;
+            if (isTW) {
+                if((threeData->closePrice - threeData->openPrice) > fourData->closePrice * [NSLocalizedStringFromTable(@"PARAM_Day", @"FigureSearchFormula", nil)doubleValue] && high3MaxPrice <= threeData->highPrice &&
+                    last3MinPrice >= (threeData->openPrice + threeData->closePrice)/2){
+                    return YES;
+                }
+            }else{
+                if((threeData->closePrice - threeData->openPrice) > fourData->closePrice * [NSLocalizedStringFromTable(@"PARAM_Day", @"FigureSearchFormula", nil)doubleValue] && high3MaxPrice <= threeData->highPrice &&
+                   low3MinPrice >= (threeData->openPrice + threeData->closePrice)/2){
+                    return YES;
+                }
             }
             return NO;
             break;

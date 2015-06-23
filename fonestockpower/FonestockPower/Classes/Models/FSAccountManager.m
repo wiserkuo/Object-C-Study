@@ -54,7 +54,9 @@
 -(void)saveToUserDefault
 {
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    _password = [[CodingUtil hashed_string:_password] uppercaseString];
+    if ([_password length] != 64) {
+         _password = [[CodingUtil hashed_string:_password] uppercaseString];
+    }
     [userDefault setObject:_account forKey:@"User_Information_Account"];
     [userDefault setObject:_password forKey:@"User_Information_Password"];
     [userDefault setObject:_authType forKey:@"User_Information_AuthType"];

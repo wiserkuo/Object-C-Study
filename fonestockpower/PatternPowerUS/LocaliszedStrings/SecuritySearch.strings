@@ -37,3 +37,5 @@
 "自選股已達上限" = "The number of stocks is maximum value";
 "刪除" = "Delete";
 "此檔股票已存在確定要移到自選嗎" = "This is stock has already exist\nDo you want to move to group %@?";
+
+"資料載入中, 請稍候..." = "Searching...";

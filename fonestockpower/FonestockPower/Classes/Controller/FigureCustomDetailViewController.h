@@ -19,6 +19,6 @@
 //在FigureSearch 資料表及FigureSearchKBarValue 資料表內，皆有該布林值
 //在FigureSearch 資料表內還另外記錄有右方應顯示數字的日、週、月的值
 
--(instancetype)initWithNeededObjectFromDictionary:(NSDictionary *)sendObj :(int)currentOption :(int)searchNum :(int)kNumber;
+-(instancetype)initWithNeededObjectFromDictionary:(NSDictionary *)sendObj :(int)currentOption :(int)searchNum :(int)kNumber :(NSMutableArray*)figureSearchArray;
 
 @end

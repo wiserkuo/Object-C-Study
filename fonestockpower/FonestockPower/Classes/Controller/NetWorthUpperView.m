@@ -147,7 +147,6 @@
     [_netWorthViewController setBeginDay:beginDay];
 }
 
-
 - (void)drawRect:(CGRect)rect
 {
     crossLine.hidden = YES;
@@ -330,7 +329,7 @@
             dailyValue = data->dailyValue;
         }
 //        [crossLine setFrame:CGRectMake(0, 0, self.frame.size.width, 1)];
-        for (int i=1; i<num; i++) {
+        for (int i = 0; i <= num; i++) {
             NetWorthData * data = [_netWorthDataDictionary objectForKey:date];
             if (data) {
                 crossLine.hidden = NO;
@@ -369,10 +368,10 @@
             valueLabel.text = @"";
         }
         
-        if (totalValue>0) {
+        if (totalValue > 0) {
             valueLabel.textColor = [StockConstant PriceUpColor];
         }else{
-            valueLabel.textColor = [UIColor blackColor];
+            valueLabel.textColor = [StockConstant PriceDownColor];
         }
         touchPoint.x = result;
         [_netWorthViewController doTouchesWithPoint:touchPoint Date:dateStr Value:dailyValue];
@@ -419,7 +418,7 @@
             dailyValue = data->dailyValue;
         }
 //        [crossLine setFrame:CGRectMake(0, 0, self.frame.size.width, 0)];
-        for (int i=1; i<num; i++) {
+        for (int i = 0; i <= num; i++) {
             NetWorthData * data = [_netWorthDataDictionary objectForKey:date];
             if (data) {
                 crossLine.hidden = NO;
@@ -463,7 +462,7 @@
         if (totalValue>0) {
             valueLabel.textColor = [StockConstant PriceUpColor];
         }else{
-            valueLabel.textColor = [UIColor blackColor];
+            valueLabel.textColor = [StockConstant PriceDownColor];
         }
         touchPoint.x = result;
         [_netWorthViewController doTouchesWithPoint:touchPoint Date:dateStr Value:dailyValue];

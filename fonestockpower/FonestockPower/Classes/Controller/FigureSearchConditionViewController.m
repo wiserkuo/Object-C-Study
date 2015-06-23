@@ -37,7 +37,6 @@
 
 #define indicatorNumberOfTables 5
 
-#define IS_IOS8 [[UIDevice currentDevice] systemVersion].floatValue >= 8.0
 @interface FigureSearchConditionViewController ()<UIAlertViewDelegate,FigureSearchDelegate,SecuritySearchDelegate,UIScrollViewDelegate,FSTeachPopDelegate, UITextViewDelegate>
 {
     SearchCriteriaViewController *searchViewController;
@@ -203,15 +202,8 @@
 
 
 -(void)barButtonClick{
-    if(IS_IOS8){
-        self.changeAlertController = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedStringFromTable(@"重新編輯圖形，將會清空追蹤資料，是否重編?", @"FigureSearch", nil) preferredStyle:UIAlertControllerStyleAlert];
-        [_changeAlertController addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"取消", @"FigureSearch", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){[self alertControllerAction:0 sender:_changeAlertController];}]];
-        [_changeAlertController addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"確定", @"FigureSearch", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){[self alertControllerAction:1 sender:_changeAlertController];}]];
-        [self presentViewController:_changeAlertController animated:YES completion:nil];
-    }else{
-        self.changeAlert = [[UIAlertView alloc]initWithTitle:nil message:NSLocalizedStringFromTable(@"重新編輯圖形，將會清空追蹤資料，是否重編?", @"FigureSearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"取消", @"FigureSearch", nil) otherButtonTitles:NSLocalizedStringFromTable(@"確定", @"FigureSearch", nil), nil];
-        [_changeAlert show];
-    }
+    self.changeAlert = [[UIAlertView alloc]initWithTitle:nil message:NSLocalizedStringFromTable(@"重新編輯圖形，將會清空追蹤資料，是否重編?", @"FigureSearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"取消", @"FigureSearch", nil) otherButtonTitles:NSLocalizedStringFromTable(@"確定", @"FigureSearch", nil), nil];
+    [_changeAlert show];
 }
 
 - (void)initScrollView {
@@ -546,7 +538,7 @@
             FigureTrackListViewController * trackList = [[FigureTrackListViewController alloc]initWithTrackUpArray:trackArray FigureSearchName:[_figureSearchArray objectAtIndex:1] FigureSearchId:[_figureSearchArray objectAtIndex:0]  Range:searchName];
             [self.navigationController pushViewController:trackList animated:NO];
         }else{
-            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:NSLocalizedStringFromTable(@"圖示選股", @"FigureSearch", nil) message:NSLocalizedStringFromTable(@"無追蹤股票", @"FigureSearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確定", @"FigureSearch", nil) otherButtonTitles:nil];
+            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:self.functionName message:NSLocalizedStringFromTable(@"無追蹤股票", @"FigureSearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確定", @"FigureSearch", nil) otherButtonTitles:nil];
             [alert show];
         }
         
@@ -578,8 +570,7 @@
         NSMutableArray * dataArray = [_customModel searchLastResultWithFigureSearchId:[_figureSearchArray objectAtIndex:0] Range:searchName SearchType:self.opportunity];
         
         if ([dataArray count]==0) {
-            UIAlertView * alert = [[UIAlertView alloc]initWithTitle:NSLocalizedStringFromTable(@"最新搜尋記錄", @"FigureSearch", nil) message:NSLocalizedStringFromTable(@"無搜尋記錄", @"FigureSearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確定", @"FigureSearch", nil) otherButtonTitles:nil];
-            [alert show];
+            [FSHUD showMsg:NSLocalizedStringFromTable(@"無搜尋記錄", @"FigureSearch", nil)];
         }else{
             NSMutableArray * allArray = [_customModel searchFigureSearchResultDataWithFigureSearchResultInfoId:[dataArray objectAtIndex:0]];
             NSMutableArray * data = [[NSMutableArray alloc]initWithArray:@[]];
@@ -768,20 +759,31 @@
     
     NSMutableArray * conditionArray = [_customModel searchkBarConditionsWithFigureSearchId:[_figureSearchArray objectAtIndex:0] tNumber:[NSNumber numberWithInt:day]];
     
-    float high = [(NSNumber *)[dataArray objectAtIndex:0]floatValue]*100;
-    float low = [(NSNumber *)[dataArray objectAtIndex:1]floatValue]*100;
-    float open = [(NSNumber *)[dataArray objectAtIndex:2]floatValue]*100;
+    float high  = [(NSNumber *)[dataArray objectAtIndex:0]floatValue]*100;
+    float low   = [(NSNumber *)[dataArray objectAtIndex:1]floatValue]*100;
+    float open  = [(NSNumber *)[dataArray objectAtIndex:2]floatValue]*100;
     float close = [(NSNumber *)[dataArray objectAtIndex:3]floatValue]*100;
-    if (open>=close) {
-        highLine =[self setRangeWithString:highLine Range:high-open SearchGroup:searchGroup Equation:[(NSNumber *)[conditionArray objectAtIndex:2]intValue]];
-        rect = [self setRangeWithString:rect Range:open-close SearchGroup:searchGroup Equation:[(NSNumber *)[conditionArray objectAtIndex:3]intValue]];
-        lowLine = [self setRangeWithString:lowLine Range:close-low SearchGroup:searchGroup Equation:[(NSNumber *)[conditionArray objectAtIndex:4]intValue]];
-    }else if (close>open){
-        highLine =[self setRangeWithString:highLine Range:high-close SearchGroup:searchGroup Equation:[(NSNumber *)[conditionArray objectAtIndex:2]intValue]];
-        rect = [self setRangeWithString:rect Range:close-open SearchGroup:searchGroup Equation:[(NSNumber *)[conditionArray objectAtIndex:3]intValue]];
-        lowLine = [self setRangeWithString:lowLine Range:open-low SearchGroup:searchGroup Equation:[(NSNumber *)[conditionArray objectAtIndex:4]intValue]];
+    printf("searchGroup=%d\n",searchGroup);
+    float rate=1;
+    if(searchGroup==1){
+        rate=[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]/10;//因為DB中的型態數值是以10%為範圍存放 所以須做日的換算
     }
-    pctChange = [self setChangeRangeWithString:pctChange Range:close SearchGroup:searchGroup Equation:[(NSNumber *)[conditionArray objectAtIndex:0]intValue]];
+    else if(searchGroup==2){
+        rate=[(NSNumber *)[_figureSearchArray objectAtIndex:3]floatValue]/10;//週
+    }
+    else if(searchGroup==3){
+        rate=[(NSNumber *)[_figureSearchArray objectAtIndex:4]floatValue]/10;//月
+    }
+    if (open>=close) {
+        highLine =[self setRangeWithString:highLine Range:(high-open)*rate SearchGroup:searchGroup Equation:[(NSNumber *)[conditionArray objectAtIndex:2]intValue]];
+        rect = [self setRangeWithString:rect Range:(open-close)*rate SearchGroup:searchGroup Equation:[(NSNumber *)[conditionArray objectAtIndex:3]intValue]];
+        lowLine = [self setRangeWithString:lowLine Range:(close-low)*rate SearchGroup:searchGroup Equation:[(NSNumber *)[conditionArray objectAtIndex:4]intValue]];
+    }else if (close>open){
+        highLine =[self setRangeWithString:highLine Range:(high-close)*rate SearchGroup:searchGroup Equation:[(NSNumber *)[conditionArray objectAtIndex:2]intValue]];
+        rect = [self setRangeWithString:rect Range:(close-open)*rate SearchGroup:searchGroup Equation:[(NSNumber *)[conditionArray objectAtIndex:3]intValue]];
+        lowLine = [self setRangeWithString:lowLine Range:(open-low)*rate SearchGroup:searchGroup Equation:[(NSNumber *)[conditionArray objectAtIndex:4]intValue]];
+    }
+    pctChange = [self setChangeRangeWithString:pctChange Range:close*rate SearchGroup:searchGroup Equation:[(NSNumber *)[conditionArray objectAtIndex:0]intValue]];
     
     NSString * riseStr =@"(#RANGE##DAY#LAST >= #RANGE##DAY#OPEN)";
     NSString * downStr = @"(#RANGE##DAY#OPEN > #RANGE##DAY#LAST)";
@@ -1059,14 +1061,8 @@
         alertBodyMsg = [NSString stringWithFormat:alertBodyMsgPatten, totalAmount];
     }
     
-    if(IS_IOS8){
-        self.resultAlertController = [UIAlertController alertControllerWithTitle:alertTitle message:alertBodyMsg preferredStyle:UIAlertControllerStyleAlert];
-        [_resultAlertController addAction:[UIAlertAction actionWithTitle:NSLocalizedStringFromTable(@"確定", @"FigureSearch", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){[self alertControllerAction:0 sender:_resultAlertController];}]];
-        [self presentViewController:_resultAlertController animated:YES completion:nil];
-    }else{
-        self.resultAlert = [[UIAlertView alloc]initWithTitle:alertTitle message:alertBodyMsg delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedStringFromTable(@"確定", @"FigureSearch", nil),nil];
-        [_resultAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-    }
+    self.resultAlert = [[UIAlertView alloc]initWithTitle:alertTitle message:alertBodyMsg delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedStringFromTable(@"確定", @"FigureSearch", nil),nil];
+    [_resultAlert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
     
 }
 
@@ -1431,5 +1427,12 @@
     }else{
         placeholder.hidden = YES;
     }
+}
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
 }
 @end

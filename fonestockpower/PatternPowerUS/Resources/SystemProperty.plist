@@ -30,5 +30,7 @@
 	<string>https://www.fonestock.com.tw/fs_register/request</string>
 	<key>OpenProjectURL</key>
 	<string>https://www.fonestock.com.tw/fs_service/apiSignup/initial</string>
+	<key>CheckSubscriptionURL</key>
+	<string>https://www.fonestock.com.tw/fs_service/apiSubscription/status</string>
 </dict>
 </plist>

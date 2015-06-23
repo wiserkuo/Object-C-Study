@@ -133,7 +133,7 @@
 "如果需要使用該功能，請前往付費" = "Please subscribe to unlock.";
 "前往付費" = "Subscribe";
 "確定" = "OK";
-"登入成功" = "Logged in";
+"已登入" = "Logged in";
 "待機設定" = "待機設定";
 "連線設定" = "連線設定";
 "取消" = "Cancel";
@@ -162,3 +162,5 @@
 
 //FB分享
 "FB分享成功,謝謝您的分享" = "FB share success, thank you for your sharing";
+
+"連線失敗!請重新連線或請稍後再試" = "Connection Failed!Please reconnect";

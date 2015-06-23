@@ -253,7 +253,7 @@
     alertView.contentScrollViewMaxHeight = 380;
     alertView.contentScrollViewMinHeight = 300;
     [alertView.contentView setFrame:CGRectMake(0, 0, 280, 380)];
-    [alertView addButtonWithTitle:NSLocalizedStringFromTable(@"確定", @"SecuritySearch", nil) type:CXAlertViewButtonTypeDefault handler:^(CXAlertView *alertView, CXAlertButtonItem *button) {
+    [alertView addButtonWithTitle:NSLocalizedStringFromTable(@"確認", @"SecuritySearch", nil) type:CXAlertViewButtonTypeDefault handler:^(CXAlertView *alertView, CXAlertButtonItem *button) {
         [self btnClick];
         [alertView dismiss];
     }];
@@ -273,7 +273,7 @@
         
     }
     if ([noText count]>0) {
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:NSLocalizedStringFromTable(@"錯誤", @"SecuritySearch", nil) message:NSLocalizedStringFromTable(@"名稱不可為空白", @"SecuritySearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確定", @"SecuritySearch", nil) otherButtonTitles:nil];
+        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:NSLocalizedStringFromTable(@"錯誤", @"SecuritySearch", nil) message:NSLocalizedStringFromTable(@"名稱不可為空白", @"SecuritySearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"確認", @"SecuritySearch", nil) otherButtonTitles:nil];
         [alert show];
     }else{
         NSMutableArray * changeNameArray = [[NSMutableArray alloc]init];

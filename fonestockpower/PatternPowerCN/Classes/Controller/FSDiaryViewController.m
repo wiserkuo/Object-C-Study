@@ -82,10 +82,10 @@
 -(void)initWithData{
     _diaryArray = [[NSMutableArray alloc] init];
     if (_longButton.selected == YES) {
-        [_positionModel loadDiaryData:@"Sell"];
+        [_positionModel loadDiaryData:@"SELL"];
         _status = YES;
     }else{
-        [_positionModel loadDiaryData:@"Cover"];
+        [_positionModel loadDiaryData:@"COVER"];
         _status = NO;
     }
     _diaryArray = _positionModel.diaryArray;
@@ -240,13 +240,13 @@
     if ([btn isEqual:_longButton]) {
         _shortButton.selected = NO;
         _longButton.selected = YES;
-        [_positionModel loadDiaryData:@"Sell"];
+        [_positionModel loadDiaryData:@"SELL"];
         _diaryArray = _positionModel.diaryArray;
         _status = YES;
     }else{
         _shortButton.selected = YES;
         _longButton.selected = NO;
-        [_positionModel loadDiaryData:@"Cover"];
+        [_positionModel loadDiaryData:@"COVER"];
         _diaryArray = _positionModel.diaryArray;
         _status = NO;
     }
@@ -350,7 +350,7 @@
         
         for (NSDictionary *dict in dataArray) {
             arrowData * data = [[arrowData alloc]init];
-            if ([[dict objectForKey:@"Deal"] isEqualToString:@"Buy"] || [[dict objectForKey:@"Deal"] isEqualToString:@"Cover"]) {
+            if ([[dict objectForKey:@"Deal"] isEqualToString:@"BUY"] || [[dict objectForKey:@"Deal"] isEqualToString:@"COVER"]) {
                 data->arrowType = 1;
             }else{
                 data->arrowType = 2;
@@ -415,7 +415,7 @@
         
         for (NSDictionary *dict in dataArray) {
             arrowData * data = [[arrowData alloc]init];
-            if ([[dict objectForKey:@"Deal"] isEqualToString:@"Buy"] || [[dict objectForKey:@"Deal"] isEqualToString:@"Cover"]) {
+            if ([[dict objectForKey:@"Deal"] isEqualToString:@"BUY"] || [[dict objectForKey:@"Deal"] isEqualToString:@"COVER"]) {
                 data->arrowType = 1;
             }else{
                 data->arrowType = 2;
@@ -444,9 +444,9 @@
         
         NSMutableArray *gainDataArray = [[NSMutableArray alloc] init];
         if (_longButton.selected == YES) {
-            gainDataArray = [[FSActionPlanDatabase sharedInstances] searchGainDataWithSymbol:idSymbol Term:@"Long" DealBuy:@"Buy" DealSell:@"Sell"];
+            gainDataArray = [[FSActionPlanDatabase sharedInstances] searchGainDataWithSymbol:idSymbol Term:@"Long" DealBuy:@"BUY" DealSell:@"SELL"];
         }else{
-            gainDataArray = [[FSActionPlanDatabase sharedInstances] searchGainDataWithSymbol:idSymbol Term:@"Short" DealBuy:@"Short" DealSell:@"Cover"];
+            gainDataArray = [[FSActionPlanDatabase sharedInstances] searchGainDataWithSymbol:idSymbol Term:@"Short" DealBuy:@"SHORT" DealSell:@"COVER"];
         }
 
         for (int i = 0; i < [gainDataArray count]; i++) {

@@ -65,6 +65,9 @@
 "最差報酬率" = "Worst ROI";
 "平均報酬率" = "Avg ROI";
 
+"移除" = "Remove";
+"於 交易計劃" = "from Action Plan";
+
 "取消" = "Cancel";
 "交易" = "Deal";
 "Amount Payable" = "Amount Payable";
@@ -77,8 +80,8 @@
 "設定停利價" = "Set Stop profit";
 "設定停損價" = "Set Stop Loss";
 "請輸入金額" = "Please enter the amount";
-"當 現價 ≧ 停利價, 停損價會重新計算." = "When current price ≧ stop loss, \nthe stop loss will be recalculated";
-"當 現價 ≦ 停利價, 停損價會重新計算." = "When current price ≦ stop loss, \nthe stop loss will be recalculated";
+"當 現價 ≧ 停利價, 停損價會重新計算." = "When current price ≧ profit loss, \nthe stop loss will be recalculated";
+"當 現價 ≦ 停利價, 停損價會重新計算." = "When current price ≦ profit loss, \nthe stop loss will be recalculated";
 "總買進數量需大於總賣出數量，請確認刪除動作" = "You cannot sell more shares than you have bought.";
 "建議以最高買進價做為停損停利計算依據,\n若以買進均價計算,警示點有可能設的太遠" = "Best to use the highest buying price as stop loss/profit.\nIf average buying price is used, the alerts may be too far off.";
 "建議以最低放空價做為停損停利計算依據,\n若以放空均價計算,警示點有可能設的太遠" = "Best to use the lowest short selling price as stop loss/profit.\nIf average short selling price is used, the alerts may be too far off.";

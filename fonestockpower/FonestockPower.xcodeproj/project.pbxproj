@@ -2529,6 +2529,10 @@
 		B35CCCF71ACA8D4000535287 /* FigureSearchMyProfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2899D3F918FD10AF00078734 /* FigureSearchMyProfileModel.m */; };
 		B35CCCF81ACA8D4000535287 /* FigureSearchMyProfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2899D3F918FD10AF00078734 /* FigureSearchMyProfileModel.m */; };
 		B35CCCF91ACA8D4000535287 /* FigureSearchMyProfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2899D3F918FD10AF00078734 /* FigureSearchMyProfileModel.m */; };
+		B36805881B292AAB00065114 /* NSData+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = B36805871B292AAB00065114 /* NSData+MD5.m */; };
+		B36805891B292AAB00065114 /* NSData+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = B36805871B292AAB00065114 /* NSData+MD5.m */; };
+		B368058A1B292AAB00065114 /* NSData+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = B36805871B292AAB00065114 /* NSData+MD5.m */; };
+		B368058B1B292AAB00065114 /* NSData+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = B36805871B292AAB00065114 /* NSData+MD5.m */; };
 		B3767B7A18FCFCAC00EC2131 /* FSCategoryTree.m in Sources */ = {isa = PBXBuildFile; fileRef = B3767B7918FCFCAC00EC2131 /* FSCategoryTree.m */; };
 		B3767B7B18FCFCAC00EC2131 /* FSCategoryTree.m in Sources */ = {isa = PBXBuildFile; fileRef = B3767B7918FCFCAC00EC2131 /* FSCategoryTree.m */; };
 		B3767B7C18FCFCAC00EC2131 /* FSCategoryTree.m in Sources */ = {isa = PBXBuildFile; fileRef = B3767B7918FCFCAC00EC2131 /* FSCategoryTree.m */; };
@@ -3145,6 +3149,11 @@
 		B39A18471999B69E009C7F09 /* KeepAliveOut.m in Sources */ = {isa = PBXBuildFile; fileRef = 28636B1B196CEB4E0090F6FC /* KeepAliveOut.m */; };
 		B39A186D199A38C8009C7F09 /* TodayReserveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B39A186A199A38C8009C7F09 /* TodayReserveCell.m */; };
 		B39A1871199A38FE009C7F09 /* TodayReserve.m in Sources */ = {isa = PBXBuildFile; fileRef = B39A1870199A38FE009C7F09 /* TodayReserve.m */; };
+		B39EFF3C1B32A45C000D0323 /* UIActivityViewController+Rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B39EFF3B1B32A45C000D0323 /* UIActivityViewController+Rotation.m */; };
+		B39EFF3D1B32A45C000D0323 /* UIActivityViewController+Rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B39EFF3B1B32A45C000D0323 /* UIActivityViewController+Rotation.m */; };
+		B39EFF3E1B32A45C000D0323 /* UIActivityViewController+Rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B39EFF3B1B32A45C000D0323 /* UIActivityViewController+Rotation.m */; };
+		B39EFF3F1B32A45C000D0323 /* UIActivityViewController+Rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B39EFF3B1B32A45C000D0323 /* UIActivityViewController+Rotation.m */; };
+		B39F78011B313A52005D7954 /* FSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FDBC6718E597A6007962A4 /* FSAppDelegate.m */; };
 		B3A315D31A6F4BBC002C16C6 /* SystemProperty.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3A315D11A6F4BBC002C16C6 /* SystemProperty.plist */; };
 		B3A315E21A6FC914002C16C6 /* BtnCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2899D44418FD30A300078734 /* BtnCollectionView.m */; };
 		B3A315E81A6FC914002C16C6 /* PatternsTipsCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B9ED64A71A6799EC00665293 /* PatternsTipsCollectionCell.m */; };
@@ -3978,7 +3987,6 @@
 		B3FDBC0218E55D7F007962A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3E7916418D49A8B0093AEF2 /* UIKit.framework */; };
 		B3FDBC0818E55D7F007962A4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B3FDBC0618E55D7F007962A4 /* InfoPlist.strings */; };
 		B3FDBC0A18E55D7F007962A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FDBC0918E55D7F007962A4 /* main.m */; };
-		B3FDBC0E18E55D7F007962A4 /* FSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FDBC0D18E55D7F007962A4 /* FSAppDelegate.m */; };
 		B3FDBC1018E55D7F007962A4 /* PatternPowerCN.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3FDBC0F18E55D7F007962A4 /* PatternPowerCN.xcassets */; };
 		B3FDBC2A18E55E5C007962A4 /* FSUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B3C3878318E0167B00F3C185 /* FSUIButton.m */; };
 		B3FDBC2C18E55E5C007962A4 /* FSRadioButtonSet.m in Sources */ = {isa = PBXBuildFile; fileRef = B333397618E1663B00F6ADCB /* FSRadioButtonSet.m */; };
@@ -4002,6 +4010,33 @@
 		B3FDBC6818E597A6007962A4 /* FSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FDBC6718E597A6007962A4 /* FSAppDelegate.m */; };
 		B3FDBC8518E59811007962A4 /* SystemProperty.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3FDBC8418E59811007962A4 /* SystemProperty.plist */; };
 		B3FDBC8618E598DC007962A4 /* FSRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FDBBF218E55A2E007962A4 /* FSRootViewController.m */; };
+		B3FFBE0D1B281BF000D334DE /* inapp_apple.zip in Resources */ = {isa = PBXBuildFile; fileRef = B3FFBE0C1B281BF000D334DE /* inapp_apple.zip */; };
+		B3FFBE0E1B281BF000D334DE /* inapp_apple.zip in Resources */ = {isa = PBXBuildFile; fileRef = B3FFBE0C1B281BF000D334DE /* inapp_apple.zip */; };
+		B3FFBE0F1B281BF000D334DE /* inapp_apple.zip in Resources */ = {isa = PBXBuildFile; fileRef = B3FFBE0C1B281BF000D334DE /* inapp_apple.zip */; };
+		B3FFBE101B281BF000D334DE /* inapp_apple.zip in Resources */ = {isa = PBXBuildFile; fileRef = B3FFBE0C1B281BF000D334DE /* inapp_apple.zip */; };
+		B3FFBE1B1B281CB000D334DE /* ZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE1A1B281CB000D334DE /* ZipArchive.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B3FFBE1C1B281CB000D334DE /* ZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE1A1B281CB000D334DE /* ZipArchive.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B3FFBE1D1B281CB000D334DE /* ZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE1A1B281CB000D334DE /* ZipArchive.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B3FFBE1E1B281CB000D334DE /* ZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE1A1B281CB000D334DE /* ZipArchive.m */; };
+		B3FFBE341B281CD900D334DE /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE221B281CD900D334DE /* ioapi.c */; };
+		B3FFBE351B281CD900D334DE /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE221B281CD900D334DE /* ioapi.c */; };
+		B3FFBE361B281CD900D334DE /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE221B281CD900D334DE /* ioapi.c */; };
+		B3FFBE371B281CD900D334DE /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE221B281CD900D334DE /* ioapi.c */; };
+		B3FFBE501B281CD900D334DE /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE2A1B281CD900D334DE /* mztools.c */; };
+		B3FFBE511B281CD900D334DE /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE2A1B281CD900D334DE /* mztools.c */; };
+		B3FFBE521B281CD900D334DE /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE2A1B281CD900D334DE /* mztools.c */; };
+		B3FFBE531B281CD900D334DE /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE2A1B281CD900D334DE /* mztools.c */; };
+		B3FFBE541B281CD900D334DE /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE2C1B281CD900D334DE /* unzip.c */; };
+		B3FFBE551B281CD900D334DE /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE2C1B281CD900D334DE /* unzip.c */; };
+		B3FFBE561B281CD900D334DE /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE2C1B281CD900D334DE /* unzip.c */; };
+		B3FFBE571B281CD900D334DE /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE2C1B281CD900D334DE /* unzip.c */; };
+		B3FFBE581B281CD900D334DE /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE2E1B281CD900D334DE /* zip.c */; };
+		B3FFBE591B281CD900D334DE /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE2E1B281CD900D334DE /* zip.c */; };
+		B3FFBE5A1B281CD900D334DE /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE2E1B281CD900D334DE /* zip.c */; };
+		B3FFBE5B1B281CD900D334DE /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = B3FFBE2E1B281CD900D334DE /* zip.c */; };
+		B3FFBE5D1B281DC600D334DE /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B3FFBE5C1B281DC600D334DE /* libz.1.2.5.dylib */; };
+		B3FFBE5E1B282A8D00D334DE /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B3FFBE5C1B281DC600D334DE /* libz.1.2.5.dylib */; };
+		B3FFBE5F1B282A9600D334DE /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B3FFBE5C1B281DC600D334DE /* libz.1.2.5.dylib */; };
 		B900659419FF7402004134CA /* CheckBoxTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B900659319FF7402004134CA /* CheckBoxTableViewCell.m */; };
 		B900659519FF7402004134CA /* CheckBoxTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B900659319FF7402004134CA /* CheckBoxTableViewCell.m */; };
 		B900659619FF7402004134CA /* CheckBoxTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B900659319FF7402004134CA /* CheckBoxTableViewCell.m */; };
@@ -4784,6 +4819,32 @@
 		F4710FC31A6F7D0600425E95 /* FSRootPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4710FBA1A6F7D0600425E95 /* FSRootPaymentViewController.m */; };
 		F47AA2101A26B55500582367 /* FSMainPlusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F47AA20F1A26B55500582367 /* FSMainPlusModel.m */; };
 		F47AA2121A26B55500582367 /* FSMainPlusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F47AA20F1A26B55500582367 /* FSMainPlusModel.m */; };
+		F48A7E3D1B21A27400D1A782 /* UIImage+PixelColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F48A7E3C1B21A27400D1A782 /* UIImage+PixelColor.m */; };
+		F48A7E3E1B21A27400D1A782 /* UIImage+PixelColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F48A7E3C1B21A27400D1A782 /* UIImage+PixelColor.m */; };
+		F48A7E3F1B21A27400D1A782 /* UIImage+PixelColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F48A7E3C1B21A27400D1A782 /* UIImage+PixelColor.m */; };
+		F48A7E401B21A27400D1A782 /* UIImage+PixelColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F48A7E3C1B21A27400D1A782 /* UIImage+PixelColor.m */; };
+		F48A7E411B21A27400D1A782 /* UIImage+PixelColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F48A7E3C1B21A27400D1A782 /* UIImage+PixelColor.m */; };
+		F48A7E421B21A27400D1A782 /* UIImage+PixelColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F48A7E3C1B21A27400D1A782 /* UIImage+PixelColor.m */; };
+		F48A7E431B21A27400D1A782 /* UIImage+PixelColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F48A7E3C1B21A27400D1A782 /* UIImage+PixelColor.m */; };
+		F48A7E441B21A27400D1A782 /* UIImage+PixelColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F48A7E3C1B21A27400D1A782 /* UIImage+PixelColor.m */; };
+		F48A7E451B21A27400D1A782 /* UIImage+PixelColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F48A7E3C1B21A27400D1A782 /* UIImage+PixelColor.m */; };
+		F48A7E461B21A27400D1A782 /* UIImage+PixelColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F48A7E3C1B21A27400D1A782 /* UIImage+PixelColor.m */; };
+		F48A7E471B21A27400D1A782 /* UIImage+PixelColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F48A7E3C1B21A27400D1A782 /* UIImage+PixelColor.m */; };
+		F48A7E481B21A27400D1A782 /* UIImage+PixelColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F48A7E3C1B21A27400D1A782 /* UIImage+PixelColor.m */; };
+		F48A7E491B21A27400D1A782 /* UIImage+PixelColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F48A7E3C1B21A27400D1A782 /* UIImage+PixelColor.m */; };
+		F4AE08861B3146CF00F034AE /* FSInsetsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE08851B3146CF00F034AE /* FSInsetsLabel.m */; };
+		F4AE08871B3146CF00F034AE /* FSInsetsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE08851B3146CF00F034AE /* FSInsetsLabel.m */; };
+		F4AE08881B3146CF00F034AE /* FSInsetsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE08851B3146CF00F034AE /* FSInsetsLabel.m */; };
+		F4AE08891B3146CF00F034AE /* FSInsetsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE08851B3146CF00F034AE /* FSInsetsLabel.m */; };
+		F4AE088A1B3146CF00F034AE /* FSInsetsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE08851B3146CF00F034AE /* FSInsetsLabel.m */; };
+		F4AE088B1B3146CF00F034AE /* FSInsetsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE08851B3146CF00F034AE /* FSInsetsLabel.m */; };
+		F4AE088C1B3146CF00F034AE /* FSInsetsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE08851B3146CF00F034AE /* FSInsetsLabel.m */; };
+		F4AE088D1B3146CF00F034AE /* FSInsetsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE08851B3146CF00F034AE /* FSInsetsLabel.m */; };
+		F4AE088E1B3146CF00F034AE /* FSInsetsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE08851B3146CF00F034AE /* FSInsetsLabel.m */; };
+		F4AE088F1B3146CF00F034AE /* FSInsetsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE08851B3146CF00F034AE /* FSInsetsLabel.m */; };
+		F4AE08901B3146CF00F034AE /* FSInsetsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE08851B3146CF00F034AE /* FSInsetsLabel.m */; };
+		F4AE08911B3146CF00F034AE /* FSInsetsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE08851B3146CF00F034AE /* FSInsetsLabel.m */; };
+		F4AE08921B3146CF00F034AE /* FSInsetsLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AE08851B3146CF00F034AE /* FSInsetsLabel.m */; };
 		F4BDBED51A7F40B80009F230 /* FSADViewController_1.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA53CE1A70C45F001B6593 /* FSADViewController_1.m */; };
 		F4BDBED71A7F40B90009F230 /* FSADViewController_1.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA53CE1A70C45F001B6593 /* FSADViewController_1.m */; };
 		F4BDBED81A7F40BB0009F230 /* FSADViewController_1.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA53CE1A70C45F001B6593 /* FSADViewController_1.m */; };
@@ -4820,6 +4881,11 @@
 		F4BDBEFE1A7F58780009F230 /* FSADViewController_2.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA53DA1A70C63F001B6593 /* FSADViewController_2.m */; };
 		F4BDBEFF1A7F58790009F230 /* FSADViewController_2.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA53DA1A70C63F001B6593 /* FSADViewController_2.m */; };
 		F4BDBF001A7F587A0009F230 /* FSADViewController_2.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA53DA1A70C63F001B6593 /* FSADViewController_2.m */; };
+		F4DD30D01B203D2900689295 /* FSReferenceIn.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DD30CF1B203D2900689295 /* FSReferenceIn.m */; };
+		F4DD30D11B203D2900689295 /* FSReferenceIn.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DD30CF1B203D2900689295 /* FSReferenceIn.m */; };
+		F4DD30D21B203D2900689295 /* FSReferenceIn.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DD30CF1B203D2900689295 /* FSReferenceIn.m */; };
+		F4DD30D31B203D2900689295 /* FSReferenceIn.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DD30CF1B203D2900689295 /* FSReferenceIn.m */; };
+		F4DD30D41B203D2900689295 /* FSReferenceIn.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DD30CF1B203D2900689295 /* FSReferenceIn.m */; };
 		F4DE98711A722F15006B4EC3 /* FSDistributeOut.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE98701A722F15006B4EC3 /* FSDistributeOut.m */; };
 		F4DE98721A722F15006B4EC3 /* FSDistributeOut.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE98701A722F15006B4EC3 /* FSDistributeOut.m */; };
 		F4DE98731A722F15006B4EC3 /* FSDistributeOut.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DE98701A722F15006B4EC3 /* FSDistributeOut.m */; };
@@ -6065,6 +6131,8 @@
 		B35B4E0E199CA91F00A39BBA /* CYQModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYQModel.m; sourceTree = "<group>"; };
 		B35B4E10199CA9E000A39BBA /* SKDateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKDateUtils.h; sourceTree = "<group>"; };
 		B35B4E11199CA9E000A39BBA /* SKDateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKDateUtils.m; sourceTree = "<group>"; };
+		B36805861B292AAB00065114 /* NSData+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MD5.h"; sourceTree = "<group>"; };
+		B36805871B292AAB00065114 /* NSData+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MD5.m"; sourceTree = "<group>"; };
 		B36A5A8A18DE013D0042BC02 /* FSFonestock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSFonestock.h; path = Classes/Models/FSFonestock.h; sourceTree = "<group>"; };
 		B36A5A8B18DE013D0042BC02 /* FSFonestock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSFonestock.m; path = Classes/Models/FSFonestock.m; sourceTree = "<group>"; };
 		B3767B7818FCFCAC00EC2131 /* FSCategoryTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSCategoryTree.h; path = Classes/Models/FSCategoryTree.h; sourceTree = "<group>"; };
@@ -6146,6 +6214,8 @@
 		B39A1885199A39CC009C7F09 /* MarginTradingIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarginTradingIn.m; sourceTree = "<group>"; };
 		B39A1886199A39CC009C7F09 /* MarginTradingOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarginTradingOut.h; sourceTree = "<group>"; };
 		B39A1887199A39CC009C7F09 /* MarginTradingOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarginTradingOut.m; sourceTree = "<group>"; };
+		B39EFF3A1B32A45C000D0323 /* UIActivityViewController+Rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityViewController+Rotation.h"; sourceTree = "<group>"; };
+		B39EFF3B1B32A45C000D0323 /* UIActivityViewController+Rotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActivityViewController+Rotation.m"; sourceTree = "<group>"; };
 		B3A091B919A1EEB300C47613 /* DateRangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateRangeViewController.h; sourceTree = "<group>"; };
 		B3A091BA19A1EEB300C47613 /* DateRangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateRangeViewController.m; sourceTree = "<group>"; };
 		B3A315D01A6F4BBC002C16C6 /* PatternTipsTW-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PatternTipsTW-Info.plist"; sourceTree = "<group>"; };
@@ -6261,7 +6331,6 @@
 		B3FDBC0718E55D7F007962A4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B3FDBC0918E55D7F007962A4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B3FDBC0B18E55D7F007962A4 /* PatternPowerCN-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PatternPowerCN-Prefix.pch"; sourceTree = "<group>"; };
-		B3FDBC0D18E55D7F007962A4 /* FSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FSAppDelegate.m; sourceTree = "<group>"; };
 		B3FDBC0F18E55D7F007962A4 /* PatternPowerCN.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PatternPowerCN.xcassets; sourceTree = "<group>"; };
 		B3FDBC3F18E57EE2007962A4 /* FSPointsAuthCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSPointsAuthCenter.h; path = Classes/Models/FSPointsAuthCenter.h; sourceTree = "<group>"; };
 		B3FDBC4018E57EE2007962A4 /* FSPointsAuthCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSPointsAuthCenter.m; path = Classes/Models/FSPointsAuthCenter.m; sourceTree = "<group>"; };
@@ -6276,6 +6345,19 @@
 		B3FDBC6718E597A6007962A4 /* FSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FSAppDelegate.m; sourceTree = "<group>"; };
 		B3FDBC6918E597A7007962A4 /* PatternPowerUS.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PatternPowerUS.xcassets; sourceTree = "<group>"; };
 		B3FDBC8418E59811007962A4 /* SystemProperty.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SystemProperty.plist; path = PatternPowerUS/Resources/SystemProperty.plist; sourceTree = "<group>"; };
+		B3FFBE0C1B281BF000D334DE /* inapp_apple.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = inapp_apple.zip; sourceTree = "<group>"; };
+		B3FFBE191B281CB000D334DE /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		B3FFBE1A1B281CB000D334DE /* ZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZipArchive.m; sourceTree = "<group>"; };
+		B3FFBE211B281CD900D334DE /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		B3FFBE221B281CD900D334DE /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		B3FFBE231B281CD900D334DE /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		B3FFBE2A1B281CD900D334DE /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		B3FFBE2B1B281CD900D334DE /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		B3FFBE2C1B281CD900D334DE /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		B3FFBE2D1B281CD900D334DE /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		B3FFBE2E1B281CD900D334DE /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		B3FFBE2F1B281CD900D334DE /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		B3FFBE5C1B281DC600D334DE /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		B900659219FF7402004134CA /* CheckBoxTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckBoxTableViewCell.h; sourceTree = "<group>"; };
 		B900659319FF7402004134CA /* CheckBoxTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckBoxTableViewCell.m; sourceTree = "<group>"; };
 		B905F2271952B30400823B71 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -6596,8 +6678,8 @@
 		F44ACE621AE64D4300240CF2 /* SearchCriteria.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = SearchCriteria.strings; sourceTree = "<group>"; };
 		F44B8AB01A8C4434003B5478 /* ADSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADSystem.h; sourceTree = "<group>"; };
 		F44B8AB11A8C4434003B5478 /* ADSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADSystem.m; sourceTree = "<group>"; };
-		F44BDD471A2DAC6A003F576B /* FSMainForceAnchorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMainForceAnchorViewController.h; sourceTree = "<group>"; };
-		F44BDD481A2DAC6A003F576B /* FSMainForceAnchorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMainForceAnchorViewController.m; sourceTree = "<group>"; };
+		F44BDD471A2DAC6A003F576B /* FSMainForceAnchorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSMainForceAnchorViewController.h; path = ../../../FSMainForceAnchorViewController.h; sourceTree = "<group>"; };
+		F44BDD481A2DAC6A003F576B /* FSMainForceAnchorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSMainForceAnchorViewController.m; path = ../../../FSMainForceAnchorViewController.m; sourceTree = "<group>"; };
 		F44C43B51AF06476003A4865 /* FSSymbolKeywordOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSSymbolKeywordOut.h; sourceTree = "<group>"; };
 		F44C43B61AF06476003A4865 /* FSSymbolKeywordOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSSymbolKeywordOut.m; sourceTree = "<group>"; };
 		F44C43BB1AF066B5003A4865 /* FSSymbolKeywordIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSSymbolKeywordIn.h; sourceTree = "<group>"; };
@@ -6671,6 +6753,8 @@
 		F4710FBA1A6F7D0600425E95 /* FSRootPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSRootPaymentViewController.m; sourceTree = "<group>"; };
 		F47AA20E1A26B55500582367 /* FSMainPlusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSMainPlusModel.h; sourceTree = "<group>"; };
 		F47AA20F1A26B55500582367 /* FSMainPlusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSMainPlusModel.m; sourceTree = "<group>"; };
+		F48A7E3B1B21A27400D1A782 /* UIImage+PixelColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PixelColor.h"; sourceTree = "<group>"; };
+		F48A7E3C1B21A27400D1A782 /* UIImage+PixelColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PixelColor.m"; sourceTree = "<group>"; };
 		F49A35AF19FF7B7600C3F456 /* StockRankOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StockRankOut.h; path = ../../../FonestockPower/StockRankOut.h; sourceTree = "<group>"; };
 		F49A35B019FF7B7600C3F456 /* StockRankOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StockRankOut.m; path = ../../../FonestockPower/StockRankOut.m; sourceTree = "<group>"; };
 		F4AA53CD1A70C45F001B6593 /* FSADViewController_1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSADViewController_1.h; sourceTree = "<group>"; };
@@ -6681,10 +6765,14 @@
 		F4AA53E51A70C65D001B6593 /* FSADViewController_3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSADViewController_3.m; sourceTree = "<group>"; };
 		F4AA53EF1A70C668001B6593 /* FSADViewController_4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSADViewController_4.h; sourceTree = "<group>"; };
 		F4AA53F01A70C668001B6593 /* FSADViewController_4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSADViewController_4.m; sourceTree = "<group>"; };
+		F4AE08841B3146CF00F034AE /* FSInsetsLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSInsetsLabel.h; sourceTree = "<group>"; };
+		F4AE08851B3146CF00F034AE /* FSInsetsLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSInsetsLabel.m; sourceTree = "<group>"; };
 		F4B3310F1A664E6A0035E35A /* FSLotteryNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSLotteryNewsViewController.h; sourceTree = "<group>"; };
 		F4B331101A664E6A0035E35A /* FSLotteryNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSLotteryNewsViewController.m; sourceTree = "<group>"; };
 		F4BDBEE31A7F49F50009F230 /* FSADResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSADResultViewController.h; sourceTree = "<group>"; };
 		F4BDBEE41A7F49F50009F230 /* FSADResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSADResultViewController.m; sourceTree = "<group>"; };
+		F4DD30CE1B203D2900689295 /* FSReferenceIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSReferenceIn.h; path = ../../../../FSReferenceIn.h; sourceTree = "<group>"; };
+		F4DD30CF1B203D2900689295 /* FSReferenceIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSReferenceIn.m; path = ../../../../FSReferenceIn.m; sourceTree = "<group>"; };
 		F4DE986F1A722F15006B4EC3 /* FSDistributeOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FSDistributeOut.h; path = ../FSDistributeOut.h; sourceTree = "<group>"; };
 		F4DE98701A722F15006B4EC3 /* FSDistributeOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FSDistributeOut.m; path = ../FSDistributeOut.m; sourceTree = "<group>"; };
 		F4DE987B1A7240FE006B4EC3 /* FSDistributeIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSDistributeIn.h; sourceTree = "<group>"; };
@@ -6797,6 +6885,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3FFBE5D1B281DC600D334DE /* libz.1.2.5.dylib in Frameworks */,
 				91F69C301A5E3B5900DD955B /* libProtocolBuffers.a in Frameworks */,
 				B38A5BEB1933114C00393F6C /* Social.framework in Frameworks */,
 				B94FAC8E194EF140004B97BF /* Crashlytics.framework in Frameworks */,
@@ -6824,6 +6913,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3FFBE5F1B282A9600D334DE /* libz.1.2.5.dylib in Frameworks */,
 				B31E92C81AB97EB100426BE2 /* libProtocolBuffers.a in Frameworks */,
 				B30F9A7418EA709F003310CD /* libsqlite3.dylib in Frameworks */,
 				B3FDBC0118E55D7F007962A4 /* CoreGraphics.framework in Frameworks */,
@@ -6838,6 +6928,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3FFBE5E1B282A8D00D334DE /* libz.1.2.5.dylib in Frameworks */,
 				B34D4DDB1AA1A96D0081DD5B /* libProtocolBuffers.a in Frameworks */,
 				B94FAC8D194EF140004B97BF /* Crashlytics.framework in Frameworks */,
 				B3FDBC5B18E597A6007962A4 /* CoreGraphics.framework in Frameworks */,
@@ -8504,6 +8595,7 @@
 		B3214EE518E82D6600F74281 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				B3FFBE181B281CB000D334DE /* ZipArchive */,
 				B312CB341AD61F4600BC3728 /* KissXML */,
 				B312CB461AD61F4600BC3728 /* FMDB */,
 				B312CADD1AD61C8500BC3728 /* CorePlot */,
@@ -8803,6 +8895,8 @@
 		B396DD3C1985FCFD0029678E /* LPCB */ = {
 			isa = PBXGroup;
 			children = (
+				F4DD30CE1B203D2900689295 /* FSReferenceIn.h */,
+				F4DD30CF1B203D2900689295 /* FSReferenceIn.m */,
 				28F80D121A12F17200A6C630 /* FSBAIn.m */,
 				28F80D131A12F17200A6C630 /* FSBAIn.h */,
 				2820A6BD19A5C0CA0026437E /* FSSnapshotQueryOut.h */,
@@ -8974,6 +9068,8 @@
 				145A06B5199B005200E5B120 /* FSMainForceViewController.m */,
 				145A06B8199B49A100E5B120 /* FSMainForceDateSelectViewController.h */,
 				145A06B9199B49A100E5B120 /* FSMainForceDateSelectViewController.m */,
+				F44BDD471A2DAC6A003F576B /* FSMainForceAnchorViewController.h */,
+				F44BDD481A2DAC6A003F576B /* FSMainForceAnchorViewController.m */,
 				B3A091B919A1EEB300C47613 /* DateRangeViewController.h */,
 				B3A091BA19A1EEB300C47613 /* DateRangeViewController.m */,
 				F409B46319F65DF50071CADD /* FSEmerging */,
@@ -9157,6 +9253,8 @@
 				B333397618E1663B00F6ADCB /* FSRadioButtonSet.m */,
 				B3AE135818F5146A00860E49 /* FSHUD.h */,
 				B3AE135918F5146A00860E49 /* FSHUD.m */,
+				F4AE08841B3146CF00F034AE /* FSInsetsLabel.h */,
+				F4AE08851B3146CF00F034AE /* FSInsetsLabel.m */,
 			);
 			name = CustomUI;
 			path = Classes/CustomUI;
@@ -9321,8 +9419,6 @@
 			isa = PBXGroup;
 			children = (
 				91C9E31B1A5D25E800F5D215 /* ProtocolBuffers.xcodeproj */,
-				F44BDD471A2DAC6A003F576B /* FSMainForceAnchorViewController.h */,
-				F44BDD481A2DAC6A003F576B /* FSMainForceAnchorViewController.m */,
 				B3E7916618D49A8B0093AEF2 /* FonestockPower */,
 				B3C2592F192F26B0001E5086 /* PatternPowerTW */,
 				B3FDBC0318E55D7F007962A4 /* PatternPowerCN */,
@@ -9358,6 +9454,7 @@
 		B3E7915F18D49A8B0093AEF2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B3FFBE5C1B281DC600D334DE /* libz.1.2.5.dylib */,
 				B94FAC8A194EF140004B97BF /* Crashlytics.framework */,
 				B30F9A7118EA7056003310CD /* libsqlite3.dylib */,
 				B3DF855118E3166100E483BA /* Social.framework */,
@@ -9541,6 +9638,12 @@
 				B35902D419400AD3001A27AE /* UIViewController+ContainerNavigationItem.m */,
 				9110C2CB1A65082600F10AA6 /* UIBezierPath+dqd_arrowhead.h */,
 				9110C2CC1A65082600F10AA6 /* UIBezierPath+dqd_arrowhead.m */,
+				F48A7E3B1B21A27400D1A782 /* UIImage+PixelColor.h */,
+				F48A7E3C1B21A27400D1A782 /* UIImage+PixelColor.m */,
+				B36805861B292AAB00065114 /* NSData+MD5.h */,
+				B36805871B292AAB00065114 /* NSData+MD5.m */,
+				B39EFF3A1B32A45C000D0323 /* UIActivityViewController+Rotation.h */,
+				B39EFF3B1B32A45C000D0323 /* UIActivityViewController+Rotation.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -9573,6 +9676,7 @@
 		B3FDBBFA18E55CF4007962A4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B3FFBE0C1B281BF000D334DE /* inapp_apple.zip */,
 				B3169ADD1963AEF700947C45 /* IndicatorParameterUrlTable.plist */,
 				B3FDBC4718E581C3007962A4 /* SystemProperty.plist */,
 			);
@@ -9583,7 +9687,6 @@
 			isa = PBXGroup;
 			children = (
 				B338BD1C18F26BD5007F2BC6 /* Controller */,
-				B3FDBC0D18E55D7F007962A4 /* FSAppDelegate.m */,
 				B3FDBC0F18E55D7F007962A4 /* PatternPowerCN.xcassets */,
 				284879FC18FB81DC00F145ED /* LocaliszedStrings */,
 				B3FDBC0418E55D7F007962A4 /* Supporting Files */,
@@ -9648,6 +9751,32 @@
 				B305225519497DD000870515 /* PatternPowerIntroduction.html */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		B3FFBE181B281CB000D334DE /* ZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				B3FFBE1F1B281CD900D334DE /* minizip */,
+				B3FFBE191B281CB000D334DE /* ZipArchive.h */,
+				B3FFBE1A1B281CB000D334DE /* ZipArchive.m */,
+			);
+			path = ZipArchive;
+			sourceTree = "<group>";
+		};
+		B3FFBE1F1B281CD900D334DE /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				B3FFBE211B281CD900D334DE /* crypt.h */,
+				B3FFBE221B281CD900D334DE /* ioapi.c */,
+				B3FFBE231B281CD900D334DE /* ioapi.h */,
+				B3FFBE2A1B281CD900D334DE /* mztools.c */,
+				B3FFBE2B1B281CD900D334DE /* mztools.h */,
+				B3FFBE2C1B281CD900D334DE /* unzip.c */,
+				B3FFBE2D1B281CD900D334DE /* unzip.h */,
+				B3FFBE2E1B281CD900D334DE /* zip.c */,
+				B3FFBE2F1B281CD900D334DE /* zip.h */,
+			);
+			path = minizip;
 			sourceTree = "<group>";
 		};
 		B90E24311A66081F00914F55 /* PatternTips */ = {
@@ -10404,6 +10533,9 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Fonestock;
 				TargetAttributes = {
+					B3A318B11A6FC98C002C16C6 = {
+						DevelopmentTeam = 6R7GPNS4B8;
+					};
 					B3C257EF192F227B001E5086 = {
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
@@ -10412,20 +10544,24 @@
 						};
 					};
 					B3FDBBFE18E55D7F007962A4 = {
-						DevelopmentTeam = 6R7GPNS4B8;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.InAppPurchase = {
 								enabled = 0;
 							};
 						};
 					};
 					B3FDBC5818E597A6007962A4 = {
-						DevelopmentTeam = 6R7GPNS4B8;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
 						};
+					};
+					B90E24331A66091300914F55 = {
+						DevelopmentTeam = 6R7GPNS4B8;
 					};
 				};
 			};
@@ -10505,6 +10641,7 @@
 				B31D42C61A0A526400B0EFB5 /* FigureSearchFormula.strings in Resources */,
 				B31D42C91A0A526400B0EFB5 /* slider-default-track@2x.png in Resources */,
 				B34D4E4C1AA1B1BC0081DD5B /* public_key.der in Resources */,
+				B3FFBE101B281BF000D334DE /* inapp_apple.zip in Resources */,
 				B3336DFB1A1235470035EBC8 /* SystemProperty.plist in Resources */,
 				B31D42CA1A0A526400B0EFB5 /* Emerging.strings in Resources */,
 				B31D42CB1A0A526400B0EFB5 /* watchlists.strings in Resources */,
@@ -10874,6 +11011,7 @@
 				9177F03419F65E1300073E17 /* IndexQuotes.strings in Resources */,
 				B3E2E496199B6685003E8DEC /* TypicalPattern.strings in Resources */,
 				B3E2E494199B6685003E8DEC /* Navigation.strings in Resources */,
+				B3FFBE0F1B281BF000D334DE /* inapp_apple.zip in Resources */,
 				9177F03619F65E1300073E17 /* InternationalInfo.strings in Resources */,
 				B9DC26DA19AED1E900A4DEB8 /* Revenue.strings in Resources */,
 				B3E2E495199B6685003E8DEC /* SecuritySearch.strings in Resources */,
@@ -10956,6 +11094,7 @@
 				B93D816C19FE1541005FCF56 /* slider-default_trackBackground@2x.png in Resources */,
 				B93D815019FE1541005FCF56 /* slider-default-handle-highlighted.png in Resources */,
 				28487A0C18FB81DC00F145ED /* SecuritySearch.strings in Resources */,
+				B3FFBE0D1B281BF000D334DE /* inapp_apple.zip in Resources */,
 				F4452BCF1AEB932100273C2C /* Position.strings in Resources */,
 				28487A0D18FB81DC00F145ED /* TypicalPattern.strings in Resources */,
 				B93D816419FE1541005FCF56 /* slider-default-track@2x.png in Resources */,
@@ -10995,6 +11134,7 @@
 				2899D3E218FCD8B000078734 /* Equity.strings in Resources */,
 				2899D3E818FCD8B000078734 /* watchlists.strings in Resources */,
 				B34D4E4B1AA1B1BC0081DD5B /* public_key.der in Resources */,
+				B3FFBE0E1B281BF000D334DE /* inapp_apple.zip in Resources */,
 				B93D816919FE1541005FCF56 /* slider-default-trackBackground.png in Resources */,
 				B9F6FBC71A088060004D9C2F /* SearchCriteria.strings in Resources */,
 				B3F90185194161C8000B6186 /* Pattern Power - US stocks Introduction.html in Resources */,
@@ -11373,6 +11513,7 @@
 				B31D40CA1A0A526400B0EFB5 /* CYQModel.m in Sources */,
 				F4352D681A1B392F008F5198 /* FSMainBargainingChipOut.m in Sources */,
 				B31D40CB1A0A526400B0EFB5 /* FinanicalDataOut.m in Sources */,
+				B39EFF3F1B32A45C000D0323 /* UIActivityViewController+Rotation.m in Sources */,
 				B31D40CC1A0A526400B0EFB5 /* FSPositionInformationViewController.m in Sources */,
 				B31D40CD1A0A526400B0EFB5 /* FSEquityDrawViewController.m in Sources */,
 				B31D40CE1A0A526400B0EFB5 /* FSInvestedModel.m in Sources */,
@@ -11514,6 +11655,7 @@
 				B38E574B1AD7A73B00880C53 /* FSNewsTitleDataIn.m in Sources */,
 				B31D41331A0A526400B0EFB5 /* NewsRelateIn.m in Sources */,
 				28E99DF11A1057AE00E5BF7F /* FSJoinPacketIn.m in Sources */,
+				F4AE088A1B3146CF00F034AE /* FSInsetsLabel.m in Sources */,
 				B31D41341A0A526400B0EFB5 /* FSCDP.m in Sources */,
 				149EDBFD1A4E938B0039E423 /* JCNotificationBannerWindow.m in Sources */,
 				B31D41361A0A526400B0EFB5 /* FSTechModel.m in Sources */,
@@ -11572,6 +11714,7 @@
 				B31D41621A0A526400B0EFB5 /* FSPointsAuthCenter.m in Sources */,
 				B31D41631A0A526400B0EFB5 /* FigureSearchCollectionViewCell.m in Sources */,
 				B31D41641A0A526400B0EFB5 /* EODActionModel.m in Sources */,
+				B3FFBE5B1B281CD900D334DE /* zip.c in Sources */,
 				B31D41651A0A526400B0EFB5 /* StockHolderMeeting.m in Sources */,
 				B31D41661A0A526400B0EFB5 /* SGInfoAlert.m in Sources */,
 				B31D41671A0A526400B0EFB5 /* FSMultiChartViewFlowLayout.m in Sources */,
@@ -11600,6 +11743,7 @@
 				B394244F1AD3FD4F00D1E718 /* LFDisplayBridge.m in Sources */,
 				91FB8D1A1A53C76E00624741 /* ShowResultTableViewCell.m in Sources */,
 				B31D417C1A0A526400B0EFB5 /* DDPageControl.m in Sources */,
+				B3FFBE371B281CD900D334DE /* ioapi.c in Sources */,
 				B31D417D1A0A526400B0EFB5 /* FSActionEditCondictionViewController.m in Sources */,
 				B30561911A5EA49C005296AD /* TechIn.m in Sources */,
 				B31D417E1A0A526400B0EFB5 /* UICollectionView+FSMultiChartExtensions.m in Sources */,
@@ -11619,6 +11763,7 @@
 				B31D418D1A0A526400B0EFB5 /* InvesterBSIn.m in Sources */,
 				B31D418E1A0A526400B0EFB5 /* BrokersOut.m in Sources */,
 				149EDC851A4E9B3F0039E423 /* FSTradeDiaryViewController.m in Sources */,
+				B3FFBE1E1B281CB000D334DE /* ZipArchive.m in Sources */,
 				B38E574C1AD7A73B00880C53 /* FSNewsTitleDataOut.m in Sources */,
 				B31D418F1A0A526400B0EFB5 /* FSTeachPopView.m in Sources */,
 				B31D41901A0A526400B0EFB5 /* FSOptionInfoViewController.m in Sources */,
@@ -11714,6 +11859,7 @@
 				F4BDBEF61A7F58710009F230 /* FSADViewController_2.m in Sources */,
 				B31D41D71A0A526400B0EFB5 /* FSLauncherCollectionViewCell.m in Sources */,
 				B31D41D81A0A526400B0EFB5 /* DataSettingViewController.m in Sources */,
+				B368058B1B292AAB00065114 /* NSData+MD5.m in Sources */,
 				B31D41D91A0A526400B0EFB5 /* FSDiaryTableView.m in Sources */,
 				B31D41DA1A0A526400B0EFB5 /* NewsContentIn.m in Sources */,
 				B31D41DC1A0A526400B0EFB5 /* FSFonestock.m in Sources */,
@@ -11736,6 +11882,7 @@
 				91CCFAB41A281D3E00CF0EDD /* PowerPPPTableViewCell.m in Sources */,
 				B31D41E61A0A526400B0EFB5 /* Brokers.m in Sources */,
 				149EDC5F1A4E9AA90039E423 /* FSTradeHistoryMainTableViewCell.m in Sources */,
+				F4DD30D41B203D2900689295 /* FSReferenceIn.m in Sources */,
 				B31D41E71A0A526400B0EFB5 /* FigureSearchModel.m in Sources */,
 				B31D41E81A0A526400B0EFB5 /* AlertSnapshotIn.m in Sources */,
 				B31D41E91A0A526400B0EFB5 /* MessageType11.m in Sources */,
@@ -11757,6 +11904,7 @@
 				B31D41F61A0A526400B0EFB5 /* EsmPriceOut.m in Sources */,
 				B312CB651AD61F4600BC3728 /* DDXMLElement+Dictionary.m in Sources */,
 				B312CB7F1AD61F4600BC3728 /* DDXMLDocument.m in Sources */,
+				B3FFBE531B281CD900D334DE /* mztools.c in Sources */,
 				B31D41F71A0A526400B0EFB5 /* WatchLists.m in Sources */,
 				B31D41F81A0A526400B0EFB5 /* NSDate+Extensions.m in Sources */,
 				B31D41F91A0A526400B0EFB5 /* NewHistoricalPriceOut.m in Sources */,
@@ -11910,6 +12058,7 @@
 				B31D427F1A0A526400B0EFB5 /* FSLoginService.m in Sources */,
 				149EDBED1A4E92D90039E423 /* FSLineActivity.m in Sources */,
 				F41093081A35A86C0069C28D /* FSBrokerOptionalListViewController.m in Sources */,
+				F48A7E411B21A27400D1A782 /* UIImage+PixelColor.m in Sources */,
 				B31D42801A0A526400B0EFB5 /* OptionSymbolSyncIn.m in Sources */,
 				9163C7B31A0B57870023B0E0 /* FSLauncherCustomizeDecisionViewController.m in Sources */,
 				B31D42811A0A526400B0EFB5 /* Indicator.m in Sources */,
@@ -11943,6 +12092,7 @@
 				F45DF7431A835E8A000B6187 /* FSADViewController_3.m in Sources */,
 				B31D429C1A0A526400B0EFB5 /* EquityTick.m in Sources */,
 				B31D429D1A0A526400B0EFB5 /* FSTickData.m in Sources */,
+				B3FFBE571B281CD900D334DE /* unzip.c in Sources */,
 				B31D429E1A0A526400B0EFB5 /* NetWorthCrossLine.m in Sources */,
 				B31D429F1A0A526400B0EFB5 /* DefaultDBData.m in Sources */,
 				B31D42A01A0A526400B0EFB5 /* MessageType09.m in Sources */,
@@ -12054,6 +12204,7 @@
 				B3544AF21ACA803D007CAA31 /* HistoricalParm.m in Sources */,
 				B38C3A791A6631A000593B76 /* GetINIOut.m in Sources */,
 				B38C3A831A6631A000593B76 /* SKCustomTableView.m in Sources */,
+				F4AE088E1B3146CF00F034AE /* FSInsetsLabel.m in Sources */,
 				B38C3A841A6631A000593B76 /* (null) in Sources */,
 				B38C3A871A6631A000593B76 /* FSUIViewController.m in Sources */,
 				B32155E01A663AB800634BE9 /* Tips_location_down.pb.m in Sources */,
@@ -12087,6 +12238,7 @@
 				B38C3B0C1A6631A000593B76 /* FSUIButton.m in Sources */,
 				B312CBAA1AD61F4600BC3728 /* FMDatabase+InMemoryOnDiskIO.m in Sources */,
 				B38C3B0E1A6631A000593B76 /* MarqueeLabel.m in Sources */,
+				F48A7E451B21A27400D1A782 /* UIImage+PixelColor.m in Sources */,
 				B38C3B111A6631A000593B76 /* FSURLConnectCenter.m in Sources */,
 				B38C3B151A6631A000593B76 /* MBProgressHUD.m in Sources */,
 				B38C3B181A6631A000593B76 /* CustomIOS7AlertView.m in Sources */,
@@ -12173,6 +12325,7 @@
 				B390F3231A63CC8C00C19D90 /* PageControlViewController.m in Sources */,
 				B390F3251A63CC8C00C19D90 /* UpperValueView.m in Sources */,
 				B390F3261A63CC8C00C19D90 /* FSBValueFormat.m in Sources */,
+				F48A7E421B21A27400D1A782 /* UIImage+PixelColor.m in Sources */,
 				B390F3321A63CC8C00C19D90 /* FSFonestock.m in Sources */,
 				B390F3381A63CC8C00C19D90 /* FSLoginViewController.m in Sources */,
 				B390F33B1A63CC8C00C19D90 /* FSAppDelegate.m in Sources */,
@@ -12219,6 +12372,7 @@
 				F4BDBEF81A7F58730009F230 /* FSADViewController_2.m in Sources */,
 				B312CB9A1AD61F4600BC3728 /* DDXMLNode.m in Sources */,
 				B390F40D1A63CC8C00C19D90 /* FSTickData.m in Sources */,
+				F4AE088B1B3146CF00F034AE /* FSInsetsLabel.m in Sources */,
 				B35CCCF21ACA8D3D00535287 /* FigureSearchMyProfileModel.m in Sources */,
 				B394240A1AD3E08F00D1E718 /* UITableView+iOS7Separator.m in Sources */,
 				B390F40F1A63CC8C00C19D90 /* DefaultDBData.m in Sources */,
@@ -12236,6 +12390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B390F4861A63D07300C19D90 /* FSTickQueryIn.m in Sources */,
+				F4AE088D1B3146CF00F034AE /* FSInsetsLabel.m in Sources */,
 				B390F48D1A63D07300C19D90 /* FSUITableViewCell.m in Sources */,
 				B390F49C1A63D07300C19D90 /* Reachability.m in Sources */,
 				B390F4C11A63D07300C19D90 /* TechDrawBottomView.m in Sources */,
@@ -12323,6 +12478,7 @@
 				B35CCCDD1ACA860B00535287 /* FSSignupViewController.m in Sources */,
 				B390F63A1A63D07300C19D90 /* FSUIViewController.m in Sources */,
 				B390F6401A63D07300C19D90 /* FSPushNotificationCenter.m in Sources */,
+				F48A7E441B21A27400D1A782 /* UIImage+PixelColor.m in Sources */,
 				B390F6431A63D07300C19D90 /* (null) in Sources */,
 				B35CCCF41ACA8D3F00535287 /* FigureSearchMyProfileModel.m in Sources */,
 				F4FD6B411AD6609A0046EB3B /* FSRSAEncrypt.m in Sources */,
@@ -12437,6 +12593,7 @@
 				B3A3173D1A6FC914002C16C6 /* FSTickQueryOut.m in Sources */,
 				B3A317461A6FC914002C16C6 /* FSRadioButtonSet.m in Sources */,
 				F4FD6B3B1AD6604F0046EB3B /* FSSignupModel.m in Sources */,
+				F48A7E461B21A27400D1A782 /* UIImage+PixelColor.m in Sources */,
 				B3A3174D1A6FC914002C16C6 /* FSNotificationCenter.m in Sources */,
 				B3544AEF1ACA803D007CAA31 /* HistoricDataTypes.m in Sources */,
 				B312CBEC1AD61F4600BC3728 /* FMResultSet.m in Sources */,
@@ -12462,6 +12619,7 @@
 				B3A3179F1A6FC914002C16C6 /* GetINIOut.m in Sources */,
 				F45DF7731A835F87000B6187 /* FSADPopViewController.m in Sources */,
 				B3A317AA1A6FC914002C16C6 /* SKCustomTableView.m in Sources */,
+				F4AE088F1B3146CF00F034AE /* FSInsetsLabel.m in Sources */,
 				B39424161AD3E0CA00D1E718 /* UIView+NewComponent.m in Sources */,
 				B3A317AB1A6FC914002C16C6 /* (null) in Sources */,
 				B3A317AE1A6FC914002C16C6 /* FSUIViewController.m in Sources */,
@@ -12580,6 +12738,7 @@
 				B3A31A161A6FC98C002C16C6 /* FSTickQueryOut.m in Sources */,
 				B3A31A1F1A6FC98C002C16C6 /* FSRadioButtonSet.m in Sources */,
 				F4FD6B3D1AD660500046EB3B /* FSSignupModel.m in Sources */,
+				F48A7E481B21A27400D1A782 /* UIImage+PixelColor.m in Sources */,
 				B3A31A261A6FC98C002C16C6 /* FSNotificationCenter.m in Sources */,
 				B3544AE31ACA803D007CAA31 /* HistoricDataTypes.m in Sources */,
 				B312CBEE1AD61F4600BC3728 /* FMResultSet.m in Sources */,
@@ -12605,6 +12764,7 @@
 				B3A31A781A6FC98C002C16C6 /* GetINIOut.m in Sources */,
 				F45DF7751A835F87000B6187 /* FSADPopViewController.m in Sources */,
 				B3A31A831A6FC98C002C16C6 /* SKCustomTableView.m in Sources */,
+				F4AE08911B3146CF00F034AE /* FSInsetsLabel.m in Sources */,
 				B39424181AD3E0CA00D1E718 /* UIView+NewComponent.m in Sources */,
 				B3A31A841A6FC98C002C16C6 /* (null) in Sources */,
 				B3A31A871A6FC98C002C16C6 /* FSUIViewController.m in Sources */,
@@ -12662,6 +12822,7 @@
 				B3A3213B1A6FCA90002C16C6 /* BtnCollectionView.m in Sources */,
 				B3A321411A6FCA90002C16C6 /* PatternsTipsCollectionCell.m in Sources */,
 				B3A321441A6FCA90002C16C6 /* PatternTipsModel.m in Sources */,
+				F48A7E491B21A27400D1A782 /* UIImage+PixelColor.m in Sources */,
 				B3A3214B1A6FCA90002C16C6 /* FSTickQueryIn.m in Sources */,
 				B3A321521A6FCA90002C16C6 /* FSUITableViewCell.m in Sources */,
 				B3544A621ACA6865007CAA31 /* FSLauncherPageViewController.m in Sources */,
@@ -12777,6 +12938,7 @@
 				B3A323861A6FCA90002C16C6 /* OptionSymbolSyncIn.m in Sources */,
 				B3A3238C1A6FCA90002C16C6 /* FSUIButton.m in Sources */,
 				B3A3238E1A6FCA90002C16C6 /* MarqueeLabel.m in Sources */,
+				F4AE08921B3146CF00F034AE /* FSInsetsLabel.m in Sources */,
 				B39424211AD3E0E200D1E718 /* UIViewController+CustomNavigationBar.m in Sources */,
 				B3A323911A6FCA90002C16C6 /* FSURLConnectCenter.m in Sources */,
 				B35CCCE81ACA861A00535287 /* FSURLParser.m in Sources */,
@@ -12926,6 +13088,7 @@
 				F4BDBEE81A7F49F50009F230 /* FSADResultViewController.m in Sources */,
 				B3C25827192F227B001E5086 /* PortfolioOut.m in Sources */,
 				911098C31A03763E007426A6 /* FSLauncherCustomizeViewController.m in Sources */,
+				B3FFBE561B281CD900D334DE /* unzip.c in Sources */,
 				B3C25828192F227B001E5086 /* FSHistoricalEPSCell.m in Sources */,
 				B3F901831941583E000B6186 /* Dummy.m in Sources */,
 				144E4FF919A2E16300A329B4 /* TSQCalendarCell.m in Sources */,
@@ -12999,6 +13162,7 @@
 				B3C25849192F227B001E5086 /* TowerView.m in Sources */,
 				28FB89F51A077DBA00EE6803 /* MessageDetailViewController.m in Sources */,
 				B3C2584A192F227B001E5086 /* FSHUD.m in Sources */,
+				F48A7E401B21A27400D1A782 /* UIImage+PixelColor.m in Sources */,
 				91F0ABAB1AEA729E0059BEA8 /* TempCompanyProfileForCN.m in Sources */,
 				B3C2584B192F227B001E5086 /* FigureRangeSetupViewController.m in Sources */,
 				B3C6777E19C92EE80023FEFB /* FSFinancialRatioUSIn.m in Sources */,
@@ -13012,6 +13176,7 @@
 				B3C2584F192F227B001E5086 /* HistoricalEPSIn.m in Sources */,
 				B3C25850192F227B001E5086 /* HistoricDataTypes.m in Sources */,
 				B35902DE194016D1001A27AE /* FSLauncherNewsViewController.m in Sources */,
+				B3FFBE361B281CD900D334DE /* ioapi.c in Sources */,
 				91FB8D141A53C76E00624741 /* FSShowResultViewController.m in Sources */,
 				B3C25851192F227B001E5086 /* MarketInfoOut.m in Sources */,
 				6578A4E719527AF800B77045 /* FSActionTableView.m in Sources */,
@@ -13167,6 +13332,7 @@
 				B3C25892192F227B001E5086 /* UITableView+iOS7Separator.m in Sources */,
 				B3C25893192F227B001E5086 /* FSDataModelProc.m in Sources */,
 				B3C25894192F227B001E5086 /* URLParser.m in Sources */,
+				B368058A1B292AAB00065114 /* NSData+MD5.m in Sources */,
 				9183578E1A0773F200A75CAD /* InternationalInfoForexViewController.m in Sources */,
 				B3C25895192F227B001E5086 /* ValueUtil.m in Sources */,
 				B3C25896192F227B001E5086 /* CompanyProfilePage1ViewController.m in Sources */,
@@ -13205,6 +13371,7 @@
 				B3C258A3192F227B001E5086 /* AlertSnapshotIn.m in Sources */,
 				B3C258A4192F227B001E5086 /* MessageType11.m in Sources */,
 				B3C258A5192F227B001E5086 /* FSMultiChartCellRefreshingOperation.m in Sources */,
+				F4AE08891B3146CF00F034AE /* FSInsetsLabel.m in Sources */,
 				B9173A0A199C5C1F00DDA84E /* BoardMemberHoldingIn.m in Sources */,
 				28FD4A3D19D5502400E9D440 /* TaiwanSearchStockViewController.m in Sources */,
 				F41928581A19F60100D968D8 /* FSMainBargainingChipViewController.m in Sources */,
@@ -13237,12 +13404,14 @@
 				B3C258B3192F227B001E5086 /* FSCrossHair.m in Sources */,
 				B3C258B4192F227B001E5086 /* SecurityName.m in Sources */,
 				B3C258B5192F227B001E5086 /* GetINIOut.m in Sources */,
+				B39EFF3E1B32A45C000D0323 /* UIActivityViewController+Rotation.m in Sources */,
 				B3C258B6192F227B001E5086 /* SnapshotOut.m in Sources */,
 				B3C258B8192F227B001E5086 /* AmericaEditChooseViewController.m in Sources */,
 				B3D75E9319A5E3D700B8D233 /* TSQTACalendarRowCell.m in Sources */,
 				F44C43BA1AF06476003A4865 /* FSSymbolKeywordOut.m in Sources */,
 				149EDC681A4E9AA90039E423 /* FSTradeHistoryViewController.m in Sources */,
 				B3C258BB192F227B001E5086 /* BADataOut.m in Sources */,
+				B3FFBE521B281CD900D334DE /* mztools.c in Sources */,
 				14A0A80D19F9F1D100261820 /* FSActionAlertTableView.m in Sources */,
 				B3C258BC192F227B001E5086 /* SKCustomTableView.m in Sources */,
 				1453423819A5D1D2002DA2D8 /* (null) in Sources */,
@@ -13295,6 +13464,7 @@
 				B312CB8B1AD61F4600BC3728 /* DDXMLElement.m in Sources */,
 				B972FE5719A19B6100010752 /* HistoricalCell.m in Sources */,
 				F41557A01A1F29DF00CADA12 /* FSBrokerBranchInfo.m in Sources */,
+				B3FFBE1D1B281CB000D334DE /* ZipArchive.m in Sources */,
 				B39424441AD3FD0B00D1E718 /* CXAlertViewController.m in Sources */,
 				6578A4C91952787000B77045 /* FSInvestedViewController.m in Sources */,
 				1496D0B21A67564100AD5D81 /* FSTodayReserve2Cell.m in Sources */,
@@ -13321,6 +13491,7 @@
 				B3C258D7192F227B001E5086 /* CashFlowDataOut.m in Sources */,
 				B3C258D8192F227B001E5086 /* AlertINIIn.m in Sources */,
 				B96E84F3199DEC9400EB1587 /* BoardMemberTransfer.m in Sources */,
+				F4DD30D31B203D2900689295 /* FSReferenceIn.m in Sources */,
 				B39A183E1999B658009C7F09 /* EODTargetModel.m in Sources */,
 				149B7DE21A41545800A142AD /* FSLineActivity.m in Sources */,
 				B38E57451AD7A73B00880C53 /* FSNewsSnDataOut.m in Sources */,
@@ -13353,6 +13524,7 @@
 				B3C258EA192F227B001E5086 /* HistoricDataAgent.m in Sources */,
 				B394244E1AD3FD4F00D1E718 /* LFDisplayBridge.m in Sources */,
 				B9EF635C1966B1BF003F3981 /* RadioTableViewCell.m in Sources */,
+				B3FFBE5A1B281CD900D334DE /* zip.c in Sources */,
 				6578A490195277BA00B77045 /* FSActionEditCondictionCell.m in Sources */,
 				B3C258EB192F227B001E5086 /* SectorTableOut.m in Sources */,
 				28FB89F21A077DBA00EE6803 /* VIPMessageViewController.m in Sources */,
@@ -13474,6 +13646,7 @@
 				B312CB7B1AD61F4600BC3728 /* DDXMLDocument.m in Sources */,
 				149EDC5B1A4E9AA90039E423 /* FSTradeHistoryMainTableViewCell.m in Sources */,
 				2899D44A18FD30A300078734 /* BtnCollectionViewCell.m in Sources */,
+				F48A7E3D1B21A27400D1A782 /* UIImage+PixelColor.m in Sources */,
 				B91739F9199C592300DDA84E /* CompanyProfilePage4Cell.m in Sources */,
 				28736596190F409E000518F1 /* MessageType06.m in Sources */,
 				B9173A15199C89CE00DDA84E /* MajorProductsIn.m in Sources */,
@@ -13726,6 +13899,7 @@
 				B312CBAF1AD61F4600BC3728 /* FMDatabase.m in Sources */,
 				B30CC83D18E3DAD000A1C781 /* FSDistViewController.m in Sources */,
 				B3B00EFD19248C080065524B /* FSIAPVerifyReceiptCenter.m in Sources */,
+				F4AE08861B3146CF00F034AE /* FSInsetsLabel.m in Sources */,
 				1483EEAC1A4AA8830078F088 /* JCNotificationCenter.m in Sources */,
 				28FB89F01A077DBA00EE6803 /* VIPMessageViewController.m in Sources */,
 				28FB89F31A077DBA00EE6803 /* MessageDetailViewController.m in Sources */,
@@ -13741,6 +13915,7 @@
 				28FD4A3C19D5502400E9D440 /* TaiwanSearchStockViewController.m in Sources */,
 				B3F1EE8A18E2C73D00F38F65 /* FSListViewController.m in Sources */,
 				B38F269219AEBA2B0003672D /* mime.m in Sources */,
+				F4DD30D01B203D2900689295 /* FSReferenceIn.m in Sources */,
 				28FB89C41A077C7B00EE6803 /* ShopInfoViewController.m in Sources */,
 				1472A8311A08A47A00681892 /* FSPositionManagementTableView.m in Sources */,
 				2820A6B919A593060026437E /* TrendEODTargetController.m in Sources */,
@@ -14091,6 +14266,7 @@
 				B34D4E431AA1B0BD0081DD5B /* FSMainBargainingChipViewController.m in Sources */,
 				28D3E5351904E80B005A7B0A /* TextFieldTableViewCell.m in Sources */,
 				2889266019060676000F7FEF /* FinanicalDataOut.m in Sources */,
+				F48A7E3E1B21A27400D1A782 /* UIImage+PixelColor.m in Sources */,
 				281154F619188BD700192524 /* FSEquityDrawViewController.m in Sources */,
 				281155381918C5CF00192524 /* BottonView.m in Sources */,
 				14E0F505196F8A7E00F3E854 /* FSDiaryViewController.m in Sources */,
@@ -14134,6 +14310,7 @@
 				287BCCC41910EAAC00B430F8 /* TradeDistributeOut.m in Sources */,
 				B9ED64AC1A67BBE500665293 /* PatternsTipsCollectionCell.m in Sources */,
 				28A01456191724FA00290A51 /* FSEquityDrawViewTickPlotDataSource.m in Sources */,
+				B39F78011B313A52005D7954 /* FSAppDelegate.m in Sources */,
 				145480CA19D3E7E50012F853 /* FSOptionViewController.m in Sources */,
 				288926BA19060739000F7FEF /* AlertSnapshotOut.m in Sources */,
 				B34D4E3F1AA1B0B70081DD5B /* FSMainBargainingChipIn.m in Sources */,
@@ -14207,6 +14384,7 @@
 				B3CA6B8918F67DD6009BDAEA /* UIView+HUD.m in Sources */,
 				287BCC8D1910970500B430F8 /* FSAverageValueLine.m in Sources */,
 				B3767B8518FD1C6E00EC2131 /* SectorTableIn.m in Sources */,
+				B3FFBE541B281CD900D334DE /* unzip.c in Sources */,
 				6578A485195277B900B77045 /* FSActionPlanSettingCell.m in Sources */,
 				1457ACC21964F75C0013B1A4 /* FSActionSheetCell.m in Sources */,
 				B34D4E231AA1B00E0081DD5B /* FSMainPlusDateRangeViewController.m in Sources */,
@@ -14230,6 +14408,7 @@
 				B38F268519AEB9D90003672D /* EODTargetOut.m in Sources */,
 				2820A6AE19A5926E0026437E /* FSTechModel.m in Sources */,
 				B3767B7B18FCFCAC00EC2131 /* FSCategoryTree.m in Sources */,
+				F4DD30D11B203D2900689295 /* FSReferenceIn.m in Sources */,
 				28D3E55219050CEF005A7B0A /* HistoricalEPSIn.m in Sources */,
 				B39424381AD3FD0B00D1E718 /* CXAlertButtonItem.m in Sources */,
 				B38F26BE19AEC31C0003672D /* HistoricalCell.m in Sources */,
@@ -14254,6 +14433,7 @@
 				B37F440B196252720039A985 /* FSLauncherConfigureViewController.m in Sources */,
 				6578A48E195277BA00B77045 /* FSActionEditCondictionCell.m in Sources */,
 				B34D4E471AA1B11C0081DD5B /* FSBAIn.m in Sources */,
+				B3FFBE1B1B281CB000D334DE /* ZipArchive.m in Sources */,
 				B3C6778719C92F340023FEFB /* FSBalanceSheetUSIn.m in Sources */,
 				287BCCDE1910F0B100B430F8 /* FSPriceVolumeControlSpace.m in Sources */,
 				149EF2271A68A15600F74E78 /* Tips_location_up.pb.m in Sources */,
@@ -14273,6 +14453,7 @@
 				287805F3194937BF0097D7D3 /* NetWorthViewController.m in Sources */,
 				2899D41418FD261C00078734 /* FigureSearchCollectionViewCell.m in Sources */,
 				287365C9190F504E000518F1 /* FSMultiChartViewFlowLayout.m in Sources */,
+				B39EFF3C1B32A45C000D0323 /* UIActivityViewController+Rotation.m in Sources */,
 				149EF2211A68A12E00F74E78 /* ProtocolBufferOut.m in Sources */,
 				2889264E19060676000F7FEF /* BalanceSheetOut.m in Sources */,
 				F43DAD511AEDEA5F008729D3 /* SymbolSectorIdIn.m in Sources */,
@@ -14348,6 +14529,7 @@
 				B34D4E2A1AA1B0320081DD5B /* FSBrokerParametersViewController.m in Sources */,
 				28D3E56919051640005A7B0A /* RevenueChartViewController.m in Sources */,
 				B312CBE41AD61F4600BC3728 /* FMResultSet.m in Sources */,
+				B3FFBE501B281CD900D334DE /* mztools.c in Sources */,
 				B38F26AD19AEBD4C0003672D /* FSBAQueryIn.m in Sources */,
 				28D3E5141904BC06005A7B0A /* UIViewController+Notification.m in Sources */,
 				28C8C4D81A26D78F00780D38 /* FSIndexIn.m in Sources */,
@@ -14414,6 +14596,7 @@
 				6578A497195277BA00B77045 /* FSActionPlanTableView.m in Sources */,
 				2889267B190606C5000F7FEF /* Brokers.m in Sources */,
 				2899D42B18FD268D00078734 /* FigureSearchModel.m in Sources */,
+				B3FFBE341B281CD900D334DE /* ioapi.c in Sources */,
 				B963D5D5194EBCB900552A41 /* FigureSearchCheckBoxTableViewCell.m in Sources */,
 				B38E574E1AD7A73C00880C53 /* FSNewsSnDataIn.m in Sources */,
 				288926B719060739000F7FEF /* AlertSnapshotIn.m in Sources */,
@@ -14437,6 +14620,7 @@
 				B3C6778919C92F340023FEFB /* FSSetFocusIn.m in Sources */,
 				B3213C451A135181008E5864 /* FSUIViewController.m in Sources */,
 				287365D7190F58AD000518F1 /* WatchLists.m in Sources */,
+				B3FFBE581B281CD900D334DE /* zip.c in Sources */,
 				28EE49DD19CBF9FD00A50D66 /* SGInfoAlert.m in Sources */,
 				149EDC571A4E9AA90039E423 /* FSTradeHistoryFixedTableViewCell.m in Sources */,
 				B3C6777F19C92F050023FEFB /* FSCashFlowUSIn.m in Sources */,
@@ -14593,8 +14777,10 @@
 				B38E57511AD7A73C00880C53 /* FSNewsTitleDataOut.m in Sources */,
 				144E500319A2E16300A329B4 /* TSQCalendarView.m in Sources */,
 				B90FF3F5197CEBE000C08A14 /* MacroeconomicDrawTableViewCell.m in Sources */,
+				F4AE08871B3146CF00F034AE /* FSInsetsLabel.m in Sources */,
 				B3C6778819C92F340023FEFB /* FSTickIn.m in Sources */,
 				28A0149F191743BF00290A51 /* NewHistoricalPriceIn.m in Sources */,
+				B36805881B292AAB00065114 /* NSData+MD5.m in Sources */,
 				144E503619A2F74200A329B4 /* MarginTradingOut.m in Sources */,
 				B34D4DE81AA1AD490081DD5B /* FSTechnicalTableViewCell.m in Sources */,
 				28D3E52B1904E664005A7B0A /* SettingIndicatorsViewController.m in Sources */,
@@ -14624,7 +14810,6 @@
 				B38F267319AEB9830003672D /* InstitutionalBSViewController.m in Sources */,
 				B34D4E191AA1AF5F0081DD5B /* InternationalInfoIndustryViewController.m in Sources */,
 				28C2FE72190A121C00F80798 /* BalanceSheet.m in Sources */,
-				B3FDBC0E18E55D7F007962A4 /* FSAppDelegate.m in Sources */,
 				144E507D19A34B9D00A329B4 /* RelatedNewsDetailViewController.m in Sources */,
 				B3FDBC3018E55EFF007962A4 /* FSLoginViewController.m in Sources */,
 				1472A82C1A089ECE00681892 /* FSPositionManagementViewController.m in Sources */,
@@ -14674,6 +14859,7 @@
 				2899D44918FD30A300078734 /* BtnCollectionView.m in Sources */,
 				B90FF3F0197CEBB700C08A14 /* MacroeconomicDrawViewController.m in Sources */,
 				28A0147A19172D6500290A51 /* DiscreteTickOut.m in Sources */,
+				B36805891B292AAB00065114 /* NSData+MD5.m in Sources */,
 				28892685190606C5000F7FEF /* BrokersIn.m in Sources */,
 				2899D40718FD246400078734 /* FigureSearchViewController.m in Sources */,
 				2889270C190658DF000F7FEF /* FSWatchlistViewController.m in Sources */,
@@ -14722,10 +14908,12 @@
 				281154F719188BD700192524 /* FSEquityDrawViewController.m in Sources */,
 				281155391918C5CF00192524 /* BottonView.m in Sources */,
 				287BCCB31910E69500B430F8 /* FSPriceByVolumeTableViewController.m in Sources */,
+				B39EFF3D1B32A45C000D0323 /* UIActivityViewController+Rotation.m in Sources */,
 				B93D80EE19FDDA2E005FCF56 /* SearchCriteriaViewController.m in Sources */,
 				2899D42418FD266200078734 /* FigureSearchUSIn.m in Sources */,
 				B312CB701AD61F4600BC3728 /* NSString+DDXML.m in Sources */,
 				28D3E55019050CEF005A7B0A /* HistoricalEPS.m in Sources */,
+				B3FFBE351B281CD900D334DE /* ioapi.c in Sources */,
 				281155111918C03000192524 /* DMIView.m in Sources */,
 				B30F7E731A03670700810791 /* FSOptionStrategyCell.m in Sources */,
 				6578A4F419527B7E00B77045 /* Alert.m in Sources */,
@@ -14735,6 +14923,7 @@
 				6578A486195277BA00B77045 /* FSActionPlanSettingCell.m in Sources */,
 				B34D4E331AA1B0600081DD5B /* FSBrokerBranchInfo.m in Sources */,
 				28D3E56719051640005A7B0A /* RevenueChartView.m in Sources */,
+				B3FFBE551B281CD900D334DE /* unzip.c in Sources */,
 				B9C7486519C12EFD001D98C0 /* SearchCriteriaModel.m in Sources */,
 				6578A4EE19527B0300B77045 /* FSActionPlanModel.m in Sources */,
 				2899D46818FD344800078734 /* FigureCustomCaseViewController.m in Sources */,
@@ -14764,6 +14953,7 @@
 				28A01457191724FA00290A51 /* FSEquityDrawViewTickPlotDataSource.m in Sources */,
 				288926BB19060739000F7FEF /* AlertSnapshotOut.m in Sources */,
 				B39424521AD3FD4F00D1E718 /* LFGlassView.m in Sources */,
+				F4AE08881B3146CF00F034AE /* FSInsetsLabel.m in Sources */,
 				28FBF0FE19FF6B8100CE22BF /* SymbolSectorIdIn.m in Sources */,
 				B9671BC5194879EE005AB054 /* EODTargetModel.m in Sources */,
 				281E330919A49FBC00C5844A /* TodayReserveCell.m in Sources */,
@@ -14776,6 +14966,7 @@
 				145480CB19D3E7E50012F853 /* FSOptionViewController.m in Sources */,
 				B34D4E3A1AA1B06A0081DD5B /* FSBrokerBranchIn.m in Sources */,
 				B31EC75B18FB83F2000C2C17 /* FSHistoricalEPSCell.m in Sources */,
+				F48A7E3F1B21A27400D1A782 /* UIImage+PixelColor.m in Sources */,
 				B38E57411AD7A73A00880C53 /* FSNewsTitleDataIn.m in Sources */,
 				B394243E1AD3FD0B00D1E718 /* CXAlertView.m in Sources */,
 				B3F901821941583E000B6186 /* Dummy.m in Sources */,
@@ -14805,6 +14996,7 @@
 				144E500419A2E16300A329B4 /* TSQCalendarView.m in Sources */,
 				2811550E1918C03000192524 /* CrossLineView.m in Sources */,
 				287BCCE91910F0F000B430F8 /* FSPriceVolumeCrossHairInfoPanel.m in Sources */,
+				B3FFBE1C1B281CB000D334DE /* ZipArchive.m in Sources */,
 				1472A8331A08A47A00681892 /* FSPositionManagementTableView.m in Sources */,
 				B979510C194B276500CF65DE /* EODTargetIn.m in Sources */,
 				B344E3D418ED7ACE00D786E4 /* UINavigationItem+iOS7Spacing.m in Sources */,
@@ -14845,6 +15037,7 @@
 				145A018A19D55DFC005E9875 /* TaiwanSearchStockViewController.m in Sources */,
 				287BCC8E1910970500B430F8 /* FSAverageValueLine.m in Sources */,
 				B3767B8618FD1C6E00EC2131 /* SectorTableIn.m in Sources */,
+				B3FFBE591B281CD900D334DE /* zip.c in Sources */,
 				911098C21A03763E007426A6 /* FSLauncherCustomizeViewController.m in Sources */,
 				28A01454191724FA00290A51 /* FSCDP.m in Sources */,
 				288926A31906070D000F7FEF /* EsmTraderSyncIn.m in Sources */,
@@ -15239,6 +15432,7 @@
 				2889260D1905F9FD000F7FEF /* CompanyProfilePage1WideStyleCell.m in Sources */,
 				B9671BC9194879EE005AB054 /* EODTargetOut.m in Sources */,
 				B34D4E401AA1B0B80081DD5B /* FSMainBargainingChipIn.m in Sources */,
+				B3FFBE511B281CD900D334DE /* mztools.c in Sources */,
 				B3D75E9519A5E63900B8D233 /* mime.m in Sources */,
 				B30F7E671A0366F300810791 /* FSOptionTrialViewController.m in Sources */,
 				B312CB631AD61F4600BC3728 /* DDXMLElement+Dictionary.m in Sources */,
@@ -15251,6 +15445,7 @@
 				B3AF76381907686D00650DCB /* UIViewController+ActionSheet.m in Sources */,
 				149EDC741A4E9B3F0039E423 /* FSTradeDiaryFixedTableViewCell.m in Sources */,
 				287365B1190F501A000518F1 /* FSMultiChartPlotManager.m in Sources */,
+				F4DD30D21B203D2900689295 /* FSReferenceIn.m in Sources */,
 				2820A6B719A593060026437E /* TrendEODActionViewController.m in Sources */,
 				B344E3B318ED483700D786E4 /* FSUIButton.m in Sources */,
 				2899D45718FD335A00078734 /* MarqueeLabel.m in Sources */,
@@ -15369,6 +15564,7 @@
 				B90E25911A66091300914F55 /* FSTickQueryOut.m in Sources */,
 				B90E259A1A66091300914F55 /* FSRadioButtonSet.m in Sources */,
 				F4FD6B3C1AD660500046EB3B /* FSSignupModel.m in Sources */,
+				F48A7E471B21A27400D1A782 /* UIImage+PixelColor.m in Sources */,
 				B90E25A11A66091300914F55 /* FSNotificationCenter.m in Sources */,
 				B3544AE91ACA803D007CAA31 /* HistoricDataTypes.m in Sources */,
 				B312CBED1AD61F4600BC3728 /* FMResultSet.m in Sources */,
@@ -15394,6 +15590,7 @@
 				B90E25F11A66091300914F55 /* GetINIOut.m in Sources */,
 				F45DF7741A835F87000B6187 /* FSADPopViewController.m in Sources */,
 				B90E25FB1A66091300914F55 /* SKCustomTableView.m in Sources */,
+				F4AE08901B3146CF00F034AE /* FSInsetsLabel.m in Sources */,
 				B39424171AD3E0CA00D1E718 /* UIView+NewComponent.m in Sources */,
 				B90E25FC1A66091300914F55 /* (null) in Sources */,
 				B90E25FF1A66091300914F55 /* FSUIViewController.m in Sources */,
@@ -15553,11 +15750,13 @@
 				B312CB8E1AD61F4600BC3728 /* DDXMLElement.m in Sources */,
 				B3544AFE1ACA803E007CAA31 /* HistoricalParm.m in Sources */,
 				B9B462BF1A848A9D00FE1A31 /* FSRootPaymentViewController.m in Sources */,
+				F48A7E431B21A27400D1A782 /* UIImage+PixelColor.m in Sources */,
 				B9B462C81A848A9D00FE1A31 /* FSLineActivity.m in Sources */,
 				B9B462D11A848A9D00FE1A31 /* FSTickQuery.m in Sources */,
 				B9B462D61A848A9D00FE1A31 /* InPacketFactory.m in Sources */,
 				B9B462D81A848A9D00FE1A31 /* Tech.m in Sources */,
 				B9B462E21A848A9D00FE1A31 /* FSUtility.m in Sources */,
+				F4AE088C1B3146CF00F034AE /* FSInsetsLabel.m in Sources */,
 				B9B462E41A848A9D00FE1A31 /* FSRootViewController.m in Sources */,
 				B9B462E91A848A9D00FE1A31 /* SectorTableOut.m in Sources */,
 				B9B462F11A848A9D00FE1A31 /* InPacket.m in Sources */,
@@ -16010,7 +16209,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "PatternTipsCN-AppIcon";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "PatternTipsCN-LaunchImage";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bo-Wen Yu (C25M35SK22)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bo-Wen Yu (C25M35SK22)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -16060,7 +16259,7 @@
 					"$(PROJECT_DIR)/FonestockPower/Lib/GoogleMobileAdsSdkiOS-6.12.2",
 				);
 				PRODUCT_NAME = cnpattern;
-				PROVISIONING_PROFILE = "bf53f2ec-d154-4d0f-a445-3e1056eae87a";
+				PROVISIONING_PROFILE = "36bcc60a-9045-4749-8d04-0ebf6b4635fc";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ProtocolBuffers/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -16162,7 +16361,7 @@
 				PROVISIONING_PROFILE = "2967217b-10dd-4db2-8666-7f5e60bb8782";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ProtocolBuffers/**";
-				VALID_ARCHS = "armv7 armv64";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -16192,7 +16391,7 @@
 					"$(PROJECT_DIR)/FonestockPower/Lib/CorePlot",
 				);
 				PRODUCT_NAME = twcharttrade;
-				PROVISIONING_PROFILE = "816479b3-5ce9-4460-b02c-861071c3c720";
+				PROVISIONING_PROFILE = "d216bf70-248e-4324-8773-6c322165fb8f";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ProtocolBuffers/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -16345,7 +16544,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "PatternPowerCN-AppIcon";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "PatternPowerCN-LaunchImage-NONE";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bo-Wen Yu (C25M35SK22)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -16366,6 +16565,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = cncharttrade;
+				PROVISIONING_PROFILE = "2967217b-10dd-4db2-8666-7f5e60bb8782";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ProtocolBuffers/**";
 				VALID_ARCHS = armv7;
@@ -16378,7 +16578,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "PatternPowerCN-AppIcon";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "PatternPowerCN-LaunchImage-NONE";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Fonestock Technology Inc. (6R7GPNS4B8)";
 				"ENABLE_NS_ASSERTIONS[arch=*]" = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -16398,6 +16598,7 @@
 					"$(PROJECT_DIR)/FonestockPower/Lib/CorePlot",
 				);
 				PRODUCT_NAME = cncharttrade;
+				PROVISIONING_PROFILE = "52fd8ce1-da8b-4785-b717-2b73e9ad668f";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ProtocolBuffers/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -16410,7 +16611,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "PatternPowerUS-AppIcon";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "PatternPowerUS-LaunchImage";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bo-Wen Yu (C25M35SK22)";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -16432,7 +16633,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = uscharttrade;
-				PROVISIONING_PROFILE = "2967217b-10dd-4db2-8666-7f5e60bb8782";
+				PROVISIONING_PROFILE = "d9b5ea34-a2a4-42ae-8698-a0f365d28067";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ProtocolBuffers/**";
 				VALID_ARCHS = armv7;
@@ -16445,7 +16646,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "PatternPowerUS-AppIcon";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "PatternPowerUS-LaunchImage";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Fonestock Technology Inc. (6R7GPNS4B8)";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -16465,7 +16666,7 @@
 					"$(PROJECT_DIR)/FonestockPower/Lib/CorePlot",
 				);
 				PRODUCT_NAME = uscharttrade;
-				PROVISIONING_PROFILE = "e15bdf70-6ef5-488d-948c-4c8ad165c33d";
+				PROVISIONING_PROFILE = "2a5bbdd6-1819-4afa-9096-bd7b185d317c";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ProtocolBuffers/**";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -16479,7 +16680,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "PatternTipsTW-AppIcon";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "PatternTipsTW-LaunchImage";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bo-Wen Yu (C25M35SK22)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bo-Wen Yu (C25M35SK22)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -16499,7 +16700,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = twpattern;
-				PROVISIONING_PROFILE = "6ee80334-f693-45e5-bb8b-e4b07d803dcb";
+				PROVISIONING_PROFILE = "2967217b-10dd-4db2-8666-7f5e60bb8782";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ProtocolBuffers/**";
 				VALID_ARCHS = armv7;
@@ -16513,7 +16714,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "PatternTipsTW-AppIcon";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "PatternTipsTW-LaunchImage";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Fonestock Technology Inc. (6R7GPNS4B8)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Fonestock Technology Inc. (6R7GPNS4B8)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

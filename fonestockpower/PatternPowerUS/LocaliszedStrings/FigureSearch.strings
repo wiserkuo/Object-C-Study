@@ -90,9 +90,11 @@
 "請輸入數值" = "Please enter the value"; //bug#10725
 "超過上限" = "Please enter a number between 1 and 100";
 "請由右往左開始編輯一根以上的K棒" = "Please define 1 to 5 candlesticks from right to left";
+"下次不顯示此訊息" = "Do not show this message again";
+"下次不顯示此信息" = "Do not show this message again";
 "漲跌幅已更新，是否要儲存？" = "The change range has been updated, want to save?";
 "Ask to save" = "This pattern has been updated.\nDo you want to save it?";
-
+"我的型態" = "My Patterns";
 "超過上限日" = "Day";
 "超過上限週" = "Week";
 "超過上限月" = "Month";
@@ -101,13 +103,13 @@
 "超過上限週月" = "Week, Month";
 "超過上限日週月" = "Day, Week, Month";
 "not finish" = "Do you want to leave without finishing？";
-"下次不顯示此訊息" = "Do not show this message again";
+
 "名稱不可空白" = "Enter pattern name";
 "請設定至少1根k棒" = "Please define at least 1 candidate";
-"下次不顯示此信息" = "Don't show next time";
 
 //search
 "型態追蹤" = "Pattern Tracking";
+"型態追蹤列表" = "Track List";
 "%d檔追蹤標的" = "%d candidates";
 "日線" = "Day";
 "週線" = "Week";
@@ -142,7 +144,7 @@
 "馬上加值" = "Purchase";
 "編輯" = "Edit";
 "重新編輯圖形，將會清空追蹤資料，是否重編?" = "Editing the pattern will clear the search history and the track list.";
-"無追蹤股票" = "No Tracks";
+"無追蹤股票" = "No stock";
 "無搜尋記錄" = "No search history found";
 "無相符個股" = "No Data";
 "最新搜尋記錄" = "Figure Search";
@@ -156,7 +158,7 @@
 "筆數" = "%d / %d";
 "筆數無僅" ="%d / %d";
 "條件2" = "Add Search Criteria";
-"搜尋結果為最近一次收盤資料."="The search results are the latest EOD data.";
+"搜尋結果為最近一次收盤資料"="The search results are the latest EOD data.";
 "此名稱已存在,請重新輸入"="This Pattern Name has already exists";
 "離開"="Leave";
 
@@ -193,7 +195,7 @@
 "搜尋中" = "Search data please wait...";
 "EOD搜尋中" = "Loading, please wait...";
 "Targets搜尋中" = "Searching!";
-"確定要刪除?" = "Are you sure you want to delete it?";
+"確定要刪除?" = "Are you sure you want to delete?";
 "請先由交易計劃清單移除此檔股票" = "This stock is in Action Plan.\nIf you wish to remove it from the watchlist, please go to Action Plan to delete it first.";
 
 //FlatTrend
@@ -252,7 +254,7 @@
 "換股" = "Change stock";
 "點擊看詳細資料" = "Tap for more detail";
 "兩檔比較" = "Compare";
-"刪除一根圖形" = "Are you sure you want to delete it?";
+"刪除一根圖形" = "Are you sure you want to delete?";
 "點擊至技術線圖" = "Tab to enter technical analysis";
 
 "上漲趨勢" = "Uptrend";
@@ -305,3 +307,6 @@
 "小於"="Less than";
 "約等於"="Around";
 "請選擇"="";
+
+"類型" = "Time Frame";
+"新增自選股" = "Add Symbols";

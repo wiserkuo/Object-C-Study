@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "MacroeconomicDrawViewController.h"
 
-@interface ChooseReferenceViewController : UIViewController< UITableViewDataSource, UITableViewDelegate>
+@interface ChooseReferenceViewController : FSUIViewController< UITableViewDataSource, UITableViewDelegate>
 -(id)initWithTitle:(NSMutableArray *)TitleArray Name:(NSMutableArray *)NameArray Controller:(MacroeconomicDrawViewController *)controller;
 @end

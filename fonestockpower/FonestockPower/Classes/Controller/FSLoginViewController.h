@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FSLoginViewController : UIViewController
+@interface FSLoginViewController : FSUIViewController
 - (instancetype)initWithAccount:(NSString *)account AndPassword:(NSString *)password;
+@property BOOL hasBackButton;
 @end

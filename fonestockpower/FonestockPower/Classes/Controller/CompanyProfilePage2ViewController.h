@@ -10,6 +10,6 @@
 #import "CompanyProfilePage2BottomCell.h"
 #import "CompanyProfilePage2TopCell.h"
 
-@interface CompanyProfilePage2ViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, InvesterHoldDelegate, BoardHoldingDelegate>
+@interface CompanyProfilePage2ViewController : FSUIViewController<UITableViewDataSource, UITableViewDelegate, InvesterHoldDelegate, BoardHoldingDelegate>
 
 @end

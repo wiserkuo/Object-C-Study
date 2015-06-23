@@ -145,7 +145,13 @@ static NSString *itemIdentifier = @"CollectionIdentifier";
     }
     TipsSymbolObject *obj = [symbolArray objectAtIndex:indexPath.row];
     
-    [collectionCell.btn setTitle:obj.fullName forState:UIControlStateNormal];
+    if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
+        [collectionCell.btn setTitle:obj.Symbol forState:UIControlStateNormal];
+    } else {
+        [collectionCell.btn setTitle:obj.fullName forState:UIControlStateNormal];
+    }
+    
+    
     
     return collectionCell;
 }

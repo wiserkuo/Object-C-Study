@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FSRootViewController : UIViewController
+@interface FSRootViewController : FSUIViewController
 
 //判斷是要使用哪一種儲存方式
 typedef NS_ENUM(NSUInteger, FSCurrentUsingType){

@@ -5,10 +5,10 @@
   Created by Kenny on 2014/8/29.
   Copyright (c) 2014年 Fonestock. All rights reserved.
 */
-"Buy" = "买进";
-"Sell" = "卖出";
-"Short" = "放空";
-"Cover" = "回补";
+"BUY" = "买进";
+"SELL" = "卖出";
+"SHORT" = "放空";
+"COVER" = "回补";
 
 "OK" = "确认";
 "Trade" = "股票交易";
@@ -16,7 +16,7 @@
 "Date" = "日期";
 "Symbol" = "名称";
 "Action" = "交易";
-"Shares" = "手数";
+"Shares" = "手數(1手=100股)";
 "Price" = "价格";
 "Amount Payable" = "金额";
 "Done" = "确认";

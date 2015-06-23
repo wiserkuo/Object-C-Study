@@ -13,7 +13,7 @@
 #import "FSLineActivity.h"
 #import "FSFaceBookActivity.h"
 #import <Social/Social.h>
-#import "SGInfoAlert.h"
+
 
 #define IS_IPAD [[[UIDevice currentDevice] model] rangeOfString:@"iPad"].location != NSNotFound
 
@@ -116,12 +116,13 @@
 @property (nonatomic) int searchNum;
 @property (nonatomic) int currentOption;
 @property (nonatomic) int initKNum;
+//k棒DB資料 從EditVC傳來 用來算日週月的btn數字 原始開高低收是以10%為範圍參考 顯示在btn的數字前 需要換算比例 ex:  highValue=highValue * dayRange/10
+@property (strong) NSMutableArray * figureSearchArray;
 
 @end
 
 #define IS_COLOR YES
 #define OUT_OF_COLOR NO
-#define IS_IOS8 [[UIDevice currentDevice] systemVersion].floatValue >= 8.0
 
 @implementation FigureCustomDetailViewController
 
@@ -154,6 +155,7 @@
     _lowValue = [(NSNumber *)[_storeDataArray objectAtIndex:6] floatValue];
     _openValue = [(NSNumber *)[_storeDataArray objectAtIndex:7] floatValue];
     _closeValue = [(NSNumber *)[_storeDataArray objectAtIndex:8] floatValue];
+    
     _isShowBorder = [[_storeDataArray objectAtIndex:FSFigureDBColumnKLine] boolValue];
 
     //「實體線」及arrow ，的顏色判斷上以開盤價及收盤價為準才是正確的
@@ -220,7 +222,7 @@
     }
 }
 
--(instancetype)initWithNeededObjectFromDictionary:(NSDictionary *)sendObj :(int)currentOption :(int)searchNum :(int)kNumber
+-(instancetype)initWithNeededObjectFromDictionary:(NSDictionary *)sendObj :(int)currentOption :(int)searchNum :(int)kNumber :(NSMutableArray*)figureSearchArray;
 {
     self = [super init];
     if(self){
@@ -228,6 +230,7 @@
         _currentOption = currentOption;
         _searchNum = searchNum;
         _initKNum = kNumber;
+        _figureSearchArray = figureSearchArray;
     }
 //    NSArray* cachePathArray = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
 //    NSString* cachePath = [cachePathArray lastObject];
@@ -400,14 +403,21 @@
     self.close = [(NSNumber *)[self.needObj objectForKey:@"close"] floatValue];
     self.yOffset = [(NSNumber *)[self.needObj objectForKey:@"yOffset"] floatValue];
     self.storeDWM = [(NSNumber *)[self.needObj objectForKey:@"storeDWM"] intValue];
+    
 }
 
 -(void)setBtnTitle
 {
-    [self.upLineBtn setTitle:[self setStringOrNumber:FSFigureDBColumnUpLine :_highValue :_openValue :_closeValue] forState:UIControlStateNormal];
-    [self.kBarMainBodyBtn setTitle:[self setStringOrNumber:FSFigureDBColumnKLine :NAN :_openValue :_closeValue] forState:UIControlStateNormal];
-    [self.downLineBtn setTitle:[self setStringOrNumber:FSFigureDBColumnDownLine :_lowValue :_openValue :_closeValue] forState:UIControlStateNormal];
-    [self.upDownBtn setTitle:[self setStringOrNumber:FSFigureDBColumnRange :_closeValue :NAN :NAN] forState:UIControlStateNormal];
+    
+    printf("storeDWM = %d\n",_storeDWM);
+    float rate;
+    rate=[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue]/10;
+
+    
+    [self.upLineBtn setTitle:[self setStringOrNumber:FSFigureDBColumnUpLine :_highValue*rate :_openValue*rate :_closeValue*rate] forState:UIControlStateNormal];
+    [self.kBarMainBodyBtn setTitle:[self setStringOrNumber:FSFigureDBColumnKLine :NAN :_openValue*rate :_closeValue*rate] forState:UIControlStateNormal];
+    [self.downLineBtn setTitle:[self setStringOrNumber:FSFigureDBColumnDownLine :_lowValue*rate :_openValue*rate :_closeValue*rate] forState:UIControlStateNormal];
+    [self.upDownBtn setTitle:[self setStringOrNumber:FSFigureDBColumnRange :_closeValue*rate :NAN :NAN] forState:UIControlStateNormal];
     [self setKBarBorderColor];
 }
 
@@ -496,7 +506,19 @@
     if(!isnan(para2) && !isnan(para3)){
         rightPart = [self setTheRValue:para1 :para2 :para3];
     }else{
-        rightPart = [NSString stringWithFormat:@"%1.2f%%",para1 * 100];
+        float rate=1;
+            switch(_storeDWM){
+                case 0:
+                    rate=1;
+                    break;
+                case 1:
+                    rate=[(NSNumber *)[_figureSearchArray objectAtIndex:3]floatValue]/[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue];
+                    break;
+                case 2:
+                    rate=[(NSNumber *)[_figureSearchArray objectAtIndex:4]floatValue]/[(NSNumber *)[_figureSearchArray objectAtIndex:2]floatValue];
+                    break;
+            }
+        rightPart = [NSString stringWithFormat:@"%1.2f%%",para1*rate * 100];
     }
     
     if(boolObj){
@@ -778,10 +800,10 @@
                             NSString *status = [jsonDict objectForKey:@"status"];
                             if ([@"shar.ok" isEqualToString:status]) {
                                 [[[FSDataModelProc sharedInstance] loginService] loginAuthUsingSelfAccount];
-                                [SGInfoAlert showInfo:@"FB分享成功,謝謝您的分享,神乎贈送一天圖是力(一天一次)" bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:[[UIApplication sharedApplication] keyWindow]];
+                                [FSHUD showMsg:@"FB分享成功,謝謝您的分享,神乎贈送一天圖是力(一天一次)"];
                             }
                             else {
-                                [SGInfoAlert showInfo:@"FB分享成功,謝謝您的分享" bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:[[UIApplication sharedApplication] keyWindow]];
+                                [FSHUD showMsg:@"FB分享成功,謝謝您的分享"];
                             }
                         }
                     }
@@ -907,40 +929,26 @@
         wakeUpActionSheet = 3;
     }
     if(wakeUpActionSheet == 1){
-        if(IS_IOS8){
-            _alertController = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromTable(@"請選擇", @"FigureSearch", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-            [self addActionTo:_alertController WithActionCancel:4 first:0 second:1 third:2 forth:3  ];
-            [self presentViewController:_alertController animated:YES completion:nil];
-        }else{
-            _actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedStringFromTable(@"請選擇", @"FigureSearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"取消", @"FigureSearch", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedStringFromTable(@"約等於", @"FigureSearch", nil),
-                                          NSLocalizedStringFromTable(@"大於", @"FigureSearch", nil),
-                                          NSLocalizedStringFromTable(@"小於", @"FigureSearch", nil),
-                                          NSLocalizedStringFromTable(@"任意長度", @"FigureSearch", nil), nil];
-            [_actionSheet showInView:self.view];
-        }
+        
+        _actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"取消", @"FigureSearch", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedStringFromTable(@"約等於", @"FigureSearch", nil),
+                                      NSLocalizedStringFromTable(@"大於", @"FigureSearch", nil),
+                                      NSLocalizedStringFromTable(@"小於", @"FigureSearch", nil),
+                                      NSLocalizedStringFromTable(@"任意長度", @"FigureSearch", nil), nil];
+        [_actionSheet showInView:self.view];
+        
     }else if(wakeUpActionSheet == 2){
-        if(IS_IOS8){
-            _alertController1 = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromTable(@"請選擇", @"FigureSearch", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-            [self addActionTo:_alertController1 WithActionCancel:3 first:0 second:1 third:2 forth:-0];
-            [self presentViewController:_alertController1 animated:YES completion:nil];
-        }else{
-            _actionSheet1 = [[UIActionSheet alloc] initWithTitle:NSLocalizedStringFromTable(@"請選擇", @"FigureSearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"取消", @"FigureSearch", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedStringFromTable(@"漲的顏色", @"FigureSearch", nil),
+            _actionSheet1 = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"取消", @"FigureSearch", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedStringFromTable(@"漲的顏色", @"FigureSearch", nil),
                                           NSLocalizedStringFromTable(@"跌的顏色", @"FigureSearch", nil),
                                           NSLocalizedStringFromTable(@"任意顏色", @"FigureSearch", nil), nil];
             [_actionSheet1 showInView:self.view];
-        }
     }else if(wakeUpActionSheet == 3){
-        if(IS_IOS8){
-            _alertController2 = [UIAlertController alertControllerWithTitle:NSLocalizedStringFromTable(@"請選擇", @"FigureSearch", nil) message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-            [self addActionTo:_alertController2 WithActionCancel:4 first:0 second:1 third:2 forth:3];
-            [self presentViewController:_alertController2 animated:YES completion:nil];
-        }else{
-            _actionSheet2 = [[UIActionSheet alloc] initWithTitle:NSLocalizedStringFromTable(@"請選擇", @"FigureSearch", nil) delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"取消", @"FigureSearch", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedStringFromTable(@"約等於", @"FigureSearch", nil),
-                            NSLocalizedStringFromTable(@"大於", @"FigureSearch", nil),
-                            NSLocalizedStringFromTable(@"小於", @"FigureSearch", nil),
-                            NSLocalizedStringFromTable(@"任意值", @"FigureSearch", nil), nil];
-            [_actionSheet2 showInView:self.view];
-        }
+        
+        _actionSheet2 = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedStringFromTable(@"取消", @"FigureSearch", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedStringFromTable(@"約等於", @"FigureSearch", nil),
+                        NSLocalizedStringFromTable(@"大於", @"FigureSearch", nil),
+                        NSLocalizedStringFromTable(@"小於", @"FigureSearch", nil),
+                        NSLocalizedStringFromTable(@"任意值", @"FigureSearch", nil), nil];
+        [_actionSheet2 showInView:self.view];
+        
     }
     
 }
@@ -1011,7 +1019,7 @@
     }
 }
 
--(void)addActionTo:(UIAlertController *)targetController WithActionCancel:(NSInteger)can first:(NSInteger)fir second:(NSInteger)sec third:(NSInteger)third forth:(NSInteger)forth
+-(void)addActionTo:(UIAlertController *)targetController WithActionCancel:(NSInteger)can first:(NSInteger)fir second:(NSInteger)sec third:(NSInteger)third forth:(NSInteger)forth option:(NSInteger)option
 {
     int count = 5;
     NSArray *clickData = [NSArray arrayWithObjects:[NSNumber numberWithInteger:can],[NSNumber numberWithInteger:fir],[NSNumber numberWithInteger:sec],[NSNumber numberWithInteger:third],[NSNumber numberWithInteger:forth], nil];
@@ -1023,10 +1031,19 @@
                      NSLocalizedStringFromTable(@"任意顏色", @"FigureSearch", nil),nil];
     }
     if(count == 5){
-        actionBtn = [NSArray arrayWithObjects:NSLocalizedStringFromTable(@"取消", @"FigureSearch", nil),NSLocalizedStringFromTable(@"約等於", @"FigureSearch", nil),
+        if(option == 1){
+            actionBtn = [NSArray arrayWithObjects:NSLocalizedStringFromTable(@"取消", @"FigureSearch", nil),NSLocalizedStringFromTable(@"約等於", @"FigureSearch", nil),
                      NSLocalizedStringFromTable(@"大於", @"FigureSearch", nil),
                      NSLocalizedStringFromTable(@"小於", @"FigureSearch", nil),
-                     NSLocalizedStringFromTable(@"任意長度", @"FigureSearch", nil), nil];
+                     NSLocalizedStringFromTable(@"任意值", @"FigureSearch", nil), nil];
+        }
+        if(option ==0){
+            actionBtn = [NSArray arrayWithObjects:NSLocalizedStringFromTable(@"取消", @"FigureSearch", nil),NSLocalizedStringFromTable(@"約等於", @"FigureSearch", nil),
+                         NSLocalizedStringFromTable(@"大於", @"FigureSearch", nil),
+                         NSLocalizedStringFromTable(@"小於", @"FigureSearch", nil),
+                         NSLocalizedStringFromTable(@"任意長度", @"FigureSearch", nil), nil];
+            
+        }
     }
     for(int i = 0; i < count; i++){
         if(i == 0){

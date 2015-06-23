@@ -57,20 +57,14 @@
 
 -(void)searchPlateData:(NSNumber *)number
 {
-    
-    NSLog(@"%@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory  inDomains:NSUserDomainMask] lastObject]);
-    
-//    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-
     NSMutableArray * nameArray = [[NSMutableArray alloc]init];
     NSMutableArray * idArray = [[NSMutableArray alloc]init];
     FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
     FSDatabaseAgent *dbAgent = dataModel.mainDB;
     
     [ dbAgent  inDatabase: ^ ( FMDatabase  * db )  {
-        NSLog(@"=====================parentID=%d\n",number.intValue);
         
-        FMResultSet *message = [db executeQuery:@"SELECT CatName,CatID FROM category WHERE parentID = ? AND CatName NOT LIKE '權證' ORDER BY OrderType",number];
+        FMResultSet *message = [db executeQuery:@"SELECT CatName,CatID FROM category WHERE parentID = ? AND CatName NOT LIKE '權證' ORDER BY orderType",number];
         while ([message next]) {
             [nameArray addObject:[message stringForColumn:@"CatName"]];
             [idArray addObject:[message stringForColumn:@"CatID"]];
@@ -399,15 +393,25 @@
     FSDataModelProc *dataModel = [FSDataModelProc sharedInstance];
     FSDatabaseAgent *dbAgent = dataModel.mainDB;
     
+    
+    
+    
     [ dbAgent  inDatabase: ^ ( FMDatabase  * db )  {
-        
-        FMResultSet *message = [db executeQuery:@"SELECT GroupName,GroupID FROM groupName ORDER BY GroupIndex"];
+        int limit = 5;
+        if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
+            limit = 5;
+        } else {
+            limit = 10;
+        }
+        FMResultSet *message = [db executeQuery:@"SELECT GroupName,GroupID FROM groupName ORDER BY GroupIndex LIMIT ?", [NSNumber numberWithInt:limit]];
         while ([message next]) {
             [nameArray addObject:[message stringForColumn:@"GroupName"]];
             [idArray addObject:[NSNumber numberWithInt:[message intForColumn:@"GroupID"]]];
         }
     }];
-    NSMutableArray * dataArray = [[NSMutableArray alloc]initWithObjects:nameArray,idArray, nil];
+    
+    NSMutableArray *dataArray = [[NSMutableArray alloc]initWithObjects:nameArray,idArray, nil];
+    
     [chooseGroupObj performSelectorOnMainThread:@selector(groupNotifyDataArrive:) withObject:dataArray waitUntilDone:NO];
 }
 
@@ -665,10 +669,14 @@
         }
         
     }
-    if (_totalNumber==_nowNumber) {
+    if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
         [self searchAmericaStockWithName:searchName];
     }else{
-        [self searchStockWithName:searchName];
+        if (_totalNumber==_nowNumber) {
+            [self searchAmericaStockWithName:searchName];
+        }else{
+            [self searchStockWithName:searchName];
+        }
     }
 
 //    [notifyObj performSelectorOnMainThread:@selector(notifyDataArrive:) withObject:_allDataArray waitUntilDone:NO];

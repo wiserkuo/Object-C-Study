@@ -21,6 +21,7 @@
 @interface FSActionPlanSettingViewController ()<UIActionSheetDelegate, UITextFieldDelegate,SecuritySearchDelegate>{
     FSUIButton *groupButton;
     FSUIButton *addSymbolButton;
+    FSUIButton *backButton;
     UITableView *mainTableView;
     UIAlertView * errorAlert;
     BOOL alertFlag;
@@ -128,10 +129,17 @@
     [self.view addSubview:_changeName];
     [_objDictionary setObject:_changeName forKey:@"_changeName"];
     
+    backButton = [[FSUIButton alloc]initWithButtonType:FSUIButtonTypeBlackLeftArrow];
+    backButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [backButton addTarget:self action:@selector(backBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:backButton];
+    [_objDictionary setObject:backButton forKey:@"_groupTitleLabel"];
+    
     _stringV = @"V:|-40-[_actionEditCondition]|";
     _stringH = @"H:|[_actionEditCondition]|";
     addSymbolButton.hidden = NO;
     _changeName.hidden = YES;
+    backButton.hidden = YES;
     [self.view setNeedsUpdateConstraints];
 }
 
@@ -141,13 +149,14 @@
     
     NSMutableArray *constraints  =[[NSMutableArray alloc] initWithCapacity:10];
     
-    
-    
-    
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:_stringV options:0 metrics:nil views:_objDictionary]];
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[groupButton][addSymbolButton(groupButton)]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:_objDictionary]];
-    
-    [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[groupButton][_changeName(groupButton)]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:_objDictionary]];
+
+    if (addSymbolButton.hidden) {
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-5-[_groupTitleLabel(44)]-5-[groupButton]-5-[_changeName(100)]-5-|" options:NSLayoutFormatAlignAllTop | NSLayoutFormatAlignAllBottom metrics:nil views:_objDictionary]];
+    }else{
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[groupButton][addSymbolButton(groupButton)]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:_objDictionary]];
+    }
+
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:_stringH options:0 metrics:nil views:_objDictionary]];
     
     [self replaceCustomizeConstraints:constraints];
@@ -160,7 +169,7 @@
     }else{
         [self addAllGroup];
         [_actionEditCondition willMoveToParentViewController:nil];
-        
+        [self.navigationController setNavigationBarHidden:NO];
         [self transitionFromViewController:_actionEditChoose toViewController:_actionEditCondition duration:0.0f options:UIViewAnimationOptionCurveLinear animations:^{} completion:^(BOOL finished){
             _searchType = 0;
             
@@ -168,6 +177,7 @@
             _stringH = @"H:|[_actionEditCondition]|";
             addSymbolButton.hidden = NO;
             _changeName.hidden = YES;
+            backButton.hidden = YES;
             [self.view setNeedsUpdateConstraints];
         }];
         [_actionEditChoose.dataArray removeAllObjects];
@@ -261,13 +271,7 @@
 #pragma mark - Add Symbols Button Action
 -(void)addSymbols{
     [self removeAllGroup];
-    
-    
-    
-    
     if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionTW || [FSFonestock sharedInstance].marketVersion == FSMarketVersionCN) {
-        
-        
         
         TaiwanStockViewController * twStockView = [[TaiwanStockViewController alloc]init];
         
@@ -287,13 +291,7 @@
         //            _changeName.hidden = NO;
         //            [self.view setNeedsUpdateConstraints];
         //        }];
-        
-        
-    }
-    else if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
-        
-        
-        
+    }else if ([FSFonestock sharedInstance].marketVersion == FSMarketVersionUS) {
         
         self.actionEditChoose =[[FSActionEditChooseViewController alloc]init];
         _actionEditChoose.view.translatesAutoresizingMaskIntoConstraints = NO;
@@ -307,10 +305,11 @@
         _searchType = 1;
         
         [self transitionFromViewController:_actionEditCondition toViewController:_actionEditChoose duration:0.0f options:UIViewAnimationOptionCurveLinear animations:^{} completion:^(BOOL finished){
-            _stringV = @"V:|-40-[_actionEditChoose]|";
+            _stringV = @"V:|-22-[_groupTitleLabel(44)]-3-[_actionEditChoose]|";
             _stringH = @"H:|[_actionEditChoose]|";
             addSymbolButton.hidden = YES;
             _changeName.hidden = NO;
+            backButton.hidden = NO;
             [self.view setNeedsUpdateConstraints];
         }];
         
@@ -323,11 +322,7 @@
             [dataModal.portfolioData selectGroupID: _searchNum];
             [groupButton setTitle:[_categoryArray objectAtIndex:0] forState:UIControlStateNormal];
         }
-        
-        
     }
-
-
 }
 
 
@@ -365,16 +360,16 @@
     [_popOverScrollView setContentSize:CGSizeMake(280, 50*[_categoryArray count])];
     int screenHeight = [[UIScreen mainScreen] applicationFrame].size.height;
     if (screenHeight==460) {
-        [_popOverScrollView setFrame:CGRectMake(0, 0, 280, 300)];
+        [_popOverScrollView setFrame:CGRectMake(0, 0, 280, 50*[_categoryArray count])];
     }else{
-        [_popOverScrollView setFrame:CGRectMake(0, 0, 280, 380)];
+        [_popOverScrollView setFrame:CGRectMake(0, 0, 280, 50*[_categoryArray count])];
     }
     
     CXAlertView *alertView = [[CXAlertView alloc] initWithTitle:NSLocalizedStringFromTable(@"請輸入新的自訂群組名稱", @"SecuritySearch", nil) contentView:_popOverScrollView cancelButtonTitle:NSLocalizedStringFromTable(@"取消", @"SecuritySearch", nil)];
-    alertView.contentScrollViewMaxHeight = 380;
-    alertView.contentScrollViewMinHeight = 300;
-    [alertView.contentView setFrame:CGRectMake(0, 0, 280, 380)];
-    [alertView addButtonWithTitle:NSLocalizedStringFromTable(@"確定", @"SecuritySearch", nil) type:CXAlertViewButtonTypeDefault handler:^(CXAlertView *alertView, CXAlertButtonItem *button) {
+    alertView.contentScrollViewMaxHeight = 50*[_categoryArray count];
+    alertView.contentScrollViewMinHeight = 50*[_categoryArray count];
+    [alertView.contentView setFrame:CGRectMake(0, 0, 280, 50*[_categoryArray count])];
+    [alertView addButtonWithTitle:NSLocalizedStringFromTable(@"確認", @"SecuritySearch", nil) type:CXAlertViewButtonTypeDefault handler:^(CXAlertView *alertView, CXAlertButtonItem *button) {
         [alertView dismiss];
         [self btnClick];
         alertFlag = YES;

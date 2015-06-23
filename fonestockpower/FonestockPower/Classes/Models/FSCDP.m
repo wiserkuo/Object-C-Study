@@ -172,14 +172,13 @@ static NSString *MainItemKVOIdentifier = @"MainItemKVOIdentifierCDP";
     [dataLock lock];
     UInt8 type = 'D';
 	if(![dataSource isLatestData:type])
-		return;
+        [dataLock unlock]; return;
 //    UInt32 lastSeq = [dataSource tickCount:type]-1;
 #ifdef LPCB
     FSSnapshot *lpcbSnapshot = [[[FSDataModelProc sharedInstance]portfolioTickBank] getSnapshotBvalueFromIdentCodeSymbol:_portfolioItem.getIdentCodeSymbol];
     
     if(lpcbSnapshot == nil){
-        [dataLock unlock];
-        return;
+        [dataLock unlock]; return;
     }
     
 //	DecompressedHistoricData *historic = [dataSource copyHistoricTick:type sequenceNo:lastSeq];
@@ -216,11 +215,13 @@ static NSString *MainItemKVOIdentifier = @"MainItemKVOIdentifierCDP";
 
 - (void)reloadData
 {
+    [dataLock lock];
     [self.ahPlot reloadData];
     [self.nhPlot reloadData];
     [self.cdpPlot reloadData];
     [self.alPlot reloadData];
     [self.nlPlot reloadData];
+    [dataLock unlock];
 }
 
 #pragma mark - Computation

@@ -49,7 +49,7 @@
     UIImageView *radioImageView;
     
     NSMutableDictionary *alertDict;
-
+    __weak NSBlockOperation *weakOperation;
 }
 @property (nonatomic, strong) NSArray *dynamicHeaderArray;
 @property (nonatomic, strong) NSArray *headerSymbolArrayForGetValue;
@@ -323,7 +323,7 @@
 //    [self initSort];
 //    self.alertDataArray = [[[FSDataModelProc sharedInstance]alert] checkAlertData];
 
-    [self showAlert];
+//    [self showAlert]; // connor test
 
 //    [_watchlistTableView reloadData];
     [self changeReloadName];
@@ -721,7 +721,7 @@
 
 -(void)attributeHeaderClick{
     [self changeHeaderTitle];
-    [self.watchlistTableView reloadRowsAtIndexPaths:[self.watchlistTableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationAutomatic];
+//    [self.watchlistTableView reloadRowsAtIndexPaths:[self.watchlistTableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)addVolumeHeader
@@ -811,8 +811,8 @@
     }else{
         self.sortButtonTitleArray = @[NSLocalizedStringFromTable(@"VolT", @"watchlists", nil),
                                       NSLocalizedStringFromTable(@"Vol%", @"watchlists", nil),
-                                      NSLocalizedStringFromTable(@"Up Price $", @"watchlists", nil),
-                                      NSLocalizedStringFromTable(@"Down Price $", @"watchlists", nil),
+                                      NSLocalizedStringFromTable(@"Up", @"watchlists", nil),
+                                      NSLocalizedStringFromTable(@"Down", @"watchlists", nil),
                                       NSLocalizedStringFromTable(@"Rise", @"watchlists", nil),
                                       NSLocalizedStringFromTable(@"Fall", @"watchlists", nil),
                                       NSLocalizedStringFromTable(@"Amp", @"watchlists", nil),
@@ -888,6 +888,8 @@
     [self stopWatch];
 //	[self delTmpStock];
     [_cellRenderQueue cancelAllOperations];
+    
+    NSLog(@"[_cellRenderQueue cancelAllOperations];");
 }
 
 - (void)addTmpStock
@@ -1103,17 +1105,24 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if([tableView isEqual:_watchlistTableView]){
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([tableView isEqual:_watchlistTableView]) {
         FSWatchlistTableCell *cell = (FSWatchlistTableCell *) [_watchlistTableView dequeueReusableCellWithIdentifier:@"FSWatchlistTableCell" forIndexPath:indexPath];
-        if(cell == nil){
+        if (cell == nil){
             cell = [[FSWatchlistTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"FSWatchlistTableCell"];
         }
-        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-
+        
         //顯示股名
         cell.nameLabel.text = [_watchlistItem name:indexPath];
+        
+#ifdef PatternPowerTW
+#else
+        cell.nameLabel.labelize = NO;
+        NSLog(@"~~~~ %ld : %@", (long)[indexPath row], cell.nameLabel.text);
+        
+#endif
+        
 //            cell.nameLabel.backgroundColor = [_watchlistItem alertStatus:indexPath];
         PortfolioItem *item = [_watchlistItem portfolioItem:indexPath];
         cell.identCodeSymbol = [item getIdentCodeSymbol];
@@ -1198,8 +1207,8 @@
 #pragma mark TableView Delegate
 
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
 
 //    NSString *identCodeSymbol = [[_watchlistItem portfolioItem:indexPath] getIdentCodeSymbol];
     
@@ -1565,7 +1574,11 @@
  */
 - (void)showDynamicLabelTwo:(UILabel *) label indexPath:(NSIndexPath *) indexPath sortIndex:(NSInteger) sortIndex
 {
-    [_cellRenderQueue addOperation:[NSBlockOperation blockOperationWithBlock:^{
+    
+    NSBlockOperation *operation = [[NSBlockOperation alloc] init];
+    weakOperation = operation;
+    
+    [operation addExecutionBlock:^{
         UIColor *color = [UIColor blackColor]; //數值顏色
         NSString *textValue = @"----";	//數值string
         UIColor *backgroundColor = [UIColor clearColor]; //label背景色
@@ -1601,11 +1614,11 @@
                         //Fall
                         headerName = @"p_chg";
                         break;
-                    
-//                    case 6:
-//                        //Down
-//                        headerName = @"chg";
-//                        break;
+                        
+                        //                    case 6:
+                        //                        //Down
+                        //                        headerName = @"chg";
+                        //                        break;
                     case 6:
                         //Amp
                         headerName = @"stockAmplitude";
@@ -1660,6 +1673,8 @@
                 }
             }
             
+            if ([weakOperation isCancelled]) return;
+            
             PortfolioTick *tickBank = [[FSDataModelProc sharedInstance]portfolioTickBank];
             
             
@@ -1684,7 +1699,10 @@
 #endif
             
         }
-    }]];
+    }];
+    
+    [_cellRenderQueue addOperation:operation];
+    
 }
 - (void)setTextValue:(NSString**)textValue Color:(UIColor**)color BackgroundColor:(UIColor**)backgroundColor ByHeaderName:(NSString*)headerName
 			Snapshot:(EquitySnapshotDecompressed*)snapshot IdSymbol:(NSString *)idSymbol
@@ -2011,6 +2029,8 @@
 - (void)setTextValue2:(NSString**)textValue Color:(UIColor**)color BackgroundColor:(UIColor**)backgroundColor ByHeaderName:(NSString*)headerName
 			Snapshot:(FSSnapshot*)snapshot IdSymbol:(NSString *)idSymbol
 {
+    if ([weakOperation isCancelled]) return;
+    
     //成交價
 	if ([headerName isEqualToString:@"price"]) {
 		if (snapshot.last_price.calcValue != 0 && snapshot.reference_price.calcValue != 0) {

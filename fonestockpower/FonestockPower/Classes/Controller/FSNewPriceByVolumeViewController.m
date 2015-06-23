@@ -130,7 +130,6 @@
     if (snapshot) {
         [infoPanel reloadBValueSnapshot:snapshot];
     }
-
 }
 
 - (void)addHeaderView

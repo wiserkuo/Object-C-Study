@@ -12,7 +12,7 @@
 #import "FSTeachPopView.h"
 #import "UIViewController+CustomNavigationBar.h"
 #import "FSTeachPopDelegate.h"
-#import "SGInfoAlert.h"
+
 
 #define IS_IOS8 [[UIDevice currentDevice] systemVersion].floatValue >= 8.0
 
@@ -89,9 +89,24 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO];
-    _dayText.text = [_figureSearchArray objectAtIndex:2];
-    _weekText.text = [_figureSearchArray objectAtIndex:3];
-    _monthText.text = [_figureSearchArray objectAtIndex:4];
+    //bug#11100  range轉成浮點數與整數形式比較兩者是否相同 判斷整數去小數點再顯示
+    if([[_figureSearchArray objectAtIndex:2] floatValue]==[[_figureSearchArray objectAtIndex:2] intValue])
+        _dayText.text = [NSString stringWithFormat:@"%d",[[_figureSearchArray objectAtIndex:2]intValue]];
+    else
+        _dayText.text =[NSString stringWithFormat:@"%.1f",[[_figureSearchArray objectAtIndex:2]floatValue]];
+    
+    if([[_figureSearchArray objectAtIndex:3] floatValue]==[[_figureSearchArray objectAtIndex:3] intValue])
+        _weekText.text = [NSString stringWithFormat:@"%d",[[_figureSearchArray objectAtIndex:3]intValue]];
+    else
+        _weekText.text =[NSString stringWithFormat:@"%.1f",[[_figureSearchArray objectAtIndex:3]floatValue]];
+    
+    if([[_figureSearchArray objectAtIndex:4] floatValue]==[[_figureSearchArray objectAtIndex:4] intValue])
+        _monthText.text = [NSString stringWithFormat:@"%d",[[_figureSearchArray objectAtIndex:4]intValue]];
+    else
+        _monthText.text =[NSString stringWithFormat:@"%.1f",[[_figureSearchArray objectAtIndex:4]floatValue]];
+    
+    //_weekText.text = [_figureSearchArray objectAtIndex:3];
+    //_monthText.text = [_figureSearchArray objectAtIndex:4];
     _theOriginTextFieldData = [NSArray arrayWithObjects:_dayText.text, _weekText.text, _monthText.text, nil];
     //被註解起來的內容改在FigureCustomDetailViewController，以其他方式實作
 //    NSMutableArray * conditionArray = [_customModel searchkBarConditionsWithFigureSearchId:[_figureSearchArray objectAtIndex:0] tNumber:[NSNumber numberWithInt:_kNumber]];
@@ -194,15 +209,18 @@
             UITextField *textTextField = sender.textFields.firstObject;
             //如果使用者輸入的數值在範圍內，則將該數值透過程式塞回給textField，否則跳出sgInfoAlert
             if(([(NSNumber *)textTextField.text floatValue] > 0.0)&&([(NSNumber *)textTextField.text floatValue] <= limit)){
-                ((UITextField*)[textFieldArray objectAtIndex:_whichTextFieldBeTapped]).text = [NSString stringWithFormat:@"%.1f",[(NSNumber *)textTextField.text floatValue]];
+                if([(NSNumber *)textTextField.text floatValue]==[(NSNumber *)textTextField.text intValue])
+                    ((UITextField*)[textFieldArray objectAtIndex:_whichTextFieldBeTapped]).text =[NSString stringWithFormat:@"%d",[(NSNumber *)textTextField.text intValue] ];
+                else
+                    ((UITextField*)[textFieldArray objectAtIndex:_whichTextFieldBeTapped]).text = [NSString stringWithFormat:@"%.1f",[(NSNumber *)textTextField.text floatValue]];
             }
             //bug#10725 wiser start
             else if ([textTextField.text isEqualToString:@""]){
-                [SGInfoAlert showInfo:[NSString stringWithFormat:NSLocalizedStringFromTable(@"請輸入數值", @"FigureSearch", nil),limit] bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+                [FSHUD showMsg:[NSString stringWithFormat:NSLocalizedStringFromTable(@"請輸入數值", @"FigureSearch", nil),limit]];
             }
             //bug#10725 wiser end
             else{
-                [SGInfoAlert showInfo:[NSString stringWithFormat:NSLocalizedStringFromTable([sgInfoContentArray objectAtIndex:_whichTextFieldBeTapped], @"FigureSearch", nil),limit] bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+                [FSHUD showMsg:[NSString stringWithFormat:NSLocalizedStringFromTable([sgInfoContentArray objectAtIndex:_whichTextFieldBeTapped], @"FigureSearch", nil),limit]];
             }
         }
     }
@@ -277,11 +295,11 @@
         }
         //bug#10725 wiser start
         else if ([[alertView textFieldAtIndex:0].text isEqualToString:@""]){
-            [SGInfoAlert showInfo:[NSString stringWithFormat:NSLocalizedStringFromTable(@"請輸入數值", @"FigureSearch", nil),limit] bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+            [FSHUD showMsg:[NSString stringWithFormat:NSLocalizedStringFromTable(@"請輸入數值", @"FigureSearch", nil),limit]];
         }
         //bug#10725 wiser end
         else{
-            [SGInfoAlert showInfo:[NSString stringWithFormat:NSLocalizedStringFromTable([sgInfoContentArray objectAtIndex:_whichTextFieldBeTapped], @"FigureSearch", nil),limit] bgColor:[[UIColor colorWithRed:42/255 green:42/255 blue:42/255 alpha:1] CGColor] inView:self.view];
+            [FSHUD showMsg:[NSString stringWithFormat:NSLocalizedStringFromTable([sgInfoContentArray objectAtIndex:_whichTextFieldBeTapped], @"FigureSearch", nil),limit]];
         }
     }
 }
@@ -305,7 +323,7 @@
     NSString * group = [appid substringWithRange:NSMakeRange(0, 2)];
     //依各個市場設定可容許的最大幅度
     if([group isEqualToString:@"tw"]){
-        _forDD = 7;
+        _forDD = 10;
         _forWW = 35;
         _forMM = 100;
     }else{

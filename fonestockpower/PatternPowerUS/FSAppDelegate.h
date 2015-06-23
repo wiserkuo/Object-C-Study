@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "FSNavigationViewController.h"
+#import "FSInsetsLabel.h"
 
 @interface FSAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) FSNavigationViewController *rootViewNavController;
 @property (strong, nonatomic) UIWindow *actionSheetWindow;
+@property (strong, nonatomic) FSInsetsLabel *msgLabelView;
 @end

@@ -847,17 +847,17 @@ static float ySize;
 		}
 		
 	}else if (drawAndScrollController.upperViewIndicator ==UpperViewSARIndicator){
-        FSDataModelProc *dataModal = [FSDataModelProc sharedInstance];
-        float number;
-		for (NSUInteger i = dataStartIndex; i <= dataEndIndex; i++)
-		{
-			number = [dataModal.operationalIndicator getValueFrom:(int)i parm:@"SAR"];
-			if(number > highestValueTemp)
-				highestValueTemp = number;
-			if(number < lowestValueTemp)
-				lowestValueTemp = number;
-			
-		}
+//        FSDataModelProc *dataModal = [FSDataModelProc sharedInstance];
+//        float number;
+//		for (NSUInteger i = dataStartIndex; i <= dataEndIndex; i++)
+//		{
+//			number = [dataModal.operationalIndicator getValueFrom:(int)i parm:@"SAR"];
+//            printf("number=%f , highest=%f , lowest=%f\n",number,highestValueTemp,lowestValueTemp);
+//			if(number > highestValueTemp)
+//				highestValueTemp = number;
+//			if(number < lowestValueTemp)
+//				lowestValueTemp = number;
+//		}
     }
 	
 	if(highestValueTemp != highestValue)
@@ -919,15 +919,20 @@ static float ySize;
 //	highestValue = [drawAndScrollController.historicData getTheHightestValueFromStartIndex:dataStartIndex toEndIndex:dataEndIndex]; //抓區間最低值
     
     if (!drawAndScrollController.twoLine) {
-        if(drawAndScrollController.upperViewIndicator == UpperViewMAIndicator)
-        {
-            [self drawMovingAverageFrom:(int)dataStartIndex to:(int)dataEndIndex];		 // MA
+        if(drawAndScrollController.upperViewIndicator == UpperViewMAIndicator){
+        
+            [self drawMovingAverageFrom:(int)dataStartIndex to:(int)dataEndIndex];// MA
+        
         }
-        else if(drawAndScrollController.upperViewIndicator == UpperViewBBIndicator)
-        {
+        else if(drawAndScrollController.upperViewIndicator == UpperViewBBIndicator){
+        
             [self drawBollingerFrom:(int)dataStartIndex to:(int)dataEndIndex]; // BB
-        }else if (drawAndScrollController.upperViewIndicator == UpperViewSARIndicator) {
+        
+        }
+        else if(drawAndScrollController.upperViewIndicator == UpperViewSARIndicator){
+            
             [self drawSARFrom:(int)dataStartIndex to:(int)dataEndIndex]; // SAR
+            
         }
         
         if (!firstDraw) {
@@ -1196,14 +1201,14 @@ static float ySize;
         NSMutableDictionary * dic =[_dateDictionary objectForKey:[_objDataArray objectAtIndex:same]];
         arrowData * data = [[arrowData alloc]init];
         if (arrow.tag==1) {
-            data = [dic objectForKey:@"Buy"];
+            data = [dic objectForKey:@"BUY"];
             if (!data) {
-                data = [dic objectForKey:@"Cover"];
+                data = [dic objectForKey:@"COVER"];
             }
         }else{
-            data = [dic objectForKey:@"Sell"];
+            data = [dic objectForKey:@"SELL"];
             if (!data) {
-                data = [dic objectForKey:@"Short"];
+                data = [dic objectForKey:@"SHORT"];
             }
         }
         [drawAndScrollController arrowTapWithArrowData:data];
@@ -1215,11 +1220,11 @@ static float ySize;
     arrowData * aData;
     NSString * typeStr;
     if(type==1){
-        aData = [data objectForKey:@"Buy"];
-        typeStr = @"Buy";
+        aData = [data objectForKey:@"BUY"];
+        typeStr = @"BUY";
     }else{
-        aData = [data objectForKey:@"Sell"];
-        typeStr = @"Sell";
+        aData = [data objectForKey:@"SELL"];
+        typeStr = @"SELL";
     }
     aData->note = note;
     [data setObject:aData forKey:typeStr];
